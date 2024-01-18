@@ -3,6 +3,7 @@
 npm i
 npm i swiper
 npm i -D daisyui@latest
+npm install react-icons --save
 ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
