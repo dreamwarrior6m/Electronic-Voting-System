@@ -1,10 +1,10 @@
 "use client";
-import React, { useContext, useState } from "react";
+import useAuth from "@/app/hook/useAuth";
 import Image from "next/image";
 import Link from "next/link";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import useAuth from "@/app/hook/useAuth";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -77,8 +77,6 @@ const Registration = () => {
               },
               body: JSON.stringify(user),
             });
-
-            
           })
           .catch((error) => {
             Swal.fire({
@@ -89,7 +87,7 @@ const Registration = () => {
               timer: 2000,
             });
           });
-          router.push("/");
+        router.push("/");
       })
       .catch((error) => {
         Swal.fire({
@@ -227,7 +225,6 @@ const Registration = () => {
                         type="text"
                         placeholder="Photo"
                         className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
                         name="photo"
                       />
                     </div>

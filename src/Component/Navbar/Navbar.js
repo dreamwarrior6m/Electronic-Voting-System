@@ -1,9 +1,10 @@
 "use client";
 import useAuth from "@/app/hook/useAuth";
+import Image from "next/image";
 import Link from "next/link";
+import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
-import Image from "next/image";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -25,15 +26,22 @@ const Navbar = () => {
           <div className="dropdown dropdown-end ml-2">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                {user && <Image width={20} height={20} alt="Profile Image" src={user?.photoURL} />}
+                {user && (
+                  <Image
+                    width={20}
+                    height={20}
+                    alt="User Profile"
+                    src={user?.photoURL ? user?.photoURL : userProfile}
+                  />
+                )}
               </div>
             </label>
             <ul
               tabIndex={0}
-              className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-40 mt-4"
+              className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
             >
-              <div className="text-center">
-                {user && <p className="mb-3">{user?.displayName}</p>}
+              <div className="">
+                {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
                 {user && (
                   <li>
                     <Link href="/dashboard">Dashboard</Link>
