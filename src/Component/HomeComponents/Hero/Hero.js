@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div classNameName="px-4">
+    <div className="px-4">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
