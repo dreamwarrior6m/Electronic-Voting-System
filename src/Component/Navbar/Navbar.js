@@ -6,6 +6,7 @@ import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
 
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   console.log(user);
@@ -48,6 +49,7 @@ const Navbar = () => {
                       <Link href="/dashboard">Dashboard</Link>
                     </li>
                   )}
+
 
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
