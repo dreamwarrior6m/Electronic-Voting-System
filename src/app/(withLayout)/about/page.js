@@ -8,7 +8,7 @@ import Link from "next/link";
 const About = () => {
   return (
     <div className="my-10 max-w-7xl mx-auto">
-      <div className="">
+      <div className="text-white">
         <div href="/" className="flex">
           <Link href="/" className="hover:opacity-80">
             <MdHome className="text-2xl" />
