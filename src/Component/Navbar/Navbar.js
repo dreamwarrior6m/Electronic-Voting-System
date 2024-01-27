@@ -6,6 +6,7 @@ import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
 
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   console.log(user);
@@ -16,6 +17,36 @@ const Navbar = () => {
   };
 
   return (
+
+    <div className={styles.container}>
+      <div>
+        {/* <p className={styles.logo}>EVS</p> */}
+        <Image className="w-[100px] h-[100px] rounded-full" src="https://i.postimg.cc/br5hyfp2/EVS-1-removebg-preview.png" width={500} height={500} alt="logo image"></Image>
+      </div>
+      <div className="lg:flex lg:gap-2 lg:items-center">
+        <Links></Links>
+        {user && (
+          <div className="dropdown dropdown-end ml-2">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                {user && (
+                  <Image
+                    width={20}
+                    height={20}
+                    alt="User Profile"
+                    src={user?.photoURL ? user?.photoURL : userProfile}
+                  />
+                )}
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+            >
+              <div className="">
+                {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
+                {user && (
+
     <div className="lg:sticky lg:top-0 lg:z-10 lg:w-full lg:bg-base-100 lg:drop-shadow-sm border-b-2 border-base-600">
       <div className="max-w-7xl flex items-center justify-between px-4 lg:px-0  py-2 mx-auto">
         <div>
@@ -48,6 +79,7 @@ const Navbar = () => {
                       <Link href="/dashboard">Dashboard</Link>
                     </li>
                   )}
+
 
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
