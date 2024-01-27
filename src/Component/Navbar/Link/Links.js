@@ -37,8 +37,13 @@ const Links = () => {
                 id: 6,
                 path: '/login',
                 title: 'Log In'
-            }
-        ])
+            },
+            {
+                id: 7,
+                path: '/registration',
+                title: 'Registration'
+            },
+        ]),
     ];
     const [open, setopen]=useState(false)
 
