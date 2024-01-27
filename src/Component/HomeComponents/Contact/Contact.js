@@ -59,7 +59,7 @@ const Contact = () => {
               cols="20"
               rows="8"
             ></textarea>
-            <button className=" w-full rounded-md py-2 hover:bg-white font-medium bg-[#00263A] hover:text-[#00263A] hover:transition">
+            <button className=" w-full rounded-md py-2 text-white font-medium bg-[#00263A] hover:text-[#00263A] hover:transition">
               Submit
             </button>
           </form>
