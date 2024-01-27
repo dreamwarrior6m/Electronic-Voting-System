@@ -4,7 +4,7 @@ import Navbar from "@/Component/Navbar/Navbar";
 const Layout = ({ children }) => {
   return (
     <div>
-      <div className="max-w-6xl mx-auto">
+      <div className="">
         <Navbar />
         {children}
         <Footer />
