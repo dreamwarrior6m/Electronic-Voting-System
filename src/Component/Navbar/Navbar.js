@@ -6,6 +6,7 @@ import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
 
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   console.log(user);
@@ -18,7 +19,8 @@ const Navbar = () => {
   return (
     <div className={styles.container}>
       <div>
-        <p className={styles.logo}>EVS</p>
+        {/* <p className={styles.logo}>EVS</p> */}
+        <Image className="w-[100px] h-[100px] rounded-full" src="https://i.postimg.cc/br5hyfp2/EVS-1-removebg-preview.png" width={500} height={500} alt="logo image"></Image>
       </div>
       <div className="lg:flex lg:gap-2 lg:items-center">
         <Links></Links>
