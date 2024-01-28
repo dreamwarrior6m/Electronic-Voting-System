@@ -21,7 +21,7 @@ const CreateCandidate = () => {
         const data = await UploadImage(image)
         const candidatePhoto = data.data.display_url
         const candidate = {candidateName,candidateID, candidatePhoto,userID,candidateEmail,check,brand}
-        const res = await fetch("https://evs-server.vercel.app/candidate", {
+        const res = await fetch("http://localhost:5000/candidate", {
          method: "POST",
          headers: {
            "Content-Type": "application/json",
