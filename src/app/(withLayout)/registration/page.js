@@ -70,7 +70,7 @@ const Registration = () => {
             });
             window.location.reload();
 
-            fetch("https://evs-delta.vercel.app/users", {
+            fetch("https://evs-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -117,7 +117,7 @@ const Registration = () => {
     //       });
 
     //       //mongoDB
-    //       const res = await fetch("https://evs-delta.vercel.app/users", {
+    //       const res = await fetch("https://evs-server.vercel.app/users", {
     //         method: "POST",
     //         headers: {
     //           "Content-Type": "application/json",
