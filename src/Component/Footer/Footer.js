@@ -6,7 +6,7 @@ import { FaFacebookF, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <footer className="p-10 bg-gray-900 border-t-[1px] border-white/10 text-white">
+      <footer className="pt-10 pb-6 bg-gray-900 border-t-[1px] border-white/10 text-white">
         <div className="footer grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto justify-items-center opacity-95">
           <nav>
             <div className="max-w-7xl mx-auto">
@@ -40,31 +40,29 @@ const Footer = () => {
           </nav>
           <nav>
             <header className="footer-title">Services</header>
-            <a className="link link-hover">Blood Donation</a>
-            <a className="link link-hover">Health Check</a>
-            <a className="link link-hover">Blood Bank</a>
+            <a className="link link-hover text-[#5E61E5]">Poll</a>
+            <a className="link link-hover text-[#5E61E5]">Q&A</a>
+            <a className="link link-hover text-[#5E61E5]">Ranking</a>
           </nav>
           <nav>
             <header className="footer-title">Legal</header>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+            <a className="link link-hover text-[#5E61E5]">Terms of use</a>
+            <a className="link link-hover text-[#5E61E5]">Privacy policy</a>
+            <a className="link link-hover text-[#5E61E5]">Cookie policy</a>
           </nav>
           <nav>
-            <header className="footer-title">Explore</header>
-            <a className="link link-hover">Features</a>
-            <a className="link link-hover">Blood Group</a>
-            <a className="link link-hover">Security</a>
-            <a className="link link-hover">fund</a>
+            <header className="footer-title">Support</header>
+            <a className="link link-hover text-[#5E61E5]">Pricing</a>
+            <a className="link link-hover text-[#5E61E5]">Help Center</a>
+            <a className="link link-hover text-[#5E61E5]">Guide</a>
+            <a className="link link-hover text-[#5E61E5]">F.A.Q</a>
           </nav>
         </div>
       </footer>
       <footer className="px-10 py-8 bg-gray-900 text-white">
         <div className="footer footer-center  max-w-5xl mx-auto">
           <aside>
-            <p>
-              Copyright © 2023 - All right reserved by Save Life Blood Donation
-            </p>
+            <p>© 2023 Automotive. All Rights Reserved.</p>
           </aside>
         </div>
       </footer>
