@@ -62,7 +62,7 @@ const Page = () => {
           {/* map candidates to rows */}
           {candidates.map((candidate, index) => (
             <tr key={candidate.id} className={`${
-              index % 2 === 0 ? 'bg-gray-100' : 'bg-white'
+              index % 2 === 1 ? 'bg-gray-100' : 'bg-white'
             } text-center font-semibold border-b border-gray-600`}>
               <th>
                 <label>
@@ -83,7 +83,7 @@ const Page = () => {
               <td>
                 <button className="btn btn-ghost btn-xs text-black font-semibold">Information</button>
               </td>
-              <td className="text-3xl cursor-pointer"><button onClick={()=>handledeleted(candidate._id)}><MdDeleteForever /></button></td>
+              <td className="text-3xl cursor-pointer"><button onClick={()=>handledeleted(candidate._id)}><MdDeleteForever className=" text-red-700" /></button></td>
             </tr>
           ))}
         </tbody>

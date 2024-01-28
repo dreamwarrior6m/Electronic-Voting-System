@@ -21,7 +21,8 @@ const Registration = () => {
     const photo = from.photo.value;
     const date = from.date.value;
     const idNumber = from.idNumber.value;
-    const user = { name, email, photo, date, idNumber };
+    const  verify = false
+    const user = { name, email, photo, date, idNumber,  verify };
     console.log(user);
 
     if (password.length < 6) {
