@@ -22,7 +22,7 @@ const page = () => {
     console.log(OrganizatonName, Type, email, name, photo);
 
     try {
-      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
+      const res = await fetch("https://evs-server.vercel.app/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

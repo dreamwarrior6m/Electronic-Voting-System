@@ -9,7 +9,7 @@ export const metadata = {
 const Layout = ({ children }) => {
   return (
     <div>
-      <div className="">
+      <div className="bg-gray-900">
         <Navbar />
         {children}
         <Footer />

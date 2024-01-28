@@ -6,6 +6,7 @@ import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
 
+
 const Navbar = () => {
   const { user, logOut } = useAuth();
   console.log(user);
@@ -16,8 +17,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="lg:sticky lg:top-0 lg:z-10 lg:w-full lg:bg-base-100 lg:drop-shadow-sm border-b-2 border-base-600">
-      <div className="max-w-7xl flex items-center justify-between px-4 lg:px-0  py-2 mx-auto">
+    <div className="lg:sticky lg:top-0 lg:z-10 lg:w-full lg:bg-[#00263A] text-white lg:drop-shadow-sm border-b-[1px] border-white/10">
+      <div className="max-w-7xl flex items-center justify-between px-4 lg:px-0  py-3 mx-auto">
         <div>
           <p className="font-bold text-[30px] lg:ml-1">DVS</p>
         </div>
@@ -48,6 +49,7 @@ const Navbar = () => {
                       <Link href="/dashboard">Dashboard</Link>
                     </li>
                   )}
+
 
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
