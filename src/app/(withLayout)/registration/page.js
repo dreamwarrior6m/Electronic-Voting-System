@@ -104,7 +104,7 @@ const Registration = () => {
   return (
     <div>
       <div
-        className="dark:bg-slate-900 bg-gray-100 flex lg:h-screen items-center"
+        className="dark:bg-slate-900 bg-gray-100 flex items-center"
         style={{
           backgroundImage: "url(https://i.postimg.cc/sgjS2KpT/logo-vote.jpg)",
           backgroundRepeat: "no-repeat",
