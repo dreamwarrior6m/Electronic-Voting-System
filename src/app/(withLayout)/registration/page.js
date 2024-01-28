@@ -1,9 +1,9 @@
 "use client";
 import useAuth from "@/app/hook/useAuth";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
 import Swal from "sweetalert2";
 
 const Registration = () => {
@@ -11,6 +11,7 @@ const Registration = () => {
   const router = useRouter();
   const [Error, seterror] = useState();
   const [loading, setloading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -58,6 +59,7 @@ const Registration = () => {
       return;
     }
 
+    setloading(true);
     createUser(email, password)
       .then(() => {
         updateUserProfile(name, photo)
@@ -69,9 +71,9 @@ const Registration = () => {
               showConfirmButton: false,
               timer: 2000,
             });
+            from.reset();
             window.location.reload();
-
-            fetch("https://evs-server.vercel.app/users", {
+            fetch("https://evs-delta.vercel.app/users", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -99,182 +101,150 @@ const Registration = () => {
           timer: 1500,
         });
       });
-
-    //firebase
-    // try {
-    //   const res = await createUser(email, password);
-    //   if (res) {
-    //     const res2 = await updateUserProfile(name, photo);
-    //     console.log("name-photo", res2);
-    //     console.log({ res2 });
-    //     if (res2) {
-
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "success",
-    //         title: "Login successfully",
-    //         showConfirmButton: false,
-    //         timer: 2000,
-    //       });
-
-    //       //mongoDB
-    //       const res = await fetch("https://evs-server.vercel.app/users", {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(user),
-    //       });
-    //       router.push("/");
-    //     }
-    //   } else {
-    //     Swal.fire({
-    //       position: "top-end",
-    //       icon: "error",
-    //       title: "There is a Problem!!",
-    //       showConfirmButton: false,
-    //       timer: 2000,
-    //     });
-    //   }
-    // } catch (e) {
-    //   console.error(e);
-    // }
-
-    // try {
-    //   setloading(true);
-    //   const res = await fetch("http://localhost:3000/api/signup", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(user),
-    //   });
-    //   z;
-    //   if (res.ok) {
-    //     seterror(await res.json());
-    //     from.reset();
-    //     //  router.push('/login')
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   setloading(false);
-    // } finally {
-    //   setloading(false);
-    // }
   };
   return (
     <div>
-      <div className="my-8 p-6 bg-gray-800 rounded-md shadow-md">
-        <div className="flex justify-center mx-auto">
-          <Image
-            src="https://i.postimg.cc/s2Nhzyd5/signup-removebg-preview.png"
-            className="w-[150px] h-[150px]"
-            width="500"
-            height="500"
-            alt="signup image"
-          ></Image>
-        </div>
-        <div className="hero">
-          <div className="hero-content  ">
-            <div className=" w-full   ">
-              <form onSubmit={handleRegistration} className="card-body">
-                <div className="grid lg:grid-cols-3 gap-4">
-                  <div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">Name</span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Enter Your Name"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
-                        name="name"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">ID Card Number</span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Photo"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
-                        name="idNumber"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">Password</span>
-                      </label>
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
-                        name="password"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">Upload Picture</span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Photo"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        name="photo"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">E-mail</span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Enter Your E-mail"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
-                        name="email"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className=" text-white">Birth of Date</span>
-                      </label>
-                      <input
-                        type="date"
-                        placeholder="Photo"
-                        className="w-full px-4 py-2  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
-                        required
-                        name="date"
-                      />
-                    </div>
-                  </div>
-                </div>
-                {Error && <p className="">{Error.message}</p>}
-
-                <div className="form-control mt-3 w-full ">
-                  <button
-                    disabled={loading}
-                    className="p-2  button text-white bg-gray-500 shadow-2xl hover:bg-slate-400 rounded-sm"
-                  >
-                    {loading ? "loading...." : "Sign Up"}
-                  </button>
-                </div>
-                <label className="label">
-                  Already have an account?
-                  <span className="text-white underline">
-                    <Link href="/login">Login Now</Link>
-                  </span>
-                </label>
-              </form>
+      <div
+        className="dark:bg-slate-900 bg-gray-100 flex items-center"
+        style={{
+          backgroundImage: "url(https://i.postimg.cc/sgjS2KpT/logo-vote.jpg)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
+          <div className="py-6 lg:p-7 bg-white border-gray-200 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="pt-4 px-4 ">
+              <div className="text-center">
+                <h1 className="block text-3xl font-bold text-gray-800 dark:text-white">
+                  Register Now
+                </h1>
+              </div>
             </div>
+            <div className="px-4 ">
+              <div className="text-center ">
+                <button className="mt-2 text-xl text-gray-600 dark:text-gray-400">
+                  Already have an account?
+                  <Link
+                    className="text-blue-400 underline font-bold"
+                    href="/login"
+                  >
+                    Login Now
+                  </Link>
+                </button>
+              </div>
+            </div>
+
+            <div className="pt-6  px-4 flex items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">
+              Or
+            </div>
+
+            <form onSubmit={handleRegistration} className="card-body -mt-4">
+              <div className="grid lg:grid-cols-12 gap-4">
+                <div className="form-control col-span-6">
+                  <label className="label">
+                    <span className=" dark:text-white">Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your Name"
+                    className="input input-bordered"
+                    required
+                    name="name"
+                  />
+                </div>
+                <div className="form-control col-span-6">
+                  <label className="label">
+                    <span className=" dark:text-white">E-mail</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your E-mail"
+                    className="input input-bordered"
+                    required
+                    name="email"
+                  />
+                </div>
+                <div className="relative col-span-6">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-whitee">
+                        Password
+                      </span>
+                    </label>
+                    <input
+                      type={showPass ? "text" : "password"}
+                      name="password"
+                      placeholder="Enter your password"
+                      className="input input-bordered"
+                      required
+                    />
+                  </div>
+                  <div className="absolute -mt-[42px] right-0 flex items-center pr-3">
+                    <p
+                      onClick={() => setShowPass(!showPass)}
+                      className="p-2 focus:outline-none"
+                    >
+                      {showPass ? (
+                        <PiEyeLight className="h-5 w-5" />
+                      ) : (
+                        <PiEyeSlash className="h-5 w-5 " />
+                      )}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-control col-span-6">
+                  <label className="label">
+                    <span className=" dark:text-white">ID Card Number</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Your ID Card Number"
+                    className="input input-bordered"
+                    required
+                    name="idNumber"
+                  />
+                </div>
+
+                <div className="form-control col-span-6">
+                  <label className="label">
+                    <span className=" dark:text-white">Upload Picture</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Valid Photo URL"
+                    className="input input-bordered"
+                    name="photo"
+                  />
+                </div>
+                <div className="form-control col-span-6">
+                  <label className="label">
+                    <span className=" dark:text-white">Birth of Date</span>
+                  </label>
+                  <input
+                    type="date"
+                    placeholder="Photo"
+                    className="input input-bordered"
+                    required
+                    name="date"
+                  />
+                </div>
+              </div>
+              {Error && <p className="">{Error.message}</p>}
+
+              <div className="form-control mt-5">
+                <button
+                  type="submit"
+                  className=" py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                >
+                  {loading ? (
+                    <h1 className="loading loading-spinner loading-sm"></h1>
+                  ) : (
+                    "Sign Up"
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
