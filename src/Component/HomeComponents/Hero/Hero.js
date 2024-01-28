@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div classNameName="px-4">
+    <div className="px-4">
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -41,9 +41,7 @@ const Hero = () => {
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:pt-28  lg:px-8 lg:pb-28">
               <h1 className="text-center sm:text-left text-5xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl sm:ml-12">
-                <span className="block text-white">
-                  Democracy is a design
-                </span>
+                <span className="block text-white">Democracy is a design</span>
                 <span className="block text-indigo-300">problem.</span>
               </h1>
               <p className="mt-6 max-w-sm mx-auto sm:ml-12 text-center sm:text-left text-lg sm:text-xl text-indigo-200 sm:max-w-2xl">
