@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-no-undef */
 import Image from "next/image";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import Link from "next/link";
 import { MdHome } from "react-icons/md";
 import dreamWarrior from "../../../../public/images/EVS.jpg";
-import Link from "next/link";
 
 const About = () => {
   return (

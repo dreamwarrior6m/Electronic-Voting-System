@@ -1,7 +1,7 @@
 "use client";
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import SideNav from "@/Component/Dashboard/SideNav/SideNav";
-import NavLink from "@/Component/Navbar/NavLink/Navlink";
+
 
 const layout = ({ children }) => {
   return (
