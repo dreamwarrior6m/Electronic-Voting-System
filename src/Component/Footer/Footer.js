@@ -38,19 +38,19 @@ const Footer = () => {
               </section>
             </div>
           </nav>
-          <nav className="justify-items-center">
+          <nav className="justify-items-center lg:justify-items-start">
             <header className="footer-title">Services</header>
             <a className="link link-hover text-[#5E61E5]">Poll</a>
             <a className="link link-hover text-[#5E61E5]">Q&A</a>
             <a className="link link-hover text-[#5E61E5]">Ranking</a>
           </nav>
-          <nav className="justify-items-center">
+          <nav className="justify-items-center lg:justify-items-start">
             <header className="footer-title">Legal</header>
             <a className="link link-hover text-[#5E61E5]">Terms of use</a>
             <a className="link link-hover text-[#5E61E5]">Privacy policy</a>
             <a className="link link-hover text-[#5E61E5]">Cookie policy</a>
           </nav>
-          <nav className="justify-items-center">
+          <nav className="justify-items-center lg:justify-items-start">
             <header className="footer-title">Support</header>
             <a className="link link-hover text-[#5E61E5]">Pricing</a>
             <a className="link link-hover text-[#5E61E5]">Help Center</a>
