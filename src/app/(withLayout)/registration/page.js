@@ -21,7 +21,8 @@ const Registration = () => {
     const photo = from.photo.value;
     const date = from.date.value;
     const idNumber = from.idNumber.value;
-    const user = { name, email, photo, date, idNumber };
+    const  verify = false
+    const user = { name, email, photo, date, idNumber,  verify };
     console.log(user);
 
     if (password.length < 6) {
@@ -70,7 +71,7 @@ const Registration = () => {
             });
             window.location.reload();
 
-            fetch("https://evs-delta.vercel.app/users", {
+            fetch("https://evs-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -117,7 +118,7 @@ const Registration = () => {
     //       });
 
     //       //mongoDB
-    //       const res = await fetch("https://evs-delta.vercel.app/users", {
+    //       const res = await fetch("https://evs-server.vercel.app/users", {
     //         method: "POST",
     //         headers: {
     //           "Content-Type": "application/json",
