@@ -59,7 +59,7 @@ const page = () => {
     <div className="my-10">
       <div>
         <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
-          <div className="py-6 lg:p-7 bg-white border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+          <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
             <h3 className="text-4xl font-bold text-center">DVS</h3>
             <h3 className="text-xl font-bold text-center">
               Digital Voting System
