@@ -1,6 +1,6 @@
 const Facilities = () => {
   return (
-    <div className="bg-white dark:bg-gray-900 pt-16 pb-32">
+    <div className="bg-[#f1faee] dark:bg-gray-900 pt-16 pb-32">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
         <h2 className="text-base font-semibold tracking-wider text-indigo-600 dark:text-indigo-500 uppercase">
           Polling made easy
@@ -16,7 +16,7 @@ const Facilities = () => {
         <div className="mt-12">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -48,7 +48,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -80,7 +80,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -112,7 +112,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -144,7 +144,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -176,7 +176,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-gray-100 dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
