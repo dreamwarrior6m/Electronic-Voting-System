@@ -20,12 +20,12 @@ const ShowAllvote = () => {
           <div className="card bg-neutral text-neutral-content">
             <div className="card-body items-center text-center">
               <h2 className="card-title">{allVote?.OrganizatonName}</h2>
-              <p>Type: {allVote?.Type}</p>
+              <p>Vote name: {allVote?.name}</p>
               <p>Email: {allVote?.email}</p>
               <div className="card-actions justify-end">
                 <button className="btn btn-sm btn-primary">Participate</button>
-                <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link>
-                {/* <Link href={`/show-all-vote/candidate/:${allVote?.OrganizatonName}`}  className="btn btn-sm"> Candidates</Link> */}
+                {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
+                <Link href={`/show-all-vote/${allVote?.name}`}  className="btn btn-sm"> Candidates</Link>
               </div>
             </div>
           </div>
