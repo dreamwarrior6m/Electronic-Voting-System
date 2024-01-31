@@ -41,9 +41,7 @@ const Hero = () => {
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:pt-28  lg:px-8 lg:pb-28">
               <h1 className="text-center sm:text-left text-5xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl sm:ml-12">
-                <span className="block text-white">
-                  Democracy is a design
-                </span>
+                <span className="block text-[#f1faee]">Democracy is a design</span>
                 <span className="block text-indigo-300">problem.</span>
               </h1>
               <p className="mt-6 max-w-sm mx-auto sm:ml-12 text-center sm:text-left text-lg sm:text-xl text-indigo-200 sm:max-w-2xl">
@@ -54,13 +52,13 @@ const Hero = () => {
                 <div className="sm:ml-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <Link
                     href="/create"
-                    className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
+                    className="flex items-center justify-center rounded-md border border-transparent bg-[#f1faee] px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
                   >
                     Organize voteing
                   </Link>
                   <Link
                     href="/demo"
-                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8"
+                    className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-[#f1faee] shadow-sm hover:bg-opacity-70 sm:px-8"
                   >
                     View examples
                   </Link>

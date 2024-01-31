@@ -3,24 +3,26 @@ import { MdDeleteForever } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
+import ReactPaginate from "react-paginate";
+import './styles.css'
 
 const AllVoter = () => {
   const [voters, setVoters] = useState([]);
-  const[toggle, settoggle]= useState(false)
+  const [limit, setLimit] = useState(5);
+  const [pageCount, setPageCount] = useState(1);
+  const currentPage = useRef(1);
 
-  useEffect(() => {
-    // Fetch the list of voters when the component mounts
-    fetch("https://evs-server.vercel.app/users")
-      .then((res) => res.json())
-      .then((data) => setVoters(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://evs-server.vercel.app/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setVoters(data));
+  // }, []);
 
   const handleVerify = async (id) => {
     try {
       const res = await axios.patch(`https://evs-server.vercel.app/users/verify/${id}`);
-      settoggle(res.data.message)
     } catch (error) {
       console.error('Error:', error);
     }
@@ -37,11 +39,9 @@ const AllVoter = () => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        // Send a DELETE request to remove the specific voter
         const res = await axios.delete(`https://evs-server.vercel.app/users/${id}`);
 
         if (res.data.deletedCount > 0) {
-          // Update the local state to remove the deleted voter
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
 
           Swal.fire({
@@ -52,6 +52,34 @@ const AllVoter = () => {
         }
       }
     });
+  };
+  // pagination
+  
+  useEffect(() => {
+    getPaginatedUsers();
+  }, []);
+
+  const handlePageClick = (e) => {
+    currentPage.current = e.selected + 1;
+    getPaginatedUsers();
+  };
+
+  const changeLimit = () => {
+    currentPage.current = 1;
+    getPaginatedUsers();
+  };
+
+  const getPaginatedUsers = async () => {
+    try {
+      const response = await axios.get(
+        `https://evs-server.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+      );
+
+      setPageCount(response.data.pageCount);
+      setVoters(response.data.result);
+    } catch (error) {
+      console.error('Error fetching paginated users:', error);
+    }
   };
 
   return (
@@ -107,6 +135,45 @@ const AllVoter = () => {
           </tbody>
         </table>
       </div>
+      {
+         <div className="flex items-center justify-between mt-4">
+        <ReactPaginate
+          breakLabel={<span className="break-label">...</span>}
+          nextLabel={<span className="pagination-icon">&rarr;</span>}
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel={<span className="pagination-icon">&larr;</span>}
+          renderOnZeroPageCount={null}
+          marginPagesDisplayed={2}
+          containerClassName="pagination-container"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          activeClassName="active"
+          forcePage={currentPage.current - 1}
+        />
+          <div className="flex items-center">
+            <span className="text-sm text-gray-600 mr-2">
+              Page {currentPage.current} of {pageCount}
+            </span>
+            <input
+              className="p-2 border border-gray-400 rounded-md"
+              placeholder="Limit"
+              onChange={(e) => setLimit(e.target.value)}
+            />
+            <button
+              className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+              onClick={changeLimit}
+            >
+              Set Limit
+            </button>
+          </div>
+        </div>
+      }
     </div>
   );
 };
