@@ -14,13 +14,18 @@ const Links = () => {
             path: '/',
             title: "Home",
         },
-        {
+        { 
             id: 2,
+            path: '/show-all-vote',
+            title: "All Vote",
+        },
+        {
+            id: 3,
             path: '/about',
             title: "About",
         },
         {
-            id: 3,
+            id: 4,
             path: '/service',
             title: 'Service'
         },
@@ -37,11 +42,6 @@ const Links = () => {
                 id: 6,
                 path: '/login',
                 title: 'Log In'
-            },
-            {
-                id: 7,
-                path: '/registration',
-                title: 'Registration'
             },
         ]),
     ];
