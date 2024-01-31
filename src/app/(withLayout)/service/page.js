@@ -16,7 +16,7 @@ const Service = () => {
     "Sending documents",
   ];
   return (
-    <div className="pt-10 text-white ">
+    <div className="pt-10 text-white max-w-7xl mx-auto">
       <div className=" text-center">
         <h2 className="text-5xl py-2 font-bold">Services</h2>
         <h3 className="text-xl  font-semibold pb-12">
@@ -24,13 +24,13 @@ const Service = () => {
         </h3>
       </div>
 
-      <div className="bg-white rounded-lg text-black p-4">
+      <div className="bg-neutral-800 rounded-lg p-4">
         <h2 className="font-semibold">HOW WE CAN HELP</h2>
         <h2 className="text-2xl font-semibold pb-2">
           Advanced features and a modern distribution model
         </h2>
         <p className="">
-          The VDS system is available in the service model (SaaS). You
+          The DVS system is available in the service model (SaaS). You
           don&apos;t need to install any software or invest in IT
           infrastructure. Our service is accessible through any web browser, on
           any operating system (Windows, macOS, Android, iOS). Due to the

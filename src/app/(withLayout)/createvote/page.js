@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
+import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useAuthState } from "react-firebase-hooks/auth";
 const page = () => {
   const router = useRouter();
   const [loading, setloading] = useState(false);
-  // const [user] = useAuthState(auth);
-  // console.log({user});
+  const [user] = useAuthState(auth);
+  console.log(user?.email);
   // if(!user){
   //   router.push('/login')
   // }
@@ -17,9 +19,10 @@ const page = () => {
     const form = event.target;
     const OrganizatonName = form.OrganizatonName.value;
     const Type = form.Type.value;
-    const email = form.email.value;
     const name = form.name.value;
     const photo = form.photo.value;
+
+    const email = user?.email;
     const createVoteInfo = { OrganizatonName, Type, email, name, photo };
     console.log(OrganizatonName, Type, email, name, photo);
 
@@ -56,7 +59,7 @@ const page = () => {
   };
 
   return (
-    <div className="my-10">
+    <div className="my-10 text-white">
       <div>
         <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
           <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
@@ -81,7 +84,8 @@ const page = () => {
                       name="OrganizatonName"
                     />
                   </div>
-                  <div className="form-control">
+
+                  {/* <div className="form-control">
                     <label className="label">
                       <span className="label-text dark:text-white">
                         Your E-mail
@@ -94,18 +98,35 @@ const page = () => {
                       required
                       name="email"
                     />
+                  </div> */}
+
+                  <div className="form-control w-full ">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Select Organization Type
+                      </span>
+                    </label>
+                    <select
+                      className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
+                      name="Type"
+                      id=""
+                    >
+                      <option value="Administrative">Administrative</option>
+                      <option value="Education">Education</option>
+                      <option value="General">General</option>
+                    </select>
                   </div>
                 </div>
                 <div>
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text dark:text-white">
-                        Your Name
+                        Vote Name
                       </span>
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter Your Name"
+                      placeholder="Enter Vote Name"
                       className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                       required
                       name="name"
@@ -127,22 +148,7 @@ const page = () => {
                   </div>
                 </div>
               </div>
-              <div className="form-control w-full ">
-                <label className="label">
-                  <span className="label-text dark:text-white">
-                    Select Organization Type
-                  </span>
-                </label>
-                <select
-                  className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
-                  name="Type"
-                  id=""
-                >
-                  <option value="Administrative">Administrative</option>
-                  <option value="Education">Education</option>
-                  <option value="General">General</option>
-                </select>
-              </div>
+
               <div className="form-control mt-6 w-full ">
                 <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                   {loading ? (

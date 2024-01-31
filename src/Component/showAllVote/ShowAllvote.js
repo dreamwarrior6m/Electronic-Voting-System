@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const ShowAllvote = () => {
   const [showAllVote, setShowAllVote] = useState();
@@ -20,9 +21,11 @@ const ShowAllvote = () => {
             <div className="card-body items-center text-center">
               <h2 className="card-title">{allVote?.OrganizatonName}</h2>
               <p>Type: {allVote?.Type}</p>
+              <p>Email: {allVote?.email}</p>
               <div className="card-actions justify-end">
                 <button className="btn btn-sm btn-primary">Participate</button>
-                <button className="btn btn-sm">Candidates</button>
+                <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link>
+                {/* <Link href={`/show-all-vote/candidate/:${allVote?.OrganizatonName}`}  className="btn btn-sm"> Candidates</Link> */}
               </div>
             </div>
           </div>

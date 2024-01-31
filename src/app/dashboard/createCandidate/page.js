@@ -1,80 +1,92 @@
 "use client";
 import { UploadImage } from "@/Component/shareComponent/utilites";
+import { auth } from "@/app/firebase/config";
 import { useState } from "react";
 import { TfiAlert } from "react-icons/tfi";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const CreateCandidate = () => {
-  const [loading,setloading]= useState(false)
-    const handleCreateCandidate = async (event) =>{
-        event.preventDefault();
-        const form = event.target;
-        const candidateName = form.candidateName.value;
-        const candidateID = form.candidateID.value;
-        const image = form.candidatePhoto.files[0];
-        const userID = form.userID.value;
-        const candidateEmail = form.candidateEmail.value;
-        const check = form.check.value;
-        const brand= form.brand.value;
-      try{
-      setloading(true)
-        const data = await UploadImage(image)
-        const candidatePhoto = data.data.display_url
-        const candidate = {candidateName,candidateID, candidatePhoto,userID,candidateEmail,check,brand}
-        const res = await fetch("https://evs-server.vercel.app/candidate", {
-         method: "POST",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(candidate),
-       })
-       if(res.status === 400){
-         console.log(res)
-         Swal.fire({
-           position: "top-end",
-           icon: "error",
-           title: "Candidate Information is wrong",
-           showConfirmButton: false,
-           timer: 1500
-         });
-         setloading(false)
-         form.reset()
-       }
-       if(res.status === 200){
-         console.log(res)
-         Swal.fire({
-           position: "top-end",
-           icon: "success",
-           title: "Candidate added successfully",
-           showConfirmButton: false,
-           timer: 1500
-         });
-         setloading(false)
-         form.reset()
-       }
-       else{
-        setloading(false)
-         Swal.fire({
-           position: "top-end",
-           icon: "error",
-           title: "Candidate Information is wrong",
-           showConfirmButton: false,
-           timer: 1500
-         });
-       }
- 
-      }
-      catch (err){
-        setloading(false)
+  const [user] = useAuthState(auth);
+  console.log(user);
+
+  const [loading, setloading] = useState(false);
+  const handleCreateCandidate = async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const candidateName = form.candidateName.value;
+    const candidateID = form.candidateID.value;
+    const image = form.candidatePhoto.files[0];
+    const userID = form.userID.value;
+    const candidateEmail = form.candidateEmail.value;
+    const check = form.check.value;
+    const brand = form.brand.value;
+    const adminEmail = user?.email;
+    try {
+      setloading(true);
+      const data = await UploadImage(image);
+      const candidatePhoto = data.data.display_url;
+      const candidate = {
+        candidateName,
+        candidateID,
+        candidatePhoto,
+        userID,
+        candidateEmail,
+        check,
+        brand,
+        adminEmail,
+      };
+      const res = await fetch("https://evs-server.vercel.app/candidate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(candidate),
+      });
+      if (res.status === 400) {
+        console.log(res);
         Swal.fire({
           position: "top-end",
           icon: "error",
-          title: `${err.message}`,
+          title: "Candidate Information is wrong",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
+        });
+        setloading(false);
+        form.reset();
+      }
+      if (res.status === 200) {
+        console.log(res);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Candidate added successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setloading(false);
+        form.reset();
+      } else {
+        setloading(false);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Candidate Information is wrong",
+          showConfirmButton: false,
+          timer: 1500,
         });
       }
+    } catch (err) {
+      setloading(false);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
+  };
 
   return (
     <div>
@@ -120,7 +132,12 @@ const CreateCandidate = () => {
                           <label className="label">
                             <span className=" text-white">Upload Photo</span>
                           </label>
-                          <input required name="candidatePhoto" type="file" className="file-input file-input-bordered w-full max-w-xs bg-gray-700" />
+                          <input
+                            required
+                            name="candidatePhoto"
+                            type="file"
+                            className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
+                          />
                         </div>
                         <div className="form-control">
                           <label className="label">
@@ -154,21 +171,25 @@ const CreateCandidate = () => {
                           <label className="label">
                             <span className=" text-white">Select Brand</span>
                           </label>
-                         <select  className="w-full px-4 h-[48px]  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500" name="brand" id="">
-                          <option value="Dream Warrior">Dream Warrior</option>
-                          <option value="Hexa Inovet">Hexa Inovet</option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                          <option value=""></option>
-                         </select>
+                          <select
+                            className="w-full px-4 h-[48px]  bg-gray-700 text-white rounded-md focus:outline-none focus:border-indigo-500"
+                            name="brand"
+                            id=""
+                          >
+                            <option value="Dream Warrior">Dream Warrior</option>
+                            <option value="Hexa Inovet">Hexa Inovet</option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                          </select>
                         </div>
                       </div>
                       <label className="label">
                         <div className="flex gap-1 text-white">
-                          <input type="checkbox" name="check" id=""  required/>
+                          <input type="checkbox" name="check" id="" required />
                           Agree to continue
                         </div>
                         <span className="text-white "> </span>
@@ -176,10 +197,11 @@ const CreateCandidate = () => {
                     </div>
 
                     <div className="form-control mt-3 w-full ">
-                      <button disabled={loading} className="p-2  button text-white bg-gray-500 shadow-2xl hover:bg-slate-400 rounded-sm">
-                        {
-                          loading?"Loading...":"Create"
-                        }
+                      <button
+                        disabled={loading}
+                        className="p-2  button text-white bg-gray-500 shadow-2xl hover:bg-slate-400 rounded-sm"
+                      >
+                        {loading ? "Loading..." : "Create"}
                       </button>
                     </div>
                   </form>
@@ -194,7 +216,8 @@ const CreateCandidate = () => {
                 <TfiAlert />
               </span>
               <h2>
-              Provide correct information. Incorrect information is not acceptable.Thank You
+                Provide correct information. Incorrect information is not
+                acceptable.Thank You
               </h2>
             </div>
           </div>
