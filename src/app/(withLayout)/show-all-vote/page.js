@@ -1,4 +1,5 @@
-import ShowAllvote from "@/Component/ShowAllVote/ShowAllvote";
+import ShowAllvote from "@/Component/showAllVote/ShowAllvote";
+
 
 const page = () => {
   return (
