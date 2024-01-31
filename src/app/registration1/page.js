@@ -73,7 +73,7 @@ const Registration = () => {
             });
             from.reset();
             window.location.reload();
-            fetch("https://evs-delta.vercel.app/users", {
+            fetch("https://evs-server.vercel.app/users", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

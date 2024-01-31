@@ -16,8 +16,8 @@ const Service = () => {
     "Sending documents",
   ];
   return (
-    <div className="pt-10  ">
-      <div className="">
+    <div className="pt-10 text-white ">
+      <div className=" text-center">
         <h2 className="text-5xl py-2 font-bold">Services</h2>
         <h3 className="text-xl  font-semibold pb-12">
           Everything you need for online voting
