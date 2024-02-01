@@ -34,6 +34,7 @@ const CreateCandidate = () => {
     const brand = form.brand.value;
     const adminEmail = user?.email;
     const voteName = findVote?.name;
+    const voteCount = 0;
     try {
       setloading(true);
       const data = await UploadImage(image);
@@ -48,6 +49,7 @@ const CreateCandidate = () => {
         brand,
         adminEmail,
         voteName,
+        voteCount,
       };
       const res = await fetch("https://evs-server.vercel.app/candidate", {
         method: "POST",
