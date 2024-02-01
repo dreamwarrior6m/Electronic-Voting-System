@@ -50,6 +50,7 @@ const AuthProvider = ({ children }) => {
             const loggedUser = { email: userEmail };
     
             const axiosConfig = { withCredentials: true };
+            setLoading(false)
     
         });
     

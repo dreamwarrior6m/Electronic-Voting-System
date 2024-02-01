@@ -39,7 +39,13 @@ const page = () => {
           timer: 1500,
         });
 
-        router.push("/");
+        const referrer = router.query.referrer || router.asPath;
+        console.log(referrer)
+        if (referrer !== "/login") {
+          router.push(referrer);
+        } else {
+          router.push("/"); 
+        }
       } else {
         Swal.fire({
           position: "top-end",
