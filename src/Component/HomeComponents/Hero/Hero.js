@@ -1,13 +1,13 @@
 "use client";
-import React from "react";
-import { Navigation, Autoplay, Pagination, A11y } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/scrollbar";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { A11y, Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import TypewriterComponent from "typewriter-effect";
 
 const Hero = () => {
   return (
@@ -40,10 +40,32 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-700 dark:from-gray-400 dark:to-gray-400 mix-blend-multiply"></div>
             </div>
             <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:pt-28  lg:px-8 lg:pb-28">
-              <h1 className="text-center sm:text-left text-5xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl sm:ml-12">
-                <span className="block text-[#f1faee]">Democracy is a design</span>
-                <span className="block text-indigo-300">problem.</span>
-              </h1>
+              <motion.h1
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: 0.2,
+                  x: { type: "spring", stiffness: 60 },
+                  opacity: { duration: 1 },
+                  ease: "easeIn",
+                  duration: 1,
+                }}
+                className="text-center sm:text-left text-5xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl sm:ml-12"
+              >
+                <span className="block text-[#f1faee]">
+                  Democracy is a design
+                  <span className="block text-indigo-300">
+                    <TypewriterComponent
+                      options={{
+                        strings: ["Problem.", "Create Poll."],
+                        autoStart: true,
+                        loop: true,
+                      }}
+                    />
+                  </span>
+                </span>
+              </motion.h1>
               <p className="mt-6 max-w-sm mx-auto sm:ml-12 text-center sm:text-left text-lg sm:text-xl text-indigo-200 sm:max-w-2xl">
                 Elections should work for everyone. We are here to make that
                 happen. Create a poll - and get answers in no time.
