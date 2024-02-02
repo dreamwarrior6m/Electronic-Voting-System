@@ -6,18 +6,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
+import Image from "next/image"
+import Swal from "sweetalert2";
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
   const [selectCandidateId, setSelectCandidateId] = useState();
   const [showVote, setShowVote] = useState();
   const [voterEmail, setVoterEmail] = useState();
+  const [participate, setParticipate] = useState();
   const { id } = useParams();
   const [user] = useAuthState(auth);
   console.log(id);
   const updateVoterEmail2 = user?.email;
   const updateVoterEmail = { updateVoterEmail2 };
   console.log(updateVoterEmail);
+
+  const updateParticipate = { email: user?.email, voteName: id };
+  console.log(updateParticipate);
 
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/candidate")
@@ -36,6 +42,16 @@ const Participate = () => {
       });
   }, [id]);
 
+  //participate get data
+  useEffect(()=>{
+fetch('https://evs-delta.vercel.app/participate')
+.then(res=> res.json())
+.then(data=>{
+  setParticipate(data);
+})
+  },[])
+  console.log(participate);
+
   console.log(showVote?.voterEmail);
   const oldVoterEmail = showVote?.voterEmail;
   console.log(voterEmail);
@@ -49,7 +65,7 @@ const Participate = () => {
     // console.log(id);
     setSelectCandidateId(id);
   };
-
+ 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
 
@@ -69,26 +85,38 @@ const Participate = () => {
             updateVoteCount
           )
           .then((res) => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Voted successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
             console.log(res);
-            // setVoterEmail(...oldVoterEmail , [user])
+            // participate api update
+            // axios.post(
+            //   "https://evs-delta.vercel.app/participate",
+            //   updateParticipate
+            // )
+            // .then((res) => {
+            //   console.log("partcipate", res);
+            // })
+            // .catch((err) => {
+            //   console.error("participate", err);
+            // })
 
-            //add voter gmail
-            // axios
-            //   .patch(
-            //     `https://evs-delta.vercel.app/create-vote/${id}`,
-            //     updateVoterEmail
-            //   )
-            //   .then((res) => {
-            //     console.log("update voter", res);
-                
-            //   })
-            //   .catch((err) => {
-            //     console.error("not update vorer", err);
-            //   });
           })
           .catch((err) => {
             console.error(err);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "You already voted!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
+
       });
   };
 
@@ -96,9 +124,12 @@ const Participate = () => {
     <div className="text-white p-5">
       {filterCandidate?.map((candidat, ind) => (
         <>
-          <div key={candidat._id} className="form-control">
+          <div key={candidat._id} className="form-control w-[50%] mx-auto">
             <label className="label cursor-pointer">
-              <span className="label-text">{candidat?.candidateName}</span>
+              <span className="label-text">
+                <Image className=" rounded-full" src={candidat?.candidatePhoto} alt="alt" width={100} height={100} />
+                </span>
+              <span className="label-text">Name: {candidat?.candidateName}</span>
               <input
                 onClick={() => handalCountVote(candidat?._id)}
                 type="radio"
@@ -106,10 +137,11 @@ const Participate = () => {
                 className="radio checked:bg-blue-500"
               />
             </label>
-          </div>{" "}
+            <hr></hr>
+          </div> 
         </>
       ))}
-      <div className="">
+      <div className="text-center pt-5">
         <button onClick={() => handaleAddVote()} className="btn btn-primary">
           submit
         </button>
