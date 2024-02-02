@@ -21,8 +21,9 @@ const ShowAllvote = () => {
             <div className="card-body items-center text-center">
               <h2 className="card-title">{allVote?.OrganizatonName}</h2>
               <p>Vote name: {allVote?.name}</p>
-              <p>Email: {allVote?.email}</p>
-              <p>Voter Email: {allVote?.voterEmail}</p>
+              <p>Running</p>
+              {/* <p>Email: {allVote?.email}</p> */}
+              {/* <p>Voter Email: {allVote?.voterEmail}</p> */}
               <div className="card-actions justify-end">
                 <Link href={`/participate/${allVote?.name}`} className="btn btn-sm btn-primary">Participate</Link>
                 {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
