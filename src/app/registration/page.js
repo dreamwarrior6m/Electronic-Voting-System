@@ -118,7 +118,7 @@ const Registration = () => {
           </div>
         </div>
         <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-blue-700">
-          <form onSubmit={handleRegistration} className=" w-full">
+          <form onSubmit={handleRegistration} className="w-full">
             <div className="grid lg:grid-cols-12 gap-4">
               <div className="form-control col-span-6">
                 <label className="label">
@@ -157,6 +157,8 @@ const Registration = () => {
                     placeholder="Enter your password"
                     className="input input-bordered text-white"
                     required
+                    readOnly
+                    defaultChecked
                   />
                 </div>
                 <div className="absolute -mt-[42px] right-0 flex items-center pr-3">
