@@ -47,7 +47,8 @@ const Facilities = () => {
               </div>
             </div>
 
-            <div className="pt-6">
+            <div className="pt-6"
+            >
               <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
