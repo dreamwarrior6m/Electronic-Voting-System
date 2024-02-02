@@ -1,6 +1,7 @@
 "use client";
 import useAuth from "@/app/hook/useAuth";
 import { FaRegCopy } from "react-icons/fa";
+import img from "../../../assast/profile.png"
 
 import Image from "next/image";
 const Page = () => {
@@ -12,7 +13,7 @@ const Page = () => {
           <div className="flex gap-5 items-center card-body ">
             <Image
               className="w-[150px] h-[150px] rounded-full border-4 border-red-200"
-              src={user?.photoURL ? user?.photoURL : userProfile}
+              src={user?.photoURL ? user?.photoURL : img}
               width={500}
               height={500}
               alt="profile"

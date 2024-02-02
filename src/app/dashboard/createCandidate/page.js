@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const CreateCandidate = () => {
   const [user] = useAuthState(auth);
-  console.log(user.email);
+  console.log(user?.email);
   const [allVote, setAllVote] = useState();
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/create-vote")
