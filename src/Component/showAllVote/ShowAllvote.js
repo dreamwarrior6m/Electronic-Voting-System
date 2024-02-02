@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Protected from "../Protected/Protected";
 
 const ShowAllvote = () => {
   const [showAllVote, setShowAllVote] = useState();
@@ -14,6 +15,7 @@ const ShowAllvote = () => {
   console.log(showAllVote);
 
   return (
+    <Protected>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
       {showAllVote?.map((allVote, ind) => (
         <div key={allVote._id} className="">
@@ -35,6 +37,8 @@ const ShowAllvote = () => {
         </div>
       ))}
     </div>
+    </Protected>
+   
   );
 };
 
