@@ -164,14 +164,18 @@ const page = () => {
           <div className="my-7 text-center">
             <h4 className="text-base">
               <span className="opacity-90">Don't have an account yet?</span>{" "}
-              <Link href='/registration'>
-                <span className="text-[#4F46E5] cursor-pointer">Registration</span>
+              <Link href="/registration">
+                <span className="text-[#4F46E5] cursor-pointer">
+                  Registration
+                </span>
               </Link>
             </h4>
           </div>
           <div className="opacity-50">
             <ul className="flex gap-6 items-center justify-center text-white">
-              <li>Home</li>
+              <Link href="/">
+                <li>Home</li>
+              </Link>
               <li>Contact</li>
               <li>Terms</li>
               <li>Imprint</li>
