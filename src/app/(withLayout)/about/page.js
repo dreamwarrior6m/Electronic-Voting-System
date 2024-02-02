@@ -3,10 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdHome } from "react-icons/md";
 import dreamWarrior from "../../../../public/images/EVS.jpg";
+import Protected from "@/Component/Protected/Protected";
 
 const About = () => {
   return (
-    <div className="my-10 max-w-7xl mx-auto">
+    <Protected>
+      <div className="my-10 max-w-7xl mx-auto">
       <div className="text-white">
         <div href="/" className="flex">
           <Link href="/" className="hover:opacity-80">
@@ -167,6 +169,7 @@ const About = () => {
         </div>
       </div>
     </div>
+    </Protected>
   );
 };
 

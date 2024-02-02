@@ -8,7 +8,7 @@ const Page = () => {
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/candidate")
+    fetch("https://evs-server.vercel.app/candidate")
       .then((res) => res.json())
       .then((data) => setCandidates(data));
   }, []);
@@ -23,7 +23,7 @@ const Page = () => {
       confirmButtonText: "Yes, Deleted it!"
   }).then(async (result) => {
       if (result.isConfirmed) {
-          const res =await axios.delete(`http://localhost:5000/candidate/${id}`)
+          const res =await axios.delete(`https://evs-server.vercel.app/candidate/${id}`)
           if (res.data.deletedCount > 0) {
             setCandidates((prevotes)=>prevotes.filter((votes)=>votes._id!==id))
               Swal.fire({
