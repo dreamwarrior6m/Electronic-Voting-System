@@ -272,7 +272,7 @@ const Registration = () => {
           </div>
           <div className="opacity-50">
             <ul className="flex gap-6 items-center justify-center text-white">
-              <li>Home</li>
+              <Link href="/"><li>Home</li></Link>
               <li>Contact</li>
               <li>Terms</li>
               <li>Imprint</li>
