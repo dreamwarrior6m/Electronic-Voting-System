@@ -6,7 +6,8 @@ import dreamWarrior from "../../../../public/images/EVS.jpg";
 
 const About = () => {
   return (
-    <div className="my-10 max-w-7xl mx-auto">
+   
+      <div className="my-10 max-w-7xl mx-auto">
       <div className="text-white">
         <div href="/" className="flex">
           <Link href="/" className="hover:opacity-80">
@@ -167,6 +168,7 @@ const About = () => {
         </div>
       </div>
     </div>
+ 
   );
 };
 

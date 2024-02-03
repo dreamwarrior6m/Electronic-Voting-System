@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
 import './styles.css'
+import { useRole } from "@/Component/Tanstackquery";
+import { ROOT_DIR_ALIAS } from "next/dist/lib/constants";
 
 const AllVoter = () => {
   const [voters, setVoters] = useState([]);
@@ -19,10 +21,15 @@ const AllVoter = () => {
   //     .then((res) => res.json())
   //     .then((data) => setVoters(data));
   // }, []);
+  const {Role,refetch}= useRole()
+  console.log(Role)
 
   const handleVerify = async (id) => {
     try {
       const res = await axios.patch(`https://evs-server.vercel.app/users/verify/${id}`);
+      if(res.data){
+        refetch()
+      }
     } catch (error) {
       console.error('Error:', error);
     }

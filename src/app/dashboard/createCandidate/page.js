@@ -1,14 +1,25 @@
 "use client";
 import { UploadImage } from "@/Component/shareComponent/utilites";
 import { auth } from "@/app/firebase/config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TfiAlert } from "react-icons/tfi";
 import Swal from "sweetalert2";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const CreateCandidate = () => {
   const [user] = useAuthState(auth);
-  console.log(user);
+  console.log(user?.email);
+  const [allVote, setAllVote] = useState();
+  useEffect(() => {
+    fetch("https://evs-delta.vercel.app/create-vote")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllVote(data);
+      });
+  }, []);
+  console.log(allVote);
+  const findVote = allVote?.find((vote) => vote?.email === user?.email);
+  console.log(findVote);
 
   const [loading, setloading] = useState(false);
   const handleCreateCandidate = async (event) => {
@@ -22,6 +33,8 @@ const CreateCandidate = () => {
     const check = form.check.value;
     const brand = form.brand.value;
     const adminEmail = user?.email;
+    const voteName = findVote?.name;
+    const voteCount = 0;
     try {
       setloading(true);
       const data = await UploadImage(image);
@@ -35,6 +48,8 @@ const CreateCandidate = () => {
         check,
         brand,
         adminEmail,
+        voteName,
+        voteCount,
       };
       const res = await fetch("https://evs-server.vercel.app/candidate", {
         method: "POST",
