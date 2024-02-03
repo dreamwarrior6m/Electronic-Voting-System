@@ -11,7 +11,7 @@ const ShowAllvote = () => {
         setShowAllVote(data);
       });
   }, []);
-  console.log(showAllVote);
+  // console.log(showAllVote);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
