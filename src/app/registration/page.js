@@ -25,7 +25,8 @@ const Registration = () => {
     const date = from.date.value;
     const idNumber = from.idNumber.value;
     const verify = false;
-    const user = { name, email, photo, date, idNumber, verify };
+    const isRole = "Normal";
+    const user = { name, email, photo, date, idNumber, verify,isRole };
     console.log(user);
 
     if (password.length < 6) {
@@ -75,7 +76,7 @@ const Registration = () => {
             });
             from.reset();
             window.location.reload();
-            fetch("https://evs-delta.vercel.app/users", {
+            fetch("http://localhost:5000/users", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -105,12 +106,12 @@ const Registration = () => {
       });
   };
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center">
+    <div className="dark:bg-slate-900 flex lg:h-screen items-center mt-10">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
           <div className="my-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold">Create a free account</h1>
+            <h1 className="mb-2 text-3xl font-bold text-black">Create a free account</h1>
             <h4 className="text-base">
               <span className="opacity-75">Or</span>{" "}
               <span className="text-[#4F46E5]">log in to your account</span>
@@ -127,7 +128,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-black"
                   required
                   name="name"
                 />
@@ -139,7 +140,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-black"
                   required
                   name="email"
                 />
@@ -155,9 +156,8 @@ const Registration = () => {
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-white"
+                    className="input input-bordered text-black"
                     required
-                    readOnly
                     defaultChecked
                   />
                 </div>
@@ -181,7 +181,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your ID Card Number"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-black"
                   required
                   name="idNumber"
                 />
@@ -194,7 +194,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Valid Photo URL"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-black"
                   name="photo"
                 />
               </div>
@@ -205,7 +205,7 @@ const Registration = () => {
                 <input
                   type="date"
                   placeholder="Photo"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-black"
                   required
                   name="date"
                 />

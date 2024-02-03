@@ -46,11 +46,9 @@ const Navbar = () => {
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
                   {user && (
                     <li>
-                      <Link href="/dashboard/home">Dashboard</Link>
+                      <Link href="/Profile">Profile</Link>
                     </li>
                   )}
-
-
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
                   </li>

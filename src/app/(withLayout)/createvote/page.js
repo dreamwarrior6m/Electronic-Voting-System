@@ -29,7 +29,7 @@ const page = () => {
     setloading(true);
 
     try {
-      const res = await fetch("https://evs-server.vercel.app/create-vote", {
+      const res = await fetch("http://localhost:5000/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-        router.push("/dashboard");
+        router.push("/dashboard/home");
       } else {
         Swal.fire({
           position: "top-end",
@@ -59,7 +59,7 @@ const page = () => {
   };
 
   return (
-    <div className="my-10 text-white">
+    <div className="my-10 text-black">
       <div>
         <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
           <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">

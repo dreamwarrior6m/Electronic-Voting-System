@@ -16,20 +16,17 @@ const AllVoter = () => {
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
 
-  // useEffect(() => {
-  //   fetch("https://evs-server.vercel.app/users")
-  //     .then((res) => res.json())
-  //     .then((data) => setVoters(data));
-  // }, []);
-  const {Role,refetch}= useRole()
-  console.log(Role)
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setVoters(data));
+  }, []);
+  // const {Role,refetch}= useRole()
+  // console.log(Role)
 
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`https://evs-server.vercel.app/users/verify/${id}`);
-      if(res.data){
-        refetch()
-      }
+      const res = await axios.patch(`http://localhost:5000/users/verify/${id}`);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -46,7 +43,7 @@ const AllVoter = () => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(`https://evs-server.vercel.app/users/${id}`);
+        const res = await axios.delete(`http://localhost:5000/users/${id}`);
 
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
@@ -79,7 +76,7 @@ const AllVoter = () => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
-        `https://evs-server.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+        `http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`
       );
 
       setPageCount(response.data.pageCount);

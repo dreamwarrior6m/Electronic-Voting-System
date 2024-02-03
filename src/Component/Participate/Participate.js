@@ -26,7 +26,7 @@ const Participate = () => {
   console.log(updateParticipate);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -35,7 +35,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   useEffect(() => {
-    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+    fetch(`http://localhost:5000/create-vote/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setShowVote(data);
@@ -44,7 +44,7 @@ const Participate = () => {
 
   //participate get data
   useEffect(()=>{
-fetch('https://evs-delta.vercel.app/participate')
+fetch('http://localhost:5000/participate')
 .then(res=> res.json())
 .then(data=>{
   setParticipate(data);
@@ -69,7 +69,7 @@ fetch('https://evs-delta.vercel.app/participate')
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
 
-    fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+    fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -81,7 +81,7 @@ fetch('https://evs-delta.vercel.app/participate')
         // add vote number
         axios
           .patch(
-            `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
+            `http://localhost:5000/candidate/${selectCandidateId}`,
             updateVoteCount
           )
           .then((res) => {
@@ -95,7 +95,7 @@ fetch('https://evs-delta.vercel.app/participate')
             console.log(res);
             // participate api update
             // axios.post(
-            //   "https://evs-delta.vercel.app/participate",
+            //   "http://localhost:5000/participate",
             //   updateParticipate
             // )
             // .then((res) => {
