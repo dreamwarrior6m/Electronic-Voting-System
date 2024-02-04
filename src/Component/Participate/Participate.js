@@ -144,7 +144,7 @@ const Participate = () => {
     <div className="text-white p-5">
       {filterCandidate?.map((candidat, ind) => (
         <>
-          <div key={candidat._id} className="form-control w-[50%] mx-auto">
+          <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
             <label className="label cursor-pointer">
               <span className="label-text">
                 <Image
@@ -169,14 +169,20 @@ const Participate = () => {
           </div>
         </>
       ))}
+      <div className="">
+        {
+          filterCandidate?.length == 0 &&
+          <h2 className="text-center text-xl md:text-3xl font-bold p-5">No candidate partcipate</h2>
+        }
+      </div>
       <div className="text-center pt-5">
-        {filterParticipet?.[0]?.email == user?.email ? (
+        {(filterParticipet?.[0]?.email == user?.email) || filterCandidate?.length == 0 ? (
           <button
             disabled
             onClick={() => handaleAddVote()}
             className="btn btn-primary"
           >
-            You already voted
+            submit
           </button>
         ) : (
           <button onClick={() => handaleAddVote()} className="btn btn-primary">
