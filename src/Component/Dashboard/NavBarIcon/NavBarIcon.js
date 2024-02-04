@@ -16,6 +16,10 @@ const NavBarIcon = () => {
       title: "Candidate",
     },
     {
+      path: "/dashboard/allElections",
+      title: "All Elections",
+    },
+    {
       path: "/dashboard/allVoter",
       title: "All Voter",
     },
