@@ -4,6 +4,16 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+} from "react-share";
+import CopyToClipboard from "react-copy-to-clipboard";
+import Swal from "sweetalert2";
 
 const Share = () => {
   const [allVote, setAllVote] = useState();
@@ -24,46 +34,94 @@ const Share = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
+    const shareUrl = `localhost:3000/share/${filterAllVote?.[0].name}`;
+  
+
+  const handleCopy = () => {
+     
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "URL copied",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
+
   return (
     <div>
-      <div className="text-white grid grid-cols-1 p-5 gap-5">
-        <div className="card  bg-base-100 shadow-xl">
-          <figure className="px-10 pt-10">
-            <Image
-              src={filterAllVote?.[0].photo}
-              alt="alt"
-              width={300}
-              height={300}
-            />
-          </figure>
-          <div className="card-body items-center text-center">
-            <h2 className="card-title">
-              <span className="text-xl font-bold text-red-600"></span>
-            </h2>
-            <p>Election Name: {filterAllVote?.[0].name} </p>
+      <div className="text-white p-5">
+        <div className="card  bg-base-100 shadow-xl flex md:flex-row">
+          <div className="flex-1">
+            <figure className="px-10 pt-10">
+              <Image
+                src={filterAllVote?.[0].photo}
+                alt="alt"
+                width={300}
+                height={300}
+              />
+            </figure>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">
+                <span className="text-xl font-bold text-red-600"></span>
+              </h2>
+              <p>Election Name: {filterAllVote?.[0].name} </p>
 
-            <div className="card-actions justify-center">
-              <Link
-                href={`/participate/${filterAllVote?.[0].name}`}
-                className="btn btn-sm btn-primary"
-              >
-                Participate
-              </Link>
-              {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-              <Link
-                href={`/show-all-vote/${filterAllVote?.[0].name}`}
-                className="btn btn-sm"
-              >
-                {" "}
-                Candidates
-              </Link>
-              <Link
-                href={`/result/${filterAllVote?.[0].name}`}
-                className="btn btn-sm"
-              >
-                {" "}
-                result
-              </Link>
+              <div className="card-actions justify-center">
+                <Link
+                  href={`/participate/${filterAllVote?.[0].name}`}
+                  className="btn btn-sm btn-primary"
+                >
+                  Participate
+                </Link>
+                {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
+                <Link
+                  href={`/show-all-vote/${filterAllVote?.[0].name}`}
+                  className="btn btn-sm"
+                >
+                  {" "}
+                  Candidates
+                </Link>
+                <Link
+                  href={`/result/${filterAllVote?.[0].name}`}
+                  className="btn btn-sm"
+                >
+                  {" "}
+                  result
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-2 text-center p-5">
+            <div className="text-center">
+              <h2 className="">Share link</h2>
+              <div className="flex gap-4 pt-3 justify-center">
+                <FacebookShareButton url={shareUrl}>
+                  <FacebookIcon className="rounded-full size-8" />
+                </FacebookShareButton>
+
+                <WhatsappShareButton url={shareUrl}>
+                  <WhatsappIcon className="rounded-full size-8" />
+                </WhatsappShareButton>
+
+                <FacebookMessengerShareButton url={shareUrl}>
+                  <FacebookMessengerIcon className="rounded-full size-8" />
+                </FacebookMessengerShareButton>
+              </div>
+              <div className="pt-5">
+                <h2 className="">Share-Link:</h2>
+                <h2 className="bg-black p-1 px-3 rounded-md">
+                  {shareUrl}
+                  <CopyToClipboard text={shareUrl}>
+                    <span className="pl-1">
+                      <button onClick={handleCopy} className="btn btn-sm">
+                        copy
+                      </button>
+                    </span>
+                  </CopyToClipboard>
+                </h2>
+              </div>
             </div>
           </div>
         </div>
