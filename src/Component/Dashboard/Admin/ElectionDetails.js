@@ -49,7 +49,10 @@ const ElectionDetails = () => {
 
     return (
       <div>
-        <h2>Position: {isSystemRunning ? "Running" : "Stopped"}</h2>
+        <h2>
+          <span className="font-bold">Current Status: </span>{" "}
+          {isSystemRunning ? "Running" : "Stopped"}
+        </h2>
       </div>
     );
   };
@@ -60,24 +63,39 @@ const ElectionDetails = () => {
   return (
     <div>
       <div>
-        <h3 className="text-3xl font-bold text-gray-700 text-center py-3">
+        <h3 className="text-4xl font-bold text-center py-3">
           {filterElection[0]?.OrganizatonName} Election Details
         </h3>
       </div>
+      <h4 className="text-3xl font-bold py-2">All Info:</h4>
       <div className="text-2xl font font-medium">
         {filterElection?.map((election, index) => (
           <div key={election?._id}>
             <div className="">
-              <p>{election?.OrganizatonName}</p>
-              <p>{election?.name}</p>
+              <p>
+                <span className="font-bold">Organization Name: </span>
+                {election?.OrganizatonName}
+              </p>
+              <p>
+                <span className="font-bold">Election Name: </span>
+                {election?.name}
+              </p>
               <Timer
                 startDate1={`${election?.startDate}T${election?.startTime}`}
                 endDate1={`${election?.endDate}T${election?.endTime}`}
               />
-              <p>Email: {election?.email}</p>
+              <p>
+                <span className="font-bold">Email: </span> {election?.email}
+              </p>
             </div>
           </div>
         ))}
+      </div>
+      <div className="mt-6">
+        <h4 className="text-3xl font-bold">All Candidate:</h4>
+      </div>
+      <div className="mt-6">
+        <h4 className="text-3xl font-bold">All Voter:</h4>
       </div>
     </div>
   );
