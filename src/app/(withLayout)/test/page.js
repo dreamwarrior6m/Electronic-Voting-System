@@ -80,7 +80,6 @@ const ShowAllvote = () => {
                 {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
                 <Link href={`/show-all-vote/${allVote?.name}`}  className="btn btn-sm"> Candidates</Link>
                 <Link href={`/result/${allVote?.name}`}  className="btn btn-sm"> result</Link>
-                <Link href={`share/${allVote?.name}`}  className="btn btn-sm"> Share</Link>
               </div>
             </div>
           </div>
