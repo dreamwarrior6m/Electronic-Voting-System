@@ -1,6 +1,7 @@
+import useAuth from "@/app/hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-
+ 
 
 
 export const useRole=()=>{
@@ -9,7 +10,11 @@ export const useRole=()=>{
         queryFn: async () => {
             const res = await axios.get(`https://evs-delta.vercel.app/users`)
             return res.data;
+ 
         }
-    })
-    return [Role, isLoading,refetch]
-}
+      }
+    });
+  
+    return { role: data, refetch };
+  };
+  

@@ -1,54 +1,14 @@
 "use client";
+
 import { FaRegCopy } from "react-icons/fa";
 import img from "../../../assast/profile.png"
+
 import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
-
-
 const Page = () => {
   const { user } = useAuth();
- 
-  // console.log(user?.email);
-  const [allUser, setAlluser] = useState([]);
-  const userData = `https://evs-delta.vercel.app/users`;
-  useEffect(() => {
-    fetch(userData)
-      .then((res) => res.json())
-      .then((data) => setAlluser(data));
-  }, [userData]);
-  // console.log(allUser)
-
-  const User = allUser?.filter((users) => users?.email === user?.email);
-  // console.log(User?.[0]?.idNumber);
-
-  // update profile
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const date = form.date.value;
-    const name = form.name.value;
-    const alldata = { name, date };
-    console.log(alldata);
-
-    fetch(`http://localhost:5000/users/${user?.email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(alldata),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          Swal("Thank You", "Update Successfully", "success");
-        }
-      });
-  };
-
- 
   return (
-    <div className="bg-lime-500">
+    <div className="bg-lime-500 my-2">
       <div className="  ">
         <div className="card w-full h-full  shadow-xl image-full ">
           <div className="flex gap-5 items-center card-body ">
@@ -60,9 +20,8 @@ const Page = () => {
               alt="profile"
             ></Image>
             <div className="flex gap-2 items-center">
- 
-              <p>{User?.[0]?.idNumber}</p>  <FaRegCopy />
- 
+              <p> ID: 4654214521 </p>
+              <FaRegCopy />
             </div>
 
             {user && (
@@ -84,13 +43,11 @@ const Page = () => {
                 </div>
                 <div>
                   <h2 className="text-xl font-bold">Date Of Birdth</h2>
- 
-                  <p className="">{User?.[0]?.date}</p>
+                  <p>28/4/2003</p>
                 </div>
                 <div>
                   <h2 className="text-xl font-bold">ID Number</h2>
-                  <p>{User?.[0]?.idNumber}</p>
- 
+                  <p>6565454878</p>
                 </div>
               </div>
             </div>

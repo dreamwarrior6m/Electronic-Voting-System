@@ -11,7 +11,7 @@ const CreateCandidate = () => {
   console.log(user?.email);
   const [allVote, setAllVote] = useState();
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/create-vote")
+    fetch("http://localhost:5000/create-vote")
       .then((res) => res.json())
       .then((data) => {
         setAllVote(data);
@@ -51,7 +51,9 @@ const CreateCandidate = () => {
         voteName,
         voteCount,
       };
+ 
       const res = await fetch("https://evs-delta.vercel.app/candidate", {
+ 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
