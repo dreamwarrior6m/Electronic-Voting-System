@@ -95,7 +95,7 @@ const AllVoter =() => {
         const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
  
  
-        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
+        // const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
  
  
 
