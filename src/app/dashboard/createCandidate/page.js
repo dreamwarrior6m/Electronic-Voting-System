@@ -51,7 +51,13 @@ const CreateCandidate = () => {
         voteName,
         voteCount,
       };
+<<<<<<< HEAD
       const res = await fetch("https://evs-delta.vercel.app/candidate", {
+=======
+ 
+      const res = await fetch("https://evs-delta.vercel.app/candidate", {
+ 
+>>>>>>> 8b9ff1d76a92d03fa242f5b048b0ce00692b78f9
         method: "POST",
         headers: {
           "Content-Type": "application/json",
