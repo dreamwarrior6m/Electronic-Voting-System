@@ -11,6 +11,7 @@ const page = () => {
   const [loading, setloading] = useState(false);
   const [allCreateVote, setAllCreateVote] = useState();
   const [user] = useAuthState(auth);
+  console.log('user',user)
   // console.log(user?.email);
   // if(!user){
   //   router.push('/login')
