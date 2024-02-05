@@ -2,17 +2,32 @@
 "use client";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useAuthState } from "react-firebase-hooks/auth";
+import axios from "axios";
 const page = () => {
   const router = useRouter();
   const [loading, setloading] = useState(false);
+  const [allCreateVote, setAllCreateVote] = useState();
   const [user] = useAuthState(auth);
-  console.log(user?.email);
+  // console.log(user?.email);
   // if(!user){
   //   router.push('/login')
   // }
+
+  useEffect(() => {
+    axios
+      .get("https://evs-delta.vercel.app/create-vote")
+      .then((res) => {
+        setAllCreateVote(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    }, []);
+    console.log(allCreateVote);
+    
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -22,8 +37,28 @@ const page = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const email = user?.email;
-    const createVoteInfo = { OrganizatonName, Type, email, name, photo };
-    console.log(OrganizatonName, Type, email, name, photo);
+    const createVoteInfo = {
+      OrganizatonName,
+      Type,
+      email,
+      name,
+      photo,
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+    };
+    console.log(
+      OrganizatonName,
+      Type,
+      email,
+      name,
+      photo,
+      startDate,
+      startTime,
+      endDate,
+      endTime
+    );
 
     setloading(true);
 
@@ -66,9 +101,10 @@ const page = () => {
             <h3 className="text-xl font-bold text-center">
               Digital Voting System
             </h3>
+
             <form onSubmit={handleCreate} className="card-body">
-              <div className="grid lg:grid-cols-2 gap-2">
-                <div>
+              <div className="">
+                <div className="grid md:grid-cols-2 gap-3">
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text dark:text-white">
@@ -83,22 +119,6 @@ const page = () => {
                       name="OrganizatonName"
                     />
                   </div>
-
-                  {/* <div className="form-control">
-                    <label className="label">
-                      <span className="label-text dark:text-white">
-                        Your E-mail
-                      </span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter Your Name"
-                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                      required
-                      name="email"
-                    />
-                  </div> */}
-
                   <div className="form-control w-full ">
                     <label className="label">
                       <span className="label-text dark:text-white">
@@ -116,7 +136,8 @@ const page = () => {
                     </select>
                   </div>
                 </div>
-                <div>
+
+                <div className="grid md:grid-cols-2 gap-3">
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text dark:text-white">
@@ -125,7 +146,7 @@ const page = () => {
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter Vote Name"
+                      placeholder="Vote Name must unique"
                       className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                       required
                       name="name"
@@ -143,6 +164,100 @@ const page = () => {
                       className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                       required
                       name="photo"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Start Date
+                      </span>
+                    </label>
+                    <input
+                      type="date"
+                      placeholder="Start Date"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      required
+                      name="startDate"
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Start Time
+                      </span>
+                    </label>
+                    <input
+                      type="time"
+                      placeholder="Start Time"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      required
+                      name="startTime"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        End Date
+                      </span>
+                    </label>
+                    <input
+                      type="date"
+                      placeholder="End Date"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      required
+                      name="endDate"
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        End Time
+                      </span>
+                    </label>
+                    <input
+                      type="time"
+                      placeholder="End Time"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      required
+                      name="endTime"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Your E-mail
+                      </span>
+                    </label>
+                    <input
+                      defaultValue={user?.email}
+                      disabled
+                      type="email"
+                      placeholder="Enter Your Email"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      name="email"
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Your Name
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      disabled
+                      defaultValue={user?.displayName}
+                      placeholder="Your name"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                     />
                   </div>
                 </div>

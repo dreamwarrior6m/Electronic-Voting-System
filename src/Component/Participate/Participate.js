@@ -45,15 +45,7 @@ const Participate = () => {
   }, [id]);
 
   //participate get data
-<<<<<<< HEAD
-  useEffect(()=>{
-fetch('http://localhost:5000/participate')
-.then(res=> res.json())
-.then(data=>{
-  setParticipate(data);
-})
-  },[])
-=======
+
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/participate")
       .then((res) => res.json())
@@ -61,7 +53,6 @@ fetch('http://localhost:5000/participate')
         setParticipate(data);
       });
   }, []);
->>>>>>> 6b2deaf3a9a8c01ac1ee902512e32116197875ad
   console.log(participate);
 
   // console.log(showVote?.voterEmail);
@@ -77,6 +68,7 @@ fetch('http://localhost:5000/participate')
     // console.log(id);
     setSelectCandidateId(id);
   };
+ 
 
   const filterParticipet = participate?.filter(
     (participat) =>
@@ -86,55 +78,7 @@ fetch('http://localhost:5000/participate')
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
-<<<<<<< HEAD
-
-    fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const updateVot = data?.voteCount;
-        const updateVoteCount2 = updateVot + 1;
-        const updateVoteCount = { updateVoteCount2 };
-        console.log(updateVoteCount);
-
-        // add vote number
-        axios
-          .patch(
-            `http://localhost:5000/candidate/${selectCandidateId}`,
-            updateVoteCount
-          )
-          .then((res) => {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Voted successfully",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-            console.log(res);
-            // participate api update
-            // axios.post(
-            //   "http://localhost:5000/participate",
-            //   updateParticipate
-            // )
-            // .then((res) => {
-            //   console.log("partcipate", res);
-            // })
-            // .catch((err) => {
-            //   console.error("participate", err);
-            // })
-
-          })
-          .catch((err) => {
-            console.error(err);
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: "You already voted!",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-=======
+ 
   
       if (filterParticipet?.[0]?.email != user?.email) {
         fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
@@ -186,7 +130,7 @@ fetch('http://localhost:5000/participate')
                   timer: 1500,
                 });
               });
->>>>>>> 6b2deaf3a9a8c01ac1ee902512e32116197875ad
+ 
           });
       } else{
         Swal.fire({
@@ -204,7 +148,7 @@ fetch('http://localhost:5000/participate')
     <div className="text-white p-5">
       {filterCandidate?.map((candidat, ind) => (
         <>
-          <div key={candidat._id} className="form-control w-[50%] mx-auto">
+          <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
             <label className="label cursor-pointer">
               <span className="label-text">
                 <Image
@@ -229,14 +173,24 @@ fetch('http://localhost:5000/participate')
           </div>
         </>
       ))}
+      <div className="">
+        {
+          filterCandidate?.length == 0 &&
+          <h2 className="text-center text-xl md:text-3xl font-bold p-5">No candidate partcipate</h2>
+        }
+      </div>
       <div className="text-center pt-5">
+ 
         {filterParticipet?.[0]?.email == user?.email ? (
+ 
           <button
             disabled
             onClick={() => handaleAddVote()}
             className="btn btn-primary"
           >
+ 
             You already voted
+ 
           </button>
         ) : (
           <button onClick={() => handaleAddVote()} className="btn btn-primary">

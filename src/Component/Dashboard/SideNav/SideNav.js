@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
+import { GiVote } from "react-icons/gi";
 import { IoMdHome } from "react-icons/io";
 import { IoPersonAdd } from "react-icons/io5";
 import {
@@ -50,6 +51,15 @@ const SideNav = ({ children }) => {
             <BsPersonCircle className="text-2xl group-hover:text-white" />
             <h3 className="text-base group-hover:text-white font-semibold">
               Candidate
+            </h3>
+          </Link>
+          <Link
+            href="/dashboard/allElections"
+            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/allElections" ? "text-white bg-gray-900": "text-gray-800"}`}
+          >
+            <GiVote className="text-2xl group-hover:text-white" />
+            <h3 className="text-base group-hover:text-white font-semibold">
+              All Elections
             </h3>
           </Link>
           <Link
