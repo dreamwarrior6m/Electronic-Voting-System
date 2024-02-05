@@ -157,7 +157,7 @@ const Registration = () => {
                     placeholder="Enter your password"
                     className="input input-bordered text-white"
                     required
-                    readOnly
+                    
                     defaultChecked
                   />
                 </div>

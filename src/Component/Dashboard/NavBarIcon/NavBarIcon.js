@@ -27,10 +27,10 @@ const NavBarIcon = () => {
       path: "/dashboard/LivePreview",
       title: "Live Preview",
     },
-    {
-      path: "/dashboard/profile",
-      title: "Profile",
-    },
+    // {
+    //   path: "/dashboard/profile",
+    //   title: "Profile",
+    // },
     {
       path: "/",
       title: "Home",
