@@ -21,7 +21,6 @@ const page = () => {
     const Type = form.Type.value;
     const name = form.name.value;
     const photo = form.photo.value;
-
     const email = user?.email;
     const createVoteInfo = { OrganizatonName, Type, email, name, photo };
     console.log(OrganizatonName, Type, email, name, photo);

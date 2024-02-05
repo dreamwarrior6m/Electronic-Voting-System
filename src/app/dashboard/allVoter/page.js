@@ -7,30 +7,73 @@ import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
 import './styles.css'
-import { useRole } from "@/Component/Tanstackquery";
 import { ROOT_DIR_ALIAS } from "next/dist/lib/constants";
+import { root } from "postcss";
+import useAuth from "@/app/hook/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { isRole } from "@/Component/Tanstackquery";
 
-const AllVoter = () => {
+const AllVoter =() => {
   const [voters, setVoters] = useState([]);
   const [limit, setLimit] = useState(5);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
+  console.log(voters)
+
 
   useEffect(() => {
     fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => setVoters(data));
   }, []);
-  // const {Role,refetch}= useRole()
-  // console.log(Role)
+
+  
 
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/users/verify/${id}`);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to undo this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      })
+      
     } catch (error) {
       console.error('Error:', error);
     }
   };
+
+  const handleRole = async (id) =>{
+    try{
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You want make admin this user",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, I do!"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const res = await axios.patch(`http://localhost:5000/users/isRole/${id}`);
+          console.log(res.data)
+  
+          if (res.data > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "This voter has been deleted.",
+              icon: "success"
+            });
+          }
+        }
+      });
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -105,7 +148,7 @@ const AllVoter = () => {
               <th>Name</th>
               <th>ID Card Number</th>
               <th>Email</th>
-              <th>Date</th>
+              <th>Role</th>
               <th>Verify</th>
               <th>Action</th>
             </tr>
@@ -121,7 +164,9 @@ const AllVoter = () => {
                 <td>{vote.name}</td>
                 <td>{vote.idNumber}</td>
                 <td>{vote.email}</td>
-                <td>{vote.date}</td>
+                <td>
+                  <button onClick={()=>handleRole(vote._id)}>{vote.isRole}</button>
+                  </td>
                 <td>
                   <button onClick={() => handleVerify(vote._id)}>
                     {

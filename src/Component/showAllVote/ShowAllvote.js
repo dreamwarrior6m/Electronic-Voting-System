@@ -12,7 +12,7 @@ const ShowAllvote = () => {
         setShowAllVote(data);
       });
   }, []);
-  console.log(showAllVote);
+  // console.log(showAllVote);
 
   return (
     <Protected>

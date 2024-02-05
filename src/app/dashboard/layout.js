@@ -1,9 +1,14 @@
 "use client";
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import SideNav from "@/Component/Dashboard/SideNav/SideNav";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
 
 const layout = ({ children }) => {
+  const queryClient = new QueryClient()
   return (
     <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0">
       {/* SideNav  */}
@@ -16,7 +21,13 @@ const layout = ({ children }) => {
         </div>
       </div>
       {/* content  */}
-      <div className="flex-1 p-8 ">{children}</div>
+      <div className="flex-1 p-8 ">
+
+      <QueryClientProvider client={queryClient}>
+              {children}
+     </QueryClientProvider> 
+        
+        </div>
     </div>
   );
 };
