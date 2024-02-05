@@ -25,8 +25,7 @@ const Registration = () => {
     const date = from.date.value;
     const idNumber = from.idNumber.value;
     const verify = false;
-    const isRole = "User";
-    const user = { name, email, photo, date, idNumber, verify, isRole };
+    const user = { name, email, photo, date, idNumber, verify };
     console.log(user);
 
     if (password.length < 6) {
@@ -63,7 +62,14 @@ const Registration = () => {
     }
 
     setloading(true);
-    createUser(email, password)
+    createUser(email, password);
+    fetch("https://evs-delta.vercel.app/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
       .then(() => {
         updateUserProfile(name, photo)
           .then(() => {
@@ -76,13 +82,7 @@ const Registration = () => {
             });
             from.reset();
             window.location.reload();
-            fetch("https://evs-delta.vercel.app/users", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(user),
-            });
+            router.push("/");
           })
           .catch((error) => {
             Swal.fire({
@@ -93,7 +93,6 @@ const Registration = () => {
               timer: 2000,
             });
           });
-        router.push("/");
       })
       .catch((error) => {
         Swal.fire({
@@ -106,12 +105,12 @@ const Registration = () => {
       });
   };
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center mt-10">
+    <div className="dark:bg-slate-900 flex lg:h-screen items-center">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
           <div className="my-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold text-black">Create a free account</h1>
+            <h1 className="mb-2 text-3xl font-bold">Create a free account</h1>
             <h4 className="text-base">
               <span className="opacity-75">Or</span>{" "}
               <span className="text-[#4F46E5]">log in to your account</span>
@@ -128,7 +127,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="name"
                 />
@@ -140,7 +139,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="email"
                 />
@@ -156,7 +155,7 @@ const Registration = () => {
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-black"
+                    className="input input-bordered text-white"
                     required
                     defaultChecked
                   />
@@ -181,7 +180,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your ID Card Number"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="idNumber"
                 />
@@ -194,7 +193,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Valid Photo URL"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   name="photo"
                 />
               </div>
@@ -205,7 +204,7 @@ const Registration = () => {
                 <input
                   type="date"
                   placeholder="Photo"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="date"
                 />
@@ -272,7 +271,9 @@ const Registration = () => {
           </div>
           <div className="opacity-50">
             <ul className="flex gap-6 items-center justify-center text-white">
-              <Link href="/"><li>Home</li></Link>
+              <Link href="/">
+                <li>Home</li>
+              </Link>
               <li>Contact</li>
               <li>Terms</li>
               <li>Imprint</li>
