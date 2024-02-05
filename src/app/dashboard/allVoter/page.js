@@ -19,28 +19,22 @@ const AllVoter =() => {
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
   console.log(voters)
-
-
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => setVoters(data));
-  }, []);
-
-  
+ 
+  // useEffect(() => {
+  //   fetch("https://evs-delta.vercel.app/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setVoters(data));
+  // }, []);
+  const {Role,refetch}= useRole()
+  console.log(Role)
 
   const handleVerify = async (id) => {
     try {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to undo this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-      })
-      
+      const res = await axios.patch(`https://evs-delta.vercel.app/users/verify/${id}`);
+      if(res.data){
+        refetch()
+      }
+ 
     } catch (error) {
       console.error('Error:', error);
     }
@@ -86,7 +80,9 @@ const AllVoter =() => {
       confirmButtonText: "Yes, delete it!"
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(`http://localhost:5000/users/${id}`);
+ 
+        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
+ 
 
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
@@ -119,7 +115,9 @@ const AllVoter =() => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+ 
+        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+ 
       );
 
       setPageCount(response.data.pageCount);
