@@ -64,7 +64,7 @@ const page = () => {
         <div className="flex text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={loginImg} />
           <div className="my-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold">Log in to your account</h1>
+            <h1 className="mb-2 text-3xl font-bold text-black">Log in to your account</h1>
             <h4 className="text-base">
               <span className="opacity-75">Or</span>{" "}
               <span className="text-[#4F46E5]">create a free account</span>

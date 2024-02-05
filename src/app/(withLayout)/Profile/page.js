@@ -1,15 +1,14 @@
 "use client";
+
 import { FaRegCopy } from "react-icons/fa";
 import img from "../../../assast/profile.png"
+
 import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
-
-
-
 const Page = () => {
   const { user } = useAuth();
   return (
-    <div className="bg-lime-500">
+    <div className="bg-lime-500 my-2">
       <div className="  ">
         <div className="card w-full h-full  shadow-xl image-full ">
           <div className="flex gap-5 items-center card-body ">

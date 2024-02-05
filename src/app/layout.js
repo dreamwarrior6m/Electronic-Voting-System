@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           <div className="min-h-screen flex flex-col justify-between">
             <AuthProvider>
             <QueryClientProvider client={queryClient}>
-            {children}
+              {children}
             </QueryClientProvider> 
             </AuthProvider>
           </div>

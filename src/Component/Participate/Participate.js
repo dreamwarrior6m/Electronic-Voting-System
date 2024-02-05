@@ -28,7 +28,7 @@ const Participate = () => {
   // console.log(updateParticipate);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -37,7 +37,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   useEffect(() => {
-    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+    fetch(`http://localhost:5000/create-vote/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setShowVote(data);
@@ -45,6 +45,7 @@ const Participate = () => {
   }, [id]);
 
   //participate get data
+
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/participate")
       .then((res) => res.json())
@@ -67,6 +68,7 @@ const Participate = () => {
     // console.log(id);
     setSelectCandidateId(id);
   };
+ 
 
   const filterParticipet = participate?.filter(
     (participat) =>
@@ -76,6 +78,7 @@ const Participate = () => {
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
+ 
   
       if (filterParticipet?.[0]?.email != user?.email) {
         fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
@@ -127,6 +130,7 @@ const Participate = () => {
                   timer: 1500,
                 });
               });
+ 
           });
       } else{
         Swal.fire({
@@ -176,13 +180,17 @@ const Participate = () => {
         }
       </div>
       <div className="text-center pt-5">
-        {(filterParticipet?.[0]?.email == user?.email) || filterCandidate?.length == 0 ? (
+ 
+        {filterParticipet?.[0]?.email == user?.email ? (
+ 
           <button
             disabled
             onClick={() => handaleAddVote()}
             className="btn btn-primary"
           >
-            submit
+ 
+            You already voted
+ 
           </button>
         ) : (
           <button onClick={() => handaleAddVote()} className="btn btn-primary">
