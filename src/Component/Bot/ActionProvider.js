@@ -20,6 +20,15 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
+  const handleNull = () => {
+    const botMessage = createChatBotMessage('Ask Valid questions.');
+
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
 
 
   return (
@@ -29,6 +38,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
           actions: {
             handleHello,
             handleHi,
+            handleNull,
           },
         });
       })}
