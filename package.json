@@ -35,8 +35,8 @@
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "react-firebase-hooks": "^5.1.1",
-    "sweetalert2": "^11.10.4",
-    "swiper": "^11.0.5",
+    "sweetalert2": "^11.10.5",
+    "swiper": "^11.0.6",
     "tailwindcss": "^3.3.0"
   }
 }

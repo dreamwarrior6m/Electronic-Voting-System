@@ -28,7 +28,7 @@ const Participate = () => {
   // console.log(updateParticipate);
 
   useEffect(() => {
-    fetch("http://localhost:5000/candidate")
+    fetch("https://evs-delta.vercel.app/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -37,7 +37,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/create-vote/${id}`)
+    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setShowVote(data);
@@ -181,7 +181,7 @@ const Participate = () => {
       </div>
       <div className="text-center pt-5">
  
-        {filterParticipet?.[0]?.email == user?.email ? (
+        {(filterParticipet?.[0]?.email == user?.email) || filterCandidate?.length == 0 ? (
  
           <button
             disabled

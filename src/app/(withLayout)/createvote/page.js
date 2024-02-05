@@ -37,6 +37,11 @@ const page = () => {
     const Type = form.Type.value;
     const name = form.name.value;
     const photo = form.photo.value;
+    const startDate = form.startDate.value;
+    const startTime = form.startTime.value;
+    const endDate = form.endDate.value;
+    const endTime = form.endTime.value;
+
     const email = user?.email;
     const createVoteInfo = {
       OrganizatonName,
@@ -64,7 +69,7 @@ const page = () => {
     setloading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/create-vote", {
+      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

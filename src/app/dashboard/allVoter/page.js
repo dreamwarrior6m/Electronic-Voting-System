@@ -20,6 +20,16 @@ const AllVoter =() => {
   const currentPage = useRef(1);
   console.log(voters)
  
+
+
+  useEffect(() => {
+    fetch("https://evs-delta.vercel.app/users")
+      .then((res) => res.json())
+      .then((data) => setVoters(data));
+  }, []);
+
+ 
+ 
   // useEffect(() => {
   //   fetch("https://evs-delta.vercel.app/users")
   //     .then((res) => res.json())
@@ -27,6 +37,7 @@ const AllVoter =() => {
   // }, []);
   const {Role,refetch}= useRole()
   console.log(Role)
+ 
 
   const handleVerify = async (id) => {
     try {
@@ -52,7 +63,7 @@ const AllVoter =() => {
         confirmButtonText: "Yes, I do!"
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.patch(`http://localhost:5000/users/isRole/${id}`);
+          const res = await axios.patch(`https://evs-delta.vercel.app/users/isRole/${id}`);
           console.log(res.data)
   
           if (res.data > 0) {
@@ -82,6 +93,10 @@ const AllVoter =() => {
       if (result.isConfirmed) {
  
         const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
+ 
+ 
+        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
+ 
  
 
         if (res.data.deletedCount > 0) {
@@ -117,6 +132,10 @@ const AllVoter =() => {
       const response = await axios.get(
  
         `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+ 
+ 
+        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+ 
  
       );
 
