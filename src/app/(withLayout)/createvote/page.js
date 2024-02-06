@@ -85,6 +85,8 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+        const res = await axios.patch(`https://evs-delta.vercel.app/isRole/${user?.email}`)
+        console.log(res.data)
         router.push("/dashboard/home");
       } else {
         Swal.fire({
