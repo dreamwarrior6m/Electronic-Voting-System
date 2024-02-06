@@ -34,7 +34,7 @@ const Participate = () => {
         setAllCandidate(data);
       });
   }, []);
-  // console.log(allCandidate);
+  console.log(allCandidate);
 
   useEffect(() => {
     fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
@@ -53,16 +53,16 @@ const Participate = () => {
         setParticipate(data);
       });
   }, []);
-  console.log(participate);
+  // console.log(participate);
 
   // console.log(showVote?.voterEmail);
   const oldVoterEmail = showVote?.voterEmail;
   // console.log(voterEmail);
 
   const filterCandidate = allCandidate?.filter(
-    (candidate) => candidate?.voteName === id
+    (candidate) => candidate?.voteName == id
   );
-  // console.log(filterCandidate);
+  console.log(filterCandidate);
 
   const handalCountVote = (id) => {
     // console.log(id);

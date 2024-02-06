@@ -81,8 +81,6 @@ const Registration = () => {
               showConfirmButton: false,
               timer: 2000,
             });
-            from.reset();
-            window.location.reload();
             router.push("/");
           })
           .catch((error) => {
@@ -106,7 +104,7 @@ const Registration = () => {
       });
   };
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center text-black">
+    <div className="dark:bg-slate-900 flex lg:h-screen items-center text-white">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
@@ -128,7 +126,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="name"
                 />
@@ -140,7 +138,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="email"
                 />
@@ -156,7 +154,7 @@ const Registration = () => {
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-black"
+                    className="input input-bordered text-white"
                     required
                     defaultChecked
                   />
@@ -167,9 +165,9 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-black dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-white dark:text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-black dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-white dark:text-white" />
                     )}
                   </p>
                 </div>
@@ -181,7 +179,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Your ID Card Number"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   required
                   name="idNumber"
                 />
@@ -194,7 +192,7 @@ const Registration = () => {
                 <input
                   type="text"
                   placeholder="Enter Valid Photo URL"
-                  className="input input-bordered text-black"
+                  className="input input-bordered text-white"
                   name="photo"
                 />
               </div>

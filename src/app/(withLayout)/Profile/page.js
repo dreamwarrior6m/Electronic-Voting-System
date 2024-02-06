@@ -31,20 +31,20 @@ const Page = () => {
     const alldata = { name, date };
     console.log(alldata);
 
-    fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(alldata),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          Swal("Thank You", "Update Successfully", "success");
-        }
-      });
+    // fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify(alldata),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.modifiedCount > 0) {
+    //       Swal("Thank You", "Update Successfully", "success");
+    //     }
+    //   });
   };
 
   return (

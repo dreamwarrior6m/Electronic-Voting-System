@@ -12,20 +12,20 @@ import axios from "axios";
 const Navbar =() => {
   const { user, logOut } = useAuth();
   const [users ,setusers]= useState()
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`https://evs-delta.vercel.app/users/${user?.email}`);
-        setusers(res.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(`https://evs-delta.vercel.app/users/${user?.email}`);
+  //       setusers(res.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    if (user?.email) {
-      fetchData();
-    }
-  }, [user?.email]);
+  //   if (user?.email) {
+  //     fetchData();
+  //   }
+  // }, [user?.email]);
   console.log(users);
   const handleLogOut = () => {
     logOut()

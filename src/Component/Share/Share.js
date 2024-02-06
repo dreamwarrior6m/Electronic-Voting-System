@@ -34,7 +34,7 @@ const Share = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-    const shareUrl = `localhost:3000/share/${filterAllVote?.[0].name}`;
+    const shareUrl = `teamwork-electronic-voting-system.vercel.app/share/${filterAllVote?.[0].name}`;
   
 
   const handleCopy = () => {

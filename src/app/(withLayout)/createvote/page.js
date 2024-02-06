@@ -102,16 +102,16 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
- 
+
         axios
-          .patch(`https://evs-delta.vercel.app/${findUser?._id}`, updateIsRole1)
+          .patch(`https://evs-delta.vercel.app/users/${findUser?._id}`, updateIsRole1)
           .then((res) => {
             console.log(res);
           })
           .catch((err) => {
             console.error(err);
           });
- 
+
         router.push("/dashboard/home");
       } else {
         Swal.fire({
