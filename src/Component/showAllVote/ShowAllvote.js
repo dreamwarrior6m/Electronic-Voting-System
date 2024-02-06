@@ -53,7 +53,7 @@ const ShowAllvote = () => {
   // console.log(showAllVote);
 
   const mapAllVote = showAllVote?.filter(allVote=>allVote?.startDate)
-  console.log(mapAllVote)
+  // console.log(mapAllVote)
 
   return (
     <Protected>

@@ -7,11 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
 import './styles.css'
-import { ROOT_DIR_ALIAS } from "next/dist/lib/constants";
-import { root } from "postcss";
-import useAuth from "@/app/hook/useAuth";
-import { useQuery } from "@tanstack/react-query";
-import { isRole } from "@/Component/Tanstackquery";
 
 const AllVoter =() => {
   const [voters, setVoters] = useState([]);
@@ -35,8 +30,8 @@ const AllVoter =() => {
   //     .then((res) => res.json())
   //     .then((data) => setVoters(data));
   // }, []);
-  const {Role,refetch}= useRole()
-  console.log(Role)
+  // const {Role,refetch}= useRole()
+  // console.log(Role)
  
 
   const handleVerify = async (id) => {
@@ -130,9 +125,6 @@ const AllVoter =() => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
- 
-        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
- 
  
         `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
  
