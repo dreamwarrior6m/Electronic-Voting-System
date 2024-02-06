@@ -66,6 +66,10 @@ const Share = () => {
                 <span className="text-xl font-bold text-red-600"></span>
               </h2>
               <p>Election Name: {filterAllVote?.[0].name} </p>
+              <div className="">
+                <h2 className="">Start: {filterAllVote?.[0].startDate} ({filterAllVote?.[0].startTime})</h2>
+                <h2 className="">End: {filterAllVote?.[0].endDate} ({filterAllVote?.[0].endTime})</h2>
+              </div>
 
               <div className="card-actions justify-center">
                 <Link

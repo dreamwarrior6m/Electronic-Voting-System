@@ -31,7 +31,7 @@ const Page = () => {
     const alldata = { name, date };
     console.log(alldata);
 
-    fetch(`http://localhost:5000/users/${user?.email}`, {
+    fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

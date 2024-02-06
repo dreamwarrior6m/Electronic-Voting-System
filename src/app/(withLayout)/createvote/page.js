@@ -10,8 +10,9 @@ const page = () => {
   const router = useRouter();
   const [loading, setloading] = useState(false);
   const [allCreateVote, setAllCreateVote] = useState();
+  const [allUsers, setAllUsers] = useState();
   const [user] = useAuthState(auth);
-  console.log('user',user)
+  console.log("user", user);
   // console.log(user?.email);
   // if(!user){
   //   router.push('/login')
@@ -26,9 +27,22 @@ const page = () => {
       .catch((err) => {
         console.error(err);
       });
-    }, []);
-    console.log(allCreateVote);
-    
+  }, []);
+  console.log(allCreateVote);
+
+  useEffect(() => {
+    axios
+      .get("https://evs-delta.vercel.app/users")
+      .then((res) => {
+        setAllUsers(res?.data);
+      })
+      .catch((err) => {
+        consoel.error(err);
+      });
+  }, []);
+  // console.log(allUsers);
+  const findUser = allUsers?.find((users) => users?.email == user?.email);
+  console.log(findUser?._id);
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -66,6 +80,9 @@ const page = () => {
       endTime
     );
 
+    const updateIsRole = "Modarator";
+    const updateIsRole1 = { updateIsRole };
+
     setloading(true);
 
     try {
@@ -85,6 +102,15 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+        axios
+          .patch(`http://localhost:5000/users/${findUser?._id}`, updateIsRole1)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
         router.push("/dashboard/home");
       } else {
         Swal.fire({
@@ -99,7 +125,7 @@ const page = () => {
   };
 
   return (
-    <div className="my-10 text-black">
+    <div className="my-10 text-white">
       <div>
         <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
           <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
