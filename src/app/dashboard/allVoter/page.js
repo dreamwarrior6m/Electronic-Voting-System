@@ -24,18 +24,7 @@ const AllVoter =() => {
   }, []);
 
  
-<<<<<<< HEAD
-=======
  
-  // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/users")
-  //     .then((res) => res.json())
-  //     .then((data) => setVoters(data));
-  // }, []);
-  // const {Role,refetch}= useRole()
-  // console.log(Role)
- 
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
 
   const handleVerify = async (id) => {
     try {
@@ -126,10 +115,7 @@ const AllVoter =() => {
  
         `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
  
-<<<<<<< HEAD
-=======
  
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
       );
 
       setPageCount(response.data.pageCount);

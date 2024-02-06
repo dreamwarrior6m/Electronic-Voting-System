@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+ 
 import useAuth from "@/app/hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -33,4 +32,4 @@ export const isRole = () => {
 
     return { role: data, refetch };
   };
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
+ 
