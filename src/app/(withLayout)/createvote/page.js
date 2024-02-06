@@ -102,6 +102,7 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+ 
         axios
           .patch(`http://localhost:5000/users/${findUser?._id}`, updateIsRole1)
           .then((res) => {
@@ -110,7 +111,7 @@ const page = () => {
           .catch((err) => {
             console.error(err);
           });
-
+ 
         router.push("/dashboard/home");
       } else {
         Swal.fire({

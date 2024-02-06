@@ -16,7 +16,7 @@ const AllVoter =() => {
   console.log(voters)
  
 
-
+ 
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/users")
       .then((res) => res.json())
@@ -24,14 +24,6 @@ const AllVoter =() => {
   }, []);
 
  
- 
-  // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/users")
-  //     .then((res) => res.json())
-  //     .then((data) => setVoters(data));
-  // }, []);
-  // const {Role,refetch}= useRole()
-  // console.log(Role)
  
 
   const handleVerify = async (id) => {
@@ -89,11 +81,6 @@ const AllVoter =() => {
  
         const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
  
- 
-        // const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
- 
- 
-
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
 
