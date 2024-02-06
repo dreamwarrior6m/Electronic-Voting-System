@@ -9,7 +9,7 @@ export const useRole=()=>{
     const { data: Role = [], isLoading,refetch } = useQuery({
         queryKey: ['role'],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/users`)
+            const res = await axios.get(`https://evs-delta.vercel.app`)
             return res.data;
 export const isRole = () => {
     const { user } = useAuth();
@@ -18,7 +18,7 @@ export const isRole = () => {
       queryKey: ['role'],
       queryFn: async () => {
         try {
-          const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          const res = await axios.get(`https://evs-delta.vercel.app/${user?.email}`);
           return res.data;
         } catch (error) {
           console.error('Error fetching user role:', error);

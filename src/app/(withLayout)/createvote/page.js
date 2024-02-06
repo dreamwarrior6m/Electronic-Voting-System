@@ -104,7 +104,7 @@ const page = () => {
         });
  
         axios
-          .patch(`http://localhost:5000/users/${findUser?._id}`, updateIsRole1)
+          .patch(`https://evs-delta.vercel.app/${findUser?._id}`, updateIsRole1)
           .then((res) => {
             console.log(res);
           })
