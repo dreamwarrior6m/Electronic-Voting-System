@@ -18,6 +18,9 @@ const page = () => {
   //   router.push('/login')
   // }
 
+  
+  
+
   useEffect(() => {
     axios
       .get("https://evs-delta.vercel.app/create-vote")

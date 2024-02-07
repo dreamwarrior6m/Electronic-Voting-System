@@ -5,8 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Protected from "@/Component/Protected/Protected";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/app/firebase/config";
 
-const ShowElections = () => {
+const OwnElection = () => {
+  const [user] = useAuthState(auth);
+  console.log(user?.email);
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections1"],
     queryFn: async () => {
@@ -14,6 +18,12 @@ const ShowElections = () => {
       return res.data;
     },
   });
+  console.log(elections);
+  const filterElection = elections?.filter(
+    (election) => election?.email == user?.email
+  );
+  const elections2 = filterElection;
+  console.log(elections2);
 
   const Timer = ({ startDate1, endDate1 }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -46,6 +56,8 @@ const ShowElections = () => {
       return () => clearInterval(timer);
     }, []);
 
+   
+
     return (
       <div>
         <h2>
@@ -62,7 +74,7 @@ const ShowElections = () => {
       <div>
         
         <div className="grid lg:grid-cols-3 gap-5 ">
-          {elections?.map((election, index) => (
+          {elections2?.map((election, index) => (
             <div
               key={election._id}
               className={`${
@@ -102,4 +114,4 @@ const ShowElections = () => {
   );
 };
 
-export default ShowElections;
+export default OwnElection;
