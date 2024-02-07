@@ -119,7 +119,7 @@ const ElectionDetails = () => {
                   width={150}
                   height={150}
                   alt="Image"
-                  className="rounded-xl w-full h-[280px]"
+                  className="rounded-xl w-full h-auto md:h-[340px]"
                   
                 />
               </div>
