@@ -105,7 +105,7 @@ const ElectionDetails = () => {
       </div>
       <div className="mt-10">
         <h4 className="text-3xl font-bold mb-5">All Candidate:</h4>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-5">
           {filterCandidate?.map((candidate, index) => (
             <div
               key={candidate?._id}
@@ -119,7 +119,7 @@ const ElectionDetails = () => {
                   width={150}
                   height={150}
                   alt="Image"
-                  className="rounded-xl w-full h-[280px]"
+                  className="rounded-xl w-full h-auto md:h-[280px]"
                   
                 />
               </div>
