@@ -63,6 +63,15 @@ const SideNav = ({ children }) => {
             </h3>
           </Link>
           <Link
+            href="/dashboard/ownElections"
+            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/allElections" ? "text-white bg-gray-900": "text-gray-800"}`}
+          >
+            <GiVote className="text-2xl group-hover:text-white" />
+            <h3 className="text-base group-hover:text-white font-semibold">
+             Own Elections
+            </h3>
+          </Link>
+          <Link
             href="/dashboard/allVoter"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/allVoter" ? "text-white bg-gray-900": "text-gray-800"}`}
           >
