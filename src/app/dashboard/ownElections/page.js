@@ -1,4 +1,4 @@
-import ShowElections from "@/Component/Dashboard/Admin/ShowElections";
+
 import OwnElection from "@/Component/Dashboard/OwnElection/OwnElection";
 
 const page = () => {
