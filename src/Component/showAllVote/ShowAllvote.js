@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Protected from "../Protected/Protected";
+import { IoShareSocialOutline } from "react-icons/io5";
+
 
 // time start
 const Timer = ({ startDate1, endDate1 }) => {
@@ -56,31 +58,31 @@ const ShowAllvote = () => {
   // console.log(mapAllVote)
 
   return (
-    <Protected>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5">
+    <Protected >
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white m-5 rounded-lg">
       {showAllVote?.map((allVote, ind) => (
         <div key={allVote._id} className="">
-          <div className="card bg-neutral text-neutral-content">
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">{allVote?.OrganizatonName}</h2>
-              <p>Vote name: {allVote?.name}</p>
+          <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 ">
+            <div className="card-body  ">
+              <h2 className="text-3xl font-bold text-center mb-5">{allVote?.OrganizatonName}</h2>
+              <p className="font-bold">Vote name: {allVote?.name}</p>
               
               {/* start time */}
-              <Timer startDate1={`${allVote?.startDate}T${allVote?.startTime}`} endDate1={`${allVote?.endDate}T${allVote?.endTime}`} />
+           <span className="font-bold">   <Timer  startDate1={`${allVote?.startDate}T${allVote?.startTime}`} endDate1={`${allVote?.endDate}T${allVote?.endTime}`} /></span>
               {/* end time */}
 
               <div className="">
-                <h2 className="">Start: {allVote?.startDate} ({allVote?.startTime})</h2>
-                <h2 className="">End: {allVote?.endDate} ({allVote?.endTime})</h2>
+                <h2 className="text-green-600 font-bold">Start: {allVote?.startDate} ({allVote?.startTime})</h2>
+                <h2 className="text-red-600 font-bold">End: {allVote?.endDate} ({allVote?.endTime})</h2>
               </div>
               {/* <p>Email: {allVote?.email}</p> */}
               {/* <p>Voter Email: {allVote?.voterEmail}</p> */}
-              <div className="card-actions justify-end">
-                <Link href={`/participate/${allVote?.name}`} className="btn btn-sm btn-primary">Participate</Link>
+              <div className="card-actions grid grid-cols-2 justify-end">
+                <Link href={`/participate/${allVote?.name}`} className="btn btn-sm btn-primary hover:bg-slate-300">Participate</Link>
                 {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                <Link href={`/show-all-vote/${allVote?.name}`}  className="btn btn-sm"> Candidates</Link>
-                <Link href={`/result/${allVote?.name}`}  className="btn btn-sm"> result</Link>
-                <Link href={`share/${allVote?.name}`}  className="btn btn-sm"> Share</Link>
+                <Link href={`/show-all-vote/${allVote?.name}`}  className="btn btn-sm btn-primary text-black  hover:bg-slate-300"> Candidates</Link>
+                <Link href={`/result/${allVote?.name}`}  className="btn btn-sm bg-white text-black hover:btn-primary"> result</Link>
+                <Link href={`share/${allVote?.name}`}  className="btn btn-sm bg-white text-black hover:btn-primary"><IoShareSocialOutline />Share</Link>
               </div>
             </div>
           </div>
