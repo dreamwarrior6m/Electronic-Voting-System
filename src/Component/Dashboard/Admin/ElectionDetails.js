@@ -1,7 +1,7 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,6 +15,21 @@ const ElectionDetails = () => {
       return res.data;
     },
   });
+  console.log(elections);
+
+  const { data: candidates = [] } = useQuery({
+    queryKey: ["candidates1"],
+    queryFn: async () => {
+      const res = await axios.get("https://evs-delta.vercel.app/candidate");
+      return res.data;
+    },
+  });
+  const filterElection = elections?.filter((election) => election?._id === id);
+
+  const filterCandidate = candidates?.filter(
+    (candidate) => candidate?.voteName === filterElection[0]?.name
+  );
+  console.log(filterCandidate);
 
   const Timer = ({ startDate1, endDate1 }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -57,9 +72,6 @@ const ElectionDetails = () => {
     );
   };
 
-  const filterElection = elections?.filter((election) => election?._id === id);
-  console.log(filterElection);
-
   return (
     <div>
       <div>
@@ -91,10 +103,39 @@ const ElectionDetails = () => {
           </div>
         ))}
       </div>
-      <div className="mt-6">
-        <h4 className="text-3xl font-bold">All Candidate:</h4>
+      <div className="mt-10">
+        <h4 className="text-3xl font-bold mb-5">All Candidate:</h4>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {filterCandidate?.map((candidate, index) => (
+            <div
+              key={candidate?._id}
+              className={`${
+                index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
+              } text-center font-semibold rounded-xl`}
+            >
+              <div>
+                <Image
+                  src={candidate?.candidatePhoto}
+                  width={150}
+                  height={150}
+                  alt="Image"
+                  className="rounded-xl w-full h-[280px]"
+                  
+                />
+              </div>
+              <div className="py-4">
+                <h2 className="">Name: {candidate?.candidateName}</h2>
+                <h2 className="">Email: {candidate?.candidateEmail}</h2>
+                <h2 className="">Id: {candidate?.candidateID}</h2>
+                <div className="">
+                  <button className="">More Info</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-10">
         <h4 className="text-3xl font-bold">All Voter:</h4>
       </div>
     </div>
