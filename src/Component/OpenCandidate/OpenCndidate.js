@@ -43,11 +43,15 @@ const OpenCndidate = () => {
               />
             </div>
             <div className="py-4 text-gray-600">
-              <h2 className="font-bold text-xl">Name: {candidate?.candidateName}</h2>
+              <h2 className="font-bold text-xl">
+                Name: {candidate?.candidateName}
+              </h2>
               <h2 className="">Email: {candidate?.candidateEmail}</h2>
               <h2 className="">Id: {candidate?.candidateID}</h2>
               <div className="">
-                <button className="bg-gray-600 px-4 py-2 rounded-xl mt-2 text-white">More Info</button>
+                <button className="bg-gray-600 px-4 py-2 rounded-xl mt-2 text-white">
+                  More Info
+                </button>
               </div>
             </div>
           </div>

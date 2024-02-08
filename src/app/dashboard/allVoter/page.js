@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { MdDeleteForever } from "react-icons/md";
 import { ImCross } from "react-icons/im";
 import Swal from "sweetalert2";
@@ -6,40 +6,36 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
-import './styles.css'
+import "./styles.css";
 
-const AllVoter =() => {
+const AllVoter = () => {
   const [voters, setVoters] = useState([]);
   const [limit, setLimit] = useState(5);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
-  console.log(voters)
- 
+  console.log(voters);
 
- 
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/users")
       .then((res) => res.json())
       .then((data) => setVoters(data));
   }, []);
 
- 
- 
-
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`https://evs-delta.vercel.app/users/verify/${id}`);
-      if(res.data){
-        refetch()
+      const res = await axios.patch(
+        `https://evs-delta.vercel.app/users/verify/${id}`
+      );
+      if (res.data) {
+        refetch();
       }
- 
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
-  const handleRole = async (id) =>{
-    try{
+  const handleRole = async (id) => {
+    try {
       Swal.fire({
         title: "Are you sure?",
         text: "You want make admin this user",
@@ -47,25 +43,27 @@ const AllVoter =() => {
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, I do!"
+        confirmButtonText: "Yes, I do!",
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.patch(`https://evs-delta.vercel.app/users/isRole/${id}`);
-          console.log(res.data)
-  
+          const res = await axios.patch(
+            `https://evs-delta.vercel.app/users/isRole/${id}`
+          );
+          console.log(res.data);
+
           if (res.data > 0) {
             Swal.fire({
               title: "Deleted!",
               text: "This voter has been deleted.",
-              icon: "success"
+              icon: "success",
             });
           }
         }
       });
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   const handleDelete = async (id) => {
     Swal.fire({
@@ -75,26 +73,27 @@ const AllVoter =() => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
- 
-        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
- 
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/users/${id}`
+        );
+
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
 
           Swal.fire({
             title: "Deleted!",
             text: "This voter has been deleted.",
-            icon: "success"
+            icon: "success",
           });
         }
       }
     });
   };
   // pagination
-  
+
   useEffect(() => {
     getPaginatedUsers();
   }, []);
@@ -112,16 +111,13 @@ const AllVoter =() => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
- 
         `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
- 
- 
       );
 
       setPageCount(response.data.pageCount);
       setVoters(response.data.result);
     } catch (error) {
-      console.error('Error fetching paginated users:', error);
+      console.error("Error fetching paginated users:", error);
     }
   };
 
@@ -151,7 +147,12 @@ const AllVoter =() => {
           </thead>
           <tbody>
             {voters?.map((vote, index) => (
-              <tr key={vote._id} className={`${index % 2 === 0 ? 'bg-gray-100' : 'bg-white'} text-center font-semibold border-b border-gray-600`}>
+              <tr
+                key={vote._id}
+                className={`${
+                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                } text-center font-semibold border-b border-gray-600`}
+              >
                 <th>
                   <label>
                     <p className="text-black">{index + 1}</p>
@@ -161,13 +162,17 @@ const AllVoter =() => {
                 <td>{vote.idNumber}</td>
                 <td>{vote.email}</td>
                 <td>
-                  <button onClick={()=>handleRole(vote._id)}>{vote.isRole}</button>
-                  </td>
+                  <button onClick={() => handleRole(vote._id)}>
+                    {vote.isRole}
+                  </button>
+                </td>
                 <td>
                   <button onClick={() => handleVerify(vote._id)}>
-                    {
-                      vote?.verify == 'true'?<MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />:<ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
-                    }
+                    {vote?.verify == "true" ? (
+                      <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                    ) : (
+                      <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
+                    )}
                   </button>
                 </td>
                 <td className="text-3xl cursor-pointer">
@@ -181,26 +186,26 @@ const AllVoter =() => {
         </table>
       </div>
       {
-         <div className="flex items-center justify-between mt-4">
-        <ReactPaginate
-          breakLabel={<span className="break-label">...</span>}
-          nextLabel={<span className="pagination-icon">&rarr;</span>}
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel={<span className="pagination-icon">&larr;</span>}
-          renderOnZeroPageCount={null}
-          marginPagesDisplayed={2}
-          containerClassName="pagination-container"
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          activeClassName="active"
-          forcePage={currentPage.current - 1}
-        />
+        <div className="flex items-center justify-between mt-4">
+          <ReactPaginate
+            breakLabel={<span className="break-label">...</span>}
+            nextLabel={<span className="pagination-icon">&rarr;</span>}
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel={<span className="pagination-icon">&larr;</span>}
+            renderOnZeroPageCount={null}
+            marginPagesDisplayed={2}
+            containerClassName="pagination-container"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            activeClassName="active"
+            forcePage={currentPage.current - 1}
+          />
           <div className="flex items-center">
             <span className="text-sm text-gray-600 mr-2">
               Page {currentPage.current} of {pageCount}

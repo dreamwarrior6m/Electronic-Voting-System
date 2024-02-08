@@ -68,7 +68,6 @@ const Participate = () => {
     // console.log(id);
     setSelectCandidateId(id);
   };
- 
 
   const filterParticipet = participate?.filter(
     (participat) =>
@@ -78,70 +77,66 @@ const Participate = () => {
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
- 
-  
-      if (filterParticipet?.[0]?.email != user?.email) {
-        fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
-            const updateVot = data?.voteCount;
-            const updateVoteCount2 = updateVot + 1;
-            const updateVoteCount = { updateVoteCount2 };
-            // console.log(updateVoteCount);
-  
-            // add vote number
-            axios
-              .patch(
-                `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
-                updateVoteCount
-              )
-              .then((res) => {
-                router.push(`/result/${id}`)
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Voted successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                // console.log(res);
-                // participate api update
-                axios
-                  .post(
-                    "https://evs-delta.vercel.app/participate",
-                    updateParticipate
-                  )
-                  .then((res) => {
-                    console.log("partcipate", res);
-                    
-                  })
-                  .catch((err) => {
-                    console.error("participate", err);
-                  });
-              })
-              .catch((err) => {
-                // console.error(err);
-                Swal.fire({
-                  position: "top-end",
-                  icon: "error",
-                  title: "You already voted!",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
+
+    if (filterParticipet?.[0]?.email != user?.email) {
+      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          const updateVot = data?.voteCount;
+          const updateVoteCount2 = updateVot + 1;
+          const updateVoteCount = { updateVoteCount2 };
+          // console.log(updateVoteCount);
+
+          // add vote number
+          axios
+            .patch(
+              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
+              updateVoteCount
+            )
+            .then((res) => {
+              router.push(`/result/${id}`);
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Voted successfully",
+                showConfirmButton: false,
+                timer: 1500,
               });
- 
-          });
-      } else{
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "You already voted",
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      }
-   
+              // console.log(res);
+              // participate api update
+              axios
+                .post(
+                  "https://evs-delta.vercel.app/participate",
+                  updateParticipate
+                )
+                .then((res) => {
+                  console.log("partcipate", res);
+                })
+                .catch((err) => {
+                  console.error("participate", err);
+                });
+            })
+            .catch((err) => {
+              // console.error(err);
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "You already voted!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            });
+        });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "You already voted",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (
@@ -174,23 +169,21 @@ const Participate = () => {
         </>
       ))}
       <div className="">
-        {
-          filterCandidate?.length == 0 &&
-          <h2 className="text-center text-xl md:text-3xl font-bold p-5">No candidate partcipate</h2>
-        }
+        {filterCandidate?.length == 0 && (
+          <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+            No candidate partcipate
+          </h2>
+        )}
       </div>
       <div className="text-center pt-5">
- 
-        {(filterParticipet?.[0]?.email == user?.email) || filterCandidate?.length == 0 ? (
- 
+        {filterParticipet?.[0]?.email == user?.email ||
+        filterCandidate?.length == 0 ? (
           <button
             disabled
             onClick={() => handaleAddVote()}
             className="btn btn-primary"
           >
- 
             You already voted
- 
           </button>
         ) : (
           <button onClick={() => handaleAddVote()} className="btn btn-primary">

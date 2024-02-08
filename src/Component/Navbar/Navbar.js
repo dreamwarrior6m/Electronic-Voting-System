@@ -8,10 +8,9 @@ import styles from "./Navbar.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
-const Navbar =() => {
+const Navbar = () => {
   const { user, logOut } = useAuth();
-  const [users ,setusers]= useState()
+  const [users, setusers] = useState();
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -32,8 +31,8 @@ const Navbar =() => {
       .then((res) => console.log(res))
       .catch((error) => console.error(error));
   };
-  const nouser = users?.isRole
-  console.log(nouser)
+  const nouser = users?.isRole;
+  console.log(nouser);
 
   return (
     <div className="lg:sticky lg:top-0 lg:z-10 lg:w-full lg:bg-[#00263A] text-white lg:drop-shadow-sm border-b-[1px] border-white/10">
@@ -63,14 +62,15 @@ const Navbar =() => {
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
-                  {users?.isRole!="user"? (
+                  {users?.isRole != "user" ? (
                     <li>
-                     <Link href="/dashboard/home">dashboard</Link>
+                      <Link href="/dashboard/home">dashboard</Link>
                     </li>
-                  ):( <li>
-                     <Link href="/Profile">Profile</Link>
-                  </li>)
-                }
+                  ) : (
+                    <li>
+                      <Link href="/Profile">Profile</Link>
+                    </li>
+                  )}
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
                   </li>
