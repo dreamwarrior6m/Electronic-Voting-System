@@ -1,7 +1,10 @@
 import { auth } from "@/app/firebase/config";
+import useAuth from "@/app/hook/useAuth";
+import axios from "axios";
 import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BsPersonCircle } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { GiVote } from "react-icons/gi";
@@ -17,9 +20,26 @@ import { SiSecurityscorecard } from "react-icons/si";
 
 const SideNav = ({ children }) => {
   const location = usePathname();
+  const { user, logOut } = useAuth();
+  const [users ,setusers]= useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user?.email) {
+          const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          setusers(res.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  
+    fetchData();
+  }, [user?.email]);
+  
   return (
     <div>
-      <div className="flex flex-col justify-start items-center">
+      <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
         <h1 className="text-base text-center cursor-pointer font-bold text-blue-900 border-b border-gray-100 pb-4 w-full ">
           <span className="text-3xl font-bold">DVS</span> <br />
           Digital Voting System
@@ -35,7 +55,8 @@ const SideNav = ({ children }) => {
               Dashboard
             </h3>
           </Link>
-          <Link
+          {
+            users?.isRole=="Modarator" && <Link
             href="/dashboard/createCandidate"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === '/dashboard/createCandidate' ? "bg-gray-900 text-white" : "text-gray-80"}`}
           >
@@ -44,6 +65,7 @@ const SideNav = ({ children }) => {
               Create Candidate
             </h3>
           </Link>
+          }
           <Link
             href="/dashboard/Candidate"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/Candidate" ? "text-white bg-gray-900": "text-gray-800"}`}
@@ -62,16 +84,10 @@ const SideNav = ({ children }) => {
               All Elections
             </h3>
           </Link>
-          <Link
-            href="/dashboard/ownElections"
-            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/ownElections" ? "text-white bg-gray-900": "text-gray-800"}`}
-          >
-            <GiVote className="text-2xl group-hover:text-white" />
-            <h3 className="text-base group-hover:text-white font-semibold">
-             My Elections
-            </h3>
-          </Link>
-          <Link
+ 
+          {
+            users?.isRole=="Admin" && <Link
+ 
             href="/dashboard/allVoter"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/allVoter" ? "text-white bg-gray-900": "text-gray-800"}`}
           >
@@ -80,7 +96,8 @@ const SideNav = ({ children }) => {
               All Voter
             </h3>
           </Link>
-
+          }
+          
           <Link
             href="/dashboard/LivePreview"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${location === "/dashboard/LivePreview" ? "text-white bg-gray-900": "text-gray-800"}`}

@@ -28,7 +28,7 @@ const Participate = () => {
   // console.log(updateParticipate);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -37,7 +37,7 @@ const Participate = () => {
   console.log(allCandidate);
 
   useEffect(() => {
-    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+    fetch(`http://localhost:5000/create-vote/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setShowVote(data);
@@ -47,7 +47,7 @@ const Participate = () => {
   //participate get data
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/participate")
+    fetch("http://localhost:5000/participate")
       .then((res) => res.json())
       .then((data) => {
         setParticipate(data);
@@ -77,44 +77,58 @@ const Participate = () => {
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
-
-    if (filterParticipet?.[0]?.email != user?.email) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
-          const updateVot = data?.voteCount;
-          const updateVoteCount2 = updateVot + 1;
-          const updateVoteCount = { updateVoteCount2 };
-          // console.log(updateVoteCount);
-
-          // add vote number
-          axios
-            .patch(
-              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
-              updateVoteCount
-            )
-            .then((res) => {
-              router.push(`/result/${id}`);
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Voted successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              // console.log(res);
-              // participate api update
-              axios
-                .post(
-                  "https://evs-delta.vercel.app/participate",
-                  updateParticipate
-                )
-                .then((res) => {
-                  console.log("partcipate", res);
-                })
-                .catch((err) => {
-                  console.error("participate", err);
+ 
+ 
+  
+      if (filterParticipet?.[0]?.email != user?.email) {
+        fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            const updateVot = data?.voteCount;
+            const updateVoteCount2 = updateVot + 1;
+            const updateVoteCount = { updateVoteCount2 };
+            // console.log(updateVoteCount);
+  
+            // add vote number
+            axios
+              .patch(
+                `http://localhost:5000/candidate/${selectCandidateId}`,
+                updateVoteCount
+              )
+              .then((res) => {
+                router.push(`/result/${id}`)
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Voted successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                // console.log(res);
+                // participate api update
+                axios
+                  .post(
+                    "http://localhost:5000/participate",
+                    updateParticipate
+                  )
+                  .then((res) => {
+                    console.log("partcipate", res);
+                    
+                  })
+                  .catch((err) => {
+                    console.error("participate", err);
+                  });
+              })
+              .catch((err) => {
+                // console.error(err);
+                Swal.fire({
+                  position: "top-end",
+                  icon: "error",
+                  title: "You already voted!",
+                  showConfirmButton: false,
+                  timer: 1500,
+ 
                 });
             })
             .catch((err) => {
