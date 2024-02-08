@@ -68,7 +68,7 @@ const SideNav = ({ children }) => {
           >
             <GiVote className="text-2xl group-hover:text-white" />
             <h3 className="text-base group-hover:text-white font-semibold">
-             Own Elections
+             My Elections
             </h3>
           </Link>
           <Link
