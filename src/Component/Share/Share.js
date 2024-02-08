@@ -34,11 +34,9 @@ const Share = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-    const shareUrl = `localhost:3000/share/${filterAllVote?.[0].name}`;
-  
+  const shareUrl = `teamwork-electronic-voting-system.vercel.app/share/${filterAllVote?.[0].name}`;
 
   const handleCopy = () => {
-     
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -67,8 +65,14 @@ const Share = () => {
               </h2>
               <p>Election Name: {filterAllVote?.[0].name} </p>
               <div className="">
-                <h2 className="">Start: {filterAllVote?.[0].startDate} ({filterAllVote?.[0].startTime})</h2>
-                <h2 className="">End: {filterAllVote?.[0].endDate} ({filterAllVote?.[0].endTime})</h2>
+                <h2 className="">
+                  Start: {filterAllVote?.[0].startDate} (
+                  {filterAllVote?.[0].startTime})
+                </h2>
+                <h2 className="">
+                  End: {filterAllVote?.[0].endDate} (
+                  {filterAllVote?.[0].endTime})
+                </h2>
               </div>
 
               <div className="card-actions justify-center">

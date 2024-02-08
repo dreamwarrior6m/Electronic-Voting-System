@@ -31,7 +31,7 @@ const page = () => {
         setAllUsers(res?.data);
       })
       .catch((err) => {
-        consoel.error(err);
+        console.error(err);
       });
   }, []);
   // console.log(allUsers);
@@ -78,6 +78,17 @@ const page = () => {
     const updateIsRole1 = { updateIsRole };
 
     setloading(true);
+    if (!/^[a-zA-Z0-9_]+$/.test(name)) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title:
+          "Username must be unique and cannot contain spaces or special characters.",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:5000/create-vote", {
@@ -96,8 +107,12 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+ 
         axios
-          .patch(`http://localhost:5000/users/${findUser?._id}`, updateIsRole1)
+          .patch(
+            `https://evs-delta.vercel.app/users/${findUser?._id}`,
+            updateIsRole1
+          )
           .then((res) => {
             console.log(res);
           })
@@ -167,12 +182,12 @@ const page = () => {
                   <div className="form-control">
                     <label className="label">
                       <span className="label-text dark:text-white">
-                        Vote Name
+                        User Name
                       </span>
                     </label>
                     <input
                       type="text"
-                      placeholder="Vote Name must unique"
+                      placeholder="User Name must unique"
                       className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                       required
                       name="name"

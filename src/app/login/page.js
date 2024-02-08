@@ -59,7 +59,7 @@ const page = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center">
+    <div className="dark:bg-slate-900 flex lg:h-screen items-center text-white">
       <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
         <div className="flex text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={loginImg} />

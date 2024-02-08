@@ -23,28 +23,40 @@ const OpenCndidate = () => {
   console.log(filterCandidate);
 
   return (
-    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 justify-center p-5">
-      {filterCandidate?.map((candidate) => (
-        <div key={filterCandidate?._id} className=" ">
-          <div className="card bg-base-100 shadow-xl">
-            <figure>
+    <div className="max-w-7xl mx-auto px-4">
+      <h1 className="text-center font-bold text-4xl pb-8">All Candidates</h1>
+      <div className="grid md:grid-cols-2 gap-5">
+        {filterCandidate?.map((candidate, index) => (
+          <div
+            key={candidate?._id}
+            className={`${
+              index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
+            } text-center font-semibold rounded-xl`}
+          >
+            <div>
               <Image
                 src={candidate?.candidatePhoto}
-                alt="alt"
-                width={300}
-                height={300}
+                width={150}
+                height={150}
+                alt="Image"
+                className="rounded-xl w-full h-auto md:h-[280px]"
               />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{candidate?.candidateName}</h2>
-              <h2 className="">Admin email: {candidate?.adminEmail}</h2>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary btn-sm">More Info</button>
+            </div>
+            <div className="py-4 text-gray-600">
+              <h2 className="font-bold text-xl">
+                Name: {candidate?.candidateName}
+              </h2>
+              <h2 className="">Email: {candidate?.candidateEmail}</h2>
+              <h2 className="">Id: {candidate?.candidateID}</h2>
+              <div className="">
+                <button className="bg-gray-600 px-4 py-2 rounded-xl mt-2 text-white">
+                  More Info
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

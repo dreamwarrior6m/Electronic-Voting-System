@@ -20,7 +20,7 @@ const Page = () => {
       .then((res) => res.json())
       .then((data) => setAlluser(data));
   }, [userData]);
-  console.log(allUser)
+  console.log(allUser);
 
   const User = allUser?.filter((users) => users?.email == user?.email);
   console.log(User?.[0]?.idNumber);
@@ -34,7 +34,8 @@ const Page = () => {
     const alldata = { name, date };
     console.log(alldata);
 
-    fetch(`http://localhost:5000/users/${user?.email}`, {
+ 
+    fetch(`http://evs-delta.vercel.app/users/${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -48,6 +49,7 @@ const Page = () => {
           Swal("Thank You", "Update Successfully", "success");
         }
       });
+ 
   };
 
   useEffect(() => {
@@ -86,7 +88,7 @@ const Page = () => {
               alt="profile"
             ></Image>
             <div className="flex gap-2 items-center">
-              <p>{User?.[0]?.idNumber}</p>  <FaRegCopy />
+              <p>{User?.[0]?.idNumber}</p> <FaRegCopy />
             </div>
 
             {user && (

@@ -34,7 +34,7 @@ const Participate = () => {
         setAllCandidate(data);
       });
   }, []);
-  // console.log(allCandidate);
+  console.log(allCandidate);
 
   useEffect(() => {
     fetch(`http://localhost:5000/create-vote/${id}`)
@@ -53,22 +53,21 @@ const Participate = () => {
         setParticipate(data);
       });
   }, []);
-  console.log(participate);
+  // console.log(participate);
 
   // console.log(showVote?.voterEmail);
   const oldVoterEmail = showVote?.voterEmail;
   // console.log(voterEmail);
 
   const filterCandidate = allCandidate?.filter(
-    (candidate) => candidate?.voteName === id
+    (candidate) => candidate?.voteName == id
   );
-  // console.log(filterCandidate);
+  console.log(filterCandidate);
 
   const handalCountVote = (id) => {
     // console.log(id);
     setSelectCandidateId(id);
   };
- 
 
   const filterParticipet = participate?.filter(
     (participat) =>
@@ -78,6 +77,7 @@ const Participate = () => {
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
+ 
  
   
       if (filterParticipet?.[0]?.email != user?.email) {
@@ -128,20 +128,29 @@ const Participate = () => {
                   title: "You already voted!",
                   showConfirmButton: false,
                   timer: 1500,
-                });
-              });
  
-          });
-      } else{
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "You already voted",
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      }
-   
+                });
+            })
+            .catch((err) => {
+              // console.error(err);
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "You already voted!",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            });
+        });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "You already voted",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (
@@ -174,23 +183,21 @@ const Participate = () => {
         </>
       ))}
       <div className="">
-        {
-          filterCandidate?.length == 0 &&
-          <h2 className="text-center text-xl md:text-3xl font-bold p-5">No candidate partcipate</h2>
-        }
+        {filterCandidate?.length == 0 && (
+          <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+            No candidate partcipate
+          </h2>
+        )}
       </div>
       <div className="text-center pt-5">
- 
-        {(filterParticipet?.[0]?.email == user?.email) || filterCandidate?.length == 0 ? (
- 
+        {filterParticipet?.[0]?.email == user?.email ||
+        filterCandidate?.length == 0 ? (
           <button
             disabled
             onClick={() => handaleAddVote()}
             className="btn btn-primary"
           >
- 
             You already voted
- 
           </button>
         ) : (
           <button onClick={() => handaleAddVote()} className="btn btn-primary">

@@ -52,8 +52,9 @@ const CreateCandidate = () => {
         voteCount,
       };
 
-      const res = await fetch("http://localhost:5000/candidate", {
-
+ 
+      const res = await fetch("https://evs-delta.vercel.app/candidate", {
+ 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
