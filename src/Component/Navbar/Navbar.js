@@ -12,7 +12,7 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
  
   const [users ,setusers]= useState()
-  useEffect(() => {
+  useEffect(()=> {
     const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
@@ -21,6 +21,8 @@ const Navbar = () => {
         console.error(error);
       }
     };
+  })
+   
  
 
   //   if (user?.email) {
