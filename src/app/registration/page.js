@@ -64,7 +64,7 @@ const Registration = () => {
 
     setloading(true);
     createUser(email, password);
-    fetch("http://localhost:5000/users", {
+    fetch("https://evs-delta.vercel.app/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -81,11 +81,10 @@ const Registration = () => {
               showConfirmButton: false,
               timer: 2000,
             });
- 
+
             from.reset();
             window.location.reload();
             router.replace("/");
- 
           })
           .catch((error) => {
             Swal.fire({
@@ -105,7 +104,7 @@ const Registration = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        setloading(false)
+        setloading(false);
       });
   };
   return (

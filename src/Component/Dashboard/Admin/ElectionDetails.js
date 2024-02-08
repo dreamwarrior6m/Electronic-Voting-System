@@ -11,7 +11,7 @@ const ElectionDetails = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
   });
