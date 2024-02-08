@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Protected from "@/Component/Protected/Protected";
 import { MdDelete, MdEdit } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const ShowElections = () => {
   const { data: elections = [], refetch } = useQuery({
@@ -57,6 +58,23 @@ const ShowElections = () => {
     );
   };
 
+
+  // Delete Function Added
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:5000/create-vote/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.deletedCount > 0) {
+        Swal.fire({
+          title: "Successfully",
+          text: "Deleted",
+          icon: "success",
+          confirmButtonText: "oky",
+        });
+        refetch()
+      }
+    });
+  }
+
   return (
     <Protected>
       <div>
@@ -85,7 +103,7 @@ const ShowElections = () => {
                   endDate1={`${election?.endDate}T${election?.endTime}`}
                 />
                 <div className="pb-1">
-                  <button className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2">
+                  <button onClick={() => handleDelete(election._id)} className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2">
                     <MdDelete />
                   </button>
                   <button className="bg-green-500 text-white px-4 py-[10px] rounded-md">
