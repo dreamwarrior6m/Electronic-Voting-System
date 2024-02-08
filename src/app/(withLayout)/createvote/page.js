@@ -37,7 +37,7 @@ const page = () => {
         setAllUsers(res?.data);
       })
       .catch((err) => {
-        consoel.error(err);
+        console.error(err);
       });
   }, []);
   // console.log(allUsers);
@@ -88,7 +88,8 @@ const page = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Username must be unique and cannot contain spaces or special characters.",
+        title:
+          "Username must be unique and cannot contain spaces or special characters.",
         showConfirmButton: false,
         timer: 2000,
       });
