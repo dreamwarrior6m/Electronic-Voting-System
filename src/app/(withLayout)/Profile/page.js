@@ -8,13 +8,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 const Page = () => {
   const { user } = useAuth();
-  const [users, setusers]= useState([])
+  const [users, setusers] = useState([]);
   // console.log(user?.email);
   const [allUser, setAlluser] = useState([]);
-  const userData = `http://localhost:5000/users`;
+  const userData = `https://evs-delta.vercel.app/users`;
   useEffect(() => {
     fetch(userData)
       .then((res) => res.json())
@@ -34,7 +33,6 @@ const Page = () => {
     const alldata = { name, date };
     console.log(alldata);
 
- 
     fetch(`http://evs-delta.vercel.app/users/${user?.email}`, {
       method: "PUT",
       headers: {
@@ -49,24 +47,25 @@ const Page = () => {
           Swal("Thank You", "Update Successfully", "success");
         }
       });
- 
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (user?.email) {
-          const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          const res = await axios.get(
+            `https://evs-delta.vercel.app/users/${user?.email}`
+          );
           setusers(res.data);
         }
       } catch (error) {
         console.error(error);
       }
     };
-  
+
     fetchData();
   }, [user?.email]);
-  console.log(users)
+  console.log(users);
 
   return (
     <div className="">
@@ -77,7 +76,9 @@ const Page = () => {
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>
-          <h1 className="text-center text-xl text-black pt-8">Welcome to the {users?.isRole} Profile</h1>
+          <h1 className="text-center text-xl text-black pt-8">
+            Welcome to the {users?.isRole} Profile
+          </h1>
 
           <div className="flex gap-5 items-center card-body ">
             <Image

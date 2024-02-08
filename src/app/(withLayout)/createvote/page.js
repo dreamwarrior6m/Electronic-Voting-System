@@ -15,7 +15,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/create-vote")
+      .get("https://evs-delta.vercel.app/create-vote")
       .then((res) => {
         setAllCreateVote(res?.data);
       })
@@ -26,7 +26,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users")
+      .get("https://evs-delta.vercel.app/users")
       .then((res) => {
         setAllUsers(res?.data);
       })
@@ -91,7 +91,7 @@ const page = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/create-vote", {
+      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
- 
+
         axios
           .patch(
             `https://evs-delta.vercel.app/users/${findUser?._id}`,

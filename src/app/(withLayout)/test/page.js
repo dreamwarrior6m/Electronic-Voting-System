@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Protected from "../Protected/Protected";
+import Protected from "@/Component/Protected/Protected";
 
 // time start
 const Timer = ({ startDate1, endDate1 }) => {
@@ -47,7 +47,7 @@ const Timer = ({ startDate1, endDate1 }) => {
 const ShowAllvote = () => {
   const [showAllVote, setShowAllVote] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/create-vote")
+    fetch("https://evs-delta.vercel.app/create-vote")
       .then((res) => res.json())
       .then((data) => {
         setShowAllVote(data);

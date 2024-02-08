@@ -10,10 +10,10 @@ import axios from "axios";
 
 const Page = () => {
   const { user } = useAuth();
-  const [users ,setusers]= useState([])
+  const [users, setusers] = useState([]);
 
   const [allUser, setAlluser] = useState([]);
-  const userData = `http://localhost:5000/users`;
+  const userData = `https://evs-delta.vercel.app/users`;
   useEffect(() => {
     fetch(userData)
       .then((res) => res.json())
@@ -32,7 +32,7 @@ const Page = () => {
     const name = form.name.value;
     const alldata = { name, date };
     console.log(alldata);
- 
+
     fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
       method: "PUT",
       headers: {
@@ -47,23 +47,24 @@ const Page = () => {
           Swal("Thank You", "Update Successfully", "success");
         }
       });
- 
   };
 
-  // user in the mongodb not firebase 
+  // user in the mongodb not firebase
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (user?.email) {
-          const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          const res = await axios.get(
+            `https://evs-delta.vercel.app/users/${user?.email}`
+          );
           setusers(res.data);
         }
       } catch (error) {
         console.error(error);
       }
     };
-  
+
     fetchData();
   }, [user?.email]);
 
@@ -76,7 +77,9 @@ const Page = () => {
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>
-          <h1 className="text-center font-bold text-xl pt-10">Welcome to the {users.isRole} Dashboard</h1>
+          <h1 className="text-center font-bold text-xl pt-10">
+            Welcome to the {users.isRole} Dashboard
+          </h1>
 
           <div className="flex gap-5 items-center card-body ">
             <Image
@@ -95,7 +98,7 @@ const Page = () => {
                 {user?.displayName}
               </h1>
             )}
-            
+
             <hr />
             <div className="">
               <div className="grid lg:grid-cols-2 gap-10">

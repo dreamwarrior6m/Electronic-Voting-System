@@ -6,40 +6,38 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
- 
-import './styles.css'
+
+import "./styles.css";
 import { useQuery } from "@tanstack/react-query";
- 
 
 const AllVoter = () => {
   const [voters, setVoters] = useState([]);
   const [limit, setLimit] = useState(8);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
- 
- 
-  console.log(voters)
+
+  console.log(voters);
   // useEffect(() => {
-  //   fetch("http://localhost:5000/users")
+  //   fetch("https://evs-delta.vercel.app/users")
   //     .then((res) => res.json())
   //     .then((data) => console.log(data));
   // }, []);
-  const {data, refetch}= useQuery({
-    queryKey:["user"],
-    queryFn: async()=>{
-      const res = await axios.get('https://evs-delta.vercel.app/users');
+  const { data, refetch } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const res = await axios.get("https://evs-delta.vercel.app/users");
       setVoters(res.data);
-      return res.data
-    }
-  })
-
+      return res.data;
+    },
+  });
 
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`https://evs-delta.vercel.app/users/verify/${id}`);
-      if(res.data.modifiedCount>0){
-        refetch()
- 
+      const res = await axios.patch(
+        `https://evs-delta.vercel.app/users/verify/${id}`
+      );
+      if (res.data.modifiedCount > 0) {
+        refetch();
       }
     } catch (error) {
       console.error("Error:", error);
@@ -58,15 +56,15 @@ const AllVoter = () => {
         confirmButtonText: "Yes, I do!",
       }).then(async (result) => {
         if (result.isConfirmed) {
- 
-          const res = await axios.patch(`https://evs-delta.vercel.app/users/isRole/${id}`);
+          const res = await axios.patch(
+            `https://evs-delta.vercel.app/users/isRole/${id}`
+          );
           if (res.data.modifiedCount > 0) {
-            refetch()
+            refetch();
             Swal.fire({
               title: "Admin",
               text: "This voter has been Admin.",
-              icon: "success"
- 
+              icon: "success",
             });
           }
         }
@@ -87,11 +85,10 @@ const AllVoter = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
- 
- 
-        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
- 
- 
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/users/${id}`
+        );
+
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
 
@@ -123,13 +120,9 @@ const AllVoter = () => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
- 
- 
         `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
- 
- 
       );
-      
+
       setPageCount(response.data.pageCount);
       setVoters(response.data.result);
     } catch (error) {
