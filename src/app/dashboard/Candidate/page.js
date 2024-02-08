@@ -9,7 +9,7 @@ const Page = () => {
 
   useEffect(() => {
 
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
 
       .then((res) => res.json())
       .then((data) => setCandidates(data));
@@ -26,7 +26,7 @@ const Page = () => {
   }).then(async (result) => {
       if (result.isConfirmed) {
 
-          const res =await axios.delete(`https://evs-delta.vercel.app/candidate/${id}`)
+          const res =await axios.delete(`http://localhost:5000/candidate/${id}`)
           if (res.data.deletedCount > 0) {
             setCandidates((prevotes)=>prevotes.filter((votes)=>votes._id!==id))
               Swal.fire({

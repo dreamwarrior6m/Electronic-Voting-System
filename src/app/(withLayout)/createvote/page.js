@@ -12,15 +12,10 @@ const page = () => {
   const [allCreateVote, setAllCreateVote] = useState();
   const [allUsers, setAllUsers] = useState();
   const [user] = useAuthState(auth);
-  console.log("user", user);
-  // console.log(user?.email);
-  // if(!user){
-  //   router.push('/login')
-  // }
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("http://localhost:5000/create-vote")
       .then((res) => {
         setAllCreateVote(res?.data);
       })
@@ -28,11 +23,10 @@ const page = () => {
         console.error(err);
       });
   }, []);
-  console.log(allCreateVote);
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/users")
+      .get("http://localhost:5000/users")
       .then((res) => {
         setAllUsers(res?.data);
       })
@@ -86,7 +80,7 @@ const page = () => {
     setloading(true);
 
     try {
-      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
+      const res = await fetch("http://localhost:5000/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -102,10 +96,6 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-<<<<<<< HEAD
-        const res = await axios.patch(`https://evs-delta.vercel.app/isRole/${user?.email}`)
-        console.log(res.data)
-=======
         axios
           .patch(`http://localhost:5000/users/${findUser?._id}`, updateIsRole1)
           .then((res) => {
@@ -115,7 +105,6 @@ const page = () => {
             console.error(err);
           });
 
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
         router.push("/dashboard/home");
       } else {
         Swal.fire({

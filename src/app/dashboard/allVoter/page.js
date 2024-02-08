@@ -7,40 +7,34 @@ import { useEffect, useRef, useState } from "react";
 import { MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
 import './styles.css'
+import { useQuery } from "@tanstack/react-query";
 
 const AllVoter =() => {
   const [voters, setVoters] = useState([]);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(8);
   const [pageCount, setPageCount] = useState(1);
   const currentPage = useRef(1);
+ 
   console.log(voters)
- 
-
- 
-  useEffect(() => {
-    fetch("https://evs-delta.vercel.app/users")
-      .then((res) => res.json())
-      .then((data) => setVoters(data));
-  }, []);
-
- 
-<<<<<<< HEAD
-=======
- 
   // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/users")
+  //   fetch("http://localhost:5000/users")
   //     .then((res) => res.json())
-  //     .then((data) => setVoters(data));
+  //     .then((data) => console.log(data));
   // }, []);
-  // const {Role,refetch}= useRole()
-  // console.log(Role)
- 
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
+  const {data, refetch}= useQuery({
+    queryKey:["user"],
+    queryFn: async()=>{
+      const res = await axios.get('http://localhost:5000/users');
+      setVoters(res.data);
+      return res.data
+    }
+  })
+
 
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`https://evs-delta.vercel.app/users/verify/${id}`);
-      if(res.data){
+      const res = await axios.patch(`http://localhost:5000/users/verify/${id}`);
+      if(res.data.modifiedCount>0){
         refetch()
       }
  
@@ -61,13 +55,12 @@ const AllVoter =() => {
         confirmButtonText: "Yes, I do!"
       }).then(async (result) => {
         if (result.isConfirmed) {
-          const res = await axios.patch(`https://evs-delta.vercel.app/users/isRole/${id}`);
-          console.log(res.data)
-  
-          if (res.data > 0) {
+          const res = await axios.patch(`http://localhost:5000/users/isRole/${id}`);
+          if (res.data.modifiedCount > 0) {
+            refetch()
             Swal.fire({
-              title: "Deleted!",
-              text: "This voter has been deleted.",
+              title: "Admin",
+              text: "This voter has been Admin.",
               icon: "success"
             });
           }
@@ -90,7 +83,7 @@ const AllVoter =() => {
     }).then(async (result) => {
       if (result.isConfirmed) {
  
-        const res = await axios.delete(`https://evs-delta.vercel.app/users/${id}`);
+        const res = await axios.delete(`http://localhost:5000/users/${id}`);
  
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
@@ -124,21 +117,16 @@ const AllVoter =() => {
     try {
       const response = await axios.get(
  
-        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+        `http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`
  
-<<<<<<< HEAD
-=======
- 
->>>>>>> a25bce5db11b16f6e25755896f35f0527f466d80
       );
-
+      
       setPageCount(response.data.pageCount);
       setVoters(response.data.result);
     } catch (error) {
       console.error('Error fetching paginated users:', error);
     }
   };
-
   return (
     <div>
       <p className="font-bold text-center text-2xl text-black">

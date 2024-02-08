@@ -44,7 +44,7 @@ const Timer = ({ startDate1, endDate1 }) => {
 const ShowAllvote = () => {
   const [showAllVote, setShowAllVote] = useState();
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/create-vote")
+    fetch("http://localhost:5000/create-vote")
       .then((res) => res.json())
       .then((data) => {
         setShowAllVote(data);
