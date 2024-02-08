@@ -44,9 +44,7 @@ const Results = () => {
             </div>
             <div className="py-4 text-gray-600 font-bold text-lg">
               <h2 className="">Id: {candidate?.candidateID}</h2>
-              <h2 className="">
-                Name: {candidate?.candidateName}
-              </h2>
+              <h2 className="">Name: {candidate?.candidateName}</h2>
 
               <h2 className="">
                 <span className="text-3xl text-red-600">
