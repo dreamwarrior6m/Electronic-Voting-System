@@ -15,28 +15,29 @@ const Navbar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(
-          `https://evs-delta.vercel.app/users/${user?.email}`
-        );
-        setusers(res.data);
+        if (user?.email) {
+          const res = await axios.get(
+            `https://evs-delta.vercel.app/users/${user?.email}`
+          );
+          setusers(res.data);
+        }
       } catch (error) {
         console.error(error);
       }
     };
-  });
+
+    fetchData();
+  }, [user?.email]);
 
   //   if (user?.email) {
   //     fetchData();
   //   }
   // }, [user?.email]);
-  console.log(users);
   const handleLogOut = () => {
     logOut()
       .then((res) => console.log(res))
       .catch((error) => console.error(error));
   };
-  const nouser = users?.isRole;
-  console.log(nouser);
 
   return (
     <div className="lg:sticky lg:top-0 lg:z-10 lg:w-full lg:bg-[#00263A] text-white lg:drop-shadow-sm border-b-[1px] border-white/10">
@@ -66,7 +67,7 @@ const Navbar = () => {
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
-                  {users?.isRole != "user" ? (
+                  {users?.isRole == "Admin" || users?.isRole == "Modarator" ? (
                     <li>
                       <Link href="/dashboard/home">dashboard</Link>
                     </li>

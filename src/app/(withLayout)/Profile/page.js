@@ -69,14 +69,14 @@ const Page = () => {
 
   return (
     <div className="">
-      <div className="  ">
-        <div className="bg-slate-500 w-full h-full  shadow-xl image-full ">
-          <div className="flex justify-end text-4xl m-4">
+      <div className="min-h-screen">
+        <div className="bg-slate-500 w-full h-full  shadow-xl">
+          <div className="flex justify-end text-4xl">
             <FaEdit
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>
-          <h1 className="text-center text-xl text-black pt-8">
+          <h1 className="text-center font-bold text-xl text-black pt-8">
             Welcome to the {users?.isRole} Profile
           </h1>
 
@@ -84,8 +84,8 @@ const Page = () => {
             <Image
               className="w-[150px] h-[150px] rounded-full border-4 border-red-200"
               src={user?.photoURL ? user?.photoURL : img}
-              width={500}
-              height={500}
+              width={250}
+              height={250}
               alt="profile"
             ></Image>
             <div className="flex gap-2 items-center">
