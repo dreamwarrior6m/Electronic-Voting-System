@@ -132,7 +132,7 @@ const AllVoter = () => {
   return (
     <div>
       <p className="font-bold text-center text-2xl text-black">
-        Total Voters: {voters.length}
+        Total Users: {voters.length}
       </p>
       <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 

@@ -38,6 +38,7 @@ const SideNav = ({ children }) => {
 
     fetchData();
   }, [user?.email]);
+  console.log(users)
 
   return (
     <div>
@@ -61,65 +62,79 @@ const SideNav = ({ children }) => {
               Dashboard
             </h3>
           </Link>
-          {users?.isRole == "Modarator" && (
-            <Link
-              href="/dashboard/createCandidate"
-              className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-                location === "/dashboard/createCandidate"
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-80"
-              }`}
-            >
-              <IoPersonAdd className="text-2xl group-hover:text-white" />
-              <h3 className="text-base group-hover:text-white font-semibold">
-                Create Candidate
-              </h3>
-            </Link>
-          )}
           <Link
-            href="/dashboard/Candidate"
+            href="/dashboard/createCandidate"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-              location === "/dashboard/Candidate"
-                ? "text-white bg-gray-900"
-                : "text-gray-800"
+              location === "/dashboard/createCandidate"
+                ? "bg-gray-900 text-white"
+                : "text-gray-80"
             }`}
           >
-            <BsPersonCircle className="text-2xl group-hover:text-white" />
+            <IoPersonAdd className="text-2xl group-hover:text-white" />
             <h3 className="text-base group-hover:text-white font-semibold">
-              Candidate
+              Create Candidate
             </h3>
           </Link>
+
           <Link
-            href="/dashboard/allElections"
+            href="/dashboard/ownElections"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-              location === "/dashboard/allElections"
+              location === "/dashboard/ownElections"
                 ? "text-white bg-gray-900"
                 : "text-gray-800"
             }`}
           >
             <GiVote className="text-2xl group-hover:text-white" />
             <h3 className="text-base group-hover:text-white font-semibold">
-              All Elections
+              My Elections
             </h3>
           </Link>
 
           {users?.isRole == "Admin" && (
-            <Link
-              href="/dashboard/allVoter"
-              className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-                location === "/dashboard/allVoter"
-                  ? "text-white bg-gray-900"
-                  : "text-gray-800"
-              }`}
-            >
-              <MdPeople className="text-2xl group-hover:text-white" />
-              <h3 className="text-base group-hover:text-white font-semibold">
-                All Voter
-              </h3>
-            </Link>
+            <>
+              <Link
+                href="/dashboard/allElections"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
+                  location === "/dashboard/allElections"
+                    ? "text-white bg-gray-900"
+                    : "text-gray-800"
+                }`}
+              >
+                <GiVote className="text-2xl group-hover:text-white" />
+                <h3 className="text-base group-hover:text-white font-semibold">
+                  All Elections
+                </h3>
+              </Link>
+              <Link
+                href="/dashboard/Candidate"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
+                  location === "/dashboard/Candidate"
+                    ? "text-white bg-gray-900"
+                    : "text-gray-800"
+                }`}
+              >
+                <BsPersonCircle className="text-2xl group-hover:text-white" />
+                <h3 className="text-base group-hover:text-white font-semibold">
+                  All Candidate
+                </h3>
+              </Link>
+              <Link
+                href="/dashboard/allVoter"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
+                  location === "/dashboard/allVoter"
+                    ? "text-white bg-gray-900"
+                    : "text-gray-800"
+                }`}
+              >
+                <MdPeople className="text-2xl group-hover:text-white" />
+                <h3 className="text-base group-hover:text-white font-semibold">
+                  All Users
+                </h3>
+              </Link>
+            </>
           )}
 
-          <Link
+          {/* <Link
             href="/dashboard/LivePreview"
             className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
               location === "/dashboard/LivePreview"
@@ -131,7 +146,7 @@ const SideNav = ({ children }) => {
             <h3 className="text-base group-hover:text-white font-semibold">
               Live Preview
             </h3>
-          </Link>
+          </Link> */}
           <Link
             href="/"
             className="flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200"

@@ -59,19 +59,21 @@ const page = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center text-white">
+    <div className="dark:bg-slate-900 flex items-center text-gray-700 dark:text-white">
       <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
-        <div className="flex text-white flex-col justify-center items-center">
+        <div className="flex dark:text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={loginImg} />
-          <div className="my-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold text-black">Log in to your account</h1>
+          <div className=" mt-2 mb-7 text-center">
+            <h1 className="mb-2 dark:text-white text-3xl font-bold">
+              Log in to your account
+            </h1>
             <h4 className="text-base">
               <span className="opacity-75">Or</span>{" "}
-              <span className="text-[#4F46E5]">create a free account</span>
+              <span className="text-blue-500">create a free account</span>
             </h4>
           </div>
         </div>
-        <div className="lg:p-8 lg:pb-10 bg-[#f1faee] border- border-t-4 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-blue-700">
+        <div className="lg:p-8 lg:pb-10 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
           <form onSubmit={handleLogin} className=" w-full">
             <div className="form-control">
               <label className="label">
@@ -136,7 +138,7 @@ const page = () => {
             <div className="form-control mx-auto mt-5">
               <button
                 type="submit"
-                className=" py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white"
               >
                 {loading ? (
                   <p className="loading loading-spinner loading-sm" />
@@ -146,7 +148,7 @@ const page = () => {
               </button>
             </div>
             <div>
-              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-white/80 dark:before:border-gray-600 dark:after:border-gray-600">
+              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-gray-700 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
                 Or Continue with
               </div>
               <div className="w-full gap-8 flex justify-between">
@@ -160,19 +162,19 @@ const page = () => {
             </div>
           </form>
         </div>
-        <div className="flex text-white flex-col justify-center items-center">
-          <div className="my-7 text-center">
+        <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">
+          <div className="mt-7 mb-4 text-center">
             <h4 className="text-base">
-              <span className="opacity-90">Don't have an account yet?</span>{" "}
+              <span className="opacity-90">Don't have an account yet?</span>
               <Link href="/registration">
-                <span className="text-[#4F46E5] cursor-pointer">
+                <span className="text-blue-500 cursor-pointer">
                   Registration
                 </span>
               </Link>
             </h4>
           </div>
-          <div className="opacity-50">
-            <ul className="flex gap-6 items-center justify-center text-white">
+          <div className="opacity-70">
+            <ul className="flex gap-6 items-center justify-center text-gray-700 dark:text-white ">
               <Link href="/">
                 <li>Home</li>
               </Link>
