@@ -66,7 +66,7 @@ const createPoll = () => {
 
   const handleCreatePoll = () => {
     axios
-      .post("http://localhost:5000/create-poll", createPollAllData)
+      .post("https://evs-delta.vercel.app/create-poll", createPollAllData)
       .then((res) => {
         console.log(res?.data);
       })
