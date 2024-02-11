@@ -4,10 +4,10 @@ const page = () => {
   return (
     <div>
       <div>
-          <h3 className="text-3xl font-bold text-gray-700 text-center pt-2 pb-6">
-            All Elections
-          </h3>
-        </div>
+        <h3 className="text-4xl font-bold text-gray-700 text-center pt-3 pb-8">
+          All Elections
+        </h3>
+      </div>
       <ShowElections />
     </div>
   );
