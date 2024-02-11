@@ -1,5 +1,5 @@
+import OwnElection from "@/Component/Dashboard/OwnElection/OwnElection";
 
-import OwnElection from "@/Component/Dashboard/Moderator/OwnElection/OwnElection";
 
 const page = () => {
   return (
