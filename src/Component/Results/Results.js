@@ -23,31 +23,39 @@ const Results = () => {
   console.log(filterCandidates);
 
   return (
-    <div className="text-white grid grid-cols-1 md:grid-cols-3 p-5 gap-5">
-      {filterCandidates?.map((candi) => (
-        <div key={candi?._id} className="">
-          <div className="card  bg-base-100 shadow-xl">
-            <figure className="px-10 pt-10">
+    <div className="max-w-7xl mx-auto px-4">
+      <h1 className="text-center font-bold text-4xl pb-8">Results</h1>
+      <div className="grid md:grid-cols-2 gap-5">
+        {filterCandidates?.map((candidate, index) => (
+          <div
+            key={candidate?._id}
+            className={`${
+              index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
+            } text-center font-semibold rounded-xl`}
+          >
+            <div>
               <Image
-                src={candi?.candidatePhoto}
-                alt="alt"
-                width={300}
-                height={300}
+                src={candidate?.candidatePhoto}
+                width={150}
+                height={150}
+                alt="Image"
+                className="rounded-xl w-full h-auto md:h-[280px]"
               />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">
-                Total Vote:{" "}
-                <span className="text-xl font-bold text-red-600">
-                  {candi?.voteCount}
-                </span>
+            </div>
+            <div className="py-4 text-gray-600 font-bold text-lg">
+              <h2 className="">Id: {candidate?.candidateID}</h2>
+              <h2 className="">Name: {candidate?.candidateName}</h2>
+
+              <h2 className="">
+                <span className="text-3xl text-red-600">
+                  {candidate?.voteCount}
+                </span>{" "}
+                Votes Got
               </h2>
-              <p>Name: {candi?.candidateName}</p>
-               
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

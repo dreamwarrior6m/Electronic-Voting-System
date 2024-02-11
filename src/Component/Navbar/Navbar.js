@@ -5,11 +5,34 @@ import Link from "next/link";
 import userProfile from "../../../public/images/EVS.jpg";
 import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
-  // console.log(user);
+
+  const [users, setusers] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user?.email) {
+          const res = await axios.get(
+            `https://evs-delta.vercel.app/users/${user?.email}`
+          );
+          setusers(res.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [user?.email]);
+
+  //   if (user?.email) {
+  //     fetchData();
+  //   }
+  // }, [user?.email]);
   const handleLogOut = () => {
     logOut()
       .then((res) => console.log(res))
@@ -44,13 +67,15 @@ const Navbar = () => {
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
-                  {user && (
+                  {users?.isRole == "Admin" || users?.isRole == "Modarator" ? (
                     <li>
-                      <Link href="/dashboard/home">Dashboard</Link>
+                      <Link href="/dashboard/home">dashboard</Link>
+                    </li>
+                  ) : (
+                    <li>
+                      <Link href="/Profile">Profile</Link>
                     </li>
                   )}
-
-
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
                   </li>

@@ -6,10 +6,10 @@ const config = {
   initialMessages: [createChatBotMessage(`Hi! I'm ${botName}`)],
   customStyles: {
     botMessageBox: {
-      backgroundColor: "#376B7E",
+      backgroundColor: "#4F46E5",
     },
     chatButton: {
-      backgroundColor: "#5ccc9d",
+      backgroundColor: " #4F46E5",
     },
   },
 };

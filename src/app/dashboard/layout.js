@@ -2,7 +2,6 @@
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import SideNav from "@/Component/Dashboard/SideNav/SideNav";
 
-
 const layout = ({ children }) => {
   return (
     <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0">
@@ -16,7 +15,10 @@ const layout = ({ children }) => {
         </div>
       </div>
       {/* content  */}
-      <div className="flex-1 p-8 ">{children}</div>
+      <div className="flex-1 p-8 ">
+              {children}
+        
+        </div>
     </div>
   );
 };

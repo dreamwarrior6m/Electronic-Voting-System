@@ -17,107 +17,99 @@ const Registration = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    const from = e.target;
-    const name = from.name.value;
-    const email = from.email.value;
-    const password = from.password.value;
-    const photo = from.photo.value;
-    const date = from.date.value;
-    const idNumber = from.idNumber.value;
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
+    const date = form.date.value;
+    const idNumber = form.idNumber.value;
     const verify = false;
-    const user = { name, email, photo, date, idNumber, verify };
-    console.log(user);
+    const isRole = "user";
+    const user = { name, email, photo, date, idNumber, verify, isRole };
 
-    if (password.length < 6) {
+    // Password validation
+    if (
+      password.length < 6 ||
+      !/[A-Z]/.test(password) ||
+      !/[!@#$%^&*()_+{}[\]:;<>,/.?~\\]/.test(password)
+    ) {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Password should be 6 characters or more",
+        title:
+          "Password should be 6 characters or more and contain at least one capital letter and one special character.",
         showConfirmButton: false,
-        timer: 2000,
-      });
-      return;
-    }
-
-    if (!/[A-Z]/.test(password)) {
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Password should have at least one capital letter",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      return;
-    }
-
-    if (!/[!@#$%^&*()_+{}[\]:;<>,/.?~\\]/.test(password)) {
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Password should have at least one special character",
-        showConfirmButton: false,
-        timer: 2000,
+        timer: 3000,
       });
       return;
     }
 
     setloading(true);
-    createUser(email, password)
-      .then(() => {
-        updateUserProfile(name, photo)
-          .then(() => {
-            Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Login successfully",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            from.reset();
-            window.location.reload();
-            fetch("https://evs-delta.vercel.app/users", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(user),
-            });
-          })
-          .catch((error) => {
-            Swal.fire({
-              position: "top-end",
-              icon: "error",
-              title: `${error.code}`,
-              showConfirmButton: false,
-              timer: 2000,
-            });
-          });
-        router.push("/");
-      })
-      .catch((error) => {
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: `${error.code}`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
+
+    try {
+      // Create user
+      await createUser(email, password);
+
+      // Update user profile
+      await updateUserProfile(name, photo);
+
+      // Send user data to backend
+      await fetch("https://evs-delta.vercel.app/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
       });
+
+      // Show success message
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Registration successful",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+
+      // Reset form
+      form.reset();
+      router.replace("/");
+      // Reload page and redirect
+      // window.location.reload();
+      // Replace with the desired redirect path
+    } catch (error) {
+      console.error("Registration error:", error);
+      let errorMessage =
+        error.message || "An error occurred during registration.";
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: errorMessage,
+        showConfirmButton: false,
+        timer: 3000,
+      });
+    } finally {
+      setloading(false);
+    }
   };
+
   return (
-    <div className="dark:bg-slate-900 flex lg:h-screen items-center">
+    <div className="dark:bg-slate-900 flex items-center text-gray-700 dark:text-white">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
-        <div className="flex text-white flex-col justify-center items-center">
+        <div className="flex text-gray-700 dark:text-white  flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
-          <div className="my-8 text-center">
-            <h1 className="mb-2 text-3xl font-bold">Create a free account</h1>
+          <div className="mt-2 mb-7 text-center">
+            <h1 className="mb-2 text-3xl font-bold text-gray-700 dark:text-white ">
+              Create a free account
+            </h1>
             <h4 className="text-base">
-              <span className="opacity-75">Or</span>{" "}
-              <span className="text-[#4F46E5]">log in to your account</span>
+              <span className="opacity-75">Or </span>
+              <span className="text-blue-500">log in to your account</span>
             </h4>
           </div>
         </div>
-        <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-blue-700">
+        <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
           <form onSubmit={handleRegistration} className="w-full">
             <div className="grid lg:grid-cols-12 gap-4">
               <div className="form-control col-span-6">
@@ -147,9 +139,7 @@ const Registration = () => {
               <div className="relative col-span-6">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text dark:text-whitee">
-                      Password
-                    </span>
+                    <span className="label-text dark:text-white">Password</span>
                   </label>
                   <input
                     type={showPass ? "text" : "password"}
@@ -157,7 +147,6 @@ const Registration = () => {
                     placeholder="Enter your password"
                     className="input input-bordered text-white"
                     required
-                    readOnly
                     defaultChecked
                   />
                 </div>
@@ -167,9 +156,9 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-black dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-white dark:text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-black dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-white dark:text-white" />
                     )}
                   </p>
                 </div>
@@ -221,11 +210,11 @@ const Registration = () => {
                     className="checkbox checkbox-sm checkbox-primary"
                   />
                   <span className="label-text ml-3 text-base">
-                    I agree to the{" "}
+                    I agree to the
                     <span className="text-[#3B82F6] cursor-pointer">
                       privacy policy
-                    </span>{" "}
-                    and{" "}
+                    </span>
+                    and
                     <span className="text-[#3B82F6] cursor-pointer">
                       terms of service
                     </span>
@@ -237,7 +226,7 @@ const Registration = () => {
             <div className="form-control mt-5">
               <button
                 type="submit"
-                className=" py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                className=" py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white"
               >
                 {loading ? (
                   <h1 className="loading loading-spinner loading-sm"></h1>
@@ -247,7 +236,7 @@ const Registration = () => {
               </button>
             </div>
             <div>
-              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-white/80 dark:before:border-gray-600 dark:after:border-gray-600">
+              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-gray-700 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
                 Or Continue with
               </div>
               <div className="w-full gap-8 flex justify-between">
@@ -261,18 +250,20 @@ const Registration = () => {
             </div>
           </form>
         </div>
-        <div className="flex text-white flex-col justify-center items-center">
-          <div className="my-7 text-center">
+        <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">
+          <div className="mt-7 mb-4 text-center">
             <h4 className="text-base">
               <span className="opacity-90">Don't have an account yet?</span>{" "}
               <Link href="/login">
-                <span className="text-[#4F46E5] cursor-pointer">Login</span>
+                <span className="text-blue-500 cursor-pointer">Login</span>
               </Link>
             </h4>
           </div>
-          <div className="opacity-50">
-            <ul className="flex gap-6 items-center justify-center text-white">
-              <Link href="/"><li>Home</li></Link>
+          <div className="opacity-70">
+            <ul className="flex gap-6 items-center justify-center text-gray-700 dark:text-white ">
+              <Link href="/">
+                <li>Home</li>
+              </Link>
               <li>Contact</li>
               <li>Terms</li>
               <li>Imprint</li>

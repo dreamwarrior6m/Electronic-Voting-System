@@ -11,7 +11,7 @@ import axios from "axios";
 const Page = () => {
   const { user } = useAuth();
   const [users, setusers] = useState([]);
-
+  // console.log(user?.email);
   const [allUser, setAlluser] = useState([]);
   const userData = `https://evs-delta.vercel.app/users`;
   useEffect(() => {
@@ -33,7 +33,7 @@ const Page = () => {
     const alldata = { name, date };
     console.log(alldata);
 
-    fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
+    fetch(`http://evs-delta.vercel.app/users/${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -48,8 +48,6 @@ const Page = () => {
         }
       });
   };
-
-  // user in the mongodb not firebase
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,26 +65,27 @@ const Page = () => {
 
     fetchData();
   }, [user?.email]);
+  console.log(users);
 
   return (
     <div className="">
-      <div className="  ">
-        <div className="bg-slate-500 w-full h-full  shadow-xl image-full ">
-          <div className="flex justify-end text-4xl m-4">
+      <div className="min-h-screen">
+        <div className="bg-slate-500 w-full h-full  shadow-xl">
+          <div className="flex justify-end text-4xl">
             <FaEdit
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>
-          <h1 className="text-center font-bold text-xl pt-10">
-            Welcome to the {users.isRole} Dashboard
+          <h1 className="text-center font-bold text-xl text-black pt-8">
+            Welcome to the {users?.isRole} Profile
           </h1>
 
           <div className="flex gap-5 items-center card-body ">
             <Image
               className="w-[150px] h-[150px] rounded-full border-4 border-red-200"
               src={user?.photoURL ? user?.photoURL : img}
-              width={500}
-              height={500}
+              width={250}
+              height={250}
               alt="profile"
             ></Image>
             <div className="flex gap-2 items-center">

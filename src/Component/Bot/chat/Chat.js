@@ -6,17 +6,29 @@ import MessageParser from "../MessageParser";
 import ActionProvider from "../ActionProvider";
 import "../Bot.css";
 
-
 const Chat = () => {
+
+  const saveMessages = (messages, HTMLString) => {
+    localStorage.setItem('chat_messages', JSON.stringify(messages));
+  };
+
+  const loadMessages = () => {
+    const messages = JSON.parse(localStorage.getItem('chat_messages'));
+    return messages;
+  };
+
   return (
-    <div className="">
+    <div className="drop-shadow-lg">
       <div className="App">
         <Chatbot
-          headerText='Chatbot'
-          placeholderText='Enter Your Question'
+          headerText="FAQ Chatbot"
+          placeholderText="Enter Your Question"
           config={config}
           messageParser={MessageParser}
           actionProvider={ActionProvider}
+          messageHistory={loadMessages()}
+          saveMessages={saveMessages}
+          runInitialMessagesWithHistory
         />
       </div>
     </div>
