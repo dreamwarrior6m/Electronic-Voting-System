@@ -36,7 +36,7 @@ const page = () => {
   }, []);
   // console.log(allUsers);
   const findUser = allUsers?.find((users) => users?.email == user?.email);
-  console.log(findUser?._id);
+  console.log(findUser?.isRole);
 
   const handleCreate = async (event) => {
     event.preventDefault();
@@ -107,18 +107,19 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-
-        axios
-          .patch(
-            `https://evs-delta.vercel.app/users/${findUser?._id}`,
-            updateIsRole1
-          )
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        if (findUser?.isRole != "Admin") {
+          axios
+            .patch(
+              `https://evs-delta.vercel.app/users/${findUser?._id}`,
+              updateIsRole1
+            )
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
 
         router.push("/dashboard/home");
       } else {
