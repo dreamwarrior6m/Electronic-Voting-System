@@ -222,7 +222,7 @@ const OwnElection = () => {
                       <div className="form-control">
                         <label className="label">
                           <span className=" text-gray-800 dark:text-white">
-                            Vote Name
+                            Vote Name (read Only)
                           </span>
                         </label>
                         <input
@@ -232,6 +232,7 @@ const OwnElection = () => {
                           required
                           defaultValue={election.name}
                           name="voteName"
+                          readOnly
                         />
                       </div>
                       <div className="form-control">
