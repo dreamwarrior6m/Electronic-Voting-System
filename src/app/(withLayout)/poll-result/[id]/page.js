@@ -5,22 +5,33 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 
 const page = () => {
   const [pollAns, setPollAns] = useState();
   const [createPoll, setCreatePoll] = useState();
   const { id } = useParams();
   console.log(id);
-  useEffect(() => {
-    axios
-      .get("https://evs-delta.vercel.app/poll-ans")
-      .then((res) => {
-        setPollAns(res?.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+
+  const { data, refetch } = useQuery({
+    queryKey: ["poll-ans"],
+    queryFn: async () => {
+      const res = await axios.get("https://evs-delta.vercel.app/poll-ans");
+      setPollAns(res?.data);
+      return res?.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://evs-delta.vercel.app/poll-ans")
+  //     .then((res) => {
+  //       setPollAns(res?.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, []);
   console.log(pollAns);
 
   const filterPollAns = pollAns?.filter((ans) => ans?.userName == id);

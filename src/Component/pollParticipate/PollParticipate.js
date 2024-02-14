@@ -2,13 +2,19 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import CopyToClipboard from "react-copy-to-clipboard";
-import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import { useQuery } from "@tanstack/react-query";
 
 const PollParticipate = () => {
   const [pollAns, setPollAns] = useState();
@@ -16,11 +22,13 @@ const PollParticipate = () => {
   const [pollAnsId, setPollAnsId] = useState();
   const [pollParticipate, setPollParticipate] = useState();
   const { id } = useParams();
-  // console.log(id);
+  const router = useRouter();
+  console.log(id);
   const { user } = useAuth();
   // console.log(user?.email);
   const participateUser = { pollUserName: id, email: user?.email };
   console.log(participateUser);
+
 
   useEffect(() => {
     axios
@@ -32,6 +40,7 @@ const PollParticipate = () => {
         console.error(err);
       });
   }, []);
+
   useEffect(() => {
     axios
       .get("https://evs-delta.vercel.app/create-poll")
@@ -50,6 +59,7 @@ const PollParticipate = () => {
     (crPoll) => crPoll?.userName == id
   );
   console.log(filterCreatePoll);
+
 
   useEffect(() => {
     axios
@@ -85,7 +95,7 @@ const PollParticipate = () => {
           const updataVoteCount = voteCount + 1;
           const updatePollCount = { updataVoteCount };
           console.log(updatePollCount);
-
+          
           axios
             .patch(
               `https://evs-delta.vercel.app/poll-ans/${pollAnsId}`,
@@ -93,6 +103,14 @@ const PollParticipate = () => {
             )
             .then((res) => {
               console.log("update vote", res?.data);
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Vote added",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              router.push(`/poll-result/${id}`);
 
               axios
                 .post(
@@ -101,6 +119,7 @@ const PollParticipate = () => {
                 )
                 .then((res) => {
                   console.log("participate post", res?.data);
+                  refetch();
                 })
                 .catch((err) => {
                   console.error(err);
@@ -123,7 +142,7 @@ const PollParticipate = () => {
       });
     }
   };
-  const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`
+  const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
   const handleCopy = () => {
     Swal.fire({
       position: "top-end",
@@ -202,34 +221,35 @@ const PollParticipate = () => {
                       ✕
                     </button>
                   </form>
-                  <h3 className="font-bold text-center pb-2 text-lg">Share This Poll</h3>
-                  
+                  <h3 className="font-bold text-center pb-2 text-lg">
+                    Share This Poll
+                  </h3>
 
                   <div className="text-center">
-              <h2 className="pt-5">Derect Share</h2>
-              <div className="flex gap-4 pt-3 justify-center">
-                <FacebookShareButton url={shareUrl}>
-                  <FacebookIcon className="rounded-full size-8" />
-                </FacebookShareButton>
+                    <h2 className="pt-5">Derect Share</h2>
+                    <div className="flex gap-4 pt-3 justify-center">
+                      <FacebookShareButton url={shareUrl}>
+                        <FacebookIcon className="rounded-full size-8" />
+                      </FacebookShareButton>
 
-                <WhatsappShareButton url={shareUrl}>
-                  <WhatsappIcon className="rounded-full size-8" />
-                </WhatsappShareButton>
-              </div>
-              <div className="pt-10 pb-5">
-                <h2 className="">Share Link</h2>
-                <h2 className="bg-black p-1 px-3 rounded-md">
-                  {shareUrl}
-                  <CopyToClipboard text={shareUrl}>
-                    <span className="pl-1">
-                      <button onClick={handleCopy} className="btn btn-sm">
-                        copy
-                      </button>
-                    </span>
-                  </CopyToClipboard>
-                </h2>
-              </div>
-            </div>
+                      <WhatsappShareButton url={shareUrl}>
+                        <WhatsappIcon className="rounded-full size-8" />
+                      </WhatsappShareButton>
+                    </div>
+                    <div className="pt-10 pb-5">
+                      <h2 className="">Share Link</h2>
+                      <h2 className="bg-black p-1 px-3 rounded-md">
+                        {shareUrl}
+                        <CopyToClipboard text={shareUrl}>
+                          <span className="pl-1">
+                            <button onClick={handleCopy} className="btn btn-sm">
+                              copy
+                            </button>
+                          </span>
+                        </CopyToClipboard>
+                      </h2>
+                    </div>
+                  </div>
                 </div>
               </dialog>
             </div>
