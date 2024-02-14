@@ -29,7 +29,6 @@ const PollParticipate = () => {
   const participateUser = { pollUserName: id, email: user?.email };
   console.log(participateUser);
 
-
   useEffect(() => {
     axios
       .get("https://evs-delta.vercel.app/poll-ans")
@@ -60,18 +59,29 @@ const PollParticipate = () => {
   );
   console.log(filterCreatePoll);
 
+  const { data, refetch } = useQuery({
+    queryKey: ["participate"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/poll-participate"
+      );
+      setPollParticipate(res?.data);
+      return res?.data;
+    },
+  });
+  console.log(pollParticipate);
 
-  useEffect(() => {
-    axios
-      .get("https://evs-delta.vercel.app/poll-participate")
-      .then((res) => {
-        // console.log(res?.data);
-        setPollParticipate(res?.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://evs-delta.vercel.app/poll-participate")
+  //     .then((res) => {
+  //       // console.log(res?.data);
+  //       setPollParticipate(res?.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, []);
 
   console.log(pollParticipate);
   const filterPollParticipate = pollParticipate?.filter(
@@ -95,7 +105,7 @@ const PollParticipate = () => {
           const updataVoteCount = voteCount + 1;
           const updatePollCount = { updataVoteCount };
           console.log(updatePollCount);
-          
+
           axios
             .patch(
               `https://evs-delta.vercel.app/poll-ans/${pollAnsId}`,
@@ -141,6 +151,7 @@ const PollParticipate = () => {
         timer: 1500,
       });
     }
+  refetch()
   };
   const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
   const handleCopy = () => {
