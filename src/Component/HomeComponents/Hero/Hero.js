@@ -79,7 +79,7 @@ const Hero = () => {
                     Create a poll
                   </Link>
                   <Link
-                    href="/demo"
+                    href="/poll-participate/favoritelanguage"
                     className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-[#f1faee] shadow-sm hover:bg-opacity-70 sm:px-8"
                   >
                     View examples
