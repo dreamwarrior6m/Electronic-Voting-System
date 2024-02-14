@@ -6,6 +6,9 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
 import Swal from "sweetalert2";
+import Link from "next/link";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { FacebookIcon, FacebookShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 
 const PollParticipate = () => {
   const [pollAns, setPollAns] = useState();
@@ -120,6 +123,16 @@ const PollParticipate = () => {
       });
     }
   };
+  const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`
+  const handleCopy = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "URL copied",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
 
   return (
     <div className="text-white min-h-screen">
@@ -147,7 +160,6 @@ const PollParticipate = () => {
                     />
                   </span>
                   <span className="">{pollAns?.question}</span>
-                  <span>Vote: {pollAns?.pollVoteCount}</span>
                   <input
                     onClick={() => handleCoutnVote(pollAns?._id)}
                     type="radio"
@@ -159,13 +171,68 @@ const PollParticipate = () => {
               </div>
             </>
           ))}
-          <div className="text-center p-2">
+          <div className="p-5 flex gap-2 justify-center">
             <button
               onClick={() => handaleAddVote()}
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
             >
               submit
             </button>
+            <div className="">
+              <Link href={`/poll-result/${id}`} className="btn btn-sm ">
+                Show Result
+              </Link>
+            </div>
+
+            <div className="">
+              {/* You can open the modal using document.getElementById('ID').showModal() method */}
+              <button
+                className="btn btn-sm"
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+              >
+                Share
+              </button>
+              <dialog id="my_modal_3" className="modal">
+                <div className="modal-box">
+                  <form method="dialog">
+                    {/* if there is a button in form, it will close the modal */}
+                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      ✕
+                    </button>
+                  </form>
+                  <h3 className="font-bold text-center pb-2 text-lg">Share This Poll</h3>
+                  
+
+                  <div className="text-center">
+              <h2 className="pt-5">Derect Share</h2>
+              <div className="flex gap-4 pt-3 justify-center">
+                <FacebookShareButton url={shareUrl}>
+                  <FacebookIcon className="rounded-full size-8" />
+                </FacebookShareButton>
+
+                <WhatsappShareButton url={shareUrl}>
+                  <WhatsappIcon className="rounded-full size-8" />
+                </WhatsappShareButton>
+              </div>
+              <div className="pt-10 pb-5">
+                <h2 className="">Share Link</h2>
+                <h2 className="bg-black p-1 px-3 rounded-md">
+                  {shareUrl}
+                  <CopyToClipboard text={shareUrl}>
+                    <span className="pl-1">
+                      <button onClick={handleCopy} className="btn btn-sm">
+                        copy
+                      </button>
+                    </span>
+                  </CopyToClipboard>
+                </h2>
+              </div>
+            </div>
+                </div>
+              </dialog>
+            </div>
           </div>
         </div>
       </div>
