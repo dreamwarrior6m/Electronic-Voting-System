@@ -1,24 +1,29 @@
 "use client";
+import DashboardNavbar from "@/Component/Dashboard/DashboardNavbar/DashboardNavbar";
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import SideNav from "@/Component/Dashboard/SideNav/SideNav";
 
 const layout = ({ children }) => {
   return (
-    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0">
+    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900">
       {/* SideNav  */}
-      <div>
-        <div className="hidden lg:block p-6 w-1/2 lg:w-72 lg:h-screen bg-white">
+      <div className="bg-blue-200/5">
+        <div className="hidden lg:block p-6 w-1/2 lg:w-72 lg:h-screen">
           <SideNav />
         </div>
         <div className="lg:hidden">
           <NavBarIcon />
         </div>
       </div>
-      {/* content  */}
-      <div className="flex-1 p-8 ">
-              {children}
-        
+      <div className="flex-1 pt-5 pl-8">
+        <div className="mr-8">
+          <div className="p-3 rounded bg-blue-200/5">
+            <DashboardNavbar />
+          </div>
         </div>
+        {/* content  */}
+        <div>{children}</div>
+      </div>
     </div>
   );
 };
