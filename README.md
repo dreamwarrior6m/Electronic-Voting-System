@@ -12,6 +12,7 @@ npm install typewriter-effect
 npm i react-chatbot-kit
 npm i react-share
 npm i react-copy-to-clipboard
+npm i recharts
 ```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

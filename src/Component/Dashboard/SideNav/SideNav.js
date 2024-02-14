@@ -43,7 +43,7 @@ const SideNav = ({ children }) => {
   return (
     <div>
       <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
-        <h1 className="text-base text-center cursor-pointer font-bold text-blue-900 border-b border-gray-100 pb-4 w-full ">
+        <h1 className="text-base text-center cursor-pointer font-bold text-[#4F46E5] border-b border-gray-100 pb-4 w-full ">
           <span className="text-3xl font-bold">DVS</span> <br />
           Digital Voting System
         </h1>
@@ -51,7 +51,7 @@ const SideNav = ({ children }) => {
         <div className="my-4 border-b border-gray-100 pb-4 w-full">
           <Link
             href="/dashboard/home"
-            className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2  ${
+            className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2   ${
               location === "/dashboard/home"
               ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
               : "text-blue-600 border-2 border-blue-600"
