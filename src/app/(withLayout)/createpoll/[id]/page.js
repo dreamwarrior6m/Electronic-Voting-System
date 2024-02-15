@@ -6,6 +6,7 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
 
 const page = () => {
   const [allPollAns, setAllPollAns] = useState();
@@ -14,7 +15,20 @@ const page = () => {
   const { id } = useParams();
   const userName = id;
   const pollVoteCount = 0;
-  console.log(userName);
+  // console.log(userName);
+
+
+  const { data, refetch } = useQuery({
+    queryKey: ["poll-ans"],
+    queryFn: async () => {
+      const res = await axios.get("https://evs-delta.vercel.app/poll-ans");
+      setAllPollAns(res?.data);
+      return res?.data;
+    },
+  });
+  refetch()
+
+
   const handleAddQuestion = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -31,24 +45,30 @@ const page = () => {
     axios
       .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         form.reset();
       })
       .catch((err) => {
         console.error(err);
       });
+    
   };
-  useState(() => {
-    axios
-      .get("https://evs-delta.vercel.app/poll-ans")
-      .then((res) => {
-        setAllPollAns(res?.data);
-        // console.log(res)
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+
+ 
+
+
+  // useState(() => {
+  //   axios
+  //     .get("https://evs-delta.vercel.app/poll-ans")
+  //     .then((res) => {
+  //       setAllPollAns(res?.data);
+  //       // console.log(res)
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, []);
+
   console.log(allPollAns);
   const filterAllPollAns = allPollAns?.filter(
     (pollAns) => pollAns?.userName == userName

@@ -9,11 +9,12 @@ import { auth } from "@/app/firebase/config";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
   const [selectCandidateId, setSelectCandidateId] = useState();
-  const [showVote, setShowVote] = useState();
+  // const [showVote, setShowVote] = useState();
   const [voterEmail, setVoterEmail] = useState();
   const [participate, setParticipate] = useState();
   const { id } = useParams();
@@ -36,27 +37,38 @@ const Participate = () => {
   }, []);
   console.log(allCandidate);
 
-  useEffect(() => {
-    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setShowVote(data);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setShowVote(data);
+  //     });
+  // }, [id]);
 
   //participate get data
 
-  useEffect(() => {
-    fetch("https://evs-delta.vercel.app/participate")
-      .then((res) => res.json())
-      .then((data) => {
-        setParticipate(data);
-      });
-  }, []);
+  const { data, refetch } = useQuery({
+    queryKey: ["participate"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/participate"
+      );
+      setParticipate(res?.data);
+      return res?.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   fetch("https://evs-delta.vercel.app/participate")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setParticipate(data);
+  //     });
+  // }, []);
   // console.log(participate);
 
   // console.log(showVote?.voterEmail);
-  const oldVoterEmail = showVote?.voterEmail;
+  // const oldVoterEmail = showVote?.voterEmail;
   // console.log(voterEmail);
 
   const filterCandidate = allCandidate?.filter(
@@ -95,6 +107,7 @@ const Participate = () => {
               updateVoteCount
             )
             .then((res) => {
+              refetch()
               router.push(`/result/${id}`);
               Swal.fire({
                 position: "top-end",
@@ -103,6 +116,7 @@ const Participate = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              
               // console.log(res);
               // participate api update
               axios
@@ -147,6 +161,7 @@ const Participate = () => {
         timer: 1500,
       });
     }
+    
   };
 
   return (

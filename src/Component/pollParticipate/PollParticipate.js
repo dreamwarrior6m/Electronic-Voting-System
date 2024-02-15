@@ -59,17 +59,29 @@ const PollParticipate = () => {
   );
   console.log(filterCreatePoll);
 
-  useEffect(() => {
-    axios
-      .get("https://evs-delta.vercel.app/poll-participate")
-      .then((res) => {
-        // console.log(res?.data);
-        setPollParticipate(res?.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+  const { data, refetch } = useQuery({
+    queryKey: ["participate"],
+    queryFn: async () => {
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/poll-participate"
+      );
+      setPollParticipate(res?.data);
+      return res?.data;
+    },
+  });
+  console.log(pollParticipate);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("https://evs-delta.vercel.app/poll-participate")
+  //     .then((res) => {
+  //       // console.log(res?.data);
+  //       setPollParticipate(res?.data);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // }, []);
 
   console.log(pollParticipate);
   const filterPollParticipate = pollParticipate?.filter(
@@ -139,6 +151,7 @@ const PollParticipate = () => {
         timer: 1500,
       });
     }
+  refetch()
   };
   const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
   const handleCopy = () => {
