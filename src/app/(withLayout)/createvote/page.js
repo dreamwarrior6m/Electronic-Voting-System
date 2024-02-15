@@ -77,7 +77,7 @@ const page = () => {
     const updateIsRole = "Modarator";
     const updateIsRole1 = { updateIsRole };
 
-    setloading(true);
+   
     if (!/^[a-zA-Z0-9_]+$/.test(name)) {
       Swal.fire({
         position: "top-end",
@@ -91,7 +91,8 @@ const page = () => {
     }
 
     try {
-      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
+      setloading(true);
+      const res = await fetch("http://localhost:5000/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -117,7 +118,15 @@ const page = () => {
               console.log(res);
             })
             .catch((err) => {
-              console.error(err);
+              Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "some thing is Wrong",
+                showConfirmButton: false,
+                timer: 2000,
+              });
+              setloading(false)
+              
             });
         }
 
@@ -130,6 +139,7 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
+        setloading(false)
       }
     } catch {}
   };
