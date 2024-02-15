@@ -23,10 +23,13 @@ const ElectionDetails = () => {
       return res.data;
     },
   });
-  console.log(elections?.[0]?.name);
+  console.log(elections); 
+  const filterElection = elections?.filter((election) => election?._id === id);
+  
+ 
   const { user } = useAuth();
   const CandidateEmail = user?.email;
-  console.log(CandidateEmail);
+  // console.log(CandidateEmail);
   const { data: Voter = [], refetch } = useQuery({
     queryKey: ["CandidateEmail"],
     queryFn: async () => {
@@ -36,9 +39,9 @@ const ElectionDetails = () => {
       return res.data;
     },
   });
-  console.log(Voter);
+  // console.log(Voter);
   const filterVoter = Voter?.filter(
-    (voters) => voters?.candidate == elections?.[0]?.name
+    (voters) => voters?.candidate == filterElection?.[0]?.name
   );
   console.log(filterVoter);
 
@@ -89,11 +92,13 @@ const ElectionDetails = () => {
     },
     refetchInterval: 1000,
   });
-  const filterElection = elections?.filter((election) => election?._id === id);
+ 
 
   const filterCandidate = candidates?.filter(
     (candidate) => candidate?.voteName === filterElection[0]?.name
   );
+
+  console.log(filterElection);
 
   return (
     <div className="text-white">
