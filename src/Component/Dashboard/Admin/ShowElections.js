@@ -50,8 +50,7 @@ const ShowElections = () => {
     return (
       <div>
         <h2>
-          {" "}
-          <span className="font-bold">Current Status:</span>{" "}
+          <span className="font-bold">Status: </span>
           {isSystemRunning ? "Running" : "Stopped"}
         </h2>
       </div>
@@ -120,7 +119,7 @@ const ShowElections = () => {
   return (
     <Protected>
       <div>
-        <div className="grid lg:grid-cols-3 gap-5 ">
+        <div className="grid lg:grid-cols-3 gap-5 drop-shadow-lg">
           {elections?.map((election, index) => (
             <div
               key={election._id}
@@ -128,11 +127,11 @@ const ShowElections = () => {
                 index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
               } text-center font-semibold rounded-xl`}
             >
-              <div className="grid py-5 items-center space-y-1">
+              <div className="grid py-8 items-center space-y-1">
                 <p className="text-black text-3xl">{index + 1}</p>
-                <p className="text-4xl">{election?.OrganizatonName}</p>
-                <p className="text-xl">
-                  <span className="font-bold">Election Name: </span>
+                <p className="text-2xl font-bold">{election?.OrganizatonName}</p>
+                <p className="text-lg">
+                  <span className="font-bold">Name: </span>
                   {election?.name}
                 </p>
                 <Timer
@@ -217,7 +216,7 @@ const ShowElections = () => {
                         <div className="form-control">
                           <label className="label">
                             <span className=" text-gray-800 dark:text-white">
-                              Vote Name
+                              Vote Name (Read Only)
                             </span>
                           </label>
                           <input
@@ -227,6 +226,7 @@ const ShowElections = () => {
                             required
                             defaultValue={election.name}
                             name="voteName"
+                            readOnly
                           />
                         </div>
                         <div className="form-control">

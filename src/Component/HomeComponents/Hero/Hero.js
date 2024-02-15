@@ -73,13 +73,13 @@ const Hero = () => {
               <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-begin">
                 <div className="sm:ml-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <Link
-                    href="/create"
+                    href="/createpoll"
                     className="flex items-center justify-center rounded-md border border-transparent bg-[#f1faee] px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
                   >
-                    Organize voteing
+                    Create a poll
                   </Link>
                   <Link
-                    href="/demo"
+                    href="/poll-participate/favoritelanguage"
                     className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-[#f1faee] shadow-sm hover:bg-opacity-70 sm:px-8"
                   >
                     View examples

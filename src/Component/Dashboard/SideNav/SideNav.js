@@ -43,7 +43,7 @@ const SideNav = ({ children }) => {
   return (
     <div>
       <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
-        <h1 className="text-base text-center cursor-pointer font-bold text-blue-900 border-b border-gray-100 pb-4 w-full ">
+        <h1 className="text-base text-center cursor-pointer font-bold text-[#4F46E5] border-b border-gray-100 pb-4 w-full ">
           <span className="text-3xl font-bold">DVS</span> <br />
           Digital Voting System
         </h1>
@@ -51,21 +51,21 @@ const SideNav = ({ children }) => {
         <div className="my-4 border-b border-gray-100 pb-4 w-full">
           <Link
             href="/dashboard/home"
-            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
+            className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2   ${
               location === "/dashboard/home"
-                ? "bg-gray-900 text-white"
-                : "text-gray-800"
+              ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
+              : "text-blue-600 border-2 border-blue-600"
             }`}
           >
-            <MdDashboard className="text-2xl group-hover:text-white" />
-            <h3 className="text-base group-hover:text-white font-semibold">
+            <MdDashboard className="text-2xl " />
+            <h3 className="font-semibold">
               Dashboard
             </h3>
           </Link>
 
           {users?.isRole == "Modarator" && (
             <>
-              <Link
+              {/* <Link
                 href="/dashboard/createCandidate"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
                   location === "/dashboard/createCandidate"
@@ -77,18 +77,18 @@ const SideNav = ({ children }) => {
                 <h3 className="text-base group-hover:text-white font-semibold">
                   Create Candidate
                 </h3>
-              </Link>
+              </Link> */}
 
               <Link
                 href="/dashboard/ownElections"
-                className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-                  location === "/dashboard/ownElections"
-                    ? "text-white bg-gray-900"
-                    : "text-gray-800"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2  ${
+                  location === "/dashboard/home"
+                  ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
+                  : "text-blue-600 border-blue-600"
                 }`}
               >
-                <GiVote className="text-2xl group-hover:text-white" />
-                <h3 className="text-base group-hover:text-white font-semibold">
+                <GiVote className="text-2xl " />
+                <h3 className="font-semibold">
                   My Elections
                 </h3>
               </Link>
@@ -106,7 +106,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <GiVote className="text-2xl group-hover:text-white" />
-                <h3 className="text-base group-hover:text-white font-semibold">
+                <h3 className="dark:text-white text-black font-semibold">
                   All Elections
                 </h3>
               </Link>
@@ -119,7 +119,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <BsPersonCircle className="text-2xl group-hover:text-white" />
-                <h3 className="text-base group-hover:text-white font-semibold">
+                <h3 className="dark:text-white text-black font-semibold">
                   All Candidate
                 </h3>
               </Link>
@@ -132,7 +132,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <MdPeople className="text-2xl group-hover:text-white" />
-                <h3 className="text-base group-hover:text-white font-semibold">
+                <h3 className="dark:text-white text-black font-semibold">
                   All Users
                 </h3>
               </Link>
@@ -154,10 +154,10 @@ const SideNav = ({ children }) => {
           </Link> */}
           <Link
             href="/"
-            className="flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200"
+            className="flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 dark:hover:border-gray-200"
           >
-            <IoMdHome className="text-2xl text-gray-600 group-hover:text-white" />
-            <h3 className="text-base text-gray-800 group-hover:text-white font-semibold">
+            <IoMdHome className="text-2xl" />
+            <h3 className=" font-semibold">
               Home
             </h3>
           </Link>
@@ -166,14 +166,14 @@ const SideNav = ({ children }) => {
         {/* setting  */}
         <div className="my-4 border-b border-gray-100 pb-4 w-full">
           <div
-            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto ${
+            className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 dark:hover:border-gray-200 ${
               location === "dashboard/setting"
                 ? "text-white bg-gray-900"
                 : "text-gray-800"
             }`}
           >
-            <MdOutlineSettings className="text-2xl group-hover:text-white" />
-            <h3 className="text-base group-hover:text-white font-semibold">
+            <MdOutlineSettings className="text-2xl" />
+            <h3 className=" font-semibold">
               Setting
             </h3>
           </div>
@@ -191,9 +191,9 @@ const SideNav = ({ children }) => {
           className="my-4 border-b border-gray-100 pb-4 w-full"
           onClick={() => signOut(auth)}
         >
-          <div className="flex mb-2 justify-start items-center gap-4 px-5 border border-gray-200 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto">
-            <MdOutlineLogout className="text-2xl text-gray-600 group-hover:text-white" />
-            <h3 className="text-base text-gray-800 group-hover:text-white font-semibold">
+          <div className="flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 dark:hover:border-gray-200">
+            <MdOutlineLogout className="text-2xl text-gray-600 " />
+            <h3 className=" font-semibold">
               Logout
             </h3>
           </div>
