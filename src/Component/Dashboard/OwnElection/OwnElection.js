@@ -18,7 +18,7 @@ const OwnElection = () => {
       const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
-  });
+  }); 
   console.log(elections);
   const filterElection = elections?.filter(
     (election) => election?.email == user?.email
