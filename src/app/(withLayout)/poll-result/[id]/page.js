@@ -57,7 +57,7 @@ const page = () => {
         <div className="bg-gray-800 md:w-3/4 mx-auto rounded-md">
           <div className="">
             <h2 className="text-center font-bold text-3xl py-5 pb-5">
-            {filterCreatePoll?.[0]?.title}
+              {filterCreatePoll?.[0]?.title}
             </h2>
           </div>
           {filterPollAns?.map((pollAns, ind) => (
@@ -89,7 +89,9 @@ const page = () => {
             </>
           ))}
           <div className="text-center p-2">
-            <Link href={`/poll-participate/${id}`} className="btn btn-sm">Back to poll</Link>
+            <Link href={`/poll-participate/${id}`} className="btn btn-sm">
+              Back to poll
+            </Link>
           </div>
         </div>
       </div>

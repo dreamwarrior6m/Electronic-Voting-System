@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IoPersonAdd } from "react-icons/io5";
 import Swal from "sweetalert2";
 
-const ElectionInfo = ({ election, refetch}) => {
+const ElectionInfo = ({ election, refetch }) => {
   const Timer = ({ startDate1, endDate1 }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [isSystemRunning, setSystemRunning] = useState(false);

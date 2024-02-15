@@ -8,9 +8,7 @@ const Page = () => {
   const [candidates, setCandidates] = useState([]);
 
   useEffect(() => {
- 
     fetch("https://evs-delta.vercel.app/candidate")
- 
       .then((res) => res.json())
       .then((data) => setCandidates(data));
   }, []);
@@ -25,18 +23,19 @@ const Page = () => {
       confirmButtonText: "Yes, Deleted it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
- 
-
-          const res =await axios.delete(`https://evs-delta.vercel.app/candidate/${id}`)
-          if (res.data.deletedCount > 0) {
-            setCandidates((prevotes)=>prevotes.filter((votes)=>votes._id!==id))
-              Swal.fire({
-                  title: "fire!",
-                  text: `this Candidate has been deleted.`,
-                  icon: "success"
-              });
-          }
- 
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/candidate/${id}`
+        );
+        if (res.data.deletedCount > 0) {
+          setCandidates((prevotes) =>
+            prevotes.filter((votes) => votes._id !== id)
+          );
+          Swal.fire({
+            title: "fire!",
+            text: `this Candidate has been deleted.`,
+            icon: "success",
+          });
+        }
       }
     });
   };

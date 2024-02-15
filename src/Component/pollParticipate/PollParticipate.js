@@ -29,7 +29,6 @@ const PollParticipate = () => {
   const participateUser = { pollUserName: id, email: user?.email };
   console.log(participateUser);
 
-
   useEffect(() => {
     axios
       .get("https://evs-delta.vercel.app/poll-ans")
@@ -59,7 +58,6 @@ const PollParticipate = () => {
     (crPoll) => crPoll?.userName == id
   );
   console.log(filterCreatePoll);
-
 
   useEffect(() => {
     axios
@@ -95,7 +93,7 @@ const PollParticipate = () => {
           const updataVoteCount = voteCount + 1;
           const updatePollCount = { updataVoteCount };
           console.log(updatePollCount);
-          
+
           axios
             .patch(
               `https://evs-delta.vercel.app/poll-ans/${pollAnsId}`,

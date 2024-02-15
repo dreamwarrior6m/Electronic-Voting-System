@@ -6,8 +6,10 @@ import axios from "axios";
 import Protected from "@/Component/Protected/Protected";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
+import useAuth from "@/app/hook/useAuth";
 
 const ShowElections = () => {
+  const { user } = useAuth();
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections1"],
     queryFn: async () => {
@@ -116,6 +118,24 @@ const ShowElections = () => {
       });
   };
 
+  const handleNotification = (type, electionName, electionEmail) => {
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: electionEmail,
+      type,
+      electionName,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
+
   return (
     <Protected>
       <div>
@@ -129,7 +149,9 @@ const ShowElections = () => {
             >
               <div className="grid py-8 items-center space-y-1">
                 <p className="text-black text-3xl">{index + 1}</p>
-                <p className="text-2xl font-bold">{election?.OrganizatonName}</p>
+                <p className="text-2xl font-bold">
+                  {election?.OrganizatonName}
+                </p>
                 <p className="text-lg">
                   <span className="font-bold">Name: </span>
                   {election?.name}
@@ -140,7 +162,10 @@ const ShowElections = () => {
                 />
                 <div className="pb-1">
                   <button
-                    onClick={() => handleDelete(election._id)}
+                    onClick={() => {
+                      handleNotification(1, election?.name, election?.email);
+                      handleDelete(election._id);
+                    }}
                     className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2"
                   >
                     <MdDelete />
@@ -314,11 +339,16 @@ const ShowElections = () => {
                         <button
                           type="submit"
                           className="input input-bordered bg-slate-700 text-white rounded-sm mb-2 py-3  w-full col-span-2 mt-[10px]"
-                          onClick={() =>
+                          onClick={() => {
+                            handleNotification(
+                              2,
+                              election?.name,
+                              election?.email
+                            );
                             document
                               .getElementById(`my_modal_3_${election._id}`)
-                              .close()
-                          }
+                              .close();
+                          }}
                         >
                           Update
                         </button>

@@ -53,14 +53,12 @@ const SideNav = ({ children }) => {
             href="/dashboard/home"
             className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2   ${
               location === "/dashboard/home"
-              ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
-              : "text-blue-600 border-2 border-blue-600"
+                ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
+                : "text-blue-600 border-2 border-blue-600"
             }`}
           >
             <MdDashboard className="text-2xl " />
-            <h3 className="font-semibold">
-              Dashboard
-            </h3>
+            <h3 className="font-semibold">Dashboard</h3>
           </Link>
 
           {users?.isRole == "Modarator" && (
@@ -83,14 +81,12 @@ const SideNav = ({ children }) => {
                 href="/dashboard/ownElections"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2  ${
                   location === "/dashboard/home"
-                  ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
-                  : "text-blue-600 border-blue-600"
+                    ? "text-white bg-gray-900 border-gray-200/10 dark:hover:border-gray-200"
+                    : "text-blue-600 border-blue-600"
                 }`}
               >
                 <GiVote className="text-2xl " />
-                <h3 className="font-semibold">
-                  My Elections
-                </h3>
+                <h3 className="font-semibold">My Elections</h3>
               </Link>
             </>
           )}
@@ -157,9 +153,7 @@ const SideNav = ({ children }) => {
             className="flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 dark:hover:border-gray-200"
           >
             <IoMdHome className="text-2xl" />
-            <h3 className=" font-semibold">
-              Home
-            </h3>
+            <h3 className=" font-semibold">Home</h3>
           </Link>
         </div>
 
@@ -173,9 +167,7 @@ const SideNav = ({ children }) => {
             }`}
           >
             <MdOutlineSettings className="text-2xl" />
-            <h3 className=" font-semibold">
-              Setting
-            </h3>
+            <h3 className=" font-semibold">Setting</h3>
           </div>
           {/* <div className="flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto">
             <MdOutlineMoreHoriz className="text-2xl text-gray-600 group-hover:text-white" />
@@ -193,9 +185,7 @@ const SideNav = ({ children }) => {
         >
           <div className="flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 dark:hover:border-gray-200">
             <MdOutlineLogout className="text-2xl text-gray-600 " />
-            <h3 className=" font-semibold">
-              Logout
-            </h3>
+            <h3 className=" font-semibold">Logout</h3>
           </div>
         </Link>
       </div>
