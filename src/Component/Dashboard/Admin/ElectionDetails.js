@@ -14,24 +14,33 @@ import ElectionInfo from "./components/ElectionInfo";
 import ElectionCandidate from "./components/ElectionCandidate";
 
 const ElectionDetails = () => {
+  const [allVoter, setAllVoter] = useState();
   const { id } = useParams();
-  const { data: elections = [],  } = useQuery({
+  const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
       const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
   });
-  const {user} = useAuth()
-  const CandidateEmail = user?.email
-  console.log(CandidateEmail)
+  console.log(elections?.[0]?.name);
+  const { user } = useAuth();
+  const CandidateEmail = user?.email;
+  console.log(CandidateEmail);
   const { data: Voter = [], refetch } = useQuery({
     queryKey: ["CandidateEmail"],
     queryFn: async () => {
-      const res = await axios.get(`https://evs-delta.vercel.app/candidate/under/${CandidateEmail}`);
+      const res = await axios.get(
+        `https://evs-delta.vercel.app/candidate/under/${CandidateEmail}`
+      );
       return res.data;
     },
   });
+  console.log(Voter);
+  const filterVoter = Voter?.filter(
+    (voters) => voters?.candidate == elections?.[0]?.name
+  );
+  console.log(filterVoter);
 
   const handleVerify = async (id) => {
     try {
@@ -61,7 +70,7 @@ const ElectionDetails = () => {
         );
 
         if (res.data.deletedCount > 0) {
-          refetch()
+          refetch();
 
           Swal.fire({
             title: "Deleted!",
@@ -87,7 +96,7 @@ const ElectionDetails = () => {
   );
 
   return (
-    <div>
+    <div className="text-white">
       {/* ELection Name */}
       <div>
         <h3 className="text-4xl font-bold text-center py-3">
@@ -112,7 +121,7 @@ const ElectionDetails = () => {
       {/* Election Candidates */}
       <div className="mt-10">
         <h4 className="text-3xl font-bold mb-5">All Candidate:</h4>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-5">
           {filterCandidate?.map((candidate, index) => (
             <ElectionCandidate
               key={candidate?._id}
@@ -126,63 +135,62 @@ const ElectionDetails = () => {
 
       {/* All Voter */}
       <div className="mt-10">
-      <div>
-      <p className="font-bold text-center text-2xl text-black">
-       CreateVote Under voters : {Voter?.length}
-      </p>
-      <hr className="w-96 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+        <div>
+          <p className="font-bold text-center text-2xl  ">
+            CreateVote Under voters : {Voter?.length}
+          </p>
+          <hr className="w-96 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
-      <div className="overflow-x-auto">
-        <table className="table text-black">
-          <thead>
-            <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
-              <th>
-                <label>
-                  <p className="">Number</p>
-                </label>
-              </th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Verify</th>
-              <th>Action</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            {Voter?.map((vote, index) => (
-              <tr
-                key={vote._id}
-                className={`${
-                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                } text-center font-semibold border-b border-gray-600`}
-              >
-                <th>
-                  <label>
-                    <p className="text-black">{index + 1}</p>
-                  </label>
-                </th>
-                <td>{vote.name}</td>
-                <td>{vote.email}</td>
-                <td>
-                  <button onClick={() => handleVerify(vote._id)}>
-                    {vote?.verify == "true" ? (
-                      <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
-                    ) : (
-                      <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
-                    )}
-                  </button>
-                </td>
-                <td className="text-3xl cursor-pointer">
-                  <button onClick={() => handleDelete(vote._id)}>
-                    <MdDeleteForever className=" text-red-700" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          <div className="overflow-x-auto p-6 pb-12">
+            <table className="table text-black">
+              <thead>
+                <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
+                  <th>
+                    <label>
+                      <p className="">Number</p>
+                    </label>
+                  </th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Verify</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filterVoter?.map((vote, index) => (
+                  <tr
+                    key={vote._id}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                    } text-center font-semibold border-b border-gray-600`}
+                  >
+                    <th>
+                      <label>
+                        <p className="text-black">{index + 1}</p>
+                      </label>
+                    </th>
+                    <td>{vote.name}</td>
+                    <td>{vote.email}</td>
+                    <td>
+                      <button onClick={() => handleVerify(vote._id)}>
+                        {vote?.isverify == "true" ? (
+                          <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                        ) : (
+                          <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
+                        )}
+                      </button>
+                    </td>
+                    <td className="text-3xl cursor-pointer">
+                      <button onClick={() => handleDelete(vote._id)}>
+                        <MdDeleteForever className=" text-red-700" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
