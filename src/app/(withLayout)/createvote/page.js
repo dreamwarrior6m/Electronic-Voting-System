@@ -92,7 +92,7 @@ const page = () => {
 
     try {
       setloading(true);
-      const res = await fetch("http://localhost:5000/create-vote", {
+      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

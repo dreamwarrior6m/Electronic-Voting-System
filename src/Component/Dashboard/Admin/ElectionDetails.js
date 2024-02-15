@@ -28,7 +28,7 @@ const ElectionDetails = () => {
   const { data: Voter = [], refetch } = useQuery({
     queryKey: ["CandidateEmail"],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/candidate/under/${CandidateEmail}`);
+      const res = await axios.get(`https://evs-delta.vercel.app/candidate/under/${CandidateEmail}`);
       return res.data;
     },
   });
@@ -36,7 +36,7 @@ const ElectionDetails = () => {
   const handleVerify = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/candidateUnderVoter/verify/${id}`
+        `https://evs-delta.vercel.app/candidateUnderVoter/verify/${id}`
       );
       if (res.data.modifiedCount > 0) {
         refetch();
@@ -57,7 +57,7 @@ const ElectionDetails = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/candidateUnderVoter/${id}`
+          `https://evs-delta.vercel.app/candidateUnderVoter/${id}`
         );
 
         if (res.data.deletedCount > 0) {
