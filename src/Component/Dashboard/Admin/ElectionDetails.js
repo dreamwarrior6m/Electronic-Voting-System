@@ -78,7 +78,7 @@ const ElectionDetails = () => {
       const res = await axios.get("https://evs-delta.vercel.app/candidate");
       return res.data;
     },
-    refetchInterval: 1000
+    refetchInterval: 1000,
   });
   const filterElection = elections?.filter((election) => election?._id === id);
 

@@ -24,12 +24,11 @@ const createPoll = () => {
       .post("https://evs-delta.vercel.app/create-poll", createPoll)
       .then((res) => {
         console.log(res);
-        router.push(`/createpoll/${userName}`)
+        router.push(`/createpoll/${userName}`);
       })
       .catch((err) => {
         console.error(err);
       });
-
   };
   return (
     <div className="text-white">

@@ -124,6 +124,24 @@ const OwnElection = () => {
       });
   };
 
+  const handleNotification = (type, electionName, electionEmail) => {
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: electionEmail,
+      type,
+      electionName,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
+
   return (
     <Protected>
       <div>
@@ -148,7 +166,10 @@ const OwnElection = () => {
                 />
                 <div className="pb-1">
                   <button
-                    onClick={() => handleDelete(election._id)}
+                    onClick={() => {
+                      handleNotification(1, election?.name, election?.email);
+                      handleDelete(election._id);
+                    }}
                     className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2"
                   >
                     <MdDelete />
@@ -320,11 +341,16 @@ const OwnElection = () => {
                       <button
                         type="submit"
                         className="input input-bordered bg-slate-700 text-white rounded-sm mb-2 py-3  w-full col-span-2 mt-[10px]"
-                        onClick={() =>
+                        onClick={() => {
+                          handleNotification(
+                            2,
+                            election?.name,
+                            election?.email
+                          );
                           document
                             .getElementById(`my_modal_3_${election._id}`)
-                            .close()
-                        }
+                            .close();
+                        }}
                       >
                         Update
                       </button>

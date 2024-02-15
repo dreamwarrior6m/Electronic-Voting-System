@@ -34,7 +34,13 @@ const page = () => {
     const form = e.target;
     const question = form.question.value;
     const questionPhoto = form.questionPhoto.value;
-    const addPollQuestion = { question, questionPhoto, ownerEmail, userName, pollVoteCount };
+    const addPollQuestion = {
+      question,
+      questionPhoto,
+      ownerEmail,
+      userName,
+      pollVoteCount,
+    };
     console.log(addPollQuestion);
     axios
       .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
@@ -122,7 +128,10 @@ const page = () => {
             </form>
             {filterAllPollAns?.length > 0 && (
               <div className="card-body">
-                <Link href={`/poll-participate/${id}`}className="py-3 w-full px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                <Link
+                  href={`/poll-participate/${id}`}
+                  className="py-3 w-full px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                >
                   Show you poll
                 </Link>
               </div>
