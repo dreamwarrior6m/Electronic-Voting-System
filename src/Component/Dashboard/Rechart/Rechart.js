@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   ComposedChart,
   Line,
@@ -41,29 +41,16 @@ const data = [
     amt: 1228,
     cnt: 480,
   },
-  {
-    name: "Page E",
-    uv: 1520,
-    pv: 1108,
-    amt: 1100,
-    cnt: 460,
-  },
-  {
-    name: "Page F",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
 ];
 
 export default function App() {
   return (
-    <div className="mt-6">
-        <h2 className="font-bold">Voting Chart </h2>
+    <div className="mt-6 hidden lg:block">
+      <h2 className="font-bold">Voting Chart </h2>
       <ComposedChart
-        width={1190}
-        height={500}
+        className=""
+        width={800}
+        height={400}
         data={data}
         margin={{
           top: 20,
