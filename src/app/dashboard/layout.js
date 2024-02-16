@@ -5,18 +5,18 @@ import SideNav from "@/Component/Dashboard/SideNav/SideNav";
 
 const layout = ({ children }) => {
   return (
-    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900">
+    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900 min-h-screen">
       {/* SideNav  */}
-      <div className="bg-blue-200/5">
-        <div className="hidden lg:block p-6 w-1/2 lg:w-72 lg:h-screen">
+      <div className="">
+        <div className="hidden lg:h-full lg:block p-6 w-1/2 lg:w-72 bg-blue-200/5">
           <SideNav />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden text-white">
           <NavBarIcon />
         </div>
       </div>
-      <div className="flex-1 pt-5 pl-8">
-        <div className="mr-8">
+      <div className="flex-1 pt-5 px-8">
+        <div className="">
           <div className="p-3 rounded bg-blue-200/5">
             <DashboardNavbar />
           </div>

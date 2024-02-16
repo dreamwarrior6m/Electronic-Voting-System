@@ -4,8 +4,10 @@ import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaEdit, FaRegCopy } from "react-icons/fa";
-import img from "../../assast/profile.png";
+import { FaRegCopy, FaUsers } from "react-icons/fa";
+import { GiVote } from "react-icons/gi";
+import { RiUserStarLine } from "react-icons/ri";
+import { MdEdit } from "react-icons/md";
 
 const HomePage = () => {
   const { user } = useAuth();
@@ -136,203 +138,90 @@ const HomePage = () => {
             </div>
           </div>
           {/* table  */}
-          <div className="overflow-x-auto mt-6 p-3 bg-blue-200/5">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Job</th>
-                  <th>Favorite Color</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="/tailwind-css-component-profile-2@56w.png"
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Hart Hagerty</div>
-                        <div className="text-sm opacity-50">United States</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    Zemlak, Daniel and Leannon
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
-                  </td>
-                  <td>Purple</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>
-                {/* row 2 */}
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="/tailwind-css-component-profile-3@56w.png"
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Brice Swyre</div>
-                        <div className="text-sm opacity-50">China</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    Carroll Group
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Tax Accountant
-                    </span>
-                  </td>
-                  <td>Red</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>
-                {/* row 3 */}
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="/tailwind-css-component-profile-4@56w.png"
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Marjy Ferencz</div>
-                        <div className="text-sm opacity-50">Russia</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    Rowe-Schoen
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Office Assistant I
-                    </span>
-                  </td>
-                  <td>Crimson</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>
-                {/* row 4 */}
-                <tr>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="/tailwind-css-component-profile-5@56w.png"
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Yancy Tear</div>
-                        <div className="text-sm opacity-50">Brazil</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    Wyman-Ledner
-                    <br />
-                    <span className="badge badge-ghost badge-sm">
-                      Community Outreach Specialist
-                    </span>
-                  </td>
-                  <td>Indigo</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
-                  </th>
-                </tr>
-              </tbody>
-              {/* foot */}
-              <tfoot>
-                <tr>
-                  <th></th>
-                  <th>Name</th>
-                  <th>Job</th>
-                  <th>Favorite Color</th>
-                  <th></th>
-                </tr>
-              </tfoot>
-            </table>
+
+          <div className="stats shadow w-full bg-blue-200/5 rounded-none mt-6">
+            <div className="stat">
+              <div className="stat-figure text-primary">
+                <FaUsers className="inline-block w-8 h-8 stroke-current" />
+              </div>
+              <div className="stat-title">Total Users</div>
+              <div className="stat-value text-primary">2.6K</div>
+              <div className="stat-desc">21% more than last month</div>
+            </div>
+
+            <div className="stat">
+              <div className="stat-figure text-secondary">
+                <GiVote className="inline-block w-8 h-8 stroke-current" />
+              </div>
+              <div className="stat-title">Total Elections</div>
+              <div className="stat-value text-secondary">1.6k</div>
+              <div className="stat-desc">21% more than last month</div>
+            </div>
+
+            <div className="stat">
+              <div className="stat-figure text-secondary">
+                <RiUserStarLine className="inline-block w-8 h-8 stroke-current" />
+              </div>
+              <div className="stat-title">Total Candidate</div>
+              <div className="stat-value text-secondary">1.2k</div>
+              <div className="stat-desc">21% more than last month</div>
+            </div>
           </div>
+
           {/* chart  */}
-          <div>
+          <div className="">
             <Rechart />
           </div>
         </div>
 
-        <div className="bg-blue-200/10 p-4 h-screen shadow-xl image-full ">
-          <div className="flex justify-end text-4xl m-4">
-            <FaEdit
+        <div className="bg-blue-200/10 px-10 py-4 w-full h-full shadow-xl image-full hidden lg:block">
+          <div className="flex justify-end text-xl cursor-pointer">
+            <MdEdit className=""
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>
-          <h1 className="text-center font-bold text-xl pt-10">
-            Welcome to the {users.isRole} Dashboard
+          <h1 className=" font-bold text-lg mb-2">
+            Welcome Back !! <br />{" "}
+            <span className="text-2xl">{users.isRole} Dashboard</span>
           </h1>
 
-          <div className="flex gap-5 items-center card-body">
-            <Image
-              className="w-[150px] h-[150px] rounded-full border-4 border-red-200"
-              src={user?.photoURL ? user?.photoURL : img}
-              width={200}
-              height={200}
-              alt="profile"
-            ></Image>
-            <div className="flex gap-2 items-center">
+          <div className="grid gap-4 items-center">
+            <div className="w-24 h-24">
+              <Image
+                className="w-full h-full rounded-full object-cover"
+                height={100}
+                width={100}
+                src={user?.photoURL}
+                alt="Profile Photo"
+              />
+            </div>
+            <div className="flex gap-1 items-center">
               <p>{User?.[0]?.idNumber}</p> <FaRegCopy />
             </div>
-
             {user && (
-              <h1 className="text-5xl text-white font-semibold">
+              <h1 className="text-2xl text-white font-semibold">
                 {user?.displayName}
               </h1>
             )}
 
             <hr />
             <div className="">
-              <div className="grid gap-10">
+              <div className="grid gap-6">
                 <div>
-                  <h2 className="text-xl font-bold">Full Name</h2>
+                  <h2 className="text-lg font-bold">Full Name</h2>
                   {user && <p className="">{user?.displayName}</p>}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">Email</h2>
+                  <h2 className="font-bold">Email</h2>
 
-                  {user && <p className="  font-semibold">{user?.email}</p>}
+                  {user && <p className="font-semibold">{user?.email}</p>}
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">Date Of Birdth</h2>
+                  <h2 className="font-bold">Date Of Birdth</h2>
                   <p className="">{User?.[0]?.date}</p>
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold">ID Number</h2>
+                  <h2 className="font-bold">ID Number</h2>
                   <p>{User?.[0]?.idNumber}</p>
                 </div>
               </div>

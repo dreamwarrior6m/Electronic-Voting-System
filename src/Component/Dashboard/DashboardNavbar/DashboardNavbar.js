@@ -110,16 +110,18 @@ const DashboardNavbar = () => {
 
   return (
     <>
-      <div className="text-white flex justify-between items-center">
-        <div>{pathname.split("/").pop()}</div>
+      <div className="text-white lg:flex lg:justify-between lg:items-center">
+        <div className="hidden lg:block">{pathname.split("/").pop()}</div>
         <div className="flex items-center justify-center gap-4">
-          <div className="flex items-center p-2 bg-blue-200/15 rounded-md">
-            <MdSearch className="mx-3" />
+          <div className="hidden lg:block p-2 bg-blue-200/15 rounded-md">
+            <div className="flex items-center justify-around">
             <input
-              type="text"
-              className="bg-transparent border-none"
-              placeholder="Search..."
-            />
+                type="text"
+                className="bg-transparent border-none"
+                placeholder="Search..."
+              />
+              <MdSearch className="text-lg text-white/65" />
+            </div>
           </div>
           <MdOutlineChat size={26} />
           <div className="">

@@ -26,7 +26,7 @@ const ElectionDetails = () => {
   console.log(elections); 
   const filterElection = elections?.filter((election) => election?._id === id);
   
- 
+ //Get user
   const { user } = useAuth();
   const CandidateEmail = user?.email;
   // console.log(CandidateEmail);

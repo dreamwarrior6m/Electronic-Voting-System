@@ -95,7 +95,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex items-center text-gray-700 dark:text-white">
+    <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-gray-700 dark:text-white  flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
