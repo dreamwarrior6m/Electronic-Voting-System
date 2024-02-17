@@ -82,7 +82,7 @@ const SideNav = ({ children }) => {
               <Link
                 href="/dashboard/ownElections"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/home"
+                  location === "/dashboard/ownElections"
                     ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}

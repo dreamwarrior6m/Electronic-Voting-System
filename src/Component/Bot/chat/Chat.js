@@ -22,7 +22,7 @@ const Chat = () => {
       <div className="App">
         <Chatbot
           headerText="FAQ Chatbot"
-          placeholderText="Enter Your Question"
+          placeholderText="Ask Your Question"
           config={config}
           messageParser={MessageParser}
           actionProvider={ActionProvider}
