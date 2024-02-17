@@ -23,10 +23,10 @@ const ElectionDetails = () => {
       return res.data;
     },
   });
-  console.log(elections); 
+  console.log(elections);
   const filterElection = elections?.filter((election) => election?._id === id);
   
- //Get user
+  //Get user
   const { user } = useAuth();
   const CandidateEmail = user?.email;
   // console.log(CandidateEmail);
@@ -92,8 +92,6 @@ const ElectionDetails = () => {
     },
     refetchInterval: 1000,
   });
- 
-
   const filterCandidate = candidates?.filter(
     (candidate) => candidate?.voteName === filterElection[0]?.name
   );

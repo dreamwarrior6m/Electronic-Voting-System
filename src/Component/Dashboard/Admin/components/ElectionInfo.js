@@ -1,9 +1,26 @@
+import useAuth from "@/app/hook/useAuth";
+import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoPersonAdd } from "react-icons/io5";
 import Swal from "sweetalert2";
 
 const ElectionInfo = ({ election, refetch }) => {
+  const [userRoles, setUserRoles] = useState({});
+  const { user } = useAuth();
+  useEffect(() => {
+    axios
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .then((res) => {
+        console.log(res.data);
+        setUserRoles(res.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [user]);
+  // console.log("User: ", userRoles);
+
   const Timer = ({ startDate1, endDate1 }) => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [isSystemRunning, setSystemRunning] = useState(false);
@@ -52,7 +69,7 @@ const ElectionInfo = ({ election, refetch }) => {
     const candidateName = form.candidateName.value;
     const candidateID = form.candidateID.value;
     const candidatePhoto = form.candidatePhoto.value;
-    const userID = form.userID.value;
+    // const userID = form.userID.value;
     const candidateEmail = form.candidateEmail.value;
     const check = form.check.value;
     const brand = form.brand.value;
@@ -65,7 +82,7 @@ const ElectionInfo = ({ election, refetch }) => {
         candidateName,
         candidateID,
         candidatePhoto,
-        userID,
+        // userID,
         candidateEmail,
         check,
         brand,
@@ -74,7 +91,7 @@ const ElectionInfo = ({ election, refetch }) => {
         voteCount,
       };
 
-      console.log(candidate);
+      // console.log(candidate);
 
       const res = await fetch("https://evs-delta.vercel.app/candidate", {
         method: "POST",
@@ -104,6 +121,25 @@ const ElectionInfo = ({ election, refetch }) => {
           timer: 1500,
         });
         setloading(false);
+
+        //When User create a Candidate notification send to backend.
+        const type = 4;
+        const notification = {
+          senderEmail: user?.email,
+          receiverEmail: user?.email,
+          type: type,
+          electionName: election?.name,
+        };
+
+        axios
+          .post("https://evs-delta.vercel.app/notification", notification)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
+
         form.reset();
         refetch();
       } else {
@@ -146,15 +182,17 @@ const ElectionInfo = ({ election, refetch }) => {
         <p>
           <span className="font-bold">Email: </span> {election?.email}
         </p>
-        <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
-        <button
-          onClick={() =>
-            document.getElementById(`my_modal_3_${election._id}`).showModal()
-          }
-          className="bg-green-500 text-white px-4 py-[10px] rounded-md"
-        >
-          <IoPersonAdd />
-        </button>
+        <div className={`${userRoles?.isRole === "Admin" ? "hidden" : ""}`}>
+          <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
+          <button
+            onClick={() =>
+              document.getElementById(`my_modal_3_${election._id}`).showModal()
+            }
+            className="bg-green-500 text-white px-4 py-[10px] rounded-md"
+          >
+            <IoPersonAdd />
+          </button>
+        </div>
       </div>
       <Image
         className="rounded-md"
@@ -205,7 +243,7 @@ const ElectionInfo = ({ election, refetch }) => {
                       name="candidateID"
                     />
                   </div>
-                  <div className="form-control">
+                  {/* <div className="form-control">
                     <label className="label">
                       <span className=" text-gray-800 dark:text-white">
                         Your ID Card Number
@@ -218,7 +256,7 @@ const ElectionInfo = ({ election, refetch }) => {
                       required
                       name="userID"
                     />
-                  </div>
+                  </div> */}
                 </div>
                 <div>
                   <div className="form-control mb-4">

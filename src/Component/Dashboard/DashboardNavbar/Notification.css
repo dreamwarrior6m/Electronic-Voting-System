@@ -1,31 +1,21 @@
 .notification {
-    padding: 5px;
     font-size: 14px;
   }
   .notifications {
     position: absolute;
-    top: 80px;
-    right: 45px;
-    color: black;
-    font-weight: 300;
-    
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    border-radius: 12px;
-  }
-  .notifications1 {
-    position: absolute;
-    top: 80px;
-    right: 45px;
+    z-index: 2;
+    top: 37.5px;
+    right: -67px;
+    width: 220px;
     color: black;
     font-weight: 300;
     display: flex;
     flex-direction: column;
     padding: 12px;
     border-radius: 12px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
-
+  
   /* Custom CSS for scrollbar */
 .notifications::-webkit-scrollbar {
   width: 6px; /* Width of the scrollbar */
