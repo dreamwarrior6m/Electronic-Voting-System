@@ -25,7 +25,7 @@ const config = {
       "Here are some common questions:",
       {
         withAvatar: true,
-        delay: 2000,
+        delay: 2500,
         widget: 'CombinedWidget',
       }
     ),
