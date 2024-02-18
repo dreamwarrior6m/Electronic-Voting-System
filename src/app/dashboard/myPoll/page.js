@@ -6,8 +6,12 @@ import axios from "axios";
 import Link from "next/link";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useParams } from "next/navigation";
+import useAuth from "@/app/hook/useAuth";
 
 const allPoll = () => {
+  const { user } = useAuth();
+  // console.log(user?.email);
   const [allPoll, setAllPoll] = useState();
   const { data, refetch } = useQuery({
     queryKey: ["create-poll"],
@@ -17,9 +21,13 @@ const allPoll = () => {
       return res?.data;
     },
   });
+  // console.log(allPoll);
+  const filterMyPoll = allPoll?.filter(
+    (myPoll) => myPoll?.wonerEmail == user?.email
+  );
+  console.log(filterMyPoll);
 
   const handleDelete = async (id) => {
-    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to undo this!",
@@ -61,13 +69,13 @@ const allPoll = () => {
             </tr>
           </thead>
           <tbody>
-            {allPoll?.map((poll, ind) => (
+            {filterMyPoll?.map((poll, ind) => (
               <tr key={poll?._id}>
                 <th>{ind + 1}</th>
                 <td>{poll?.title}</td>
                 <td>{poll?.wonerEmail}</td>
                 <td>
-                  <Link href={`/dashboard/myPoll/${poll?.userName}`}>Show</Link>
+                  <Link href={`/poll-participate/${poll?.userName}`}>Show</Link>
                 </td>
                 <th>
                   <button

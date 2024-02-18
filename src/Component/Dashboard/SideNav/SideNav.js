@@ -90,6 +90,18 @@ const SideNav = ({ children }) => {
                 <GiVote className="text-2xl " />
                 <h3 className="font-semibold">My Elections</h3>
               </Link>
+
+              <Link
+                href="/dashboard/myPoll"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/myPoll"
+                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    : ""
+                }`}
+              >
+                <GiVote className="text-2xl " />
+                <h3 className="font-semibold">My Poll</h3>
+              </Link>
             </>
           )}
 
@@ -143,13 +155,24 @@ const SideNav = ({ children }) => {
               <Link
                 href="/dashboard/allPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/allpoll"
+                  location === "/dashboard/allPoll"
                     ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}
               >
                 <GiVote className="text-2xl " />
                 <h3 className="font-semibold">All Poll</h3>
+              </Link>
+              <Link
+                href="/dashboard/myPoll"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/myPoll"
+                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    : ""
+                }`}
+              >
+                <GiVote className="text-2xl " />
+                <h3 className="font-semibold">My Poll</h3>
               </Link>
 
             </>
