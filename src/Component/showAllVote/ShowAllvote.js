@@ -53,7 +53,7 @@ const Timer = ({ startDate1, endDate1 }) => {
 const ShowAllvote = () => {
   const [showAllVote, setShowAllVote] = useState();
   useEffect(() => {
-    fetch("http://localhost:5000/create-vote")
+    fetch("https://evs-delta.vercel.app/create-vote")
       .then((res) => res.json())
       .then((data) => {
         setShowAllVote(data);
@@ -72,7 +72,9 @@ const ShowAllvote = () => {
   const { user } = useAuth();
   const handleOpenModal = async (id) => {
     setModalOpen(true);
-    const res = await axios.get(`http://localhost:5000/create-vote/${id}`);
+    const res = await axios.get(
+      `https://evs-delta.vercel.app/create-vote/${id}`
+    );
     setdata(res.data);
   };
 
@@ -100,7 +102,7 @@ const ShowAllvote = () => {
       console.log("Form Data:", formData);
 
       const res = await axios.post(
-        `http://localhost:5000/candidate/under/users`,
+        `https://evs-delta.vercel.app/candidate/under/users`,
         formData
       );
       console.log("Server Response:", res.data);

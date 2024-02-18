@@ -10,7 +10,7 @@ const ElectionInfo = ({ election, refetch }) => {
   const { user } = useAuth();
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/users/${user?.email}`)
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
       .then((res) => {
         console.log(res.data);
         setUserRoles(res.data);
@@ -93,7 +93,7 @@ const ElectionInfo = ({ election, refetch }) => {
 
       // console.log(candidate);
 
-      const res = await fetch("http://localhost:5000/candidate", {
+      const res = await fetch("https://evs-delta.vercel.app/candidate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -132,7 +132,7 @@ const ElectionInfo = ({ election, refetch }) => {
         };
 
         axios
-          .post("http://localhost:5000/notification", notification)
+          .post("https://evs-delta.vercel.app/notification", notification)
           .then((response) => {
             console.log(response.data);
           })

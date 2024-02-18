@@ -9,7 +9,7 @@ const Results = () => {
   console.log(id);
 
   useEffect(() => {
-    fetch("http://localhost:5000/candidate")
+    fetch("https://evs-delta.vercel.app/candidate")
       .then((res) => res.json())
       .then((data) => {
         setCandidates(data);

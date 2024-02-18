@@ -18,14 +18,14 @@ const AllVoter = () => {
 
   console.log(voters);
   // useEffect(() => {
-  //   fetch("http://localhost:5000/users")
+  //   fetch("https://evs-delta.vercel.app/users")
   //     .then((res) => res.json())
   //     .then((data) => console.log(data));
   // }, []);
   const { data, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/users");
+      const res = await axios.get("https://evs-delta.vercel.app/users");
       setVoters(res.data);
       return res.data;
     },
@@ -33,7 +33,9 @@ const AllVoter = () => {
 
   const handleVerify = async (id) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/users/verify/${id}`);
+      const res = await axios.patch(
+        `https://evs-delta.vercel.app/users/verify/${id}`
+      );
       if (res.data.modifiedCount > 0) {
         refetch();
       }
@@ -55,7 +57,7 @@ const AllVoter = () => {
       }).then(async (result) => {
         if (result.isConfirmed) {
           const res = await axios.patch(
-            `http://localhost:5000/users/isRole/${id}`
+            `https://evs-delta.vercel.app/users/isRole/${id}`
           );
           if (res.data.modifiedCount > 0) {
             refetch();
@@ -83,7 +85,9 @@ const AllVoter = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(`http://localhost:5000/users/${id}`);
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/users/${id}`
+        );
 
         if (res.data.deletedCount > 0) {
           setVoters((prevVotes) => prevVotes.filter((vote) => vote._id !== id));
@@ -116,7 +120,7 @@ const AllVoter = () => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/paginatedUsers?page=${currentPage.current}&limit=${limit}`
+        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
       );
 
       setPageCount(response.data.pageCount);

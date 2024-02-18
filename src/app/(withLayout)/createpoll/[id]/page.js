@@ -20,7 +20,7 @@ const page = () => {
   const { data, refetch } = useQuery({
     queryKey: ["poll-ans"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/poll-ans");
+      const res = await axios.get("https://evs-delta.vercel.app/poll-ans");
       setAllPollAns(res?.data);
       return res?.data;
     },
@@ -41,7 +41,7 @@ const page = () => {
     };
     console.log(addPollQuestion);
     axios
-      .post("http://localhost:5000/poll-ans", addPollQuestion)
+      .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
       .then((res) => {
         // console.log(res);
         form.reset();
@@ -53,7 +53,7 @@ const page = () => {
 
   // useState(() => {
   //   axios
-  //     .get("http://localhost:5000/poll-ans")
+  //     .get("https://evs-delta.vercel.app/poll-ans")
   //     .then((res) => {
   //       setAllPollAns(res?.data);
   //       // console.log(res)
