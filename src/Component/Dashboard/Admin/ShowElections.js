@@ -114,13 +114,13 @@ const ShowElections = () => {
   return (
     <Protected>
       <div className="mt-5">
-        <div className="grid gap-2 drop-shadow-lg">
+        <div className="grid gap-2">
           {elections?.map((election, index) => (
             <div
               key={election._id}
               className={`${
                 index % 2 === 0 ? "bg-white/90 rounded-md" : "bg-white/80"
-              } text-center font-semibold rounded-md`}
+              } text-center font-semibold rounded-md `}
             >
               <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
                 <p className="col-span-1">{index + 1}</p>
@@ -132,14 +132,13 @@ const ShowElections = () => {
                     endDate1={`${election?.endDate}T${election?.endTime}`}
                   />
                 </div>
-                <Link
-                  className="col-span-2"
-                  href={`/dashboard/allElections/${election._id}`}
-                >
-                  <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
-                    See Details
-                  </button>
-                </Link>
+                <div className="col-span-2">
+                  <Link href={`/dashboard/allElections/${election._id}`}>
+                    <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                      See Details
+                    </button>
+                  </Link>
+                </div>
                 <div className="col-span-1">
                   <button
                     onClick={() => {
