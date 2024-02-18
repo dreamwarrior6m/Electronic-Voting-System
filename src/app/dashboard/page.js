@@ -176,7 +176,8 @@ const HomePage = () => {
 
         <div className="bg-blue-200/10 px-10 py-4 w-full h-full shadow-xl image-full hidden lg:block">
           <div className="flex justify-end text-xl cursor-pointer">
-            <MdEdit className=""
+            <MdEdit
+              className=""
               onClick={() => document.getElementById("my_modal_3").showModal()}
             />
           </div>

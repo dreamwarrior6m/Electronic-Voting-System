@@ -17,7 +17,6 @@ const page = () => {
   const pollVoteCount = 0;
   // console.log(userName);
 
-
   const { data, refetch } = useQuery({
     queryKey: ["poll-ans"],
     queryFn: async () => {
@@ -26,8 +25,7 @@ const page = () => {
       return res?.data;
     },
   });
-  refetch()
-
+  refetch();
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
@@ -51,11 +49,7 @@ const page = () => {
       .catch((err) => {
         console.error(err);
       });
-    
   };
-
- 
-
 
   // useState(() => {
   //   axios

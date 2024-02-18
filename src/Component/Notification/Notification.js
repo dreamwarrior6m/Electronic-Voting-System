@@ -122,7 +122,9 @@ const Notification = ({ classes }) => {
         </div>
       </button>
       <div
-        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${open ? "" : "hidden"}`}
+        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+          open ? "" : "hidden"
+        }`}
       >
         <div
           className="notifications overflow-y-auto z-10 bg-white scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"

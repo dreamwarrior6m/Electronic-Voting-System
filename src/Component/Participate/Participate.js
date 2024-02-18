@@ -41,7 +41,9 @@ const Participate = () => {
   }, []);
   console.log(candidateUnderUser);
 
-  const filterUndreUser = candidateUnderUser?.filter(underUser=>(underUser?.candidate == id) && (underUser?.email == user?.email));
+  const filterUndreUser = candidateUnderUser?.filter(
+    (underUser) => underUser?.candidate == id && underUser?.email == user?.email
+  );
   console.log(filterUndreUser);
 
   useEffect(() => {
@@ -104,7 +106,10 @@ const Participate = () => {
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
 
-    if ((filterParticipet?.[0]?.email != user?.email) && (filterUndreUser?.[0]?.isverify == 'true')) {
+    if (
+      filterParticipet?.[0]?.email != user?.email &&
+      filterUndreUser?.[0]?.isverify == "true"
+    ) {
       fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
         .then((res) => res.json())
         .then((data) => {

@@ -151,7 +151,7 @@ const PollParticipate = () => {
         timer: 1500,
       });
     }
-  refetch()
+    refetch();
   };
   const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
   const handleCopy = () => {

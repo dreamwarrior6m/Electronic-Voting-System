@@ -51,8 +51,7 @@ const ShowElections = () => {
 
     return (
       <div>
-        <h2>
-          <span className="font-bold">Status: </span>
+        <h2 className=" font-normal">
           {isSystemRunning ? "Running" : "Stopped"}
         </h2>
       </div>
@@ -60,63 +59,39 @@ const ShowElections = () => {
   };
 
   // Delete Function Added
-  const handleDelete = (id) => {
+  const handleDelete = (id, electionName) => {
     axios
-      .delete(`https://evs-delta.vercel.app/create-vote/${id}`)
+      .delete(`https://evs-delta.vercel.app/candidate/under/${electionName}`)
       .then((res) => {
         console.log(res.data);
+      });
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to fire this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Deleted it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/create-vote/${id}`
+        );
         if (res.data.deletedCount > 0) {
           Swal.fire({
-            title: "Successfully",
-            text: "Deleted",
+            title: "fire!",
+            text: `this Candidate has been deleted.`,
             icon: "success",
-            confirmButtonText: "oky",
           });
           refetch();
         }
-      });
+      }
+    });
   };
 
-  const handleUpdate = (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const OrganizatonName = form.OrganizatonName.value;
-    const Type = form.Type.value;
-    const name = form.voteName.value;
-    const photo = form.photo.value;
-    const startDate = form.startDate.value;
-    const startTime = form.startTime.value;
-    const endDate = form.endDate.value;
-    const endTime = form.endTime.value;
-    const electionId = form.electionId.value;
-
-    const obj = {
-      OrganizatonName,
-      Type,
-      endDate,
-      endTime,
-      name,
-      photo,
-      startDate,
-      startTime,
-    };
-    console.log(electionId);
-    axios
-      .put(`https://evs-delta.vercel.app/create-vote/update/${electionId}`, obj)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            title: "Successfully",
-            text: "Updated",
-            icon: "success",
-            confirmButtonText: "oky",
-          });
-          refetch();
-          form.reset();
-        }
-      });
-  };
+  //Send Notification when Admin delete a election
 
   const handleNotification = (type, electionName, electionEmail) => {
     const notification = {
@@ -138,45 +113,43 @@ const ShowElections = () => {
 
   return (
     <Protected>
-      <div>
-        <div className="grid lg:grid-cols-3 gap-5 drop-shadow-lg">
+      <div className="mt-5">
+        <div className="grid gap-2">
           {elections?.map((election, index) => (
             <div
               key={election._id}
               className={`${
-                index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
-              } text-center font-semibold rounded-xl`}
+                index % 2 === 0 ? "bg-white/90 rounded-md" : "bg-white/80"
+              } text-center font-semibold rounded-md `}
             >
-              <div className="grid py-8 items-center space-y-1">
-                <p className="text-black text-3xl">{index + 1}</p>
-                <p className="text-2xl font-bold">
-                  {election?.OrganizatonName}
-                </p>
-                <p className="text-lg">
-                  <span className="font-bold">Name: </span>
-                  {election?.name}
-                </p>
-                <Timer
-                  startDate1={`${election?.startDate}T${election?.startTime}`}
-                  endDate1={`${election?.endDate}T${election?.endTime}`}
-                />
-                <div className="pb-1">
+              <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
+                <p className="col-span-1">{index + 1}</p>
+                <p className="col-span-4">{election?.OrganizatonName}</p>
+                <p className="col-span-3">{election?.name}</p>
+                <div className="col-span-1">
+                  <Timer
+                    startDate1={`${election?.startDate}T${election?.startTime}`}
+                    endDate1={`${election?.endDate}T${election?.endTime}`}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <Link href={`/dashboard/allElections/${election._id}`}>
+                    <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                      See Details
+                    </button>
+                  </Link>
+                </div>
+                <div className="col-span-1">
                   <button
                     onClick={() => {
                       handleNotification(1, election?.name, election?.email);
-                      handleDelete(election._id);
+                      handleDelete(election._id, election?.name);
                     }}
                     className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2"
                   >
                     <MdDelete />
                   </button>
-              
                 </div>
-                <Link href={`/dashboard/allElections/${election._id}`}>
-                  <button className="bg-gray-600 text-sm font-medium text-white px-4 py-2 rounded-md">
-                    See Details
-                  </button>
-                </Link>
               </div>
             </div>
           ))}
