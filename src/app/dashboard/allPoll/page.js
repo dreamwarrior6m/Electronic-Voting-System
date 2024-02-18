@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import Protected from "@/Component/Protected/Protected";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const allPoll = () => {
   const [allPoll, setAllPoll] = useState();
@@ -50,7 +51,7 @@ const allPoll = () => {
   };
 
   return (
-    <Protected>
+    <AdminProtected>
       <div className="text-white">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
@@ -89,7 +90,7 @@ const allPoll = () => {
           </table>
         </div>
       </div>
-    </Protected>
+    </AdminProtected>
   );
 };
 

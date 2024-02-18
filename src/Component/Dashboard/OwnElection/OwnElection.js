@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Protected from "@/Component/Protected/Protected";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import Swal from "sweetalert2";
+import ModaProtected from "@/Component/Protected/ModaProtected";
 
 const OwnElection = () => {
   const [user] = useAuthState(auth);
@@ -157,7 +157,7 @@ const OwnElection = () => {
   };
 
   return (
-    <Protected>
+    <ModaProtected>
       <div className="mt-5">
         <div className="grid gap-2">
           {elections2?.map((election, index) => (
@@ -377,7 +377,7 @@ const OwnElection = () => {
           ))}
         </div>
       </div>
-    </Protected>
+    </ModaProtected>
   );
 };
 

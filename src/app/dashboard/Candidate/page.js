@@ -4,6 +4,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import Protected from "@/Component/Protected/Protected";
 
 const Page = () => {
   const { data: candidates = [], refetch } = useQuery({
@@ -41,7 +42,8 @@ const Page = () => {
   };
 
   return (
-    <div>
+   <Protected>
+     <div>
       <p className=" font-bold text-xl text-black  text-center mt-5 mb-1">
         Total Candidate : {candidates.length}
       </p>
@@ -105,6 +107,7 @@ const Page = () => {
         </table>
       </div>
     </div>
+   </Protected>
   );
 };
 
