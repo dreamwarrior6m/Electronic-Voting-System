@@ -182,16 +182,22 @@ const ElectionInfo = ({ election, refetch }) => {
         <p>
           <span className="font-bold">Email: </span> {election?.email}
         </p>
-        <div className={`${userRoles?.isRole === "Admin" ? "hidden" : ""}`}>
-          <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
-          <button
-            onClick={() =>
-              document.getElementById(`my_modal_3_${election._id}`).showModal()
-            }
-            className="bg-green-500 text-white px-4 py-[10px] rounded-md"
-          >
-            <IoPersonAdd />
-          </button>
+        <div>
+          {userRoles?.isRole != "Admin" && (
+            <div className="">
+              <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById(`my_modal_3_${election._id}`)
+                    .showModal()
+                }
+                className="bg-green-500 text-white px-4 py-[10px] rounded-md"
+              >
+                <IoPersonAdd />
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <Image

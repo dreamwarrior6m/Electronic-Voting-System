@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import Protected from "@/Component/Protected/Protected";
 
 const allPoll = () => {
   const [allPoll, setAllPoll] = useState();
@@ -22,7 +23,6 @@ const allPoll = () => {
   });
 
   const handleDelete = async (id) => {
-    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to undo this!",
@@ -50,42 +50,46 @@ const allPoll = () => {
   };
 
   return (
-    <div className="text-white">
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Owner</th>
-              <th>View</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allPoll?.map((poll, ind) => (
-              <tr key={poll?._id}>
-                <th>{ind + 1}</th>
-                <td>{poll?.title}</td>
-                <td>{poll?.wonerEmail}</td>
-                <td>
-                  <Link href={`/poll-participate/${poll?.userName}`}>Show</Link>
-                </td>
-                <th>
-                  <button
-                    onClick={() => handleDelete(poll?._id)}
-                    className=" text-red-500 text-2xl"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </th>
+    <Protected>
+      <div className="text-white">
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Owner</th>
+                <th>View</th>
+                <th>Delete</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {allPoll?.map((poll, ind) => (
+                <tr key={poll?._id}>
+                  <th>{ind + 1}</th>
+                  <td>{poll?.title}</td>
+                  <td>{poll?.wonerEmail}</td>
+                  <td>
+                    <Link href={`/poll-participate/${poll?.userName}`}>
+                      Show
+                    </Link>
+                  </td>
+                  <th>
+                    <button
+                      onClick={() => handleDelete(poll?._id)}
+                      className=" text-red-500 text-2xl"
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </Protected>
   );
 };
 

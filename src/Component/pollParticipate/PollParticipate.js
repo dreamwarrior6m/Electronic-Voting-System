@@ -153,7 +153,7 @@ const PollParticipate = () => {
     }
     refetch();
   };
-  const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
+  const shareUrl = `electronic-voting-system-beta.vercel.app/${id}`;
   const handleCopy = () => {
     Swal.fire({
       position: "top-end",

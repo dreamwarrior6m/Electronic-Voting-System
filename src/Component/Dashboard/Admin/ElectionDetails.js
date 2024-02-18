@@ -140,7 +140,7 @@ const ElectionDetails = () => {
       <div className="mt-10">
         <div>
           <p className="font-bold text-center text-2xl  ">
-            CreateVote Under voters : {Voter?.length}
+            CreateVote Under voters : {filterVoter?.length}
           </p>
           <hr className="w-96 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
