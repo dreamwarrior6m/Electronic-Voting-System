@@ -77,7 +77,6 @@ const page = () => {
     const updateIsRole = "Modarator";
     const updateIsRole1 = { updateIsRole };
 
-   
     if (!/^[a-zA-Z0-9_]+$/.test(name)) {
       Swal.fire({
         position: "top-end",
@@ -125,8 +124,7 @@ const page = () => {
                 showConfirmButton: false,
                 timer: 2000,
               });
-              setloading(false)
-              
+              setloading(false);
             });
         }
 
@@ -139,9 +137,27 @@ const page = () => {
           showConfirmButton: false,
           timer: 2000,
         });
-        setloading(false)
+        setloading(false);
       }
     } catch {}
+
+    //When User create a vote notification send to backend.
+    const type = 3;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: user?.email,
+      type: type,
+      electionName: name,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
 
   return (

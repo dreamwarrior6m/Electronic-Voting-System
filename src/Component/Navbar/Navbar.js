@@ -7,6 +7,7 @@ import Links from "./Link/Links";
 import styles from "./Navbar.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Notification from "../Notification/Notification";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -45,8 +46,9 @@ const Navbar = () => {
         <div>
           <p className="font-bold text-[30px] lg:ml-1">DVS</p>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center gap-1">
           <Links></Links>
+          {user && <Notification classes="mt-40" />}
           {user && (
             <div className="dropdown dropdown-end ml-2">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
