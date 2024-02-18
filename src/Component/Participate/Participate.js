@@ -10,6 +10,7 @@ import Image from "next/image";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import Protected from "../Protected/Protected";
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
@@ -183,7 +184,8 @@ const Participate = () => {
   };
 
   return (
-    <div className="text-white p-5">
+   <Protected>
+     <div className="text-white p-5">
       {filterCandidate?.map((candidat, ind) => (
         <>
           <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
@@ -235,6 +237,7 @@ const Participate = () => {
         )}
       </div>
     </div>
+   </Protected>
   );
 };
 

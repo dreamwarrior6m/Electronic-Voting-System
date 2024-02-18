@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
+import Protected from "@/Component/Protected/Protected";
 
 const page = () => {
   const [allPollAns, setAllPollAns] = useState();
@@ -70,70 +71,74 @@ const page = () => {
   console.log(filterAllPollAns?.length);
 
   return (
-    <div className="my-10 text-white">
-      <div>
-        <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
-          <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
-            <h3 className="text-4xl font-bold text-center">Create Poll</h3>
-            <h3 className="text-xl font-bold text-center">Answer Options</h3>
-            <h3 className="">You added: {filterAllPollAns?.length} question</h3>
-            <form onSubmit={handleAddQuestion} className="card-body">
-              <div className="grid md:grid-cols-2 gap-3">
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text dark:text-white">
-                      Answer Options
-                    </span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Option"
-                    className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                    required
-                    name="question"
-                  />
+    <Protected>
+      <div className="my-10 text-white">
+        <div>
+          <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
+            <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+              <h3 className="text-4xl font-bold text-center">Create Poll</h3>
+              <h3 className="text-xl font-bold text-center">Answer Options</h3>
+              <h3 className="">
+                You added: {filterAllPollAns?.length} question
+              </h3>
+              <form onSubmit={handleAddQuestion} className="card-body">
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Answer Options
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Option"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      required
+                      name="question"
+                    />
+                  </div>
+                  <div className="form-control">
+                    <label className="label">
+                      <span className="label-text dark:text-white">
+                        Add Photo(optional)
+                      </span>
+                    </label>
+                    <input
+                      type="img"
+                      placeholder="Photo Link"
+                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                      name="questionPhoto"
+                    />
+                  </div>
                 </div>
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text dark:text-white">
-                      Add Photo(optional)
-                    </span>
-                  </label>
-                  <input
-                    type="img"
-                    placeholder="Photo Link"
-                    className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                    name="questionPhoto"
-                  />
-                </div>
-              </div>
 
-              <div className="form-control mt-6 w-full ">
-                {filterAllPollAns?.length > 0 ? (
-                  <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                    add more question
-                  </button>
-                ) : (
-                  <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
-                    add question
-                  </button>
-                )}
-              </div>
-            </form>
-            {filterAllPollAns?.length > 0 && (
-              <div className="card-body">
-                <Link
-                  href={`/poll-participate/${id}`}
-                  className="py-3 w-full px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
-                >
-                  Show you poll
-                </Link>
-              </div>
-            )}
+                <div className="form-control mt-6 w-full ">
+                  {filterAllPollAns?.length > 0 ? (
+                    <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                      add more question
+                    </button>
+                  ) : (
+                    <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                      add question
+                    </button>
+                  )}
+                </div>
+              </form>
+              {filterAllPollAns?.length > 0 && (
+                <div className="card-body">
+                  <Link
+                    href={`/poll-participate/${id}`}
+                    className="py-3 w-full px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                  >
+                    Show you poll
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </Protected>
   );
 };
 

@@ -1,9 +1,12 @@
-import HomePage from '../page';
+import Protected from "@/Component/Protected/Protected";
+import HomePage from "../page";
 
 const page = () => {
   return (
     <div>
-      <HomePage/>
+      <Protected>
+        <HomePage />
+      </Protected>
     </div>
   );
 };
