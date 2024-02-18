@@ -31,7 +31,7 @@ const Participate = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/CandiateUnderUser")
+      .get("http://localhost:5000/CandiateUnderUser")
       .then((res) => {
         setCandidateUnderUser(res?.data);
       })
@@ -41,11 +41,13 @@ const Participate = () => {
   }, []);
   console.log(candidateUnderUser);
 
-  const filterUndreUser = candidateUnderUser?.filter(underUser=>(underUser?.candidate == id) && (underUser?.email == user?.email));
+  const filterUndreUser = candidateUnderUser?.filter(
+    (underUser) => underUser?.candidate == id && underUser?.email == user?.email
+  );
   console.log(filterUndreUser);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -54,7 +56,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   // useEffect(() => {
-  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+  //   fetch(`http://localhost:5000/create-vote/${id}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setShowVote(data);
@@ -66,14 +68,14 @@ const Participate = () => {
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/participate");
+      const res = await axios.get("http://localhost:5000/participate");
       setParticipate(res?.data);
       return res?.data;
     },
   });
 
   // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/participate")
+  //   fetch("http://localhost:5000/participate")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setParticipate(data);
@@ -104,8 +106,11 @@ const Participate = () => {
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
 
-    if ((filterParticipet?.[0]?.email != user?.email) && (filterUndreUser?.[0]?.isverify == 'true')) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+    if (
+      filterParticipet?.[0]?.email != user?.email &&
+      filterUndreUser?.[0]?.isverify == "true"
+    ) {
+      fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
@@ -117,7 +122,7 @@ const Participate = () => {
           // add vote number
           axios
             .patch(
-              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
+              `http://localhost:5000/candidate/${selectCandidateId}`,
               updateVoteCount
             )
             .then((res) => {
@@ -134,10 +139,7 @@ const Participate = () => {
               // console.log(res);
               // participate api update
               axios
-                .post(
-                  "https://evs-delta.vercel.app/participate",
-                  updateParticipate
-                )
+                .post("http://localhost:5000/participate", updateParticipate)
                 .then((res) => {
                   console.log("partcipate", res);
                 })

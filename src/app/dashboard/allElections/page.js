@@ -2,11 +2,14 @@ import ShowElections from "@/Component/Dashboard/Admin/ShowElections";
 
 const page = () => {
   return (
-    <div>
-      <div>
-        <h3 className="text-4xl font-bold text-gray-700 text-center pt-3 pb-8">
-          All Elections
-        </h3>
+    <div className="mt-5">
+      <div className="grid grid-cols-12 text-white font-semibold text-center">
+        <p className="col-span-2">Number</p>
+        <p className="col-span-2">Organization Name</p>
+        <p className="col-span-2">Election Name</p>
+        <p className="col-span-2">current Status</p>
+        <p className="col-span-2">More Details</p>
+        <p className="col-span-2">Perform Actions</p>
       </div>
       <ShowElections />
     </div>

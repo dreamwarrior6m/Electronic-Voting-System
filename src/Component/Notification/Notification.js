@@ -18,7 +18,7 @@ const Notification = ({ classes }) => {
   const { data: allNotifications = [], refetch } = useQuery({
     queryKey: ["notification1"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/notification");
+      const res = await axios.get("http://localhost:5000/notification");
       return res.data;
     },
     refetchInterval: 1000,
@@ -60,7 +60,7 @@ const Notification = ({ classes }) => {
 
   const notificationDelete = () => {
     axios
-      .delete(`https://evs-delta.vercel.app/notification/${user?.email}`)
+      .delete(`http://localhost:5000/notification/${user?.email}`)
       .then((res) => {
         console.log(res.data);
         if (res.data.deletedCount > 0) {
@@ -122,7 +122,9 @@ const Notification = ({ classes }) => {
         </div>
       </button>
       <div
-        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${open ? "" : "hidden"}`}
+        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+          open ? "" : "hidden"
+        }`}
       >
         <div
           className="notifications overflow-y-auto z-10 bg-white scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"

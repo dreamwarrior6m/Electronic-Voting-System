@@ -55,7 +55,7 @@ const Registration = () => {
       await updateUserProfile(name, photo);
 
       // Send user data to backend
-      await fetch("https://evs-delta.vercel.app/users", {
+      await fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

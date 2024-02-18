@@ -17,17 +17,15 @@ const page = () => {
   const pollVoteCount = 0;
   // console.log(userName);
 
-
   const { data, refetch } = useQuery({
     queryKey: ["poll-ans"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/poll-ans");
+      const res = await axios.get("http://localhost:5000/poll-ans");
       setAllPollAns(res?.data);
       return res?.data;
     },
   });
-  refetch()
-
+  refetch();
 
   const handleAddQuestion = (e) => {
     e.preventDefault();
@@ -43,7 +41,7 @@ const page = () => {
     };
     console.log(addPollQuestion);
     axios
-      .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
+      .post("http://localhost:5000/poll-ans", addPollQuestion)
       .then((res) => {
         // console.log(res);
         form.reset();
@@ -51,15 +49,11 @@ const page = () => {
       .catch((err) => {
         console.error(err);
       });
-    
   };
-
- 
-
 
   // useState(() => {
   //   axios
-  //     .get("https://evs-delta.vercel.app/poll-ans")
+  //     .get("http://localhost:5000/poll-ans")
   //     .then((res) => {
   //       setAllPollAns(res?.data);
   //       // console.log(res)

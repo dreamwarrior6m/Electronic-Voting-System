@@ -31,7 +31,7 @@ const PollParticipate = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/poll-ans")
+      .get("http://localhost:5000/poll-ans")
       .then((res) => {
         setPollAns(res?.data);
       })
@@ -42,7 +42,7 @@ const PollParticipate = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-poll")
+      .get("http://localhost:5000/create-poll")
       .then((res) => {
         setCreatePoll(res?.data);
       })
@@ -62,9 +62,7 @@ const PollParticipate = () => {
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get(
-        "https://evs-delta.vercel.app/poll-participate"
-      );
+      const res = await axios.get("http://localhost:5000/poll-participate");
       setPollParticipate(res?.data);
       return res?.data;
     },
@@ -73,7 +71,7 @@ const PollParticipate = () => {
 
   // useEffect(() => {
   //   axios
-  //     .get("https://evs-delta.vercel.app/poll-participate")
+  //     .get("http://localhost:5000/poll-participate")
   //     .then((res) => {
   //       // console.log(res?.data);
   //       setPollParticipate(res?.data);
@@ -98,7 +96,7 @@ const PollParticipate = () => {
     console.log(pollAnsId);
     if (filterPollParticipate?.[0]?.email != user?.email) {
       axios
-        .get(`https://evs-delta.vercel.app/poll-ans/${pollAnsId}`)
+        .get(`http://localhost:5000/poll-ans/${pollAnsId}`)
         .then((res) => {
           console.log(res?.data);
           const voteCount = res?.data?.pollVoteCount;
@@ -108,7 +106,7 @@ const PollParticipate = () => {
 
           axios
             .patch(
-              `https://evs-delta.vercel.app/poll-ans/${pollAnsId}`,
+              `http://localhost:5000/poll-ans/${pollAnsId}`,
               updatePollCount
             )
             .then((res) => {
@@ -123,10 +121,7 @@ const PollParticipate = () => {
               router.push(`/poll-result/${id}`);
 
               axios
-                .post(
-                  "https://evs-delta.vercel.app/poll-participate",
-                  participateUser
-                )
+                .post("http://localhost:5000/poll-participate", participateUser)
                 .then((res) => {
                   console.log("participate post", res?.data);
                   refetch();
@@ -151,7 +146,7 @@ const PollParticipate = () => {
         timer: 1500,
       });
     }
-  refetch()
+    refetch();
   };
   const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
   const handleCopy = () => {

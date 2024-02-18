@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 
 const Page = () => {
-  const [candidates, setCandidates] = useState([]);
+  const { data: candidates = [], refetch } = useQuery({
+    queryKey: ["candidates45"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/candidate");
+      return res.data;
+    },
+  });
 
-  useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
-      .then((res) => res.json())
-      .then((data) => setCandidates(data));
-  }, []);
+
   const handledeleted = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -23,18 +26,14 @@ const Page = () => {
       confirmButtonText: "Yes, Deleted it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(
-          `https://evs-delta.vercel.app/candidate/${id}`
-        );
+        const res = await axios.delete(`http://localhost:5000/candidate/${id}`);
         if (res.data.deletedCount > 0) {
-          setCandidates((prevotes) =>
-            prevotes.filter((votes) => votes._id !== id)
-          );
           Swal.fire({
             title: "fire!",
             text: `this Candidate has been deleted.`,
             icon: "success",
           });
+          refetch();
         }
       }
     });

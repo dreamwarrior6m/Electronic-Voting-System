@@ -15,10 +15,10 @@ const OwnElection = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections2"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
+      const res = await axios.get("http://localhost:5000/create-vote");
       return res.data;
     },
-  }); 
+  });
   console.log(elections);
   const filterElection = elections?.filter(
     (election) => election?.email == user?.email
@@ -59,29 +59,41 @@ const OwnElection = () => {
 
     return (
       <div>
-        <h2>
-          <span className="font-bold">Current Status:</span>
-          {isSystemRunning ? "Running" : "Stopped"}
-        </h2>
+        <h2 className="front-normal">{isSystemRunning ? "Running" : "Stopped"}</h2>
       </div>
     );
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, electionName) => {
     axios
-      .delete(`https://evs-delta.vercel.app/create-vote/${id}`)
+      .delete(`http://localhost:5000/candidate/under/${electionName}`)
       .then((res) => {
         console.log(res.data);
+      });
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to fire this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Deleted it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(
+          `http://localhost:5000/create-vote/${id}`
+        );
         if (res.data.deletedCount > 0) {
           Swal.fire({
-            title: "Successfully",
-            text: "Deleted",
+            title: "fire!",
+            text: `this Candidate has been deleted.`,
             icon: "success",
-            confirmButtonText: "oky",
           });
           refetch();
         }
-      });
+      }
+    });
   };
 
   const handleUpdate = (event) => {
@@ -109,7 +121,7 @@ const OwnElection = () => {
     };
     console.log(electionId);
     axios
-      .put(`https://evs-delta.vercel.app/create-vote/update/${electionId}`, obj)
+      .put(`http://localhost:5000/create-vote/update/${electionId}`, obj)
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
@@ -133,7 +145,7 @@ const OwnElection = () => {
     };
 
     axios
-      .post("https://evs-delta.vercel.app/notification", notification)
+      .post("http://localhost:5000/notification", notification)
       .then((response) => {
         console.log(response.data);
       })
@@ -144,31 +156,33 @@ const OwnElection = () => {
 
   return (
     <Protected>
-      <div>
-        <div className="grid lg:grid-cols-3 gap-5 ">
+      <div className="mt-5">
+        <div className="grid gap-2">
           {elections2?.map((election, index) => (
             <div
               key={election._id}
               className={`${
-                index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
-              } text-center font-semibold rounded-xl`}
+                index % 2 === 0 ? "bg-white/90 rounded-md" : "bg-white/80"
+              } text-center font-semibold rounded-md`}
             >
-              <div className="grid py-5 items-center space-y-1">
-                <p className="text-black text-3xl">{index + 1}</p>
-                <p className="text-4xl">{election?.OrganizatonName}</p>
-                <p className="text-xl">
-                  <span className="font-bold">Election Name: </span>
-                  {election?.name}
-                </p>
+              <div className="grid grid-cols-6 py-5 items-center justify-center space-y-1 font-medium">
+                <p className="">{index + 1}</p>
+                <p className="">{election?.OrganizatonName}</p>
+                <p className="">{election?.name}</p>
                 <Timer
                   startDate1={`${election?.startDate}T${election?.startTime}`}
                   endDate1={`${election?.endDate}T${election?.endTime}`}
                 />
-                <div className="pb-1">
+                <Link href={`/dashboard/allElections/${election._id}`}>
+                  <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                    See Details
+                  </button>
+                </Link>
+                <div className="">
                   <button
                     onClick={() => {
                       handleNotification(1, election?.name, election?.email);
-                      handleDelete(election._id);
+                      handleDelete(election._id, election?.name);
                     }}
                     className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2"
                   >
@@ -185,11 +199,6 @@ const OwnElection = () => {
                     <MdEdit />
                   </button>
                 </div>
-                <Link href={`/dashboard/allElections/${election._id}`}>
-                  <button className="bg-gray-600 text-sm font-medium text-white px-4 py-2 rounded-md">
-                    See Details
-                  </button>
-                </Link>
               </div>
 
               <>

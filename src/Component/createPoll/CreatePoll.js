@@ -21,7 +21,7 @@ const createPoll = () => {
     console.log(createPoll);
 
     axios
-      .post("https://evs-delta.vercel.app/create-poll", createPoll)
+      .post("http://localhost:5000/create-poll", createPoll)
       .then((res) => {
         console.log(res);
         router.push(`/createpoll/${userName}`);

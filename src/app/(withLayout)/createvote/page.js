@@ -15,7 +15,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("http://localhost:5000/create-vote")
       .then((res) => {
         setAllCreateVote(res?.data);
       })
@@ -26,7 +26,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/users")
+      .get("http://localhost:5000/users")
       .then((res) => {
         setAllUsers(res?.data);
       })
@@ -91,7 +91,7 @@ const page = () => {
 
     try {
       setloading(true);
-      const res = await fetch("https://evs-delta.vercel.app/create-vote", {
+      const res = await fetch("http://localhost:5000/create-vote", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const page = () => {
         if (findUser?.isRole != "Admin") {
           axios
             .patch(
-              `https://evs-delta.vercel.app/users/${findUser?._id}`,
+              `http://localhost:5000/users/${findUser?._id}`,
               updateIsRole1
             )
             .then((res) => {
@@ -151,7 +151,7 @@ const page = () => {
     };
 
     axios
-      .post("https://evs-delta.vercel.app/notification", notification)
+      .post("http://localhost:5000/notification", notification)
       .then((response) => {
         console.log(response.data);
       })
