@@ -122,11 +122,11 @@ const ShowElections = () => {
                 index % 2 === 0 ? "bg-white/90 rounded-md" : "bg-white/80"
               } text-center font-semibold rounded-md`}
             >
-              <div className="grid grid-cols-12 py-5 items-center justify-center space-y-1 font-medium">
-                <p className="col-span-2">{index + 1}</p>
-                <p className="col-span-2">{election?.OrganizatonName}</p>
-                <p className="col-span-2">{election?.name}</p>
-                <div className="col-span-2">
+              <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
+                <p className="col-span-1">{index + 1}</p>
+                <p className="col-span-4">{election?.OrganizatonName}</p>
+                <p className="col-span-3">{election?.name}</p>
+                <div className="col-span-1">
                   <Timer
                     startDate1={`${election?.startDate}T${election?.startTime}`}
                     endDate1={`${election?.endDate}T${election?.endTime}`}
@@ -140,7 +140,7 @@ const ShowElections = () => {
                     See Details
                   </button>
                 </Link>
-                <div className="col-span-2">
+                <div className="col-span-1">
                   <button
                     onClick={() => {
                       handleNotification(1, election?.name, election?.email);
