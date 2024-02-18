@@ -38,7 +38,7 @@ const SideNav = ({ children }) => {
 
     fetchData();
   }, [user?.email]);
-  console.log(users);
+  // console.log(users);
 
   return (
     <div className="">
@@ -107,6 +107,17 @@ const SideNav = ({ children }) => {
                 <h3 className=" text-white font-semibold">All Elections</h3>
               </Link>
               <Link
+                href="/dashboard/ownElections"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/ownElections"
+                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    : ""
+                }`}
+              >
+                <GiVote className="text-2xl " />
+                <h3 className="font-semibold">My Elections</h3>
+              </Link>
+              {/* <Link
                 href="/dashboard/Candidate"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
                   location === "/dashboard/Candidate"
@@ -116,7 +127,7 @@ const SideNav = ({ children }) => {
               >
                 <BsPersonCircle className="text-2xl group-hover:text-white" />
                 <h3 className=" text-white font-semibold">All Candidate</h3>
-              </Link>
+              </Link> */}
               <Link
                 href="/dashboard/allVoter"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
@@ -128,6 +139,19 @@ const SideNav = ({ children }) => {
                 <MdPeople className="text-2xl group-hover:text-white" />
                 <h3 className=" text-white font-semibold">All Users</h3>
               </Link>
+
+              <Link
+                href="/dashboard/allPoll"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/allpoll"
+                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    : ""
+                }`}
+              >
+                <GiVote className="text-2xl " />
+                <h3 className="font-semibold">All Poll</h3>
+              </Link>
+
             </>
           )}
 

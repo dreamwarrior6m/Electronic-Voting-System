@@ -28,6 +28,10 @@ const NavBarIcon = () => {
       title: "All Voter",
     },
     {
+      path: "/dashboard/allpoll",
+      title: "All Poll",
+    },
+    {
       path: "/dashboard/LivePreview",
       title: "Live Preview",
     },
