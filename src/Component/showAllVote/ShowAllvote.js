@@ -116,25 +116,25 @@ const ShowAllvote = () => {
 
   return (
     <ModaProtected>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white m-5 rounded-lg">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg ">
         {showAllVote?.map((allVote, ind) => (
-          <div key={allVote._id} className="">
-            <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 ">
+          <div key={allVote._id}>
+            <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 w-3/4  ">
               <div className="card-body  ">
                 <h2 className="text-3xl font-bold text-center mb-5">
                   {allVote?.OrganizatonName}
                   <div className="mx-auto">
-                    <button
+                    {/* <button
                       onClick={() => handleOpenModal(allVote._id)}
                       className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-xl hover:bg-green-200 gap-1"
                     >
                       {" "}
                       <VscUnverified />{" "}
                       <span className="text-[16px]">Verify now</span>
-                    </button>
+                    </button> */}
 
                     {modalOpen && (
-                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
                         <div className=" relative mt-10 p-8 rounded bg-gray-900 text-white shadow-lg w-full sm:max-w-md">
                           <button
                             className="absolute top-0 right-0 p-2 text-red-400"
@@ -241,39 +241,59 @@ const ShowAllvote = () => {
                     <h2 className="text-red-600 font-bold">
                       End: {allVote?.endDate} ({allVote?.endTime})
                     </h2>
+                    <button
+                      onClick={() => handleOpenModal(allVote._id)}
+                      className=" btn btn-sm btn-primary flex justify-center items-center text-lg border    w-full mt-2 mb-2  "
+                    >
+                      {" "}
+                      <VscUnverified />{" "}
+                      <span className="text-[16px]">Verify now </span>
+                    </button>
+
+                    <Link
+                    href={`/details/${allVote?.name}`}
+                    className="btn btn-sm btn-primary text-black hover:btn-primary w-full"
+                  >
+                    {" "}
+                    Details
+                  </Link>
                   </div>
                 </div>
                 {/* <p>Email: {allVote?.email}</p> */}
                 {/* <p>Voter Email: {allVote?.voterEmail}</p> */}
                 <div className="card-actions grid grid-cols-2 justify-end">
-                  <Link
+                  {/* <Link
                     href={`/participate/${allVote?.name}`}
                     className="btn btn-sm btn-primary hover:bg-slate-300"
                   >
                     Participate
-                  </Link>
+                  </Link> */}
                   {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                  <Link
+                  {/* <Link
                     href={`/show-all-vote/${allVote?.name}`}
                     className="btn btn-sm btn-primary text-black  hover:bg-slate-300"
                   >
                     {" "}
                     Candidates
-                  </Link>
-                  <Link
+                  </Link> */}
+                  {/* <Link
                     href={`/result/${allVote?.name}`}
                     className="btn btn-sm bg-white text-black hover:btn-primary"
                   >
                     {" "}
                     result
-                  </Link>
-                  <Link
+                  </Link> */}
+                  {/* <Link
                     href={`share/${allVote?.name}`}
                     className="btn btn-sm bg-white text-black hover:btn-primary"
                   >
                     <IoShareSocialOutline />
                     Share
-                  </Link>
+                  </Link> */}
+                  
+                
+               
+                    
                 </div>
               </div>
             </div>
