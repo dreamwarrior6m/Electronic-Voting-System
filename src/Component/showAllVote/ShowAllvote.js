@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Protected from "../Protected/Protected";
 import { IoShareSocialOutline } from "react-icons/io5";
-import Modal from "../Modal/Modal";
 import { VscUnverified } from "react-icons/vsc";
 import useAuth from "@/app/hook/useAuth";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Modal from "../Modal/Modal";
 
 // time start
 const Timer = ({ startDate1, endDate1 }) => {
@@ -63,164 +62,23 @@ const ShowAllvote = () => {
 
   const mapAllVote = showAllVote?.filter((allVote) => allVote?.startDate);
   // console.log(mapAllVote)
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
-  const [data, setdata] = useState([]);
-  const { user } = useAuth();
-  const handleOpenModal = async (id) => {
-    setModalOpen(true);
-    const res = await axios.get(
-      `https://evs-delta.vercel.app/create-vote/${id}`
-    );
-    setdata(res.data);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const form = e.target;
-      const name = form.name.value;
-      const email = form.email.value;
-      const candidate = form.candidate.value;
-      const isverify = false;
-      const CandidateEmail = data?.email;
-      const Type = data?.Type;
-      const feedback = form.feedback.value;
-      const formData = {
-        name,
-        email,
-        candidate,
-        isverify,
-        CandidateEmail,
-        Type,
-        feedback,
-      };
-
-      console.log("Form Data:", formData);
-
-      const res = await axios.post(
-        `https://evs-delta.vercel.app/candidate/under/users`,
-        formData
-      );
-      console.log("Server Response:", res.data);
-      s;
-      handleModalClose(); // Close modal after form submission
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
 
   return (
     <Protected>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-white m-5 rounded-lg">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id} className="">
-            <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 ">
-              <div className="card-body  ">
-                <h2 className="text-3xl font-bold text-center mb-5">
+            <div className=" text-black bg-slate-300 ">
+              <div className="">
+                <div className="text-3xl font-bold text-center mb-5">
                   {allVote?.OrganizatonName}
-                  <div className="mx-auto">
-                    <button
-                      onClick={() => handleOpenModal(allVote._id)}
-                      className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-xl hover:bg-green-200 gap-1"
-                    >
-                      {" "}
-                      <VscUnverified />{" "}
-                      <span className="text-[16px]">Verify now</span>
-                    </button>
-
-                    {modalOpen && (
-                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                        <div className=" relative mt-10 p-8 rounded bg-gray-900 text-white shadow-lg w-full sm:max-w-md">
-                          <button
-                            className="absolute top-0 right-0 p-2 text-red-400"
-                            onClick={handleModalClose}
-                          >
-                            X
-                          </button>
-                          <h2 className="text-2xl font-bold mb-4">
-                            Verify Voter From
-                          </h2>
-                          <form onSubmit={handleSubmit}>
-                            <div className="mb-4">
-                              <label
-                                htmlFor="name"
-                                className=" mb-2 text-xl font-normal"
-                              >
-                                Voter Name:
-                              </label>
-                              <input
-                                type="text"
-                                disabled
-                                defaultValue={user?.displayName}
-                                id="name"
-                                name="name"
-                                className="w-full px-3 border-none text-black bg-gray-200 rounded-lg text-xl font-normal foucs:bg-gray-400"
-                              />
-                            </div>
-
-                            <div className="mb-4">
-                              <label
-                                htmlFor="email"
-                                className="mb-2 text-xl font-normal"
-                              >
-                                Email:
-                              </label>
-                              <input
-                                type="email"
-                                id="email"
-                                disabled
-                                defaultValue={user?.email}
-                                name="email"
-                                className="w-full px-3 border-none text-black bg-gray-200 rounded-lg text-xl font-normal foucs:bg-gray-400"
-                              />
-                            </div>
-                            <div className="mb-4">
-                              <label
-                                htmlFor="candidate"
-                                className=" mb-2 text-xl font-normal"
-                              >
-                                Under Candidate:
-                              </label>
-                              <input
-                                type="text"
-                                id=""
-                                disabled
-                                defaultValue={data?.name}
-                                name="candidate"
-                                className="w-full px-3 border-none text-black bg-gray-200 rounded-lg text-xl font-normal foucs:bg-gray-400"
-                              />
-                            </div>
-                            <div className="mb-4">
-                              <label
-                                htmlFor="candidate"
-                                className=" mb-2 text-xl font-normal"
-                              >
-                                Please Enter your feedback:
-                              </label>
-                              <input
-                                type="text"
-                                id=""
-                                name="feedback"
-                                className="w-full px-3 border-none text-black bg-gray-200 rounded-lg text-xl font-normal foucs:bg-gray-400"
-                              />
-                            </div>
-
-                            <button
-                              type="submit"
-                              className="btn btn-outline text-white"
-                            >
-                              Submit
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    )}
+                  <div className="mx-auto z-100">
+                    <Modal electionId={allVote._id} buttonName={"Apply for Voter"} type={1}/>
                   </div>
-                </h2>
+                  <div className="mx-auto z-100">
+                    <Modal electionId={allVote._id} buttonName={"Apply for Candidate"} type={2}/>
+                  </div>
+                </div>
                 <p className="font-bold">Vote name: {allVote?.name}</p>
                 {/* start time */}
                 <span className="font-bold">
