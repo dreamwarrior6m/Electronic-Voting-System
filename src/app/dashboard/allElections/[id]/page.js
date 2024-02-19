@@ -1,12 +1,12 @@
 import ElectionDetails from "@/Component/Dashboard/Admin/ElectionDetails";
-import AdminProtected from "@/Component/Protected/AdminProtected";
+import ModaProtected from "@/Component/Protected/ModaProtected";
 
 const page = () => {
   return (
     <div>
-      <AdminProtected>
+      <ModaProtected>
         <ElectionDetails />
-      </AdminProtected>
+      </ModaProtected>
     </div>
   );
 };
