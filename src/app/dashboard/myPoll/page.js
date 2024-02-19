@@ -8,6 +8,7 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import { useParams } from "next/navigation";
 import useAuth from "@/app/hook/useAuth";
+import ModaProtected from "@/Component/Protected/ModaProtected";
 
 const allPoll = () => {
   const { user } = useAuth();
@@ -55,42 +56,46 @@ const allPoll = () => {
   };
 
   return (
-    <div className="text-white">
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          {/* head */}
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Owner</th>
-              <th>View</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filterMyPoll?.map((poll, ind) => (
-              <tr key={poll?._id}>
-                <th>{ind + 1}</th>
-                <td>{poll?.title}</td>
-                <td>{poll?.wonerEmail}</td>
-                <td>
-                  <Link href={`/poll-participate/${poll?.userName}`}>Show</Link>
-                </td>
-                <th>
-                  <button
-                    onClick={() => handleDelete(poll?._id)}
-                    className=" text-red-500 text-2xl"
-                  >
-                    <MdDeleteForever />
-                  </button>
-                </th>
+    <ModaProtected>
+      <div className="text-white">
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            {/* head */}
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Owner</th>
+                <th>View</th>
+                <th>Delete</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filterMyPoll?.map((poll, ind) => (
+                <tr key={poll?._id}>
+                  <th>{ind + 1}</th>
+                  <td>{poll?.title}</td>
+                  <td>{poll?.wonerEmail}</td>
+                  <td>
+                    <Link href={`/poll-participate/${poll?.userName}`}>
+                      Show
+                    </Link>
+                  </td>
+                  <th>
+                    <button
+                      onClick={() => handleDelete(poll?._id)}
+                      className=" text-red-500 text-2xl"
+                    >
+                      <MdDeleteForever />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </ModaProtected>
   );
 };
 

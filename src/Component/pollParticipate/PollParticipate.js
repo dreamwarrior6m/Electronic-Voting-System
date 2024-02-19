@@ -15,6 +15,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { useQuery } from "@tanstack/react-query";
+import Protected from "../Protected/Protected";
 
 const PollParticipate = () => {
   const [pollAns, setPollAns] = useState();
@@ -153,7 +154,7 @@ const PollParticipate = () => {
     }
     refetch();
   };
-  const shareUrl = `evs-delta.vercel.app/poll-participate/${id}`;
+  const shareUrl = `electronic-voting-system-beta.vercel.app/${id}`;
   const handleCopy = () => {
     Swal.fire({
       position: "top-end",
@@ -165,109 +166,114 @@ const PollParticipate = () => {
   };
 
   return (
-    <div className="text-white min-h-screen">
-      <div className="text-white p-5  pt-12">
-        <div className="bg-gray-800 md:w-3/4 mx-auto rounded-md">
-          <div className="">
-            <h2 className="text-center font-bold text-3xl py-5 pb-5">
-              {filterCreatePoll?.[0]?.title}
-            </h2>
-          </div>
-          {filterPollAns?.map((pollAns, ind) => (
-            <>
-              <div
-                key={pollAns._id}
-                className="form-control md:w-[50%] mx-auto "
-              >
-                <label className="label cursor-pointer">
-                  <span className="label-text">
-                    <Image
-                      className=" rounded-full"
-                      src={pollAns?.questionPhoto}
-                      alt="alt"
-                      width={100}
-                      height={100}
-                    />
-                  </span>
-                  <span className="">{pollAns?.question}</span>
-                  <input
-                    onClick={() => handleCoutnVote(pollAns?._id)}
-                    type="radio"
-                    name="radio-10"
-                    className="radio checked:bg-blue-500"
-                  />
-                </label>
-                <hr></hr>
-              </div>
-            </>
-          ))}
-          <div className="p-5 flex gap-2 justify-center">
-            <button
-              onClick={() => handaleAddVote()}
-              className="btn btn-primary btn-sm"
-            >
-              submit
-            </button>
+    <Protected>
+      <div className="text-white min-h-screen">
+        <div className="text-white p-5  pt-12">
+          <div className="bg-gray-800 md:w-3/4 mx-auto rounded-md">
             <div className="">
-              <Link href={`/poll-result/${id}`} className="btn btn-sm ">
-                Show Result
-              </Link>
+              <h2 className="text-center font-bold text-3xl py-5 pb-5">
+                {filterCreatePoll?.[0]?.title}
+              </h2>
             </div>
-
-            <div className="">
-              {/* You can open the modal using document.getElementById('ID').showModal() method */}
+            {filterPollAns?.map((pollAns, ind) => (
+              <>
+                <div
+                  key={pollAns._id}
+                  className="form-control md:w-[50%] mx-auto "
+                >
+                  <label className="label cursor-pointer">
+                    <span className="label-text">
+                      <Image
+                        className=" rounded-full"
+                        src={pollAns?.questionPhoto}
+                        alt="alt"
+                        width={100}
+                        height={100}
+                      />
+                    </span>
+                    <span className="">{pollAns?.question}</span>
+                    <input
+                      onClick={() => handleCoutnVote(pollAns?._id)}
+                      type="radio"
+                      name="radio-10"
+                      className="radio checked:bg-blue-500"
+                    />
+                  </label>
+                  <hr></hr>
+                </div>
+              </>
+            ))}
+            <div className="p-5 flex gap-2 justify-center">
               <button
-                className="btn btn-sm"
-                onClick={() =>
-                  document.getElementById("my_modal_3").showModal()
-                }
+                onClick={() => handaleAddVote()}
+                className="btn btn-primary btn-sm"
               >
-                Share
+                submit
               </button>
-              <dialog id="my_modal_3" className="modal">
-                <div className="modal-box">
-                  <form method="dialog">
-                    {/* if there is a button in form, it will close the modal */}
-                    <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                      ✕
-                    </button>
-                  </form>
-                  <h3 className="font-bold text-center pb-2 text-lg">
-                    Share This Poll
-                  </h3>
+              <div className="">
+                <Link href={`/poll-result/${id}`} className="btn btn-sm ">
+                  Show Result
+                </Link>
+              </div>
 
-                  <div className="text-center">
-                    <h2 className="pt-5">Derect Share</h2>
-                    <div className="flex gap-4 pt-3 justify-center">
-                      <FacebookShareButton url={shareUrl}>
-                        <FacebookIcon className="rounded-full size-8" />
-                      </FacebookShareButton>
+              <div className="">
+                {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                <button
+                  className="btn btn-sm"
+                  onClick={() =>
+                    document.getElementById("my_modal_3").showModal()
+                  }
+                >
+                  Share
+                </button>
+                <dialog id="my_modal_3" className="modal">
+                  <div className="modal-box">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                        ✕
+                      </button>
+                    </form>
+                    <h3 className="font-bold text-center pb-2 text-lg">
+                      Share This Poll
+                    </h3>
 
-                      <WhatsappShareButton url={shareUrl}>
-                        <WhatsappIcon className="rounded-full size-8" />
-                      </WhatsappShareButton>
-                    </div>
-                    <div className="pt-10 pb-5">
-                      <h2 className="">Share Link</h2>
-                      <h2 className="bg-black p-1 px-3 rounded-md">
-                        {shareUrl}
-                        <CopyToClipboard text={shareUrl}>
-                          <span className="pl-1">
-                            <button onClick={handleCopy} className="btn btn-sm">
-                              copy
-                            </button>
-                          </span>
-                        </CopyToClipboard>
-                      </h2>
+                    <div className="text-center">
+                      <h2 className="pt-5">Derect Share</h2>
+                      <div className="flex gap-4 pt-3 justify-center">
+                        <FacebookShareButton url={shareUrl}>
+                          <FacebookIcon className="rounded-full size-8" />
+                        </FacebookShareButton>
+
+                        <WhatsappShareButton url={shareUrl}>
+                          <WhatsappIcon className="rounded-full size-8" />
+                        </WhatsappShareButton>
+                      </div>
+                      <div className="pt-10 pb-5">
+                        <h2 className="">Share Link</h2>
+                        <h2 className="bg-black p-1 px-3 rounded-md">
+                          {shareUrl}
+                          <CopyToClipboard text={shareUrl}>
+                            <span className="pl-1">
+                              <button
+                                onClick={handleCopy}
+                                className="btn btn-sm"
+                              >
+                                copy
+                              </button>
+                            </span>
+                          </CopyToClipboard>
+                        </h2>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </dialog>
+                </dialog>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Protected>
   );
 };
 

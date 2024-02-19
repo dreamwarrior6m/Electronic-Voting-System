@@ -69,20 +69,22 @@ const ElectionInfo = ({ election, refetch }) => {
     const candidateName = form.candidateName.value;
     const candidateID = form.candidateID.value;
     const candidatePhoto = form.candidatePhoto.value;
+    // const userID = form.userID.value;
     const candidateEmail = form.candidateEmail.value;
+    const check = form.check.value;
     const brand = form.brand.value;
     const moderatorEmail = form.moderatorEmail.value;
     const voteName = form.electionName.value;
     const voteCount = 0;
-    const isVerify = true;
     try {
       setloading(true);
       const candidate = {
         candidateName,
-        isVerify,
         candidateID,
         candidatePhoto,
+        // userID,
         candidateEmail,
+        check,
         brand,
         moderatorEmail,
         voteName,
@@ -180,21 +182,23 @@ const ElectionInfo = ({ election, refetch }) => {
         <p>
           <span className="font-bold">Email: </span> {election?.email}
         </p>
-        {userRoles?.isRole === "Admin" ? "" : (
-          <div>
-            <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
-            <button
-              onClick={() =>
-                document
-                  .getElementById(`my_modal_3_${election._id}`)
-                  .showModal()
-              }
-              className="bg-green-500 text-white px-4 py-[10px] rounded-md"
-            >
-              <IoPersonAdd />
-            </button>
-          </div>
-        )}
+        <div>
+          {userRoles?.isRole != "Admin" && (
+            <div className="">
+              <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
+              <button
+                onClick={() =>
+                  document
+                    .getElementById(`my_modal_3_${election._id}`)
+                    .showModal()
+                }
+                className="bg-green-500 text-white px-4 py-[10px] rounded-md"
+              >
+                <IoPersonAdd />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
       <Image
         className="rounded-md"
@@ -245,6 +249,20 @@ const ElectionInfo = ({ election, refetch }) => {
                       name="candidateID"
                     />
                   </div>
+                  {/* <div className="form-control">
+                    <label className="label">
+                      <span className=" text-gray-800 dark:text-white">
+                        Your ID Card Number
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Your ID Number"
+                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      required
+                      name="userID"
+                    />
+                  </div> */}
                 </div>
                 <div>
                   <div className="form-control mb-4">
@@ -292,6 +310,13 @@ const ElectionInfo = ({ election, refetch }) => {
                     />
                   </div>
                 </div>
+                <label className="label">
+                  <div className="flex gap-1 text-gray-800 dark:text-white">
+                    <input type="checkbox" name="check" id="" required />
+                    Agree to continue
+                  </div>
+                  <span className="text-gray-800 dark:text-white"> </span>
+                </label>
               </div>
               <input
                 type="hidden"

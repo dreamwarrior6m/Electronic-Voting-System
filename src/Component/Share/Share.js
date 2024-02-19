@@ -34,7 +34,7 @@ const Share = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-  const shareUrl = `electronic-voting-system-beta.vercel.app/share/${filterAllVote?.[0].name}`;
+  const shareUrl = `electronic-voting-system-beta.vercel.app/${filterAllVote?.[0].name}`;
 
   const handleCopy = () => {
     Swal.fire({
