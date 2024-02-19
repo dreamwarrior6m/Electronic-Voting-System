@@ -5,18 +5,15 @@ import { signOut } from "firebase/auth";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { BsPersonCircle } from "react-icons/bs";
-import { CgProfile } from "react-icons/cg";
+import { FaUsers } from "react-icons/fa";
 import { GiVote } from "react-icons/gi";
 import { IoMdHome } from "react-icons/io";
-import { IoPersonAdd } from "react-icons/io5";
 import {
   MdDashboard,
   MdOutlineLogout,
   MdOutlineSettings,
   MdPeople,
 } from "react-icons/md";
-import { SiSecurityscorecard } from "react-icons/si";
 
 const SideNav = ({ children }) => {
   const location = usePathname();
@@ -65,20 +62,6 @@ const SideNav = ({ children }) => {
 
           {users?.isRole == "Modarator" && (
             <>
-              {/* <Link
-                href="/dashboard/createCandidate"
-                className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-                  location === "/dashboard/createCandidate"
-                    ? "bg-gray-900 text-white"
-                    : "text-gray-80"
-                }`}
-              >
-                <IoPersonAdd className="text-2xl group-hover:text-white" />
-                <h3 className="text-base group-hover:text-white font-semibold">
-                  Create Candidate
-                </h3>
-              </Link> */}
-
               <Link
                 href="/dashboard/ownElections"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
@@ -119,39 +102,18 @@ const SideNav = ({ children }) => {
                 <h3 className=" text-white font-semibold">All Elections</h3>
               </Link>
               <Link
-                href="/dashboard/ownElections"
-                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/ownElections"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
-                    : ""
-                }`}
-              >
-                <GiVote className="text-2xl " />
-                <h3 className="font-semibold">My Elections</h3>
-              </Link>
-              {/* <Link
                 href="/dashboard/Candidate"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
                   location === "/dashboard/Candidate"
                     ? "text-white bg-primary"
-                    : "text-gray-800"
+                    : ""
                 }`}
               >
-                <BsPersonCircle className="text-2xl group-hover:text-white" />
-                <h3 className=" text-white font-semibold">All Candidate</h3>
-              </Link> */}
-              <Link
-                href="/dashboard/allVoter"
-                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/allVoter"
-                    ? "text-white bg-primary"
-                    : "text-gray-800"
-                }`}
-              >
-                <MdPeople className="text-2xl group-hover:text-white" />
-                <h3 className=" text-white font-semibold">All Users</h3>
+                <FaUsers className="text-2xl group-hover:text-white" />
+                <h3 className="text-white font-semibold">
+                  All Candidate
+                </h3>
               </Link>
-
               <Link
                 href="/dashboard/allPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
@@ -164,33 +126,18 @@ const SideNav = ({ children }) => {
                 <h3 className="font-semibold">All Poll</h3>
               </Link>
               <Link
-                href="/dashboard/myPoll"
+                href="/dashboard/allVoter"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/myPoll"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
-                    : ""
+                  location === "/dashboard/allVoter"
+                    ? "text-white bg-primary"
+                    : "text-gray-800"
                 }`}
               >
-                <GiVote className="text-2xl " />
-                <h3 className="font-semibold">My Poll</h3>
+                <MdPeople className="text-2xl group-hover:text-white" />
+                <h3 className=" text-white font-semibold">All Users</h3>
               </Link>
-
             </>
           )}
-
-          {/* <Link
-            href="/dashboard/LivePreview"
-            className={`flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200 ${
-              location === "/dashboard/LivePreview"
-                ? "text-white bg-gray-900"
-                : "text-gray-800"
-            }`}
-          >
-            <SiSecurityscorecard className="text-2xl group-hover:text-white" />
-            <h3 className="text-base group-hover:text-white font-semibold">
-              Live Preview
-            </h3>
-          </Link> */}
           <Link
             href="/"
             className="flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200"
@@ -210,12 +157,6 @@ const SideNav = ({ children }) => {
             <MdOutlineSettings className="text-2xl" />
             <h3 className=" font-semibold">Setting</h3>
           </div>
-          {/* <div className="flex mb-2 justify-start items-center gap-4 px-5 hover:bg-gray-900 p-2 rounded-md group cursor-pointer shadow-lg m-auto">
-            <MdOutlineMoreHoriz className="text-2xl text-gray-600 group-hover:text-white" />
-            <h3 className="text-base text-gray-800 group-hover:text-white font-semibold">
-              More
-            </h3>
-          </div> */}
         </div>
 
         {/* logout  */}

@@ -60,12 +60,6 @@ const ShowElections = () => {
 
   // Delete Function Added
   const handleDelete = (id, electionName) => {
-    axios
-      .delete(`https://evs-delta.vercel.app/candidate/under/${electionName}`)
-      .then((res) => {
-        console.log(res.data);
-      });
-
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to fire this!",
@@ -86,6 +80,13 @@ const ShowElections = () => {
             icon: "success",
           });
           refetch();
+          axios
+            .delete(
+              `https://evs-delta.vercel.app/candidate/under/${electionName}`
+            )
+            .then((res) => {
+              console.log(res.data);
+            });
         }
       }
     });

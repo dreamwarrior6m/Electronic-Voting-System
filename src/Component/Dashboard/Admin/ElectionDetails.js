@@ -1,12 +1,9 @@
 "use client";
-import AllVoter from "@/app/dashboard/allVoter/page";
 import useAuth from "@/app/hook/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { MdDeleteForever, MdVerified } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -14,7 +11,6 @@ import ElectionInfo from "./components/ElectionInfo";
 import ElectionCandidate from "./components/ElectionCandidate";
 
 const ElectionDetails = () => {
-  const [allVoter, setAllVoter] = useState();
   const { id } = useParams();
   const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
@@ -25,6 +21,7 @@ const ElectionDetails = () => {
   });
   console.log(elections);
   const filterElection = elections?.filter((election) => election?._id === id);
+  console.log("Election: ",filterElection)
 
   //Get user
   const { user } = useAuth();
@@ -41,9 +38,9 @@ const ElectionDetails = () => {
   });
   // console.log(Voter);
   const filterVoter = Voter?.filter(
-    (voters) => voters?.candidate == filterElection?.[0]?.name
+    (voters) => voters?.candidate == filterElection[0]?.name
   );
-  console.log(filterVoter);
+  console.log("voter: ",filterVoter);
 
   const handleVerify = async (id) => {
     try {
