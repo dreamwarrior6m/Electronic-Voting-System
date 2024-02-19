@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Protected from "@/Component/Protected/Protected";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAuth from "@/app/hook/useAuth";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const ShowElections = () => {
   const { user } = useAuth();
@@ -113,7 +113,7 @@ const ShowElections = () => {
   };
 
   return (
-    <Protected>
+    <AdminProtected>
       <div className="mt-5">
         <div className="grid gap-2">
           {elections?.map((election, index) => (
@@ -156,7 +156,7 @@ const ShowElections = () => {
           ))}
         </div>
       </div>
-    </Protected>
+    </AdminProtected>
   );
 };
 

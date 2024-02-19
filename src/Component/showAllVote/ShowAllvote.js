@@ -2,13 +2,11 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Protected from "../Protected/Protected";
-import { IoShareSocialOutline } from "react-icons/io5";
 import Modal from "../Modal/Modal";
 import { VscUnverified } from "react-icons/vsc";
 import useAuth from "@/app/hook/useAuth";
-import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import ModaProtected from "../Protected/ModaProtected";
+
 
 // time start
 const Timer = ({ startDate1, endDate1 }) => {
@@ -115,7 +113,7 @@ const ShowAllvote = () => {
   };
 
   return (
-    <ModaProtected>
+    <Protected>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg ">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id}>
@@ -124,6 +122,7 @@ const ShowAllvote = () => {
                 <h2 className="text-3xl font-bold text-center mb-5">
                   {allVote?.OrganizatonName}
                   <div className="mx-auto">
+                    <Modal electionId={allVote._id} buttonName={"Apply for a voter"} />
                     {/* <button
                       onClick={() => handleOpenModal(allVote._id)}
                       className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-xl hover:bg-green-200 gap-1"
@@ -300,7 +299,7 @@ const ShowAllvote = () => {
           </div>
         ))}
       </div>
-    </ModaProtected>
+    </Protected>
   );
 };
 
