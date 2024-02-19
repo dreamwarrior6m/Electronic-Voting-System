@@ -34,48 +34,36 @@ const Page = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-  const shareUrl = `electronic-voting-system-beta.vercel.app/${filterAllVote?.[0].name}`;
-
-  const handleCopy = () => {
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "URL copied",
-      showConfirmButton: false,
-      timer: 1000,
-    });
-  };
-
   return (
     <div>
-      <div className="text-white p-5">
+      <div className="text-white p-10">
         <div className="card  bg-base-100 shadow-xl flex md:flex-row">
-          <div className="flex-1">
-            <figure className="px-10 pt-10">
+        <div className="flex justify-center mx-auto">
+        <div className="grid-cols-1 justify-between items-center lg:flex gap-10">
+            <figure className="px-10 pt-10 ">
               <Image
                 src={filterAllVote?.[0].photo}
                 alt="alt"
                 width={300}
                 height={300}
+                className="rounded-lg"
               />
             </figure>
-            <div className="card-body items-center text-center">
-              <h2 className="card-title">
-                <span className="text-xl font-bold text-red-600"></span>
-              </h2>
-              <p>Election Name: {filterAllVote?.[0].name} </p>
-              <div className="">
-                <h2 className="">
+            <div className=" items-center ">
+              
+              <h1 className=" text-2xl text-center font-bold mb-5   lg:text-5xl">Election Name: {filterAllVote?.[0].name} </h1>
+              <div className="mb-5">
+                <h2 className="text-green-400 text-xl   font-bold">
                   Start: {filterAllVote?.[0].startDate} (
                   {filterAllVote?.[0].startTime})
                 </h2>
-                <h2 className="">
+                <h2 className=" text-red-400 text-xl  font-bold">
                   End: {filterAllVote?.[0].endDate} (
                   {filterAllVote?.[0].endTime})
                 </h2>
               </div>
 
-              <div className="card-actions justify-center">
+              <div className=" lg:mt-20 flex  gap-2">
                 <Link
                   href={`/participate/${filterAllVote?.[0].name}`}
                   className="btn btn-sm btn-primary"
@@ -85,14 +73,14 @@ const Page = () => {
                 {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
                 <Link
                   href={`/show-all-vote/${filterAllVote?.[0].name}`}
-                  className="btn btn-sm"
+                  className="btn btn-sm btn-primary "
                 >
                   {" "}
                   Candidates
                 </Link>
                 <Link
                   href={`/result/${filterAllVote?.[0].name}`}
-                  className="btn btn-sm"
+                  className="btn btn-sm btn-primary"
                 >
                   {" "}
                   result
@@ -100,6 +88,7 @@ const Page = () => {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>
