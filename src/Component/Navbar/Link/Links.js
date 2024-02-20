@@ -36,11 +36,15 @@ const Links = () => {
       title: "Create Vote",
     },
 
-    {
-      id: 6,
-      path: "/login",
-      title: "Log In",
-    },
+    ...(user
+      ? []
+      : [
+          {
+            id: 6,
+            path: "/login",
+            title: "Log In",
+          },
+        ]),
   ];
   const [open, setopen] = useState(false);
 

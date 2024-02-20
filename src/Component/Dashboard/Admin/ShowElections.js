@@ -13,7 +13,7 @@ const ShowElections = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections1"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
   });
@@ -71,7 +71,7 @@ const ShowElections = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/create-vote/${id}`
+          `https://evs-delta.vercel.app/create-vote/${id}`
         );
         if (res.data.deletedCount > 0) {
           Swal.fire({
@@ -82,7 +82,9 @@ const ShowElections = () => {
           refetch();
           //under all candidate
           axios
-            .delete(`http://localhost:5000/candidate/under/${electionName}`)
+            .delete(
+              `https://evs-delta.vercel.app/candidate/under/${electionName}`
+            )
             .then((res) => {
               console.log(res.data);
             });
@@ -90,7 +92,7 @@ const ShowElections = () => {
           //under all users
           axios
             .delete(
-              `http://localhost:5000/candidate/under/users/${electionName}`
+              `https://evs-delta.vercel.app/candidate/under/users/${electionName}`
             )
             .then((res) => {
               console.log(res.data);
@@ -111,7 +113,7 @@ const ShowElections = () => {
     };
 
     axios
-      .post("http://localhost:5000/notification", notification)
+      .post("https://evs-delta.vercel.app/notification", notification)
       .then((response) => {
         console.log(response.data);
       })
@@ -143,7 +145,7 @@ const ShowElections = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                    <button className="border border-green-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
                       See Details
                     </button>
                   </Link>

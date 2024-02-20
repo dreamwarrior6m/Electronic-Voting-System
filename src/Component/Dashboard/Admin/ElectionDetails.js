@@ -12,7 +12,7 @@ const ElectionDetails = () => {
   const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
   });
@@ -25,7 +25,7 @@ const ElectionDetails = () => {
     queryKey: ["CandidateEmail"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/candidate/under/users/${filterElection[0]?.name}`
+        `https://evs-delta.vercel.app/candidate/under/users/${filterElection[0]?.name}`
       );
       return res.data;
     },
@@ -36,7 +36,7 @@ const ElectionDetails = () => {
   const handleCandidateVerify = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/candidate/verify/${id}`
+        `https://evs-delta.vercel.app/candidate/verify/${id}`
       );
       if (res.data.modifiedCount > 0) {
         Swal.fire({
@@ -54,7 +54,7 @@ const ElectionDetails = () => {
   const handleVerify = async (id) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/candidateUnderVoter/verify/${id}`
+        `https://evs-delta.vercel.app/candidateUnderVoter/verify/${id}`
       );
       if (res.data.modifiedCount > 0) {
         Swal.fire({
@@ -80,9 +80,7 @@ const ElectionDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(
-          `http://localhost:5000/candidate/${id}`
-        );
+        const res = await axios.delete(`https://evs-delta.vercel.app/candidate/${id}`);
 
         if (res.data.deletedCount > 0) {
           Swal.fire({
@@ -108,7 +106,7 @@ const ElectionDetails = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/candidateUnderVoter/${id}`
+          `https://evs-delta.vercel.app/candidateUnderVoter/${id}`
         );
 
         if (res.data.deletedCount > 0) {
@@ -125,7 +123,7 @@ const ElectionDetails = () => {
   const { data: candidates = [] } = useQuery({
     queryKey: ["candidates1"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/candidate");
+      const res = await axios.get("https://evs-delta.vercel.app/candidate");
       return res.data;
     },
     refetchInterval: 1000,
@@ -175,18 +173,18 @@ const ElectionDetails = () => {
       </div>
 
       {/* All Voter */}
-      <div className="grid grid-cols-2 gap-2">
-        <div className="mt-10">
+      <div className="grid grid-cols-2 gap-2 mt-8">
+        <div className="">
           <div>
             <p className="font-bold text-center text-2xl  ">
-              All Candidate : {filterCandidate?.length}
+              All Candidates : {filterCandidate?.length}
             </p>
-            <hr className="w-96 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
-            <div className="overflow-x-auto p-6 pb-12">
+            <div className="overflow-x-auto py-2 pb-12">
               <table className="table text-black">
                 <thead>
-                  <tr className="text-md font-semibold text-center border-b-2 border-gray-500">
+                  <tr className="text-md text-white font-semibold text-center border-b-2 bg-gray-400">
                     <th>
                       <label>
                         <p className="">Number</p>
@@ -213,7 +211,7 @@ const ElectionDetails = () => {
                       {/* <td>{candidate.candidateName}</td> */}
                       <td>{candidate.candidateEmail}</td>
                       <td>
-                        <div>
+                        <div className="flex justify-center items-center">
                           {candidate?.isverify == "true" ? (
                             <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
                           ) : (
@@ -245,25 +243,25 @@ const ElectionDetails = () => {
             </div>
           </div>
         </div>
-        <div className="mt-10">
+        <div className="">
           <div>
             <p className="font-bold text-center text-2xl  ">
-              All Candidate : {Voter?.length}
+              All Voters : {Voter?.length}
             </p>
-            <hr className="w-96 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
-            <div className="overflow-x-auto p-6 pb-12">
-              <table className="table text-black">
+            <div className="overflow-x-auto py-2 pb-12">
+              <table className="table text-gray-900">
                 <thead>
-                  <tr className="text-md font-semibold text-center border-b-2 border-gray-500">
+                  <tr className="text-md font-semibold text-center border-b-2 bg-gray-400">
                     <th>
                       <label>
-                        <p className="">Number</p>
+                        <p className="text-white">Number</p>
                       </label>
                     </th>
                     {/* <th>Name</th> */}
-                    <th>Email</th>
-                    <th>Actions</th>
+                    <th className="text-white">Email</th>
+                    <th className="text-white">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -282,7 +280,7 @@ const ElectionDetails = () => {
                       {/* <td>{candidate.candidateName}</td> */}
                       <td>{voter.candidateEmail}</td>
                       <td>
-                        <div>
+                        <div className="flex justify-center items-center">
                           {voter?.isverify == "true" ? (
                             <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
                           ) : (

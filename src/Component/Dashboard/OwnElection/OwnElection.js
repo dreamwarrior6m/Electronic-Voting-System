@@ -15,7 +15,7 @@ const OwnElection = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections2"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
   });
@@ -67,17 +67,18 @@ const OwnElection = () => {
   };
 
   const handleDelete = (id, electionName) => {
-
     //under all candidate
     axios
-      .delete(`http://localhost:5000/candidate/under/${electionName}`)
+      .delete(`https://evs-delta.vercel.app/candidate/under/${electionName}`)
       .then((res) => {
         console.log(res.data);
       });
-    
+
     //under all users
     axios
-      .delete(`http://localhost:5000/candidate/under/users/${electionName}`)
+      .delete(
+        `https://evs-delta.vercel.app/candidate/under/users/${electionName}`
+      )
       .then((res) => {
         console.log(res.data);
       });
@@ -93,7 +94,7 @@ const OwnElection = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/create-vote/${id}`
+          `https://evs-delta.vercel.app/create-vote/${id}`
         );
         if (res.data.deletedCount > 0) {
           Swal.fire({
@@ -132,7 +133,7 @@ const OwnElection = () => {
     };
     console.log(electionId);
     axios
-      .put(`http://localhost:5000/create-vote/update/${electionId}`, obj)
+      .put(`https://evs-delta.vercel.app/create-vote/update/${electionId}`, obj)
       .then((res) => {
         console.log(res.data);
         if (res.data.modifiedCount > 0) {
@@ -156,7 +157,7 @@ const OwnElection = () => {
     };
 
     axios
-      .post("http://localhost:5000/notification", notification)
+      .post("https://evs-delta.vercel.app/notification", notification)
       .then((response) => {
         console.log(response.data);
       })
@@ -188,7 +189,7 @@ const OwnElection = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                    <button className="border border-green-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
                       See Details
                     </button>
                   </Link>
@@ -218,13 +219,13 @@ const OwnElection = () => {
 
               <>
                 <dialog id={`my_modal_3_${election._id}`} className="modal">
-                  <div className="modal-box bg-slate-200 ">
+                  <div className="modal-box bg-gray-900 ">
                     <form method="dialog">
-                      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                      <button className="btn btn-sm btn-circle btn-ghost text-white absolute right-2 top-2">
                         ✕
                       </button>
                     </form>
-                    <h3 className="font-bold text-2xl text-center mb-[10px]">
+                    <h3 className="font-bold text-2xl text-white text-center mb-[10px]">
                       Update Your Election
                     </h3>
                     <form
@@ -234,14 +235,12 @@ const OwnElection = () => {
                     >
                       <div className="form-control">
                         <label className="label">
-                          <span className="text-gray-800 dark:text-white">
-                            Organization Name
-                          </span>
+                          <span className="text-white">Organization Name</span>
                         </label>
                         <input
                           type="text"
                           placeholder="Change Organization Name"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.OrganizatonName}
                           name="OrganizatonName"
@@ -250,12 +249,10 @@ const OwnElection = () => {
 
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            Type
-                          </span>
+                          <span className=" text-white">Type</span>
                         </label>
                         <select
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           name="Type"
                         >
                           <option value={election.Type}>{election.Type}</option>
@@ -266,14 +263,14 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
+                          <span className=" text-white">
                             Vote Name (read Only)
                           </span>
                         </label>
                         <input
                           type="text"
                           placeholder="Change The vote Name"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.name}
                           name="voteName"
@@ -282,14 +279,12 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            Organization Logo
-                          </span>
+                          <span className=" text-white">Organization Logo</span>
                         </label>
                         <input
                           type="text"
                           placeholder="Change Photo"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.photo}
                           name="photo"
@@ -297,14 +292,12 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            Start Date
-                          </span>
+                          <span className=" text-white">Start Date</span>
                         </label>
                         <input
                           type="date"
                           placeholder="Change Start Date"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.startDate}
                           name="startDate"
@@ -312,14 +305,12 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            Start Time
-                          </span>
+                          <span className=" text-white">Start Time</span>
                         </label>
                         <input
                           type="time"
                           placeholder="Change Start Time"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.startTime}
                           name="startTime"
@@ -327,14 +318,12 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            End Date
-                          </span>
+                          <span className=" text-white">End Date</span>
                         </label>
                         <input
                           type="date"
                           placeholder="Change End Date"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.endDate}
                           name="endDate"
@@ -342,14 +331,12 @@ const OwnElection = () => {
                       </div>
                       <div className="form-control">
                         <label className="label">
-                          <span className=" text-gray-800 dark:text-white">
-                            End Time
-                          </span>
+                          <span className=" text-white">End Time</span>
                         </label>
                         <input
                           type="time"
                           placeholder="Change End Time"
-                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                           required
                           defaultValue={election.endTime}
                           name="endTime"

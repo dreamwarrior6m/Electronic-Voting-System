@@ -17,7 +17,7 @@ const allPoll = () => {
   const { data, refetch } = useQuery({
     queryKey: ["create-poll"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/create-poll");
+      const res = await axios.get("https://evs-delta.vercel.app/create-poll");
       setAllPoll(res?.data);
       return res?.data;
     },
@@ -40,7 +40,7 @@ const allPoll = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `http://localhost:5000/create-poll/${id}`
+          `https://evs-delta.vercel.app/create-poll/${id}`
         );
         if (res.data.deletedCount > 0) {
           setAllPoll((prevPoll) => prevPoll.filter((vote) => vote._id !== id));

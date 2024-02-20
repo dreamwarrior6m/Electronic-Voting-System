@@ -10,7 +10,7 @@ const Modal = ({ electionId, buttonName, type }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/create-vote/${electionId}`)
+      .get(`https://evs-delta.vercel.app/create-vote/${electionId}`)
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
   }, [electionId]);
@@ -24,7 +24,7 @@ const Modal = ({ electionId, buttonName, type }) => {
     const voteName = form.candidate.value;
     const candidateID = form.candidateID.value;
     const brand = form.brand.value;
-    const isVerify = false;
+    const isverify = "false";
     const moderatorEmail = data?.email;
     const voteCount = 0;
 
@@ -33,7 +33,7 @@ const Modal = ({ electionId, buttonName, type }) => {
       candidateEmail,
       voteName,
       candidatePhoto,
-      isVerify,
+      isverify,
       moderatorEmail,
       voteCount,
       candidateID,
@@ -42,7 +42,7 @@ const Modal = ({ electionId, buttonName, type }) => {
 
     if (type === 1) {
       axios
-        .post(`http://localhost:5000/candidate/under/users`, formData)
+        .post(`https://evs-delta.vercel.app/candidate/under/users`, formData)
         .then((res) => {
           console.log(res.data);
           if (res.data.insertedId) {
@@ -61,7 +61,7 @@ const Modal = ({ electionId, buttonName, type }) => {
         });
     } else if (type === 2) {
       axios
-        .post(`http://localhost:5000/candidate`, formData)
+        .post(`https://evs-delta.vercel.app/candidate`, formData)
         .then((res) => {
           console.log(res.data);
           if (res.data.insertedId) {
@@ -89,9 +89,10 @@ const Modal = ({ electionId, buttonName, type }) => {
             .getElementById(`my_modal_3_${electionId}_${type}`)
             .showModal()
         }
-        className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-md hover:bg-green-200 gap-1"
+        className="flex justify-center items-center text-lg border border-primary px-2 py-1 rounded-md hover:bg-primary/20 gap-1 w-full"
       >
-        <VscUnverified /> <span className="text-[16px]">{buttonName}</span>
+        <VscUnverified />{" "}
+        <span className="text-[16px] py-[5px]">{buttonName}</span>
       </button>
 
       <>
