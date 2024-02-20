@@ -2,16 +2,15 @@ import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { VscUnverified } from "react-icons/vsc";
-import { CgClose } from "react-icons/cg";
+import Swal from "sweetalert2";
 
 const Modal = ({ electionId, buttonName, type }) => {
   const { user } = useAuth();
   const [data, setData] = useState([]);
 
-
   useEffect(() => {
     axios
-      .get(`https://evs-delta.vercel.app/create-vote/${electionId}`)
+      .get(`http://localhost:5000/create-vote/${electionId}`)
       .then((res) => setData(res.data))
       .catch((err) => console.error(err));
   }, [electionId]);
@@ -41,41 +40,62 @@ const Modal = ({ electionId, buttonName, type }) => {
       brand,
     };
 
-    console.log("Form Data:", formData);
-
-    // axios
-    //   .post(`https://evs-delta.vercel.app/candidate/under/users`, formData)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //     if (res.data.insertedId) {
-    //       Swal.fire({
-    //         position: "top-end",
-    //         icon: "error",
-    //         title: "some thing is Wrong",
-    //         showConfirmButton: false,
-    //         timer: 2000,
-    //       });
-    //
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("There was an error!", error);
-    //   });
+    if (type === 1) {
+      axios
+        .post(`http://localhost:5000/candidate/under/users`, formData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Apply Successfully",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            form.reset();
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    } else if (type === 2) {
+      axios
+        .post(`http://localhost:5000/candidate`, formData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Apply Successfully",
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            form.reset();
+          }
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+    }
   };
 
   return (
     <>
       <button
         onClick={() =>
-          document.getElementById(`my_modal_3_${electionId}`).showModal()
+          document
+            .getElementById(`my_modal_3_${electionId}_${type}`)
+            .showModal()
         }
-        className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-xl hover:bg-green-200 gap-1"
+        className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-md hover:bg-green-200 gap-1"
       >
         <VscUnverified /> <span className="text-[16px]">{buttonName}</span>
       </button>
 
       <>
-        <dialog id={`my_modal_3_${electionId}`} className="modal z-10">
+        <dialog id={`my_modal_3_${electionId}_${type}`} className="modal z-10">
           <div className="modal-box bg-gray-900">
             <form method="dialog">
               <button className="btn btn-sm text-white btn-circle btn-ghost absolute right-2 top-2">
@@ -166,6 +186,11 @@ const Modal = ({ electionId, buttonName, type }) => {
                 />
               </div>
               <button
+                onClick={() =>
+                  document
+                    .getElementById(`my_modal_3_${electionId}_${type}`)
+                    .close()
+                }
                 type="submit"
                 className="bg-gray-700 font-bold mt-2 px-4 py-3 rounded-sm text-white text-base lg:col-span-2"
               >

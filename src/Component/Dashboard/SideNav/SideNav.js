@@ -24,7 +24,7 @@ const SideNav = ({ children }) => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`
+            `http://localhost:5000/users/${user?.email}`
           );
           setusers(res.data);
         }
@@ -110,9 +110,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <FaUsers className="text-2xl group-hover:text-white" />
-                <h3 className="text-white font-semibold">
-                  All Candidate
-                </h3>
+                <h3 className="text-white font-semibold">All Candidate</h3>
               </Link>
               <Link
                 href="/dashboard/allPoll"

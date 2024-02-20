@@ -15,7 +15,7 @@ const HomePage = () => {
   const [users, setusers] = useState([]);
 
   const [allUser, setAlluser] = useState([]);
-  const userData = `https://evs-delta.vercel.app/users`;
+  const userData = `http://localhost:5000/users`;
   useEffect(() => {
     fetch(userData)
       .then((res) => res.json())
@@ -35,7 +35,7 @@ const HomePage = () => {
     const alldata = { name, date };
     console.log(alldata);
 
-    fetch(`https://evs-delta.vercel.app/users/${user?.email}`, {
+    fetch(`http://localhost:5000/users/${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -58,7 +58,7 @@ const HomePage = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`
+            `http://localhost:5000/users/${user?.email}`
           );
           setusers(res.data);
         }

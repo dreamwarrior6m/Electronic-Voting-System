@@ -11,7 +11,7 @@ const Page = () => {
   console.log(id);
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("http://localhost:5000/create-vote")
       .then((res) => {
         setAllVote(res?.data);
       })
@@ -90,10 +90,9 @@ const Page = () => {
           </div>
         </div>
         <div className="flex justify-end -mt-10">
-                    <h1> share</h1>
-                  </div>
+          <h1> share</h1>
+        </div>
       </div>
-     
     </div>
   );
 };

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import useAuth from "@/app/hook/useAuth";
 import Loading from "@/app/loading";
@@ -15,9 +15,7 @@ const AdminProtected = ({ children }) => {
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["poll-ans"],
     queryFn: async () => {
-      const res = await axios.get(
-        `https://evs-delta.vercel.app/users/${user?.email}`
-      );
+      const res = await axios.get(`http://localhost:5000/users/${user?.email}`);
       setAllUser(res?.data);
       return res?.data;
     },

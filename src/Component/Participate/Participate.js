@@ -32,7 +32,7 @@ const Participate = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/CandiateUnderUser")
+      .get("http://localhost:5000/CandiateUnderUser")
       .then((res) => {
         setCandidateUnderUser(res?.data);
       })
@@ -48,7 +48,7 @@ const Participate = () => {
   console.log(filterUndreUser);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
+    fetch("http://localhost:5000/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -57,7 +57,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   // useEffect(() => {
-  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+  //   fetch(`http://localhost:5000/create-vote/${id}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setShowVote(data);
@@ -69,14 +69,14 @@ const Participate = () => {
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/participate");
+      const res = await axios.get("http://localhost:5000/participate");
       setParticipate(res?.data);
       return res?.data;
     },
   });
 
   // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/participate")
+  //   fetch("http://localhost:5000/participate")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setParticipate(data);
@@ -111,7 +111,7 @@ const Participate = () => {
       filterParticipet?.[0]?.email != user?.email &&
       filterUndreUser?.[0]?.isverify == "true"
     ) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+      fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
@@ -123,7 +123,7 @@ const Participate = () => {
           // add vote number
           axios
             .patch(
-              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
+              `http://localhost:5000/candidate/${selectCandidateId}`,
               updateVoteCount
             )
             .then((res) => {
@@ -140,10 +140,7 @@ const Participate = () => {
               // console.log(res);
               // participate api update
               axios
-                .post(
-                  "https://evs-delta.vercel.app/participate",
-                  updateParticipate
-                )
+                .post("http://localhost:5000/participate", updateParticipate)
                 .then((res) => {
                   console.log("partcipate", res);
                 })
@@ -184,60 +181,63 @@ const Participate = () => {
   };
 
   return (
-   <Protected>
-     <div className="text-white p-5">
-      {filterCandidate?.map((candidat, ind) => (
-        <>
-          <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
-            <label className="label cursor-pointer">
-              <span className="label-text">
-                <Image
-                  className=" rounded-full"
-                  src={candidat?.candidatePhoto}
-                  alt="alt"
-                  width={100}
-                  height={100}
+    <Protected>
+      <div className="text-white p-5">
+        {filterCandidate?.map((candidat, ind) => (
+          <>
+            <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
+              <label className="label cursor-pointer">
+                <span className="label-text">
+                  <Image
+                    className=" rounded-full"
+                    src={candidat?.candidatePhoto}
+                    alt="alt"
+                    width={100}
+                    height={100}
+                  />
+                </span>
+                <span className="label-text">
+                  Name: {candidat?.candidateName}
+                </span>
+                <input
+                  onClick={() => handalCountVote(candidat?._id)}
+                  type="radio"
+                  name="radio-10"
+                  className="radio checked:bg-blue-500"
                 />
-              </span>
-              <span className="label-text">
-                Name: {candidat?.candidateName}
-              </span>
-              <input
-                onClick={() => handalCountVote(candidat?._id)}
-                type="radio"
-                name="radio-10"
-                className="radio checked:bg-blue-500"
-              />
-            </label>
-            <hr></hr>
-          </div>
-        </>
-      ))}
-      <div className="">
-        {filterCandidate?.length == 0 && (
-          <h2 className="text-center text-xl md:text-3xl font-bold p-5">
-            No candidate partcipate
-          </h2>
-        )}
+              </label>
+              <hr></hr>
+            </div>
+          </>
+        ))}
+        <div className="">
+          {filterCandidate?.length == 0 && (
+            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+              No candidate partcipate
+            </h2>
+          )}
+        </div>
+        <div className="text-center pt-5">
+          {filterParticipet?.[0]?.email == user?.email ||
+          filterCandidate?.length == 0 ? (
+            <button
+              disabled
+              onClick={() => handaleAddVote()}
+              className="btn btn-primary"
+            >
+              You already voted
+            </button>
+          ) : (
+            <button
+              onClick={() => handaleAddVote()}
+              className="btn btn-primary"
+            >
+              submit
+            </button>
+          )}
+        </div>
       </div>
-      <div className="text-center pt-5">
-        {filterParticipet?.[0]?.email == user?.email ||
-        filterCandidate?.length == 0 ? (
-          <button
-            disabled
-            onClick={() => handaleAddVote()}
-            className="btn btn-primary"
-          >
-            You already voted
-          </button>
-        ) : (
-          <button onClick={() => handaleAddVote()} className="btn btn-primary">
-            submit
-          </button>
-        )}
-      </div>
-    </div>
-   </Protected>
+    </Protected>
   );
 };
 
