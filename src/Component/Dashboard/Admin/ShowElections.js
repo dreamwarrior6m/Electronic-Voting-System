@@ -13,7 +13,7 @@ const ShowElections = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections1"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
+      const res = await axios.get("http://localhost:5000/create-vote");
       return res.data;
     },
   });
@@ -71,18 +71,26 @@ const ShowElections = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `https://evs-delta.vercel.app/create-vote/${id}`
+          `http://localhost:5000/create-vote/${id}`
         );
         if (res.data.deletedCount > 0) {
           Swal.fire({
-            title: "fire!",
+            title: "deleted",
             text: `this Candidate has been deleted.`,
             icon: "success",
           });
           refetch();
+          //under all candidate
+          axios
+            .delete(`http://localhost:5000/candidate/under/${electionName}`)
+            .then((res) => {
+              console.log(res.data);
+            });
+
+          //under all users
           axios
             .delete(
-              `https://evs-delta.vercel.app/candidate/under/${electionName}`
+              `http://localhost:5000/candidate/under/users/${electionName}`
             )
             .then((res) => {
               console.log(res.data);
@@ -103,7 +111,7 @@ const ShowElections = () => {
     };
 
     axios
-      .post("https://evs-delta.vercel.app/notification", notification)
+      .post("http://localhost:5000/notification", notification)
       .then((response) => {
         console.log(response.data);
       })
