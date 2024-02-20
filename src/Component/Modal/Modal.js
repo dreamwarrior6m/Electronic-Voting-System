@@ -1,0 +1,182 @@
+import useAuth from "@/app/hook/useAuth";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { VscUnverified } from "react-icons/vsc";
+import { CgClose } from "react-icons/cg";
+
+const Modal = ({ electionId, buttonName, type }) => {
+  const { user } = useAuth();
+  const [data, setData] = useState([]);
+
+
+  useEffect(() => {
+    axios
+      .get(`https://evs-delta.vercel.app/create-vote/${electionId}`)
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  }, [electionId]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const candidateName = form.name.value;
+    const candidateEmail = form.email.value;
+    const candidatePhoto = form.photo.value;
+    const voteName = form.candidate.value;
+    const candidateID = form.candidateID.value;
+    const brand = form.brand.value;
+    const isVerify = false;
+    const moderatorEmail = data?.email;
+    const voteCount = 0;
+
+    const formData = {
+      candidateName,
+      candidateEmail,
+      voteName,
+      candidatePhoto,
+      isVerify,
+      moderatorEmail,
+      voteCount,
+      candidateID,
+      brand,
+    };
+
+    console.log("Form Data:", formData);
+
+    // axios
+    //   .post(`https://evs-delta.vercel.app/candidate/under/users`, formData)
+    //   .then((response) => {
+    //     console.log(response.data);
+    //     if (res.data.insertedId) {
+    //       Swal.fire({
+    //         position: "top-end",
+    //         icon: "error",
+    //         title: "some thing is Wrong",
+    //         showConfirmButton: false,
+    //         timer: 2000,
+    //       });
+    //
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("There was an error!", error);
+    //   });
+  };
+
+  return (
+    <>
+      <button
+        onClick={() =>
+          document.getElementById(`my_modal_3_${electionId}`).showModal()
+        }
+        className="flex justify-center items-center text-lg border border-green-500 px-2 py-1 rounded-xl hover:bg-green-200 gap-1"
+      >
+        <VscUnverified /> <span className="text-[16px]">{buttonName}</span>
+      </button>
+
+      <>
+        <dialog id={`my_modal_3_${electionId}`} className="modal z-10">
+          <div className="modal-box bg-gray-900">
+            <form method="dialog">
+              <button className="btn btn-sm text-white btn-circle btn-ghost absolute right-2 top-2">
+                ✕
+              </button>
+            </form>
+            <h3 className="font-bold text-white text-2xl text-center mb-[10px]">
+              {buttonName}
+            </h3>
+            <form onSubmit={handleSubmit} className="grid lg:grid-cols-2 gap-2">
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Name</span>
+                </label>
+                <input
+                  type="text"
+                  disabled
+                  defaultValue={user?.displayName}
+                  id="name"
+                  name="name"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Email</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  disabled
+                  defaultValue={user?.email}
+                  name="email"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Photo</span>
+                </label>
+                <input
+                  type="text"
+                  id="photo"
+                  disabled
+                  defaultValue={user?.photoURL}
+                  name="photo"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Vote Name</span>
+                </label>
+                <input
+                  type="text"
+                  id=""
+                  disabled
+                  defaultValue={data?.name}
+                  name="candidate"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Your ID</span>
+                </label>
+                <input
+                  type="text"
+                  id="text"
+                  required
+                  placeholder="Enter Your Id"
+                  name="candidateID"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="text-white text-base">Brand Name</span>
+                </label>
+                <input
+                  type="text"
+                  id="text"
+                  required
+                  placeholder="Enter Your Brand Name"
+                  name="brand"
+                  className="input input-bordered py-2 rounded-sm mb-2 text-white text-base"
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-gray-700 font-bold mt-2 px-4 py-3 rounded-sm text-white text-base lg:col-span-2"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </dialog>
+      </>
+    </>
+  );
+};
+
+export default Modal;

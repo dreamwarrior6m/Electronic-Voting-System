@@ -9,13 +9,16 @@ import { auth } from "@/app/firebase/config";
 import Image from "next/image";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+import Protected from "../Protected/Protected";
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
   const [selectCandidateId, setSelectCandidateId] = useState();
-  const [showVote, setShowVote] = useState();
+  // const [showVote, setShowVote] = useState();
   const [voterEmail, setVoterEmail] = useState();
   const [participate, setParticipate] = useState();
+  const [candidateUnderUser, setCandidateUnderUser] = useState();
   const { id } = useParams();
   const [user] = useAuthState(auth);
   const router = useRouter();
@@ -28,41 +31,67 @@ const Participate = () => {
   // console.log(updateParticipate);
 
   useEffect(() => {
+    axios
+      .get("https://evs-delta.vercel.app/CandiateUnderUser")
+      .then((res) => {
+        setCandidateUnderUser(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  console.log(candidateUnderUser);
+
+  const filterUndreUser = candidateUnderUser?.filter(
+    (underUser) => underUser?.candidate == id && underUser?.email == user?.email
+  );
+  console.log(filterUndreUser);
+
+  useEffect(() => {
     fetch("https://evs-delta.vercel.app/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
       });
   }, []);
-  console.log(allCandidate);
+  // console.log(allCandidate);
 
-  useEffect(() => {
-    fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setShowVote(data);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setShowVote(data);
+  //     });
+  // }, [id]);
 
   //participate get data
 
-  useEffect(() => {
-    fetch("https://evs-delta.vercel.app/participate")
-      .then((res) => res.json())
-      .then((data) => {
-        setParticipate(data);
-      });
-  }, []);
+  const { data, refetch } = useQuery({
+    queryKey: ["participate"],
+    queryFn: async () => {
+      const res = await axios.get("https://evs-delta.vercel.app/participate");
+      setParticipate(res?.data);
+      return res?.data;
+    },
+  });
+
+  // useEffect(() => {
+  //   fetch("https://evs-delta.vercel.app/participate")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setParticipate(data);
+  //     });
+  // }, []);
   // console.log(participate);
 
   // console.log(showVote?.voterEmail);
-  const oldVoterEmail = showVote?.voterEmail;
+  // const oldVoterEmail = showVote?.voterEmail;
   // console.log(voterEmail);
 
   const filterCandidate = allCandidate?.filter(
     (candidate) => candidate?.voteName == id
   );
-  console.log(filterCandidate);
+  // console.log(filterCandidate);
 
   const handalCountVote = (id) => {
     // console.log(id);
@@ -73,12 +102,15 @@ const Participate = () => {
     (participat) =>
       participat?.email === user?.email && participat?.voteName === id
   );
-  console.log(filterParticipet?.[0]?.email);
+  // console.log(filterParticipet?.[0]?.email);
 
   const handaleAddVote = async () => {
     // console.log(candidat?.adminEmail);
 
-    if (filterParticipet?.[0]?.email != user?.email) {
+    if (
+      filterParticipet?.[0]?.email != user?.email &&
+      filterUndreUser?.[0]?.isverify == "true"
+    ) {
       fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
         .then((res) => res.json())
         .then((data) => {
@@ -95,6 +127,7 @@ const Participate = () => {
               updateVoteCount
             )
             .then((res) => {
+              refetch();
               router.push(`/result/${id}`);
               Swal.fire({
                 position: "top-end",
@@ -103,6 +136,7 @@ const Participate = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+
               // console.log(res);
               // participate api update
               axios
@@ -122,7 +156,7 @@ const Participate = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: "You already voted!",
+                title: "You are not verified user",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -132,7 +166,7 @@ const Participate = () => {
               Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: "You already voted!",
+                title: "You are not verified user",
                 showConfirmButton: false,
                 timer: 1500,
               });
@@ -142,7 +176,7 @@ const Participate = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "You already voted",
+        title: "You are not verified user",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -150,7 +184,8 @@ const Participate = () => {
   };
 
   return (
-    <div className="text-white p-5">
+   <Protected>
+     <div className="text-white p-5">
       {filterCandidate?.map((candidat, ind) => (
         <>
           <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
@@ -202,6 +237,7 @@ const Participate = () => {
         )}
       </div>
     </div>
+   </Protected>
   );
 };
 

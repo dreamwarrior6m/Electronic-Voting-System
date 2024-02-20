@@ -1,13 +1,17 @@
 import ShowElections from "@/Component/Dashboard/Admin/ShowElections";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const page = () => {
   return (
-    <div>
-      <div>
-          <h3 className="text-3xl font-bold text-gray-700 text-center pt-2 pb-6">
-            All Elections
-          </h3>
-        </div>
+    <div className="mt-5">
+      <div className="grid grid-cols-12 text-white font-semibold text-center">
+        <p className="col-span-1">Number</p>
+        <p className="col-span-4">Organization Name</p>
+        <p className="col-span-3">Election Name</p>
+        <p className="col-span-1">Status</p>
+        <p className="col-span-2">Details</p>
+        <p className="col-span-1">Action</p>
+      </div>
       <ShowElections />
     </div>
   );

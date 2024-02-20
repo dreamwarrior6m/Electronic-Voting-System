@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 
 const Protected = ({children}) => {
-    const {user,loading}= useAuth()
+    const {user,loading} = useAuth();
     const router = useRouter()
     if(loading){
       return <Loading></Loading>
