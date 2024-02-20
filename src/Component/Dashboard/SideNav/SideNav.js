@@ -24,7 +24,7 @@ const SideNav = ({ children }) => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `http://localhost:5000/users/${user?.email}`
+            `https://evs-delta.vercel.app/users/${user?.email}`
           );
           setusers(res.data);
         }

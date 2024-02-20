@@ -11,7 +11,7 @@ const Page = () => {
   console.log(id);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/create-vote")
+      .get("https://evs-delta.vercel.app/create-vote")
       .then((res) => {
         setAllVote(res?.data);
       })

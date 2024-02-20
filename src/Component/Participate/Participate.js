@@ -32,7 +32,7 @@ const Participate = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/CandiateUnderUser")
+      .get("https://evs-delta.vercel.app/CandiateUnderUser")
       .then((res) => {
         setCandidateUnderUser(res?.data);
       })
@@ -48,7 +48,7 @@ const Participate = () => {
   console.log(filterUndreUser);
 
   useEffect(() => {
-    fetch("http://localhost:5000/candidate")
+    fetch("https://evs-delta.vercel.app/candidate")
       .then((res) => res.json())
       .then((data) => {
         setAllCandidate(data);
@@ -57,7 +57,7 @@ const Participate = () => {
   // console.log(allCandidate);
 
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/create-vote/${id}`)
+  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setShowVote(data);
@@ -69,14 +69,14 @@ const Participate = () => {
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/participate");
+      const res = await axios.get("https://evs-delta.vercel.app/participate");
       setParticipate(res?.data);
       return res?.data;
     },
   });
 
   // useEffect(() => {
-  //   fetch("http://localhost:5000/participate")
+  //   fetch("https://evs-delta.vercel.app/participate")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setParticipate(data);
@@ -111,7 +111,7 @@ const Participate = () => {
       filterParticipet?.[0]?.email != user?.email &&
       filterUndreUser?.[0]?.isverify == "true"
     ) {
-      fetch(`http://localhost:5000/candidate/${selectCandidateId}`)
+      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
         .then((res) => res.json())
         .then((data) => {
           // console.log(data);
@@ -123,7 +123,7 @@ const Participate = () => {
           // add vote number
           axios
             .patch(
-              `http://localhost:5000/candidate/${selectCandidateId}`,
+              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
               updateVoteCount
             )
             .then((res) => {
@@ -140,7 +140,10 @@ const Participate = () => {
               // console.log(res);
               // participate api update
               axios
-                .post("http://localhost:5000/participate", updateParticipate)
+                .post(
+                  "https://evs-delta.vercel.app/participate",
+                  updateParticipate
+                )
                 .then((res) => {
                   console.log("partcipate", res);
                 })

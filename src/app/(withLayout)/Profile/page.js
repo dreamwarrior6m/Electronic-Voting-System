@@ -13,7 +13,7 @@ const Page = () => {
   const [users, setusers] = useState([]);
   // console.log(user?.email);
   const [allUser, setAlluser] = useState([]);
-  const userData = `http://localhost:5000/users`;
+  const userData = `https://evs-delta.vercel.app/users`;
   useEffect(() => {
     fetch(userData)
       .then((res) => res.json())
@@ -54,7 +54,7 @@ const Page = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `http://localhost:5000/users/${user?.email}`
+            `https://evs-delta.vercel.app/users/${user?.email}`
           );
           setusers(res.data);
         }
