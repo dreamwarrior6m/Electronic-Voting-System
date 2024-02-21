@@ -163,6 +163,9 @@ const page = () => {
 
   return (
     <Protected>
+
+      <div className="my-10 text-white md:mt-18 mt-14">
+
       <div className="my-10 dark:text-white">
         <div>
           <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">

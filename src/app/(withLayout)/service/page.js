@@ -1,6 +1,6 @@
 const page = () => {
   return (
-    <div className="text-white">
+    <div className="text-white md:mt-18 mt-14">
       <div
         className="hero h-[300px] lg:h-[400px] "
         style={{
