@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { useParams } from "next/navigation";
 import useAuth from "@/app/hook/useAuth";
 import ModaProtected from "@/Component/Protected/ModaProtected";
+import Protected from "@/Component/Protected/Protected";
 
 const page = () => {
   const { user } = useAuth();
@@ -73,7 +74,7 @@ const page = () => {
   };
 
   return (
-    <ModaProtected>
+    <Protected>
       <div className="text-white/85">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
@@ -89,7 +90,7 @@ const page = () => {
             </thead>
             <tbody>
               {filterMyPoll?.map((poll, ind) => (
-                <tr key={poll?._id} >
+                <tr key={poll?._id}>
                   <th>{ind + 1}</th>
                   <td>{poll?.title}</td>
                   <td>{poll?.wonerEmail}</td>
@@ -100,7 +101,9 @@ const page = () => {
                   </td>
                   <th>
                     <button
-                      onClick={() => handleDelete(poll?._id, poll?.wonerEmail, poll?.title)}
+                      onClick={() =>
+                        handleDelete(poll?._id, poll?.wonerEmail, poll?.title)
+                      }
                       className=" text-red-500 text-2xl"
                     >
                       <MdDeleteForever />
@@ -112,7 +115,7 @@ const page = () => {
           </table>
         </div>
       </div>
-    </ModaProtected>
+    </Protected>
   );
 };
 
