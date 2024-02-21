@@ -50,7 +50,7 @@ const Timer = ({ startDate1, endDate1 }) => {
 
 //time end
 
-const ShowAllvote = () => {
+const ShowAllVote = () => {
   const { user } = useAuth();
   const { data: userRoles = [], refetch } = useQuery({
     queryKey: ["userRoles12"],
@@ -88,7 +88,7 @@ const ShowAllvote = () => {
     },
     refetchInterval: 1000,
   });
-  
+
 // FilterApplyCandidate
   const candidateApply = applyForCandidate?.filter(
     (candidate) => candidate.candidateEmail === user?.email
@@ -334,4 +334,4 @@ const ShowAllvote = () => {
   );
 };
 
-export default ShowAllvote;
+export default ShowAllVote;
