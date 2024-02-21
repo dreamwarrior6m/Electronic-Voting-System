@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import useAuth from "@/app/hook/useAuth";
 import ModaProtected from "@/Component/Protected/ModaProtected";
 
-const allPoll = () => {
+const page = () => {
   const { user } = useAuth();
   // console.log(user?.email);
   const [allPoll, setAllPoll] = useState();
@@ -90,7 +90,7 @@ const allPoll = () => {
             <tbody>
               {filterMyPoll?.map((poll, ind) => (
                 <tr key={poll?._id} className={`${
-                  ind % 2 === 1 ? "bg-white/60" : "bg-white/70"
+                  ind % 2 === 1 ? "bg-gray-100/90" : "bg-gray-100/70"
                 } text-center font-semibold border-b border-gray-400`}>
                   <th>{ind + 1}</th>
                   <td>{poll?.title}</td>
@@ -118,4 +118,4 @@ const allPoll = () => {
   );
 };
 
-export default allPoll;
+export default page;
