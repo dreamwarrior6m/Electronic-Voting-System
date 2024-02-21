@@ -6,7 +6,7 @@ import TypewriterComponent from "typewriter-effect";
 
 const Hero = () => {
   return (
-    <div className="px-4">
+    <div className="px-4 md:mt-18 mt-14">
       <div className="relative max-w-7xl mx-auto rounded-b-md shadow-xl overflow-hidden bg-indigo-50 dark:bg-gray-900">
         <div className="dark:hidden dark:sm:block absolute inset-0">
           <Image

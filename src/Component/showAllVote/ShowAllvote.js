@@ -114,10 +114,10 @@ const ShowAllvote = () => {
 
   return (
     <Protected>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg ">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg md:mt-18 mt-14">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id}>
-            <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 w-3/4  ">
+            <div className="card  text-black shadow-xl hover:shadow-2xl bg-slate-300 w-3/4  mt-2 ">
               <div className="card-body  ">
                 <h2 className="text-3xl font-bold text-center mb-5">
                   {allVote?.OrganizatonName}
