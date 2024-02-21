@@ -184,60 +184,63 @@ const Participate = () => {
   };
 
   return (
-   <Protected>
-     <div className="text-white p-5">
-      {filterCandidate?.map((candidat, ind) => (
-        <>
-          <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
-            <label className="label cursor-pointer">
-              <span className="label-text">
-                <Image
-                  className=" rounded-full"
-                  src={candidat?.candidatePhoto}
-                  alt="alt"
-                  width={100}
-                  height={100}
+    <Protected>
+      <div className="text-white p-5">
+        {filterCandidate?.map((candidat, ind) => (
+          <>
+            <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
+              <label className="label cursor-pointer">
+                <span className="label-text">
+                  <Image
+                    className=" rounded-full"
+                    src={candidat?.candidatePhoto}
+                    alt="alt"
+                    width={100}
+                    height={100}
+                  />
+                </span>
+                <span className="label-text">
+                  Name: {candidat?.candidateName}
+                </span>
+                <input
+                  onClick={() => handalCountVote(candidat?._id)}
+                  type="radio"
+                  name="radio-10"
+                  className="radio checked:bg-blue-500"
                 />
-              </span>
-              <span className="label-text">
-                Name: {candidat?.candidateName}
-              </span>
-              <input
-                onClick={() => handalCountVote(candidat?._id)}
-                type="radio"
-                name="radio-10"
-                className="radio checked:bg-blue-500"
-              />
-            </label>
-            <hr></hr>
-          </div>
-        </>
-      ))}
-      <div className="">
-        {filterCandidate?.length == 0 && (
-          <h2 className="text-center text-xl md:text-3xl font-bold p-5">
-            No candidate partcipate
-          </h2>
-        )}
+              </label>
+              <hr></hr>
+            </div>
+          </>
+        ))}
+        <div className="">
+          {filterCandidate?.length == 0 && (
+            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+              No candidate partcipate
+            </h2>
+          )}
+        </div>
+        <div className="text-center pt-5">
+          {filterParticipet?.[0]?.email == user?.email ||
+          filterCandidate?.length == 0 ? (
+            <button
+              disabled
+              onClick={() => handaleAddVote()}
+              className="btn btn-primary"
+            >
+              You already voted
+            </button>
+          ) : (
+            <button
+              onClick={() => handaleAddVote()}
+              className="btn btn-primary"
+            >
+              submit
+            </button>
+          )}
+        </div>
       </div>
-      <div className="text-center pt-5">
-        {filterParticipet?.[0]?.email == user?.email ||
-        filterCandidate?.length == 0 ? (
-          <button
-            disabled
-            onClick={() => handaleAddVote()}
-            className="btn btn-primary"
-          >
-            You already voted
-          </button>
-        ) : (
-          <button onClick={() => handaleAddVote()} className="btn btn-primary">
-            submit
-          </button>
-        )}
-      </div>
-    </div>
-   </Protected>
+    </Protected>
   );
 };
 

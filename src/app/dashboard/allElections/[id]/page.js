@@ -4,9 +4,7 @@ import ModaProtected from "@/Component/Protected/ModaProtected";
 const page = () => {
   return (
     <div>
-      <ModaProtected>
-        <ElectionDetails />
-      </ModaProtected>
+      <ElectionDetails />
     </div>
   );
 };

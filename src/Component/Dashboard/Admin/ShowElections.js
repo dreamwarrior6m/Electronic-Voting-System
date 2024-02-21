@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import Protected from "@/Component/Protected/Protected";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAuth from "@/app/hook/useAuth";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const ShowElections = () => {
   const { user } = useAuth();
@@ -75,14 +75,24 @@ const ShowElections = () => {
         );
         if (res.data.deletedCount > 0) {
           Swal.fire({
-            title: "fire!",
+            title: "deleted",
             text: `this Candidate has been deleted.`,
             icon: "success",
           });
           refetch();
+          //under all candidate
           axios
             .delete(
               `https://evs-delta.vercel.app/candidate/under/${electionName}`
+            )
+            .then((res) => {
+              console.log(res.data);
+            });
+
+          //under all users
+          axios
+            .delete(
+              `https://evs-delta.vercel.app/candidate/under/users/${electionName}`
             )
             .then((res) => {
               console.log(res.data);
@@ -113,7 +123,7 @@ const ShowElections = () => {
   };
 
   return (
-    <Protected>
+    <AdminProtected>
       <div className="mt-5">
         <div className="grid gap-2">
           {elections?.map((election, index) => (
@@ -135,7 +145,7 @@ const ShowElections = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-gray-600 px-[10px] font-normal py-[6px] rounded-md">
+                    <button className="border border-green-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
                       See Details
                     </button>
                   </Link>
@@ -156,7 +166,7 @@ const ShowElections = () => {
           ))}
         </div>
       </div>
-    </Protected>
+    </AdminProtected>
   );
 };
 

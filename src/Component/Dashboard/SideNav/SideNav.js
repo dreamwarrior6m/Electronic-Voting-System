@@ -125,9 +125,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <FaUsers className="text-2xl group-hover:text-white" />
-                <h3 className="text-white font-semibold">
-                  All Candidate
-                </h3>
+                <h3 className="text-white font-semibold">All Candidate</h3>
               </Link>
               <Link
                 href="/dashboard/allPoll"

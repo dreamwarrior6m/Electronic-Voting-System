@@ -28,10 +28,10 @@ const ModaProtected = ({ children }) => {
   if (loading) {
     return <Loading></Loading>;
   }
-  if (allUsers != true && allUsers?.isRole == "Modarator") {
+  if (allUsers !== true && allUsers?.isRole === "Modarator") {
     return <>{children}</>;
   }
-  if (allUsers != true && allUsers?.isRole != "Modarator") {
+  if (allUsers !== true && allUsers?.isRole !== "Modarator") {
     return router?.push("/login");
   }
 };

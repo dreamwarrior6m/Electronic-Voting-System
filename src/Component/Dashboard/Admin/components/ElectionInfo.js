@@ -62,106 +62,70 @@ const ElectionInfo = ({ election, refetch }) => {
     );
   };
 
-  const [loading, setloading] = useState(false);
   const handleCreateCandidate = async (event) => {
     event.preventDefault();
     const form = event.target;
     const candidateName = form.candidateName.value;
     const candidateID = form.candidateID.value;
     const candidatePhoto = form.candidatePhoto.value;
-    // const userID = form.userID.value;
     const candidateEmail = form.candidateEmail.value;
-    const check = form.check.value;
     const brand = form.brand.value;
     const moderatorEmail = form.moderatorEmail.value;
     const voteName = form.electionName.value;
     const voteCount = 0;
-    try {
-      setloading(true);
-      const candidate = {
-        candidateName,
-        candidateID,
-        candidatePhoto,
-        // userID,
-        candidateEmail,
-        check,
-        brand,
-        moderatorEmail,
-        voteName,
-        voteCount,
-      };
 
-      // console.log(candidate);
+    const candidate = {
+      candidateName,
+      candidateID,
+      candidatePhoto,
+      candidateEmail,
+      brand,
+      moderatorEmail,
+      voteName,
+      voteCount,
+    };
 
-      const res = await fetch("https://evs-delta.vercel.app/candidate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(candidate),
-      });
-      if (res.status === 400) {
-        console.log(res);
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Candidate Information is wrong",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setloading(false);
-      }
-      if (res.status === 200) {
-        console.log(res);
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Candidate added successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        setloading(false);
+    // console.log(candidate);
 
-        //When User create a Candidate notification send to backend.
-        const type = 4;
-        const notification = {
-          senderEmail: user?.email,
-          receiverEmail: user?.email,
-          type: type,
-          electionName: election?.name,
-        };
-
-        axios
-          .post("https://evs-delta.vercel.app/notification", notification)
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error("There was an error!", error);
+    axios
+      .post(`https://evs-delta.vercel.app/candidate`, candidate)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Apply Successfully",
+            showConfirmButton: false,
+            timer: 2000,
           });
-
-        form.reset();
-        refetch();
-      } else {
-        setloading(false);
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Candidate Information is wrong",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    } catch (err) {
-      setloading(false);
-      Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: `${err.message}`,
-        showConfirmButton: false,
-        timer: 1500,
+          form.reset();
+        }
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
       });
-    }
+
+    //When User create a Candidate notification send to backend.
+    const type = 4;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: user?.email,
+      type: type,
+      electionName: election?.name,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+
+    form.reset();
+    refetch();
   };
 
   return (
@@ -209,7 +173,7 @@ const ElectionInfo = ({ election, refetch }) => {
       />
       <>
         <dialog id={`my_modal_3_${election._id}`} className="modal">
-          <div className="modal-box bg-slate-200 ">
+          <div className="modal-box bg-gray-900">
             <form method="dialog">
               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                 ✕
@@ -219,55 +183,41 @@ const ElectionInfo = ({ election, refetch }) => {
               Create Candidate
             </h3>
             <form onSubmit={handleCreateCandidate}>
-              <div className="grid gap-4">
+              <div className="">
                 <div>
                   <div className="form-control">
                     <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
+                      <span className=" text-white text-base">
                         Candidate Name
                       </span>
                     </label>
                     <input
                       type="text"
                       placeholder="Candidate Name"
-                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       required
                       name="candidateName"
                     />
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
-                        Candidate ID Card Number
+                      <span className=" text-white text-base">
+                        Candidate ID
                       </span>
                     </label>
                     <input
                       type="text"
                       placeholder="Candidate ID Number"
-                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       required
                       name="candidateID"
                     />
                   </div>
-                  {/* <div className="form-control">
-                    <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
-                        Your ID Card Number
-                      </span>
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Your ID Number"
-                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
-                      required
-                      name="userID"
-                    />
-                  </div> */}
                 </div>
                 <div>
-                  <div className="form-control mb-4">
+                  <div className="form-control">
                     <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
+                      <span className=" text-white text-base">
                         Upload Candidate Photo
                       </span>
                     </label>
@@ -275,7 +225,7 @@ const ElectionInfo = ({ election, refetch }) => {
                       required
                       name="candidatePhoto"
                       type="text"
-                      className=" input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      className=" input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       placeholder="Enter photo link"
                     />
                   </div>
@@ -283,40 +233,33 @@ const ElectionInfo = ({ election, refetch }) => {
                 <div>
                   <div className="form-control">
                     <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
+                      <span className=" text-white text-base">
                         Candidate E-mail
                       </span>
                     </label>
                     <input
                       type="email"
                       placeholder="Candidate E-mail"
-                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       required
                       name="candidateEmail"
                     />
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className=" text-gray-800 dark:text-white">
+                      <span className=" text-white text-base">
                         Candidate Brand Name
                       </span>
                     </label>
                     <input
                       type="text"
-                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 text-gray-800 dark:text-white"
+                      className="input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       name="brand"
                       required
                       placeholder="Enter Brand Name"
                     />
                   </div>
                 </div>
-                <label className="label">
-                  <div className="flex gap-1 text-gray-800 dark:text-white">
-                    <input type="checkbox" name="check" id="" required />
-                    Agree to continue
-                  </div>
-                  <span className="text-gray-800 dark:text-white"> </span>
-                </label>
               </div>
               <input
                 type="hidden"
@@ -327,7 +270,6 @@ const ElectionInfo = ({ election, refetch }) => {
 
               <div className="form-control mt-3 w-full ">
                 <button
-                  disabled={loading}
                   onClick={() =>
                     document
                       .getElementById(`my_modal_3_${election._id}`)
@@ -335,7 +277,7 @@ const ElectionInfo = ({ election, refetch }) => {
                   }
                   className="input input-bordered bg-slate-700 text-white rounded-lg mb-2 py-3  w-full col-span-2 mt-[10px]"
                 >
-                  {loading ? "Loading..." : "Create"}
+                  Create
                 </button>
               </div>
             </form>

@@ -90,10 +90,9 @@ const Page = () => {
           </div>
         </div>
         <div className="flex justify-end -mt-10">
-                    <h1> share</h1>
-                  </div>
+          <h1> share</h1>
+        </div>
       </div>
-     
     </div>
   );
 };
