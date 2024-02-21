@@ -133,14 +133,9 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
-        <p className="font-bold text-center text-2xl text-black">
-          Total Users: {voters.length}
-        </p>
-        <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
-
         <div className="overflow-x-auto">
-          <table className="table text-black">
-            <thead>
+          <table className="table text-gray-900 mt-4">
+            <thead className="text-white">
               <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
                 <th>
                   <label>
@@ -160,7 +155,7 @@ const AllVoter = () => {
                 <tr
                   key={vote._id}
                   className={`${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                    index % 2 === 0 ? "bg-gray-100/75" : "bg-white/60"
                   } text-center font-semibold border-b border-gray-600`}
                 >
                   <th>

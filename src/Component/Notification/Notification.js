@@ -90,6 +90,14 @@ const Notification = ({ classes }) => {
       action = "Organize a ";
     } else if (type === 4) {
       action = "Create a Candidate Under ";
+    } else if (type === 5) {
+      action = "Create a Poll ";
+    } else if (type === 6) {
+      action = "Deleted a Poll ";
+    }else if (type === 7) {
+      action = "Apply for Voter Under ";
+    }else if (type === 8) {
+      action = "Apply for Candidate Under";
     }
 
     if (senderEmail === user?.email) {
@@ -122,12 +130,12 @@ const Notification = ({ classes }) => {
         </div>
       </button>
       <div
-        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+        className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 drop-shadow-2xl ${
           open ? "" : "hidden"
         }`}
       >
         <div
-          className="notifications overflow-y-auto z-10 bg-white scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+          className="notifications overflow-y-auto z-10 bg-gray-700/95 scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
           ref={notificationRef}
         >
           {filterNotifications.length > 0 ? (
@@ -135,16 +143,16 @@ const Notification = ({ classes }) => {
               .slice()
               .reverse()
               .map((message, index) => (
-                <span className="bg-white p-1 rounded-md" key={index + 1}>
+                <span className="text-white p-1 rounded-md" key={index + 1}>
                   {displayNotification(message)}
                 </span>
               ))
           ) : (
-            <span>No notifications found.</span>
+            <span className="text-white">No notifications found.</span>
           )}
           {filterNotifications.length > 0 && (
             <button
-              className="bg-gray-500 mt-2 py-1 rounded-md"
+              className="bg-gray-400 text-white mt-2 py-2 rounded-md"
               onClick={() => notificationDelete()}
             >
               Delete All

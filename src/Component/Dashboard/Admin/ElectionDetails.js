@@ -128,11 +128,15 @@ const ElectionDetails = () => {
     },
     refetchInterval: 1000,
   });
+
   const filterCandidate = candidates?.filter(
     (candidate) => candidate?.voteName === filterElection[0]?.name
   );
 
-  console.log(filterElection);
+  console.log("FilterCandidate:",filterElection);
+
+  const verifyCandidate = filterCandidate?.filter(candidate => candidate.isverify === "true")
+  console.log("VerifyCandidate:",verifyCandidate)
 
   return (
     <div className="text-white">
@@ -161,7 +165,7 @@ const ElectionDetails = () => {
       <div className="mt-10">
         <h4 className="text-3xl font-bold mb-5">All Candidate:</h4>
         <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-5">
-          {filterCandidate?.map((candidate, index) => (
+          {verifyCandidate?.map((candidate, index) => (
             <ElectionCandidate
               key={candidate?._id}
               index={index}

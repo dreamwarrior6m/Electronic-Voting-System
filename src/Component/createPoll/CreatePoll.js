@@ -30,6 +30,25 @@ const createPoll = () => {
       .catch((err) => {
         console.error(err);
       });
+
+
+    const type = 5;
+    const electionName = title;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: user?.email,
+      type,
+      electionName,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
   return (
     <Protected>
