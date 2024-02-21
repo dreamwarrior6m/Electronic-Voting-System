@@ -9,6 +9,7 @@ import ReactPaginate from "react-paginate";
 
 import "./styles.css";
 import { useQuery } from "@tanstack/react-query";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const AllVoter = () => {
   const [voters, setVoters] = useState([]);
@@ -130,109 +131,111 @@ const AllVoter = () => {
     }
   };
   return (
-    <div>
-      <p className="font-bold text-center text-2xl text-black">
-        Total Users: {voters.length}
-      </p>
-      <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+    <AdminProtected>
+      <div>
+        <p className="font-bold text-center text-2xl text-black">
+          Total Users: {voters.length}
+        </p>
+        <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
-      <div className="overflow-x-auto">
-        <table className="table text-black">
-          <thead>
-            <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
-              <th>
-                <label>
-                  <p className="">Number</p>
-                </label>
-              </th>
-              <th>Name</th>
-              <th>ID Card Number</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Verify</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {voters?.map((vote, index) => (
-              <tr
-                key={vote._id}
-                className={`${
-                  index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                } text-center font-semibold border-b border-gray-600`}
-              >
+        <div className="overflow-x-auto">
+          <table className="table text-black">
+            <thead>
+              <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
                 <th>
                   <label>
-                    <p className="text-black">{index + 1}</p>
+                    <p className="">Number</p>
                   </label>
                 </th>
-                <td>{vote.name}</td>
-                <td>{vote.idNumber}</td>
-                <td>{vote.email}</td>
-                <td>
-                  <button onClick={() => handleRole(vote._id)}>
-                    {vote.isRole}
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handleVerify(vote._id)}>
-                    {vote?.verify == "true" ? (
-                      <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
-                    ) : (
-                      <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
-                    )}
-                  </button>
-                </td>
-                <td className="text-3xl cursor-pointer">
-                  <button onClick={() => handleDelete(vote._id)}>
-                    <MdDeleteForever className=" text-red-700" />
-                  </button>
-                </td>
+                <th>Name</th>
+                <th>ID Card Number</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Verify</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      {
-        <div className="flex items-center justify-between mt-4">
-          <ReactPaginate
-            breakLabel={<span className="break-label">...</span>}
-            nextLabel={<span className="pagination-icon">&rarr;</span>}
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            previousLabel={<span className="pagination-icon">&larr;</span>}
-            renderOnZeroPageCount={null}
-            marginPagesDisplayed={2}
-            containerClassName="pagination-container"
-            pageClassName="page-item"
-            pageLinkClassName="page-link"
-            previousClassName="page-item"
-            previousLinkClassName="page-link"
-            nextClassName="page-item"
-            nextLinkClassName="page-link"
-            activeClassName="active"
-            forcePage={currentPage.current - 1}
-          />
-          <div className="flex items-center">
-            <span className="text-sm text-gray-600 mr-2">
-              Page {currentPage.current} of {pageCount}
-            </span>
-            <input
-              className="p-2 border border-gray-400 rounded-md"
-              placeholder="Limit"
-              onChange={(e) => setLimit(e.target.value)}
-            />
-            <button
-              className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md"
-              onClick={changeLimit}
-            >
-              Set Limit
-            </button>
-          </div>
+            </thead>
+            <tbody>
+              {voters?.map((vote, index) => (
+                <tr
+                  key={vote._id}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  } text-center font-semibold border-b border-gray-600`}
+                >
+                  <th>
+                    <label>
+                      <p className="text-black">{index + 1}</p>
+                    </label>
+                  </th>
+                  <td>{vote.name}</td>
+                  <td>{vote.idNumber}</td>
+                  <td>{vote.email}</td>
+                  <td>
+                    <button onClick={() => handleRole(vote._id)}>
+                      {vote.isRole}
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => handleVerify(vote._id)}>
+                      {vote?.verify == "true" ? (
+                        <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                      ) : (
+                        <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
+                      )}
+                    </button>
+                  </td>
+                  <td className="text-3xl cursor-pointer">
+                    <button onClick={() => handleDelete(vote._id)}>
+                      <MdDeleteForever className=" text-red-700" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      }
-    </div>
+        {
+          <div className="flex items-center justify-between mt-4">
+            <ReactPaginate
+              breakLabel={<span className="break-label">...</span>}
+              nextLabel={<span className="pagination-icon">&rarr;</span>}
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              previousLabel={<span className="pagination-icon">&larr;</span>}
+              renderOnZeroPageCount={null}
+              marginPagesDisplayed={2}
+              containerClassName="pagination-container"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              activeClassName="active"
+              forcePage={currentPage.current - 1}
+            />
+            <div className="flex items-center">
+              <span className="text-sm text-gray-600 mr-2">
+                Page {currentPage.current} of {pageCount}
+              </span>
+              <input
+                className="p-2 border border-gray-400 rounded-md"
+                placeholder="Limit"
+                onChange={(e) => setLimit(e.target.value)}
+              />
+              <button
+                className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+                onClick={changeLimit}
+              >
+                Set Limit
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </AdminProtected>
   );
 };
 

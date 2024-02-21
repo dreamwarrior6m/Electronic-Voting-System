@@ -115,7 +115,7 @@ const ShowAllvote = () => {
   };
 
   return (
-    <ModaProtected>
+    <Protected>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg ">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id}>
@@ -251,12 +251,12 @@ const ShowAllvote = () => {
                     </button>
 
                     <Link
-                    href={`/details/${allVote?.name}`}
-                    className="btn btn-sm btn-primary text-black hover:btn-primary w-full"
-                  >
-                    {" "}
-                    Details
-                  </Link>
+                      href={`/details/${allVote?.name}`}
+                      className="btn btn-sm btn-primary text-black hover:btn-primary w-full"
+                    >
+                      {" "}
+                      Details
+                    </Link>
                   </div>
                 </div>
                 {/* <p>Email: {allVote?.email}</p> */}
@@ -290,17 +290,13 @@ const ShowAllvote = () => {
                     <IoShareSocialOutline />
                     Share
                   </Link> */}
-                  
-                
-               
-                    
                 </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </ModaProtected>
+    </Protected>
   );
 };
 
