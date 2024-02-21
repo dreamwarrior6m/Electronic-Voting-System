@@ -69,15 +69,12 @@ const Navbar = () => {
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
-                  {users?.isRole == "Admin" || users?.isRole == "Modarator" ? (
+                 
                     <li>
                       <Link href="/dashboard/home">dashboard</Link>
                     </li>
-                  ) : (
-                    <li>
-                      <Link href="/Profile">Profile</Link>
-                    </li>
-                  )}
+                 
+                   
                   <li>
                     <button onClick={handleLogOut}>Log Out</button>
                   </li>

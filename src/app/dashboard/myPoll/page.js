@@ -6,9 +6,8 @@ import axios from "axios";
 import Link from "next/link";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
-import { useParams } from "next/navigation";
 import useAuth from "@/app/hook/useAuth";
-import ModaProtected from "@/Component/Protected/ModaProtected";
+import Protected from "@/Component/Protected/Protected";
 
 const allPoll = () => {
   const { user } = useAuth();
@@ -56,7 +55,7 @@ const allPoll = () => {
   };
 
   return (
-    <ModaProtected>
+    <Protected>
       <div className="text-white">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
@@ -95,7 +94,7 @@ const allPoll = () => {
           </table>
         </div>
       </div>
-    </ModaProtected>
+    </Protected>
   );
 };
 

@@ -112,7 +112,9 @@ const ShowAllvote = () => {
 
   return (
     <Protected>
-      <div className="grid lg:grid-cols-3 gap-4 py-6 md:py-8 lg:py-12 ">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5  m-5 rounded-lg ">
+
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id} className="h-full">
             <div className=" text-black rounded-xl shadow-xl hover:shadow-2xl bg-slate-300 p-5 flex justify-center items-center h-full">
@@ -221,109 +223,49 @@ const ShowAllvote = () => {
                         />
                       )}
 
-                      {(voterApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                        voterApply?.find(
-                          (verify) => verify.isverify === "true"
-                        )) ||
-                      (candidateApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                        candidateApply?.find(
-                          (verify) => verify.isverify === "true"
-                        )) ? (
-                        <div className="flex justify-center items-center text-center mt-2">
-                          <Link
-                            href={`/details/${allVote?.name}`}
-                            className="w-full"
-                          >
-                            <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                              See Details
-                            </button>
-                          </Link>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  )
-                ) : userRoles?.isRole === "user" ? (
-                  <div className="flex flex-col space-y-2 mt-2">
-                    {candidateApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                    candidateApply?.find(
-                      (verify) => verify.isverify === "true"
-                    ) ? (
-                      ""
-                    ) : candidateApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      candidateApply?.find(
-                        (verify) => verify.isverify === "false"
-                      ) ? (
-                      <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                        Candidate In Process
-                      </button>
-                    ) : (
-                      <Modal
-                        electionId={allVote._id}
-                        buttonName={"Apply for a candidate"}
-                        type={2}
-                      />
-                    )}
-
-                    {voterApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                    voterApply?.find((verify) => verify.isverify === "true") ? (
-                      ""
-                    ) : voterApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      voterApply?.find(
-                        (verify) => verify.isverify === "false"
-                      ) ? (
-                      <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                        Voter In Process
-                      </button>
-                    ) : (
-                      <Modal
-                        electionId={allVote._id}
-                        buttonName={"Apply for a voter"}
-                        type={1}
-                      />
-                    )}
-                    {(voterApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                      voterApply?.find(
-                        (verify) => verify.isverify === "true"
-                      )) ||
-                    (candidateApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                      candidateApply?.find(
-                        (verify) => verify.isverify === "true"
-                      )) ? (
-                      <div className="flex justify-center items-center text-center mt-2">
-                        <Link
-                          href={`/details/${allVote?.name}`}
-                          className="w-full"
-                        >
-                          <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                            See Details
-                          </button>
-                        </Link>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+ 
+                    <Link
+                      href={`/details/${allVote?.name}`}
+                      className="btn btn-sm btn-primary text-black hover:btn-primary w-full"
+                    >
+                      {" "}
+                      Details
+                    </Link>
                   </div>
-                ) : (
-                  ""
-                )}
+                </div>
+                {/* <p>Email: {allVote?.email}</p> */}
+                {/* <p>Voter Email: {allVote?.voterEmail}</p> */}
+                <div className="card-actions grid grid-cols-2 justify-end">
+                  {/* <Link
+                    href={`/participate/${allVote?.name}`}
+                    className="btn btn-sm btn-primary hover:bg-slate-300"
+                  >
+                    Participate
+                  </Link> */}
+                  {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
+                  {/* <Link
+                    href={`/show-all-vote/${allVote?.name}`}
+                    className="btn btn-sm btn-primary text-black  hover:bg-slate-300"
+                  >
+                    {" "}
+                    Candidates
+                  </Link> */}
+                  {/* <Link
+                    href={`/result/${allVote?.name}`}
+                    className="btn btn-sm bg-white text-black hover:btn-primary"
+                  >
+                    {" "}
+                    result
+                  </Link> */}
+                  {/* <Link
+                    href={`share/${allVote?.name}`}
+                    className="btn btn-sm bg-white text-black hover:btn-primary"
+                  >
+                    <IoShareSocialOutline />
+                    Share
+                  </Link> */}
+                </div>
+
               </div>
             </div>
           </div>
