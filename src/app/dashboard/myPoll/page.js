@@ -74,7 +74,7 @@ const page = () => {
 
   return (
     <ModaProtected>
-      <div className="text-gray-900">
+      <div className="text-white/85">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
             {/* head */}
@@ -89,9 +89,7 @@ const page = () => {
             </thead>
             <tbody>
               {filterMyPoll?.map((poll, ind) => (
-                <tr key={poll?._id} className={`${
-                  ind % 2 === 1 ? "bg-gray-100/90" : "bg-gray-100/70"
-                } text-center font-semibold border-b border-gray-400`}>
+                <tr key={poll?._id} >
                   <th>{ind + 1}</th>
                   <td>{poll?.title}</td>
                   <td>{poll?.wonerEmail}</td>
