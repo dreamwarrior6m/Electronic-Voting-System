@@ -164,6 +164,9 @@ const Participate = () => {
   return (
     <Protected>
       <div className="text-white p-5">
+        <div className="flex justify-center gap-32">
+          <h2 className="md:text-3xl text-2xl font-semibold py-6 pb-10">Choose your favorite person</h2>
+        </div>
         {filterCandidate?.map((candidat, ind) => (
           <>
             <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
@@ -178,7 +181,7 @@ const Participate = () => {
                   />
                 </span>
                 <span className="label-text">
-                  Name: {candidat?.candidateName}
+                   {candidat?.candidateName}
                 </span>
                 <input
                   onClick={() => handalCountVote(candidat?._id)}
