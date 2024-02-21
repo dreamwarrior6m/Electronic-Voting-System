@@ -110,28 +110,28 @@ const Registration = () => {
           </div>
         </div>
         <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
-          <form onSubmit={handleRegistration} className="w-full">
+          <form onSubmit={handleRegistration} className="w-full p-3">
             <div className="grid lg:grid-cols-12 gap-4">
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">Name</span>
+                  <span className=" text-gray-700 dark:text-white">Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="name"
                 />
               </div>
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">E-mail</span>
+                  <span className=" text-gray-700 dark:text-white">E-mail</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="email"
                 />
@@ -139,13 +139,13 @@ const Registration = () => {
               <div className="relative col-span-6">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text dark:text-white">Password</span>
+                    <span className="label-text text-gray-700 dark:text-white">Password</span>
                   </label>
                   <input
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-white"
+                    className="input input-bordered text-gray-700 dark:text-white"
                     required
                     defaultChecked
                   />
@@ -156,21 +156,21 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-white dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-gray-700 dark:text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-white dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-gray-700 dark:text-white" />
                     )}
                   </p>
                 </div>
               </div>
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">ID Card Number</span>
+                  <span className=" text-gray-700 dark:text-white">ID Card Number</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your ID Card Number"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="idNumber"
                 />
@@ -178,23 +178,23 @@ const Registration = () => {
 
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">Upload Picture</span>
+                  <span className=" text-gray-700 dark:text-white">Upload Picture</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Valid Photo URL"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   name="photo"
                 />
               </div>
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">Birth of Date</span>
+                  <span className=" text-gray-700 dark:text-white">Birth of Date</span>
                 </label>
                 <input
                   type="date"
                   placeholder="Photo"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="date"
                 />
@@ -235,19 +235,7 @@ const Registration = () => {
                 )}
               </button>
             </div>
-            <div>
-              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-gray-700 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
-                Or Continue with
-              </div>
-              <div className="w-full gap-8 flex justify-between">
-                <button className="btn flex-1  bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-                <button className="btn flex-1 bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-              </div>
-            </div>
+            
           </form>
         </div>
         <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">

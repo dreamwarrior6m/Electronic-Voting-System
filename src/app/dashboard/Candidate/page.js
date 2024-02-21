@@ -67,8 +67,8 @@ const Page = () => {
                 <tr
                   key={candidate.id}
                   className={`${
-                    index % 2 === 1 ? "bg-white/80 " : "bg-white/60"
-                  } text-center font-semibold border-b border-gray-600`}
+                    index % 2 === 1 ?  "bg-gray-100/90" : "bg-gray-100/80"
+                  } text-center font-semibold border-b border-gray-300`}
                 >
                   <th>
                     <label>
