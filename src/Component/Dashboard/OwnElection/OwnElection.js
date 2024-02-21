@@ -169,13 +169,13 @@ const OwnElection = () => {
   return (
     <ModaProtected>
       <div className="mt-5">
-        <div className="grid gap-2">
+        <div className="grid gap-1">
           {elections2?.map((election, index) => (
             <div
               key={election._id}
               className={`${
-                index % 2 === 0 ? "bg-white/90 rounded-md" : "bg-white/80"
-              } text-center font-semibold rounded-md`}
+                index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/70"
+              } text-center font-semibold border-b border-gray-400`}
             >
               <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
                 <p className="col-span-1">{index + 1}</p>
@@ -189,7 +189,7 @@ const OwnElection = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-green-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
+                    <button className="border border-gray-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
                       See Details
                     </button>
                   </Link>

@@ -24,6 +24,7 @@ const Participate = () => {
   const router = useRouter();
   console.log(id);
   const updateVoterEmail2 = user?.email;
+  console.log(user?.email)
   const updateVoterEmail = { updateVoterEmail2 };
   // console.log(updateVoterEmail);
 
@@ -43,9 +44,9 @@ const Participate = () => {
   console.log(candidateUnderUser);
 
   const filterUndreUser = candidateUnderUser?.filter(
-    (underUser) => underUser?.candidate == id && underUser?.email == user?.email
+    (underUser) => underUser?.voteName == id && underUser?.candidateEmail == user?.email
   );
-  console.log(filterUndreUser);
+  // console.log(filterUndreUser);
 
   useEffect(() => {
     fetch("https://evs-delta.vercel.app/candidate")
@@ -54,17 +55,7 @@ const Participate = () => {
         setAllCandidate(data);
       });
   }, []);
-  // console.log(allCandidate);
 
-  // useEffect(() => {
-  //   fetch(`https://evs-delta.vercel.app/create-vote/${id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setShowVote(data);
-  //     });
-  // }, [id]);
-
-  //participate get data
 
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
@@ -74,19 +65,6 @@ const Participate = () => {
       return res?.data;
     },
   });
-
-  // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/participate")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setParticipate(data);
-  //     });
-  // }, []);
-  // console.log(participate);
-
-  // console.log(showVote?.voterEmail);
-  // const oldVoterEmail = showVote?.voterEmail;
-  // console.log(voterEmail);
 
   const filterCandidate = allCandidate?.filter(
     (candidate) => candidate?.voteName == id

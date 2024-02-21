@@ -43,17 +43,12 @@ const Page = () => {
 
   return (
     <AdminProtected>
-      <div>
-        <p className=" font-bold text-xl text-black  text-center mt-5 mb-1">
-          Total Candidate : {candidates.length}
-        </p>
-        <hr className="w-52 h-2 mx-auto my-3 bg-gradient-to-r from-blue-500 to-green-500"></hr>
-
+      <div className="mt-5">
         <div className="overflow-x-auto">
           <table className="table text-black font-semibold">
             {/* head */}
             <thead>
-              <tr className=" text-xl font-semibold  border-b-2 border-gray-500">
+              <tr className="text-center text-xl text-white font-semibold  border-b-2 border-gray-600">
                 <th>
                   <label>
                     <p className="">Number</p>
@@ -72,16 +67,16 @@ const Page = () => {
                 <tr
                   key={candidate.id}
                   className={`${
-                    index % 2 === 1 ? "bg-gray-100" : "bg-white"
-                  } text-center font-semibold border-b border-gray-600`}
+                    index % 2 === 1 ?  "bg-gray-100/90" : "bg-gray-100/80"
+                  } text-center font-semibold border-b border-gray-300`}
                 >
                   <th>
                     <label>
-                      <p className="text-black font-semibold">{index + 1}</p>
+                      <p className="text-black font-semibold text-center">{index + 1}</p>
                     </label>
                   </th>
-                  <td>
-                    <div className="flex items-center gap-3">
+                  <td className="">
+                    <div className="flex items-center justify-center gap-3">
                       <div className="avatar"></div>
                       <div>
                         <div className="font-bold">

@@ -30,18 +30,36 @@ const createPoll = () => {
       .catch((err) => {
         console.error(err);
       });
+
+    const type = 5;
+    const electionName = title;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: user?.email,
+      type,
+      electionName,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
   return (
     <Protected>
-      <div className="text-white">
-        <div className="my-10 text-white">
+      <div className="dark:text-white">
+        <div className="my-10 dark:text-white">
           <div>
-            <div className="w-full lg:max-w-[900px] mx-auto lg:px-6">
+            <div className="w-full lg:max-w-[500px] mx-auto lg:p-6">
               <form onSubmit={handleCreatePoll}>
-                <div className="py-2 lg:p-2 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+                <div className="p-5 bg-slate-300 border-gray-200  lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
                   <div className="">
-                    <div className="grid  gap-3">
-                      <div className="form-control">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="form-control col-span-2">
                         <label className="label">
                           <span className="label-text dark:text-white">
                             Title
@@ -57,7 +75,7 @@ const createPoll = () => {
                         />
                       </div>
 
-                      <div className="form-control">
+                      <div className="form-control col-span-1">
                         <label className="label">
                           <span className="label-text dark:text-white">
                             User Name
@@ -65,14 +83,30 @@ const createPoll = () => {
                         </label>
                         <input
                           type="text"
-                          placeholder="User Name must unique"
+                          placeholder="Enter Name"
                           className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
                           required
                           name="userName"
                         />
                       </div>
 
-                      <div className="form-control">
+                      <div className="cols-span-1">
+                        <div className="form-control">
+                          <label className="label">
+                            <span className="label-text dark:text-white">
+                              Add Image (optional)
+                            </span>
+                          </label>
+                          <input
+                            type="img"
+                            placeholder="Photo Link"
+                            className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                            name="photo"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-control col-span-2">
                         <label className="label">
                           <span className="label-text dark:text-white">
                             Description (optional)
@@ -87,26 +121,10 @@ const createPoll = () => {
                         />
                       </div>
                     </div>
-
-                    <div className="grid gap-3">
-                      <div className="form-control">
-                        <label className="label">
-                          <span className="label-text dark:text-white">
-                            Add Image (optional)
-                          </span>
-                        </label>
-                        <input
-                          type="img"
-                          placeholder="Photo Link"
-                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                          name="photo"
-                        />
-                      </div>
-                    </div>
                   </div>
 
                   <div className="form-control mt-6 w-full ">
-                    <button className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-sm border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                    <button className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
                       N E X T
                     </button>
                   </div>

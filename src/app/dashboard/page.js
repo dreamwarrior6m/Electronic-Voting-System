@@ -77,7 +77,7 @@ const HomePage = () => {
           <div className="col-span-3 w-full">
             <div className="stats shadow w-full bg-blue-200/5 rounded-none">
               <div className="stat">
-                <div className="stat-figure text-primary">
+                <div className="stat-figure text-indigo-500 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -93,7 +93,7 @@ const HomePage = () => {
                   </svg>
                 </div>
                 <div className="stat-title">Total Likes</div>
-                <div className="stat-value text-primary">25.6K</div>
+                <div className="stat-value text-indigo-500 ">25.6K</div>
                 <div className="stat-desc">21% more than last month</div>
               </div>
 
@@ -143,11 +143,11 @@ const HomePage = () => {
 
             <div className="stats shadow w-full bg-blue-200/5 rounded-none mt-6">
               <div className="stat">
-                <div className="stat-figure text-primary">
+                <div className="stat-figure text-indigo-500 ">
                   <FaUsers className="inline-block w-8 h-8 stroke-current" />
                 </div>
                 <div className="stat-title">Total Users</div>
-                <div className="stat-value text-primary">2.6K</div>
+                <div className="stat-value text-indigo-500 ">2.6K</div>
                 <div className="stat-desc">21% more than last month</div>
               </div>
 
@@ -278,7 +278,7 @@ const HomePage = () => {
                   />
                 </div>
                 <br />
-                <button className="btn bg-primary-content w-full">
+                <button className="btn bg-indigo-500 -content w-full">
                   Update
                 </button>
               </form>

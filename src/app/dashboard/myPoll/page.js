@@ -6,10 +6,12 @@ import axios from "axios";
 import Link from "next/link";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useParams } from "next/navigation";
 import useAuth from "@/app/hook/useAuth";
+import ModaProtected from "@/Component/Protected/ModaProtected";
 import Protected from "@/Component/Protected/Protected";
 
-const allPoll = () => {
+const page = () => {
   const { user } = useAuth();
   // console.log(user?.email);
   const [allPoll, setAllPoll] = useState();
@@ -27,7 +29,7 @@ const allPoll = () => {
   );
   console.log(filterMyPoll);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, receiverEmail, title) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to undo this!",
@@ -52,11 +54,28 @@ const allPoll = () => {
         }
       }
     });
+
+    const type = 6;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: receiverEmail,
+      type,
+      electionName: title,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
 
   return (
     <Protected>
-      <div className="text-white">
+      <div className="text-white/85">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
             {/* head */}
@@ -82,7 +101,9 @@ const allPoll = () => {
                   </td>
                   <th>
                     <button
-                      onClick={() => handleDelete(poll?._id)}
+                      onClick={() =>
+                        handleDelete(poll?._id, poll?.wonerEmail, poll?.title)
+                      }
                       className=" text-red-500 text-2xl"
                     >
                       <MdDeleteForever />
@@ -98,4 +119,4 @@ const allPoll = () => {
   );
 };
 
-export default allPoll;
+export default page;

@@ -129,7 +129,7 @@ const ElectionInfo = ({ election, refetch }) => {
   };
 
   return (
-    <div className="grid grid-cols-2 justify-center items-center">
+    <div className="grid grid-cols-2 text-[18px]">
       <div className="">
         <p>
           <span className="font-bold">Organization Name: </span>
@@ -147,9 +147,9 @@ const ElectionInfo = ({ election, refetch }) => {
           <span className="font-bold">Email: </span> {election?.email}
         </p>
         <div>
-          {userRoles?.isRole != "Admin" && (
+          {userRoles?.isRole !== "Admin" && (
             <div className="">
-              <p className="mt-3 text-3xl font-bold mb-1">Create Candidate</p>
+              <p className="mt-3 text-2xl font-bold mb-1">Create Candidate</p>
               <button
                 onClick={() =>
                   document
@@ -165,9 +165,9 @@ const ElectionInfo = ({ election, refetch }) => {
         </div>
       </div>
       <Image
-        className="rounded-md"
-        width={150}
-        height={150}
+        className="rounded-full w-[110px] h-[110px] object-cover"
+        width={110}
+        height={110}
         alt="logo"
         src={election?.photo}
       />
