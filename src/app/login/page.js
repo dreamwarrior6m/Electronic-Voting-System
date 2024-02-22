@@ -147,19 +147,6 @@ const page = () => {
                 )}
               </button>
             </div>
-            <div>
-              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-gray-700 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
-                Or Continue with
-              </div>
-              <div className="w-full gap-8 flex justify-between">
-                <button className="btn flex-1  bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-                <button className="btn flex-1 bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-              </div>
-            </div>
           </form>
         </div>
         <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">

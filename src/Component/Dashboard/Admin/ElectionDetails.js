@@ -80,7 +80,9 @@ const ElectionDetails = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await axios.delete(`https://evs-delta.vercel.app/candidate/${id}`);
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/candidate/${id}`
+        );
 
         if (res.data.deletedCount > 0) {
           Swal.fire({
@@ -128,11 +130,17 @@ const ElectionDetails = () => {
     },
     refetchInterval: 1000,
   });
+
   const filterCandidate = candidates?.filter(
     (candidate) => candidate?.voteName === filterElection[0]?.name
   );
 
-  console.log(filterElection);
+  console.log("FilterCandidate:", filterElection);
+
+  const verifyCandidate = filterCandidate?.filter(
+    (candidate) => candidate.isverify === "true"
+  );
+  console.log("VerifyCandidate:", verifyCandidate);
 
   return (
     <div className="text-white">
@@ -145,7 +153,7 @@ const ElectionDetails = () => {
 
       {/* Election Info */}
       <div className="py-2">
-        <h4 className="text-3xl font-bold ">All Info:</h4>
+        <h4 className="text-2xl font-bold ">All Info:</h4>
         <div className="text-2xl font font-medium">
           {filterElection?.map((election) => (
             <ElectionInfo
@@ -158,10 +166,10 @@ const ElectionDetails = () => {
       </div>
 
       {/* Election Candidates */}
-      <div className="mt-10">
-        <h4 className="text-3xl font-bold mb-5">All Candidate:</h4>
-        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-5">
-          {filterCandidate?.map((candidate, index) => (
+      <div className="mt-6">
+        <h4 className="text-2xl font-bold mb-5">All Candidate:</h4>
+        <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-1 justify-center items-center">
+          {verifyCandidate?.map((candidate, index) => (
             <ElectionCandidate
               key={candidate?._id}
               index={index}
@@ -173,13 +181,13 @@ const ElectionDetails = () => {
       </div>
 
       {/* All Voter */}
-      <div className="grid grid-cols-2 gap-2 mt-8">
+      <div className="grid grid-cols-2 gap-2 mt-10">
         <div className="">
           <div>
             <p className="font-bold text-center text-2xl  ">
               All Candidates : {filterCandidate?.length}
             </p>
-            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gray-400"></hr>
 
             <div className="overflow-x-auto py-2 pb-12">
               <table className="table text-black">
@@ -248,7 +256,7 @@ const ElectionDetails = () => {
             <p className="font-bold text-center text-2xl  ">
               All Voters : {Voter?.length}
             </p>
-            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+            <hr className="w-96 mx-auto h-2 mb-1 mt-1 bg-gray-400"></hr>
 
             <div className="overflow-x-auto py-2 pb-12">
               <table className="table text-gray-900">
