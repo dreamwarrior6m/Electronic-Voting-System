@@ -50,7 +50,7 @@ const Timer = ({ startDate1, endDate1 }) => {
 
 //time end
 
-const ShowAllVote = () => {
+const AllElections = () => {
   const { user } = useAuth();
   const { data: userRoles = [], refetch } = useQuery({
     queryKey: ["userRoles12"],
@@ -334,4 +334,4 @@ const ShowAllVote = () => {
   );
 };
 
-export default ShowAllVote;
+export default AllElections;
