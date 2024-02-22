@@ -43,12 +43,22 @@ const Page = () => {
 
   return (
     <AdminProtected>
+      <div>
+        <p className=" font-bold text-xl text-white  text-center mt-5 mb-1">
+          Total Candidate : {candidates.length}
+        </p>
+        <hr className="w-52 h-2 mx-auto my-3 bg-gradient-to-r from-blue-500 to-green-500"></hr>
+
       <div className="mt-5">
         <div className="overflow-x-auto">
           <table className="table text-black font-semibold">
             {/* head */}
             <thead>
+
+              <tr className=" text-gray-200 text-xl font-semibold  border-b-2 border-gray-500">
+
               <tr className="text-center text-xl text-white font-semibold  border-b-2 border-gray-600">
+
                 <th>
                   <label>
                     <p className="">Number</p>

@@ -111,27 +111,64 @@ const Nav = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-50 bg-white shadow-md`}
+      className={`fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg`}
       animate={controls}
       initial={{ opacity: 1, y: 0 }}
     >
       <div className="container mx-auto px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-center">
         <motion.div
-          className="flex items-center"
+          className="flex items-center gap-16"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
         >
           <Link
             href="/"
-            className="font-bold  text-2xl flex items-center font-[Poppins] text-gray-800"
+            className="font-bold  text-2xl flex items-center font-[Poppins] text-white"
           >
             <span className="text-3xl text-indigo-600 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
             DVS
           </Link>
+          <div className=" md:hidden text-white ">
+          {user &&  <Notification  /> 
+          }
+          </div>
+          <div className=" md:hidden">
+          {user && (
+            <div className="dropdown dropdown-end md:ml-2 ml-5">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-8 rounded-full">
+                  {user && (
+                    <Image
+                      width={20}
+                      height={20}
+                      alt="User Profile"
+                      src={user?.photoURL ? user?.photoURL : userProfile}
+                    />
+                  )}
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+              >
+                <div className="">
+                  {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
 
+                  <li>
+                    <Link href="/dashboard/home">dashboard</Link>
+                  </li>
+
+                  <li>
+                    <button onClick={handleLogOut}>Log Out</button>
+                  </li>
+                </div>
+              </ul>
+            </div>
+          )}
+          </div>
           <div className="md:hidden ml-2">
             <motion.div
               onClick={() => setOpen(!open)}
@@ -140,12 +177,13 @@ const Nav = () => {
               whileTap={{ scale: 0.9 }}
             >
               {open ? (
-                <FiX onClick={closeMenu} className="text-2xl" />
+                <FiX onClick={closeMenu} className="text-2xl text-white" />
               ) : (
-                <FiMenu className="text-2xl" />
+                <FiMenu className="text-2xl text-white" />
               )}
             </motion.div>
           </div>
+
         </motion.div>
 
         <ul
@@ -166,16 +204,16 @@ const Nav = () => {
           ))}
           {user && (
             <motion.li
-              className="mt-2 md:mt-0 md:ml-4 ml-8"
+              className="mt-2 text-white md:mt-0 md:ml-4 ml-8 hidden md:block"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <Notification classes="mt-2 md:mt-0 md:ml-4 " />
+              <Notification classes="mt-2 md:mt-0 md:ml-4" />
             </motion.li>
           )}
           {user && (
-            <div className="dropdown dropdown-end md:ml-2 ml-5">
+            <div className="dropdown dropdown-end md:ml-2 ml-5  hidden md:block">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-8 rounded-full">
                   {user && (
