@@ -40,7 +40,7 @@ const SideNav = ({ children }) => {
   return (
     <div className="">
       <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
-        <h1 className="text-4xl text-white font-bold mb-1">DVS</h1>
+        <h1 className="font-bold text-3xl flex items-center font-[Poppins] text-white mb-1">DVS</h1>
         <h2 className="text-xl text-center cursor-pointer font-medium text-white w-full">
           Digital Voting System
         </h2>

@@ -163,189 +163,188 @@ const page = () => {
 
   return (
     <Protected>
+      <div className="my-10 text-white md:pt-4 mt-14">
+        <div className="my-10 dark:text-white">
+          <div>
+            <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
+              <div className="py-6 lg:p-7 bg-slate-300 border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+                <h3 className="text-4xl font-bold text-center">DVS</h3>
+                <h3 className="text-xl font-bold text-center">
+                  Digital Voting System
+                </h3>
 
-      <div className="my-10 text-white md:mt-18 mt-14">
-
-      <div className="my-10 dark:text-white">
-        <div>
-          <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
-            <div className="py-6 lg:p-7 bg-slate-300 border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
-              <h3 className="text-4xl font-bold text-center">DVS</h3>
-              <h3 className="text-xl font-bold text-center">
-                Digital Voting System
-              </h3>
-
-              <form onSubmit={handleCreate} className="card-body">
-                <div className="">
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Organization
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Organization Name"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="OrganizatonName"
-                      />
+                <form onSubmit={handleCreate} className="card-body">
+                  <div className="">
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Organization
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Organization Name"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="OrganizatonName"
+                        />
+                      </div>
+                      <div className="form-control w-full ">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Select Organization Type
+                          </span>
+                        </label>
+                        <select
+                          className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
+                          name="Type"
+                          id=""
+                        >
+                          <option value="Administrative">Administrative</option>
+                          <option value="Education">Education</option>
+                          <option value="General">General</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="form-control w-full ">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Select Organization Type
-                        </span>
-                      </label>
-                      <select
-                        className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
-                        name="Type"
-                        id=""
-                      >
-                        <option value="Administrative">Administrative</option>
-                        <option value="Education">Education</option>
-                        <option value="General">General</option>
-                      </select>
+
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            User Name
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="User Name must unique"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="name"
+                        />
+                      </div>
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Organization Logo
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Photo Link"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="photo"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Start Date
+                          </span>
+                        </label>
+                        <input
+                          type="date"
+                          placeholder="Start Date"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="startDate"
+                        />
+                      </div>
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Start Time
+                          </span>
+                        </label>
+                        <input
+                          type="time"
+                          placeholder="Start Time"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="startTime"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            End Date
+                          </span>
+                        </label>
+                        <input
+                          type="date"
+                          placeholder="End Date"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="endDate"
+                        />
+                      </div>
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            End Time
+                          </span>
+                        </label>
+                        <input
+                          type="time"
+                          placeholder="End Time"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          required
+                          name="endTime"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-3">
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Your E-mail
+                          </span>
+                        </label>
+                        <input
+                          defaultValue={user?.email}
+                          disabled
+                          type="email"
+                          placeholder="Enter Your Email"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                          name="email"
+                        />
+                      </div>
+                      <div className="form-control">
+                        <label className="label">
+                          <span className="label-text dark:text-white">
+                            Your Name
+                          </span>
+                        </label>
+                        <input
+                          type="text"
+                          disabled
+                          defaultValue={user?.displayName}
+                          placeholder="Your name"
+                          className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        />
+                      </div>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          User Name
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="User Name must unique"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="name"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Organization Logo
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Photo Link"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="photo"
-                      />
-                    </div>
+                  <div className="form-control mt-6 w-full ">
+                    <button className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
+                      {loading ? (
+                        <h1 className="loading loading-spinner loading-sm"></h1>
+                      ) : (
+                        "Submit"
+                      )}
+                    </button>
                   </div>
-
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Start Date
-                        </span>
-                      </label>
-                      <input
-                        type="date"
-                        placeholder="Start Date"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="startDate"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Start Time
-                        </span>
-                      </label>
-                      <input
-                        type="time"
-                        placeholder="Start Time"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="startTime"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          End Date
-                        </span>
-                      </label>
-                      <input
-                        type="date"
-                        placeholder="End Date"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="endDate"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          End Time
-                        </span>
-                      </label>
-                      <input
-                        type="time"
-                        placeholder="End Time"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="endTime"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Your E-mail
-                        </span>
-                      </label>
-                      <input
-                        defaultValue={user?.email}
-                        disabled
-                        type="email"
-                        placeholder="Enter Your Email"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        name="email"
-                      />
-                    </div>
-                    <div className="form-control">
-                      <label className="label">
-                        <span className="label-text dark:text-white">
-                          Your Name
-                        </span>
-                      </label>
-                      <input
-                        type="text"
-                        disabled
-                        defaultValue={user?.displayName}
-                        placeholder="Your name"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="form-control mt-6 w-full ">
-                  <button className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
-                    {loading ? (
-                      <h1 className="loading loading-spinner loading-sm"></h1>
-                    ) : (
-                      "Submit"
-                    )}
-                  </button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -169,11 +169,11 @@ const Participate = () => {
         </div>
         {filterCandidate?.map((candidat, ind) => (
           <>
-            <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
+            <div key={candidat._id} className="form-control md:w-[50%] mx-auto py-2">
               <label className="label cursor-pointer">
                 <span className="label-text">
                   <Image
-                    className=" rounded-full"
+                    className=" w-24 h-24 rounded-full object-cover"
                     src={candidat?.candidatePhoto}
                     alt="alt"
                     width={100}
