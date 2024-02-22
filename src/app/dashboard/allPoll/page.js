@@ -7,12 +7,13 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
-import Protected from "@/Component/Protected/Protected";
 import AdminProtected from "@/Component/Protected/AdminProtected";
+import useAuth from "@/app/hook/useAuth";
 
 const allPoll = () => {
   const [allPoll, setAllPoll] = useState();
   const { id } = useParams();
+  const {user} = useAuth();
 
   const { data, refetch } = useQuery({
     queryKey: ["create-poll"],
@@ -23,7 +24,7 @@ const allPoll = () => {
     },
   });
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, receiverEmail, title) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to undo this!",
@@ -48,11 +49,27 @@ const allPoll = () => {
         }
       }
     });
+    const type = 6;
+    const notification = {
+      senderEmail: user?.email,
+      receiverEmail: receiverEmail,
+      type,
+      electionName: title,
+    };
+
+    axios
+      .post("https://evs-delta.vercel.app/notification", notification)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
   };
 
   return (
     <AdminProtected>
-      <div className="text-white">
+      <div className="text-white/85">
         <div className="overflow-x-auto">
           <table className="table table-zebra">
             {/* head */}
@@ -67,7 +84,7 @@ const allPoll = () => {
             </thead>
             <tbody>
               {allPoll?.map((poll, ind) => (
-                <tr key={poll?._id}>
+                <tr key={poll?._id} >
                   <th>{ind + 1}</th>
                   <td>{poll?.title}</td>
                   <td>{poll?.wonerEmail}</td>
@@ -78,7 +95,7 @@ const allPoll = () => {
                   </td>
                   <th>
                     <button
-                      onClick={() => handleDelete(poll?._id)}
+                      onClick={() => handleDelete(poll?._id, poll?.wonerEmail, poll?.title)}
                       className=" text-red-500 text-2xl"
                     >
                       <MdDeleteForever />

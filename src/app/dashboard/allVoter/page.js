@@ -125,6 +125,7 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
+
         <p className="font-bold text-center text-2xl text-white">
           Total Users: {data?.length}
         </p>
@@ -133,7 +134,9 @@ const AllVoter = () => {
           <table className="table text-black">
             <thead>
               <tr className="text-xl text-gray-200 font-semibold text-center border-b-2 border-gray-500">
+
               <th className="">
+
                   <label>
                     <p className="">Number</p>
                   </label>
@@ -151,8 +154,8 @@ const AllVoter = () => {
                   <tr
                   key={vote._id}
                   className={`${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                  } text-center font-semibold border-b border-gray-600`}
+                    index % 2 === 0 ?  "bg-gray-100/90" : "bg-gray-100/80"
+                  } text-center font-semibold border-b border-gray-300`}
                 >
                   <th>
                     <label>

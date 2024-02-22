@@ -45,14 +45,14 @@ const SideNav = ({ children }) => {
           Digital Voting System
         </h2>
 
-        <h4 className="loading loading-infinity loading-lg my-4 text-primary"></h4>
+        <h4 className="loading loading-infinity loading-lg my-4 text-indigo-500 "></h4>
 
         <div className="mb-3 border-b-4 border-gray-200/10 pb-4 w-full">
           <Link
             href="/dashboard/home"
             className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
               location === "/dashboard/home"
-                ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
                 : ""
             }`}
           >
@@ -65,7 +65,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/myPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/myPoll"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}
               >
@@ -81,7 +81,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/ownElections"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/ownElections"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}
               >
@@ -93,7 +93,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/myPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/myPoll"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}
               >
@@ -109,7 +109,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/allElections"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
                   location === "/dashboard/allElections"
-                    ? "text-white bg-primary"
+                    ? "text-white bg-indigo-500 "
                     : ""
                 }`}
               >
@@ -120,7 +120,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/Candidate"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
                   location === "/dashboard/Candidate"
-                    ? "text-white bg-primary"
+                    ? "text-white bg-indigo-500 "
                     : ""
                 }`}
               >
@@ -131,7 +131,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/allPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/allPoll"
-                    ? "text-white bg-primary border-gray-200/10 hover:border-gray-200"
+                    ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
                     : ""
                 }`}
               >
@@ -142,7 +142,7 @@ const SideNav = ({ children }) => {
                 href="/dashboard/allVoter"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/allVoter"
-                    ? "text-white bg-primary"
+                    ? "text-white bg-indigo-500 "
                     : "text-gray-800"
                 }`}
               >
@@ -164,7 +164,7 @@ const SideNav = ({ children }) => {
         <div className="mt-3 w-full">
           <div
             className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
-              location === "dashboard/setting" ? "text-white bg-primary" : ""
+              location === "dashboard/setting" ? "text-white bg-indigo-500 " : ""
             }`}
           >
             <MdOutlineSettings className="text-2xl" />

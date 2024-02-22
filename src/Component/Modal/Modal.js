@@ -59,6 +59,22 @@ const Modal = ({ electionId, buttonName, type }) => {
         .catch((error) => {
           console.error("There was an error!", error);
         });
+      const type = 7;
+      const notification = {
+        senderEmail: user?.email,
+        receiverEmail: user?.email,
+        type: type,
+        electionName: voteName,
+      };
+
+      axios
+        .post("https://evs-delta.vercel.app/notification", notification)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
     } else if (type === 2) {
       axios
         .post(`https://evs-delta.vercel.app/candidate`, formData)
@@ -74,6 +90,23 @@ const Modal = ({ electionId, buttonName, type }) => {
             });
             form.reset();
           }
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+        });
+
+      const type = 8;
+      const notification = {
+        senderEmail: user?.email,
+        receiverEmail: user?.email,
+        type: type,
+        electionName: voteName,
+      };
+
+      axios
+        .post("https://evs-delta.vercel.app/notification", notification)
+        .then((response) => {
+          console.log(response.data);
         })
         .catch((error) => {
           console.error("There was an error!", error);
