@@ -111,7 +111,7 @@ const Nav = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg`}
+      className={`fixed top-0 left-0 w-full z-50 bg-[#441760] shadow-lg`}
       animate={controls}
       initial={{ opacity: 1, y: 0 }}
     >
