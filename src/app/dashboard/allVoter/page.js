@@ -32,18 +32,18 @@ const AllVoter = () => {
     },
   });
 
-  const handleVerify = async (id) => {
-    try {
-      const res = await axios.patch(
-        `https://evs-delta.vercel.app/users/verify/${id}`
-      );
-      if (res.data.modifiedCount > 0) {
-        refetch();
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  // const handleVerify = async (id) => {
+  //   try {
+  //     const res = await axios.patch(
+  //       `https://evs-delta.vercel.app/users/verify/${id}`
+  //     );
+  //     if (res.data.modifiedCount > 0) {
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   const handleRole = async (id) => {
     try {
@@ -133,8 +133,7 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
-
-        <p className="font-bold text-center text-2xl text-white">
+        <p className="font-bold text-center text-2xl text-black">
           Total Users: {voters.length}
         </p>
         <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
@@ -142,15 +141,8 @@ const AllVoter = () => {
         <div className="overflow-x-auto">
           <table className="table text-black">
             <thead>
-              <tr className="text-xl text-gray-200 font-semibold text-center border-b-2 border-gray-500">
-                <th className="">
-
-        <div className="overflow-x-auto">
-          <table className="table text-gray-900 mt-4">
-            <thead className="text-white">
               <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
                 <th>
-
                   <label>
                     <p className="">Number</p>
                   </label>
@@ -159,7 +151,7 @@ const AllVoter = () => {
                 <th>ID Card Number</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Verify</th>
+                {/* <th>Verify</th> */}
                 <th>Action</th>
               </tr>
             </thead>
@@ -168,8 +160,8 @@ const AllVoter = () => {
                 <tr
                   key={vote._id}
                   className={`${
-                    index % 2 === 0 ?  "bg-gray-100/90" : "bg-gray-100/80"
-                  } text-center font-semibold border-b border-gray-300`}
+                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                  } text-center font-semibold border-b border-gray-600`}
                 >
                   <th>
                     <label>
@@ -184,7 +176,7 @@ const AllVoter = () => {
                       {vote.isRole}
                     </button>
                   </td>
-                  <td>
+                  {/* <td>
                     <button onClick={() => handleVerify(vote._id)}>
                       {vote?.verify == "true" ? (
                         <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
@@ -192,7 +184,7 @@ const AllVoter = () => {
                         <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
                       )}
                     </button>
-                  </td>
+                  </td> */}
                   <td className="text-3xl cursor-pointer">
                     <button onClick={() => handleDelete(vote._id)}>
                       <MdDeleteForever className=" text-red-700" />
