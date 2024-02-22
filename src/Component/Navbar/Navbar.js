@@ -1,6 +1,6 @@
 "use client"
 import { useState, useEffect } from "react";
-import { IoIosHome, IoIosCube, IoIosCart, IoIosLogIn, IoMdInformationCircle, IoMdList, IoIosConstruct } from "react-icons/io";
+import { IoIosCube, IoIosLogIn, IoMdInformationCircle, IoIosConstruct, IoMdHome } from "react-icons/io";
 import { FiMenu, FiX } from "react-icons/fi";
 import { motion, useAnimation } from "framer-motion";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Notification from "../Notification/Notification";
 import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
 import NavLink from "./NavLink/Navlink";
+import { BsCardText } from "react-icons/bs";
 
 
 const Nav = () => {
@@ -17,13 +18,13 @@ const Nav = () => {
       id: 1,
       path: "/",
       title: "Home",
-      icon: <IoIosHome />,
+      icon: <IoMdHome />,
     },
     {
       id: 2,
       path: "/show-all-vote",
-      title: "All Vote",
-      icon: <IoMdList />,
+      title: "Elections",
+      icon: <BsCardText />,
     },
     {
       id: 3,
@@ -34,13 +35,13 @@ const Nav = () => {
     {
       id: 4,
       path: "/service",
-      title: "Service",
+      title: "Services",
       icon: <IoIosConstruct />,
     },
     {
       id: 5,
       path: "/createvote",
-      title: "Create Vote",
+      title: "Create Election",
       icon: <IoIosCube />,
     },
     ...(user
@@ -111,7 +112,7 @@ const Nav = () => {
 
   return (
     <motion.nav
-      className={`fixed top-0 left-0 w-full z-50 bg-gray-900 shadow-lg`}
+      className={`fixed top-0 left-0 w-full z-50 border-b-[1px] border-white/10  bg-gray-900 shadow-lg`}
       animate={controls}
       initial={{ opacity: 1, y: 0 }}
     >
@@ -124,7 +125,7 @@ const Nav = () => {
         >
           <Link
             href="/"
-            className="font-bold  text-2xl flex items-center font-[Poppins] text-white"
+            className="font-bold  text-3xl flex items-center font-[Poppins] text-white"
           >
             <span className="text-3xl text-indigo-600 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
@@ -139,7 +140,7 @@ const Nav = () => {
           {user && (
             <div className="dropdown dropdown-end md:ml-2 ml-5">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-8 rounded-full">
+                <div className=" rounded-full border-[2px] border-gray-300">
                   {user && (
                     <Image
                       width={20}
@@ -215,11 +216,11 @@ const Nav = () => {
           {user && (
             <div className="dropdown dropdown-end md:ml-2 ml-5  hidden md:block">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-8 rounded-full">
+                <div className="w-10 rounded-full border-[2px] border-gray-300">
                   {user && (
                     <Image
-                      width={20}
-                      height={20}
+                      width={40}
+                      height={40}
                       alt="User Profile"
                       src={user?.photoURL ? user?.photoURL : userProfile}
                     />

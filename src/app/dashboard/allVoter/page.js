@@ -133,24 +133,16 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
-
         <p className="font-bold text-center text-2xl text-white">
           Total Users: {voters.length}
         </p>
         <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
 
         <div className="overflow-x-auto">
-          <table className="table text-black">
-            <thead>
-              <tr className="text-xl text-gray-200 font-semibold text-center border-b-2 border-gray-500">
-                <th className="">
-
-        <div className="overflow-x-auto">
           <table className="table text-gray-900 mt-4">
             <thead className="text-white">
               <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
                 <th>
-
                   <label>
                     <p className="">Number</p>
                   </label>
@@ -168,7 +160,7 @@ const AllVoter = () => {
                 <tr
                   key={vote._id}
                   className={`${
-                    index % 2 === 0 ?  "bg-gray-100/90" : "bg-gray-100/80"
+                    index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/80"
                   } text-center font-semibold border-b border-gray-300`}
                 >
                   <th>

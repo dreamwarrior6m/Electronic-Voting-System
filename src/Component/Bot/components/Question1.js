@@ -7,7 +7,7 @@ const Question1 = (props) => {
   // This function will be called when the button is clicked
   const handleClick = () => {
     const message = createChatBotMessage(
-      "High-quality online voting systems ensure that each voter can only vote once, protecting the integrity of the vote."
+      "An online voting system is a software platform that allows groups to securely conduct votes and elections"
     );
     setState((state) => ({
       ...state,
