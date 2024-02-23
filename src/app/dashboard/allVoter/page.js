@@ -187,7 +187,7 @@ const AllVoter = () => {
           </table>
         </div>
         {
-          <div className="flex items-center justify-between mt-4">
+          <div className="md:flex items-center justify-between mt-4">
             <ReactPaginate
               breakLabel={<span className="break-label">...</span>}
               nextLabel={<span className="pagination-icon">&rarr;</span>}
@@ -217,7 +217,7 @@ const AllVoter = () => {
                 onChange={(e) => setLimit(e.target.value)}
               />
               <button
-                className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+                className="ml-2 bg-blue-500 text-white md:px-4 px-2 md:py-2 py-1 rounded-md"
                 onClick={changeLimit}
               >
                 Set Limit
