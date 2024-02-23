@@ -67,9 +67,9 @@ const Participate = () => {
   });
 
   const filterCandidate = allCandidate?.filter(
-    (candidate) => candidate?.voteName == id
+    (candidate) => (candidate?.voteName == id) && (candidate?.isverify == 'true')
   );
-  // console.log(filterCandidate);
+  console.log(filterCandidate);
 
   const handalCountVote = (id) => {
     // console.log(id);
@@ -163,9 +163,14 @@ const Participate = () => {
 
   return (
     <Protected>
-      <div className="text-white p-5">
+      <div className="text-white p-5 min-h-screen">
         <div className="flex justify-center gap-32">
-          <h2 className="md:text-3xl text-2xl font-semibold py-6 pb-10">Choose your favorite person</h2>
+           
+          {filterCandidate?.length != 0 && (
+            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+              Choose your favorite person
+            </h2>
+          )}
         </div>
         {filterCandidate?.map((candidat, ind) => (
           <>
@@ -209,7 +214,7 @@ const Participate = () => {
               onClick={() => handaleAddVote()}
               className="btn btn-primary"
             >
-              You already voted
+              submit
             </button>
           ) : (
             <button

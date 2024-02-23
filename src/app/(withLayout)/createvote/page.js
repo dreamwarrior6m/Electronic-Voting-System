@@ -163,7 +163,7 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="my-10 text-white">
+      <div className="my-10 text-white pt-8">
         <div>
           <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
             <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
