@@ -59,7 +59,7 @@ const page = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white">
+    <div className="dark:bg-slate-900 flex items-center px-3 justify-center min-h-screen text-gray-700 dark:text-white">
       <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
         <div className="flex dark:text-white flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={loginImg} />
@@ -74,7 +74,7 @@ const page = () => {
           </div>
         </div>
         <div className="lg:p-8 lg:pb-10 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
-          <form onSubmit={handleLogin} className=" w-full">
+          <form onSubmit={handleLogin} className=" w-full px-3">
             <div className="form-control">
               <label className="label">
                 <span className="label-text dark:text-white">Email</span>
@@ -118,7 +118,6 @@ const page = () => {
                 <label className="label cursor-pointer">
                   <input
                     type="checkbox"
-                    checked="checked"
                     className="checkbox checkbox-sm checkbox-primary"
                   />
                   <span className="label-text ml-3 text-base">Remember me</span>

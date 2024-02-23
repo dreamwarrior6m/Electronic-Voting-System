@@ -7,6 +7,15 @@ import Link from "next/link";
 import Modal from "@/Component/Modal/Modal";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "@/app/hook/useAuth";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import CopyToClipboard from "react-copy-to-clipboard";
+import Swal from "sweetalert2";
+import OpenCndidate from "@/Component/OpenCandidate/OpenCndidate";
 
 const Page = () => {
   const { id } = useParams();
@@ -75,81 +84,149 @@ const Page = () => {
   const filterAllVote = showAllVote.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-  return (
-    <div className="min-h-screen max-w-7xl mx-auto pt-14">
-      <div className="text-white pt-10 md:px-8 px-3">
-        <h1 className=" text-2xl text-center font-semibold mb-5   lg:text-4xl">
-          Name: {filterAllVote[0]?.OrganizatonName}{" "}
-        </h1>
+  const shareUrl = `electronic-voting-system-beta.vercel.app/details/${id}`;
+  const handleCopy = () => {
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "URL copied",
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
 
-        <div className=" bg-gray-800 rounded-md">
-          <div className=" card flex md:flex-row justify-center items-center">
-            <div className="flex justify-center mx-auto items-center">
-              <div className="grid-cols-1 justify-between items-center lg:flex gap-32">
-                <figure className="px-10 pt-10">
-                  <Image
-                    src={filterAllVote[0]?.photo}
-                    alt="alt"
-                    width={300}
-                    height={300}
-                    className="rounded-lg"
-                  />
-                </figure>
-                <div className="flex items-center justify-center py-6 md:py-0">
-                  <div className="mb-5">
-                    <h2 className="text-xl  font-bold">
-                      Type: {filterAllVote[0]?.Type}
-                    </h2>
-                    <h2 className="text-green-400 text-xl   font-bold">
-                      Start: {filterAllVote[0]?.startDate} (
-                      {filterAllVote[0]?.startTime})
-                    </h2>
-                    <h2 className=" text-red-400 text-xl  font-bold">
-                      End: {filterAllVote[0]?.endDate} (
-                      {filterAllVote[0]?.endTime})
-                    </h2>
+  return (
+    <div className="min-h-screen max-w-7xl mx-auto pt-20">
+      <div className="text-white pt-10 md:px-8 px-3">
+        <div className=" bg-gray-800 rounded-md pt-12 flex flex-col-reverse md:flex-col">
+          <div className="md:flex justify-between">
+            <div className=" card flex-1">
+              <div className="mx-auto ">
+                <h2 className="text-center md:text-3xl text-2xl font bold pb-4 font-bold">
+                  Information
+                </h2>
+                <div className="gap-32">
+                  <figure className="">
+                    <Image
+                      src={filterAllVote[0]?.photo}
+                      alt="alt"
+                      width={300}
+                      height={300}
+                      className="rounded-lg"
+                    />
+                  </figure>
+                  <div className="md:py-0">
+                    <div className="pt-5">
+                      <h1 className=" text-xl  font-bold">
+                        Name: {filterAllVote[0]?.OrganizatonName}{" "}
+                      </h1>
+                      <h2 className="text-xl  font-bold">
+                        Type: {filterAllVote[0]?.Type}
+                      </h2>
+                      <h2 className="text-green-400 text-xl font-bold">
+                        Start: {filterAllVote[0]?.startDate} (
+                        {filterAllVote[0]?.startTime})
+                      </h2>
+                      <h2 className=" text-red-400 text-xl  font-bold">
+                        End: {filterAllVote[0]?.endDate} (
+                        {filterAllVote[0]?.endTime})
+                      </h2>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className=" lg:mt-20 pb-8">
-            {userRoles?.isRole === "Admin" ? (
-              <div className=" lg:mt-20 flex  gap-2 justify-center items-center pb-8">
-              <Link
-                href={`/participate/${filterAllVote?.[0].name}`}
-                className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-              >
-                Participate
-              </Link>
-              {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-              <Link
-                href={`/show-all-vote/${filterAllVote?.[0].name}`}
-                className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-              >
+            {/* candidate */}
+            <div className="flex-1 pt-12 md:pt-0 pb-5">
+              <h2 className="text-center md:text-3xl text-2xl font bold pb-4 font-bold">
                 Candidates
-              </Link>
-              <Link
-                href={`/result/${filterAllVote?.[0].name}`}
-                className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-              >
-                result
-              </Link>
-    
-              <Link
-                href={`/share/${filterAllVote?.[0].name}`}
-                className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-              >
-                Share
-              </Link>
+              </h2>
+              <OpenCndidate />
             </div>
+          </div>
+
+          {/* buttons */}
+          <div className="  pb-4 flex justify-center md:pt-8">
+            {userRoles?.isRole === "Admin" ? (
+              <div className="  flex  gap-2 justify-center items-center pb-8">
+                <Link
+                  href={`/participate/${filterAllVote?.[0].name}`}
+                  className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                >
+                  Participate
+                </Link>
+                {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
+                 
+                <Link
+                  href={`/result/${filterAllVote?.[0].name}`}
+                  className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                >
+                  result
+                </Link>
+                <div className="">
+                  {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                  <button
+                    className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                    onClick={() =>
+                      document.getElementById("my_modal_3").showModal()
+                    }
+                  >
+                    Share
+                  </button>
+                  <dialog id="my_modal_3" className="modal">
+                    <div className="modal-box">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <h3 className="font-bold text-center pb-2 text-lg">
+                        Share This Election
+                      </h3>
+
+                      <div className="text-center">
+                        <h2 className="pt-5">Derect Share</h2>
+                        <div className="flex gap-4 pt-3 justify-center">
+                          <FacebookShareButton url={shareUrl}>
+                            <FacebookIcon className="rounded-full size-8" />
+                          </FacebookShareButton>
+
+                          <WhatsappShareButton url={shareUrl}>
+                            <WhatsappIcon className="rounded-full size-8" />
+                          </WhatsappShareButton>
+                        </div>
+                        <div className="pt-10 pb-5">
+                          <h2 className="">Share Link</h2>
+                          <h2 className="bg-black p-1 px-3 rounded-md">
+                            {shareUrl}
+                            <CopyToClipboard text={shareUrl}>
+                              <span className="pl-1">
+                                <button
+                                  onClick={handleCopy}
+                                  className="btn btn-sm"
+                                >
+                                  copy
+                                </button>
+                              </span>
+                            </CopyToClipboard>
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                  </dialog>
+                </div>
+              </div>
             ) : userRoles?.isRole === "Modarator" ? (
               filterModeratorElections?.length > 0 &&
               filterModeratorElections?.find(
                 (voteName) => voteName.name === filterAllVote[0]?.name
               ) ? (
                 <div className="flex justify-center items-center text-center mt-2">
-                  <Link href={`/details/${filterAllVote[0]?.name}`} className="w-full">
+                  <Link
+                    href={`/details/${filterAllVote[0]?.name}`}
+                    className="w-full"
+                  >
                     <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
                       See Details
                     </button>
@@ -213,7 +290,7 @@ const Page = () => {
                     candidateApply?.find(
                       (verify) => verify.isverify === "true"
                     )) ? (
-                      <div className=" lg:mt-20 flex  gap-2 justify-center items-center pb-8">
+                    <div className=" flex  gap-2 justify-center items-center pb-8">
                       <Link
                         href={`/participate/${filterAllVote?.[0].name}`}
                         className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
@@ -221,25 +298,67 @@ const Page = () => {
                         Participate
                       </Link>
                       {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                      <Link
-                        href={`/show-all-vote/${filterAllVote?.[0].name}`}
-                        className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                      >
-                        Candidates
-                      </Link>
+                       
                       <Link
                         href={`/result/${filterAllVote?.[0].name}`}
                         className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                       >
                         result
                       </Link>
-            
-                      <Link
-                        href={`/share/${filterAllVote?.[0].name}`}
-                        className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                      >
-                        Share
-                      </Link>
+
+                      <div className="">
+                        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                        <button
+                          className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                          onClick={() =>
+                            document.getElementById("my_modal_3").showModal()
+                          }
+                        >
+                          Share
+                        </button>
+                        <dialog id="my_modal_3" className="modal">
+                          <div className="modal-box">
+                            <form method="dialog">
+                              {/* if there is a button in form, it will close the modal */}
+                              <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                                ✕
+                              </button>
+                            </form>
+                            <h3 className="font-bold text-center pb-2 text-lg">
+                              Share This Election
+                            </h3>
+
+                            <div className="text-center">
+                              <h2 className="pt-5">Derect Share</h2>
+                              <div className="flex gap-4 pt-3 justify-center">
+                                <FacebookShareButton url={shareUrl}>
+                                  <FacebookIcon className="rounded-full size-8" />
+                                </FacebookShareButton>
+
+                                <WhatsappShareButton url={shareUrl}>
+                                  <WhatsappIcon className="rounded-full size-8" />
+                                </WhatsappShareButton>
+                              </div>
+                              <div className="pt-10 pb-5">
+                                <h2 className="">Share Link</h2>
+                                <h2 className="bg-black p-1 px-3 rounded-md">
+                                  {shareUrl}
+                                  <CopyToClipboard text={shareUrl}>
+                                    <span className="pl-1">
+                                      <button
+                                        onClick={handleCopy}
+                                        className="btn btn-sm"
+                                      >
+                                        copy
+                                      </button>
+                                    </span>
+                                  </CopyToClipboard>
+                                </h2>
+                              </div>
+                            </div>
+                          </div>
+                        </dialog>
+                      </div>
                     </div>
                   ) : (
                     ""
@@ -299,7 +418,7 @@ const Page = () => {
                   candidateApply?.find(
                     (verify) => verify.isverify === "true"
                   )) ? (
-                    <div className=" lg:mt-20 flex  gap-2 justify-center items-center pb-8">
+                  <div className=" flex  gap-2 justify-center items-center pb-8">
                     <Link
                       href={`/participate/${filterAllVote?.[0].name}`}
                       className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
@@ -307,25 +426,67 @@ const Page = () => {
                       Participate
                     </Link>
                     {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                    <Link
-                      href={`/show-all-vote/${filterAllVote?.[0].name}`}
-                      className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                    >
-                      Candidates
-                    </Link>
+                     
                     <Link
                       href={`/result/${filterAllVote?.[0].name}`}
                       className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                     >
                       result
                     </Link>
-          
-                    <Link
-                      href={`/share/${filterAllVote?.[0].name}`}
-                      className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                    >
-                      Share
-                    </Link>
+
+                    <div className="">
+                      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                      <button
+                        className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                        onClick={() =>
+                          document.getElementById("my_modal_3").showModal()
+                        }
+                      >
+                        Share
+                      </button>
+                      <dialog id="my_modal_3" className="modal">
+                        <div className="modal-box">
+                          <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                              ✕
+                            </button>
+                          </form>
+                          <h3 className="font-bold text-center pb-2 text-lg">
+                            Share This Election
+                          </h3>
+
+                          <div className="text-center">
+                            <h2 className="pt-5">Derect Share</h2>
+                            <div className="flex gap-4 pt-3 justify-center">
+                              <FacebookShareButton url={shareUrl}>
+                                <FacebookIcon className="rounded-full size-8" />
+                              </FacebookShareButton>
+
+                              <WhatsappShareButton url={shareUrl}>
+                                <WhatsappIcon className="rounded-full size-8" />
+                              </WhatsappShareButton>
+                            </div>
+                            <div className="pt-10 pb-5">
+                              <h2 className="">Share Link</h2>
+                              <h2 className="bg-black p-1 px-3 rounded-md">
+                                {shareUrl}
+                                <CopyToClipboard text={shareUrl}>
+                                  <span className="pl-1">
+                                    <button
+                                      onClick={handleCopy}
+                                      className="btn btn-sm"
+                                    >
+                                      copy
+                                    </button>
+                                  </span>
+                                </CopyToClipboard>
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      </dialog>
+                    </div>
                   </div>
                 ) : (
                   ""

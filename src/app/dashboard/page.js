@@ -318,60 +318,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-<<<<<<< HEAD
-=======
-
-        {/* You can open the modal using document.getElementById('ID').showModal() method */}
-
-        <>
-          <dialog id="my_modal_3" className="modal">
-            <div className="modal-box bg-slate-500 ">
-              <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                  ✕
-                </button>
-              </form>
-              <h3 className="font-bold text-lg text-center">
-                Update your profile
-              </h3>
-              <form onSubmit={handleUpdate} action="">
-                <div className="form-control">
-                  <label className="label">
-                    <span className=" dark:text-white">Change Name</span>
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Change Name"
-                    className="input input-bordered text-white"
-                    required
-                    name="name"
-                  />
-                </div>
-
-                <div className="form-control">
-                  <label className="label">
-                    <span className=" dark:text-white">
-                      Change Date of birth
-                    </span>
-                  </label>
-                  <input
-                    type="date"
-                    placeholder="Photo"
-                    className="input input-bordered text-white"
-                    required
-                    name="date"
-                  />
-                </div>
-                <br />
-                <button className="btn bg-indigo-500 -content w-full">
-                  Update
-                </button>
-              </form>
-            </div>
-          </dialog>
-        </>
->>>>>>> e490498c471b9cc432d61c3c25a23b0887a12743
       </div>
     </Protected>
   );
