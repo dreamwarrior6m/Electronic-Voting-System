@@ -177,8 +177,8 @@ export const SideNav = ({ children }) => {
             <CgMoreVertical size={20} />
           </div>
         </div> */}
-      </nav>
-    </aside>
+      </div>
+    </div>
   );
 };
 
