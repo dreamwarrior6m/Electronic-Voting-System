@@ -65,7 +65,7 @@ const Page = () => {
 
     fetchData();
   }, [user?.email]);
-  console.log(users);
+  // console.log(users);
 
   return (
     <div className="">

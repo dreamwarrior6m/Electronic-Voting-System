@@ -34,7 +34,7 @@ const Share = () => {
   const filterAllVote = allVote?.filter((allVot) => allVot?.name == id);
   console.log(filterAllVote);
 
-  const shareUrl = `electronic-voting-system-beta.vercel.app/${filterAllVote?.[0].name}`;
+  const shareUrl = `electronic-voting-system-beta.vercel.app/share/${filterAllVote?.[0].name}`;
 
   const handleCopy = () => {
     Swal.fire({
@@ -48,10 +48,10 @@ const Share = () => {
 
   return (
     <div>
-      <div className="text-white p-5">
-        <div className="card  bg-base-100 shadow-xl flex md:flex-row">
+      <div className="text-white p-5 pt-28">
+        <div className=" rounded-md pb-6 bg-gray-800 shadow-xl md:flex md:flex-row">
           <div className="flex-1">
-            <figure className="px-10 pt-10">
+            <figure className="px-10 pt-10 flex items-center justify-center">
               <Image
                 src={filterAllVote?.[0].photo}
                 alt="alt"
@@ -59,7 +59,7 @@ const Share = () => {
                 height={300}
               />
             </figure>
-            <div className="card-body items-center text-center">
+            <div className="card-body  text-center">
               <h2 className="card-title">
                 <span className="text-xl font-bold text-red-600"></span>
               </h2>
@@ -101,7 +101,8 @@ const Share = () => {
             </div>
           </div>
 
-          <div className="flex-2 text-center p-5">
+          <div className="flex-1 text-center p-5 h-full md:pt-32 pt-6 ">
+            <div className="flex justify-center items-center">
             <div className="text-center">
               <h2 className="">Share link</h2>
               <div className="flex gap-4 pt-3 justify-center">
@@ -113,12 +114,9 @@ const Share = () => {
                   <WhatsappIcon className="rounded-full size-8" />
                 </WhatsappShareButton>
 
-                <FacebookMessengerShareButton url={shareUrl}>
-                  <FacebookMessengerIcon className="rounded-full size-8" />
-                </FacebookMessengerShareButton>
               </div>
-              <div className="pt-5">
-                <h2 className="">Share-Link:</h2>
+              <div className="pt-8">
+                <h2 className="">Share Link:</h2>
                 <h2 className="bg-black p-1 px-3 rounded-md">
                   {shareUrl}
                   <CopyToClipboard text={shareUrl}>
@@ -131,7 +129,9 @@ const Share = () => {
                 </h2>
               </div>
             </div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

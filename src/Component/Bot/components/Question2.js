@@ -6,7 +6,7 @@ const Question2 = (props) => { // add props here
 
   // This function will be called when the button is clicked
   const handleClick = () => {
-    const message = createChatBotMessage("This platform enables real-time secure results for elections and polls");
+    const message = createChatBotMessage("This platform enables real-time secure results for elections and polls and The system should verify the identity and eligibility of the voters and candidate, and prevent unauthorized or duplicate voting.");
     setState((state) => ({ ...state, messages: [...state.messages, message], buttonClicked: true }));
   };
 

@@ -17,7 +17,7 @@ const Links = () => {
     {
       id: 2,
       path: "/show-all-vote",
-      title: "All Vote",
+      title: "Elections",
     },
     {
       id: 3,
@@ -33,14 +33,18 @@ const Links = () => {
     {
       id: 5,
       path: "/createvote",
-      title: "Create Vote",
+      title: "Create a Election",
     },
 
-    {
-      id: 6,
-      path: "/login",
-      title: "Log In",
-    },
+    ...(user
+      ? []
+      : [
+          {
+            id: 6,
+            path: "/login",
+            title: "Log In",
+          },
+        ]),
   ];
   const [open, setopen] = useState(false);
 
