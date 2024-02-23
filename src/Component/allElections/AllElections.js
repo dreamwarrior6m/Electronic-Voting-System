@@ -51,19 +51,19 @@ const Timer = ({ startDate1, endDate1 }) => {
 //time end
 
 const AllElections = () => {
-  const { user } = useAuth();
-  const { data: userRoles = [], refetch } = useQuery({
-    queryKey: ["userRoles12"],
-    queryFn: async () => {
-      const res = await axios.get(
-        `https://evs-delta.vercel.app/users/${user?.email}`
-      );
-      return res.data;
-    },
-    refetchInterval: 1000,
-  });
+  // const { user } = useAuth();
+  // const { data: userRoles = [], refetch } = useQuery({
+  //   queryKey: ["userRoles12"],
+  //   queryFn: async () => {
+  //     const res = await axios.get(
+  //       `https://evs-delta.vercel.app/users/${user?.email}`
+  //     );
+  //     return res.data;
+  //   },
+  //   refetchInterval: 1000,
+  // });
 
-  console.log(userRoles?.isRole);
+  // console.log(userRoles?.isRole);
 
   const { data: showAllVote = [] } = useQuery({
     queryKey: ["showAllElectons"],
@@ -74,42 +74,42 @@ const AllElections = () => {
     refetchInterval: 1000,
   });
 
-  // console.log(showAllVote);
-  const filterModeratorElections = showAllVote?.filter(
-    (election) => election?.email == user?.email
-  );
-  console.log(filterModeratorElections);
+  // // console.log(showAllVote);
+  // const filterModeratorElections = showAllVote?.filter(
+  //   (election) => election?.email == user?.email
+  // );
+  // console.log(filterModeratorElections);
 
-  const { data: applyForCandidate = [] } = useQuery({
-    queryKey: ["candidates479"],
-    queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate");
-      return res.data;
-    },
-    refetchInterval: 1000,
-  });
+  // const { data: applyForCandidate = [] } = useQuery({
+  //   queryKey: ["candidates479"],
+  //   queryFn: async () => {
+  //     const res = await axios.get("https://evs-delta.vercel.app/candidate");
+  //     return res.data;
+  //   },
+  //   refetchInterval: 1000,
+  // });
 
-  // FilterApplyCandidate
-  const candidateApply = applyForCandidate?.filter(
-    (candidate) => candidate.candidateEmail === user?.email
-  );
-  console.log("get Candidate", candidateApply);
+  // // FilterApplyCandidate
+  // const candidateApply = applyForCandidate?.filter(
+  //   (candidate) => candidate.candidateEmail === user?.email
+  // );
+  // console.log("get Candidate", candidateApply);
 
-  const { data: applyForVoter = [] } = useQuery({
-    queryKey: ["Voter4829"],
-    queryFn: async () => {
-      const res = await axios.get(
-        "https://evs-delta.vercel.app/CandiateUnderUser"
-      );
-      return res.data;
-    },
-    refetchInterval: 1000,
-  });
+  // const { data: applyForVoter = [] } = useQuery({
+  //   queryKey: ["Voter4829"],
+  //   queryFn: async () => {
+  //     const res = await axios.get(
+  //       "https://evs-delta.vercel.app/CandiateUnderUser"
+  //     );
+  //     return res.data;
+  //   },
+  //   refetchInterval: 1000,
+  // });
 
-  const voterApply = applyForVoter?.filter(
-    (candidate) => candidate.candidateEmail === user?.email
-  );
-  console.log("get Voter", voterApply);
+  // const voterApply = applyForVoter?.filter(
+  //   (candidate) => candidate.candidateEmail === user?.email
+  // );
+  // console.log("get Voter", voterApply);
 
   return (
     <Protected>
@@ -149,7 +149,17 @@ const AllElections = () => {
                     endDate1={`${allVote?.endDate}T${allVote?.endTime}`}
                   />
                 </div>
-                {userRoles?.isRole === "Admin" ? (
+                <div className="flex justify-center items-center text-center mt-2">
+                      <Link
+                        href={`/details/${allVote?.name}`}
+                        className="w-full"
+                      >
+                        <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
+                          See Details
+                        </button>
+                      </Link>
+                    </div>
+                {/* {userRoles?.isRole === "Admin" ? (
                   <div className="flex justify-center items-center text-center mt-2">
                     <Link href={`/details/${allVote?.name}`} className="w-full">
                       <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
@@ -324,7 +334,7 @@ const AllElections = () => {
                   </div>
                 ) : (
                   ""
-                )}
+                )} */}
               </div>
             </div>
           </div>
