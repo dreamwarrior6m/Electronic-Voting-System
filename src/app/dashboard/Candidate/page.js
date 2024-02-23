@@ -55,8 +55,6 @@ const Page = () => {
             {/* head */}
             <thead>
 
-              <tr className=" text-gray-200 text-xl font-semibold  border-b-2 border-gray-500">
-
               <tr className="text-center text-xl text-white font-semibold  border-b-2 border-gray-600">
 
                 <th>
@@ -113,6 +111,7 @@ const Page = () => {
             </tbody>
           </table>
         </div>
+      </div>
       </div>
     </AdminProtected>
   );
