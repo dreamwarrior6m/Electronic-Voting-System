@@ -13,4 +13,6 @@
 body{
   background-color: var(--bg);
   color: var(--text);
+  margin: 0;
+  padding: 0;
 }

@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import "../Dashboard/DashboardNavbar/Notification.css";
+import "../Dashboard/DashboardNavbar/DashboardNavbar.css";
 import { MdNotifications, MdOutlineChat, MdSearch } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import useAuth from "@/app/hook/useAuth";

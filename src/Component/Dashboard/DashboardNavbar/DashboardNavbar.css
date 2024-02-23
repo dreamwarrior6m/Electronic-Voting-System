@@ -31,3 +31,38 @@
   background-color: rgba(209, 213, 219);
   border-radius: 100px; /* Color of the track */
 }
+
+.dropdown-menus{
+  position: absolute;
+  top: 77px;
+  right: 0px;
+  background-color: #111827;
+  border-radius: var(--border-radius);
+  padding: 10px 20px;
+  height: 700px;
+  width: 300px;
+}
+.dropdown-menus::before{
+  content: '';
+  position: absolute;
+  top: -5px;
+  right:20px;
+  height: 50px;
+  width: 20px;
+  background: var(--secondary-bg);
+  transform: rotate(46deg);
+}
+
+.dropdown-menus.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+}
+
+.dropdown-menus.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed)ease;
+}
