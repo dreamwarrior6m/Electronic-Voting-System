@@ -25,7 +25,7 @@ const Page = () => {
   console.log(filterAllVote);
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto">
+    <div className="min-h-screen max-w-7xl mx-auto pt-14">
       <div className="text-white pt-10 md:px-8 px-3">
         <h1 className=" text-2xl text-center font-semibold mb-5   lg:text-4xl">
           Name: {filterAllVote?.[0].OrganizatonName}{" "}
