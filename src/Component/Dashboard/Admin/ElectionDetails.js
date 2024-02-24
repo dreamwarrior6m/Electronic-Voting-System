@@ -6,10 +6,11 @@ import { MdVerified } from "react-icons/md";
 import Swal from "sweetalert2";
 import ElectionInfo from "./components/ElectionInfo";
 import ElectionCandidate from "./components/ElectionCandidate";
+import { useEffect } from "react";
 
 const ElectionDetails = () => {
   const { id } = useParams();
-  const { data: elections = [] } = useQuery({
+  const { data: elections = [], refetch1 } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
       const res = await axios.get("https://evs-delta.vercel.app/create-vote");
@@ -18,7 +19,6 @@ const ElectionDetails = () => {
   });
   console.log(elections);
   const filterElection = elections?.filter((election) => election?._id === id);
-  console.log("Election: ", filterElection);
 
   // console.log(CandidateEmail);
   const { data: Voter = [], refetch } = useQuery({
@@ -140,7 +140,59 @@ const ElectionDetails = () => {
   const verifyCandidate = filterCandidate?.filter(
     (candidate) => candidate.isverify === "true"
   );
-  console.log("VerifyCandidate:", verifyCandidate);
+  // console.log("VerifyCandidate:", verifyCandidate);
+
+  // update election position by patch
+  console.log("Election: ", filterElection?.[0]?.position);
+  const handleElectionPositionTrue = (id) => {
+    const position = true;
+    const isSystemRunning = { position };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to start this Elections",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Start it!",
+    }).then((res) => {
+      if (res?.isConfirmed) {
+        axios
+          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemRunning)
+          .then((res) => {
+            console.log(res?.data);
+          })
+          .catch((err) => console.error(err));
+        console.log("ok", id);
+        refetch();
+      }
+    });
+  };
+
+  const handleElectionPositionFalse = (id) => {
+    const position = false;
+    const isSystemRunning = { position };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to stop this Elections",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Stope it!",
+    }).then((res) => {
+      if (res?.isConfirmed) {
+        axios
+          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemRunning)
+          .then((res) => {
+            console.log(res?.data);
+          })
+          .catch((err) => console.error(err));
+        console.log("ok", id);
+        refetch();
+      }
+    });
+  };
 
   return (
     <div className="text-white">
@@ -152,16 +204,42 @@ const ElectionDetails = () => {
       </div>
 
       {/* Election Info */}
-      <div className="py-2">
-        <h4 className="text-2xl font-bold ">All Info:</h4>
-        <div className="text-2xl font font-medium">
-          {filterElection?.map((election) => (
-            <ElectionInfo
-              key={election?._id}
-              election={election}
-              refetch={refetch}
-            ></ElectionInfo>
-          ))}
+      <div className="">
+        <div className="py-2">
+          <h4 className="text-2xl font-bold ">All Info:</h4>
+          <div className="text-2xl font font-medium">
+            {filterElection?.map((election) => (
+              <ElectionInfo
+                key={election?._id}
+                election={election}
+                refetch={refetch}
+              ></ElectionInfo>
+            ))}
+          </div>
+        </div>
+
+        {/* start & stop elections */}
+
+        <div className="">
+          {filterElection?.[0]?.position != true ? (
+            <button
+              onClick={() =>
+                handleElectionPositionTrue(filterElection?.[0]?._id)
+              }
+              className="btn btn-primary btn-sm"
+            >
+              Start
+            </button>
+          ) : (
+            <button
+              onClick={() =>
+                handleElectionPositionFalse(filterElection?.[0]?._id)
+              }
+              className="btn btn-primary btn-sm"
+            >
+              Stop
+            </button>
+          )}
         </div>
       </div>
 
