@@ -10,28 +10,25 @@ import useAuth from "../hook/useAuth";
 import { FaUser, FaUsers } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { usePathname } from "next/navigation";
+import axios from "axios";
 
 const RootLayout = ({ children }) => {
   const location = usePathname();
   const { user, logOut } = useAuth();
-  const [users, setusers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (user?.email) {
-          const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`
-          );
-          setusers(res.data);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
+    axios
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .then((res) => {
+        setUsers(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [user?.email]);
+
+  console.log(users);
 
   return (
     <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900 min-h-screen">
@@ -155,4 +152,3 @@ const RootLayout = ({ children }) => {
 };
 
 export default RootLayout;
-
