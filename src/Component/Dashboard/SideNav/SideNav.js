@@ -43,7 +43,6 @@ export const SideNav = ({ children }) => {
 
     fetchData();
   }, [user?.email]);
-  // console.log(users);
 
 
   return (
@@ -67,9 +66,13 @@ export const SideNav = ({ children }) => {
             className="p-1.5 lg:block hidden rounded-lg bg-blue-200/15 hover:text-white hover:bg-[#4B53B8]"
 
           >
-            <IoMdHome className="text-2xl" />
-            <h3 className=" font-semibold">Home</h3>
-          </Link>
+            {expanded ? (
+              <MdChevronLeft size={20} />
+            ) : (
+              <MdChevronRight size={20} className="text-white" />
+            )}
+          </button>
+          
         </div>
         <SideBarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
