@@ -122,7 +122,7 @@ const RootLayout = ({ children }) => {
             <Link href="/">
               <SideBarItem icon={<IoMdHome size={25} />} text="Home" alert />
             </Link>
-            <Link href="/" onClick={() => signOut(auth)}>
+            <Link href="/" onClick={()=>logOut()}>
               <SideBarItem
                 icon={<MdOutlineLogin size={25} />}
                 text="Logout"
