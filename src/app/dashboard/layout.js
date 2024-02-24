@@ -83,27 +83,18 @@ const RootLayout = ({ children }) => {
                 <Link href="/dashboard/allElections">
                   <SideBarItem
                     icon={<GiVote size={25} />}
-                    text="All Elections"
+                    text="Elections"
                     alert
                   />
                 </Link>
-                <Link
-                  href="/dashboard/Candidate"
-                  
-                >
-                  <SideBarItem
-                    icon={<GiVote size={25} />}
-                    text="My Poll"
-                    alert
-                  />
-                </Link>
+                
                 <Link
                   href="/dashboard/allPoll"
                 
                 >
                    <SideBarItem
                     icon={<GiVote size={25} />}
-                    text="My Poll"
+                    text="All Poll"
                     alert
                   />
                 </Link>
@@ -113,7 +104,7 @@ const RootLayout = ({ children }) => {
                 >
                    <SideBarItem
                     icon={<GiVote size={25} />}
-                    text="My Poll"
+                    text="Users"
                     alert
                   />
                 </Link>
