@@ -54,7 +54,7 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="text-white min-h-screen">
+      <div className="text-white min-h-screen pt-12">
         <div className="text-white p-5  pt-12">
           <div className="bg-gray-800 md:w-3/4 mx-auto rounded-md">
             <div className="">

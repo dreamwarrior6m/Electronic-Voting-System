@@ -6,8 +6,7 @@ import dreamWarrior from "../../../../public/images/EVS.jpg";
 
 const About = () => {
   return (
-   
-      <div className="my-10 max-w-7xl mx-auto">
+    <div className="my-10 max-w-7xl mx-auto md:pt-20 mt-14">
       <div className="text-white">
         <div href="/" className="flex">
           <Link href="/" className="hover:opacity-80">
@@ -60,9 +59,7 @@ const About = () => {
             </div>
           </div>
           <h1 className="text-xl font-semibold opacity-85">Dream Warrior</h1>
-          <h1 className="text-base opacity-50 py-0.5">
-            Founder & CEO
-          </h1>
+          <h1 className="text-base opacity-50 py-0.5">Founder & CEO</h1>
         </div>
         <div className="my-8">
           <h1 className="text-2xl font-semibold">General Information</h1>
@@ -168,7 +165,6 @@ const About = () => {
         </div>
       </div>
     </div>
- 
   );
 };
 

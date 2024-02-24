@@ -2,16 +2,6 @@
 import DashboardNavbar from "@/Component/Dashboard/DashboardNavbar/DashboardNavbar";
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import { SideBarItem, SideNav } from "@/Component/Dashboard/SideNav/SideNav";
-import {
-  LifeBuoy,
-  Receipt,
-  Boxes,
-  Package,
-  UserCircle,
-  BarChart3,
-  LayoutDashboard,
-  Settings,
-} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GiVote } from "react-icons/gi";
@@ -166,4 +156,3 @@ const RootLayout = ({ children }) => {
 
 export default RootLayout;
 
-// className="hidden lg:h-full lg:block p-6 w-1/2 lg:w-72 bg-blue-200/5"

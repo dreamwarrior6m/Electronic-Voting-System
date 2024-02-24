@@ -52,7 +52,7 @@ const HomePage = () => {
           <div className="col-span-3 w-full">
             <div className="stats shadow w-full bg-blue-200/5 rounded-none">
               <div className="stat">
-                <div className="stat-figure text-primary">
+                <div className="stat-figure text-indigo-500 ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -68,7 +68,7 @@ const HomePage = () => {
                   </svg>
                 </div>
                 <div className="stat-title">Total Likes</div>
-                <div className="stat-value text-primary">25.6K</div>
+                <div className="stat-value text-indigo-500 ">25.6K</div>
                 <div className="stat-desc">21% more than last month</div>
               </div>
 
@@ -114,26 +114,16 @@ const HomePage = () => {
                 <div className="stat-desc">21% more than last month</div>
               </div>
             </div>
-            <div>
-              <div className="stats bg-primary text-primary-content">
-                <div className="stat">
-                  <div className="stat-title">Account balance</div>
-                  <div className="stat-value">$89,400</div>
-                  <div className="stat-actions">
-                    <button className="btn btn-sm btn-success">
-                      Add funds
-                    </button>
-                  </div>
-                </div>
+            {/* table  */}
 
-                <div className="stat">
-                  <div className="stat-title">Current balance</div>
-                  <div className="stat-value">$89,400</div>
-                  <div className="stat-actions">
-                    <button className="btn btn-sm">Withdrawal</button>
-                    <button className="btn btn-sm">deposit</button>
-                  </div>
+            <div className="stats shadow w-full bg-blue-200/5 rounded-none mt-6">
+              <div className="stat">
+                <div className="stat-figure text-indigo-500 ">
+                  <FaUsers className="inline-block w-8 h-8 stroke-current" />
                 </div>
+                <div className="stat-title">Total Users</div>
+                <div className="stat-value text-indigo-500 ">2.6K</div>
+                <div className="stat-desc">21% more than last month</div>
               </div>
               <div className="stats bg-primary text-primary-content">
                 <div className="stat">

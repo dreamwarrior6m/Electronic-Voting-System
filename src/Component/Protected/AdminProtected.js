@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import useAuth from "@/app/hook/useAuth";
 import Loading from "@/app/loading";
