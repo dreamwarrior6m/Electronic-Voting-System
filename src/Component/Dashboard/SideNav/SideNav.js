@@ -13,10 +13,6 @@ import { IoMdHome } from "react-icons/io";
 import {
   MdChevronLeft,
   MdChevronRight,
-  MdDashboard,
-  MdOutlineLogout,
-  MdOutlineSettings,
-  MdPeople,
 } from "react-icons/md";
 
 const SideBarContext = createContext();
@@ -43,6 +39,7 @@ export const SideNav = ({ children }) => {
 
     fetchData();
   }, [user?.email]);
+  // console.log(users);
 
 
   return (
@@ -72,7 +69,6 @@ export const SideNav = ({ children }) => {
               <MdChevronRight size={20} className="text-white" />
             )}
           </button>
-          
         </div>
         <SideBarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
