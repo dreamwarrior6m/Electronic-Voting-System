@@ -46,6 +46,7 @@ export const SideNav = ({ children }) => {
 
 
   return (
+
     <aside className="h-screen">
       <nav className="h-full flex flex-col bg-gray-900 border-r shadow-lg border-gray-800">
         <div className="p-5 pb-2 flex justify-between items-center">
@@ -63,6 +64,7 @@ export const SideNav = ({ children }) => {
           <button
             onClick={() => setExpanded((curr) => !curr)}
             className="p-1.5 lg:block hidden rounded-lg bg-blue-200/15 hover:text-white hover:bg-[#4B53B8]"
+
           >
             {expanded ? (
               <MdChevronLeft size={20} />
@@ -75,8 +77,10 @@ export const SideNav = ({ children }) => {
         <SideBarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SideBarContext.Provider>
+
       </nav>
     </aside>
+
   );
 };
 
