@@ -48,7 +48,12 @@ const Page = () => {
   const filterModeratorElections = showAllVote?.filter(
     (election) => election?.email == user?.email
   );
-  console.log(filterModeratorElections);
+
+  const filterElectionsByUserName = showAllVote?.filter(
+    (election) => election?.name == id
+  );
+  console.log(filterElectionsByUserName?.[0]?.position);
+  console.log(filterElectionsByUserName);
 
   const { data: applyForCandidate = [] } = useQuery({
     queryKey: ["candidates479"],
@@ -149,14 +154,23 @@ const Page = () => {
           <div className="  pb-4 flex justify-center md:pt-8">
             {userRoles?.isRole === "Admin" ? (
               <div className="  flex  gap-2 justify-center items-center pb-8">
-                <Link
-                  href={`/participate/${filterAllVote?.[0].name}`}
-                  className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                >
-                  Participate
-                </Link>
+                {filterElectionsByUserName?.[0]?.position != true ? (
+                  <button
+                    className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                    disabled
+                  >
+                    Participate
+                  </button>
+                ) : (
+                  <Link
+                    href={`/participate/${filterAllVote?.[0].name}`}
+                    className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                  >
+                    Participate
+                  </Link>
+                )}
                 {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                 
+
                 <Link
                   href={`/result/${filterAllVote?.[0].name}`}
                   className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
@@ -291,21 +305,29 @@ const Page = () => {
                       (verify) => verify.isverify === "true"
                     )) ? (
                     <div className=" flex  gap-2 justify-center items-center pb-8">
-                      <Link
-                        href={`/participate/${filterAllVote?.[0].name}`}
-                        className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                      >
-                        Participate
-                      </Link>
+                      {filterElectionsByUserName?.[0]?.position != true ? (
+                        <button
+                          className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                          disabled
+                        >
+                          Participate
+                        </button>
+                      ) : (
+                        <Link
+                          href={`/participate/${filterAllVote?.[0].name}`}
+                          className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                        >
+                          Participate
+                        </Link>
+                      )}
+
                       {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                       
                       <Link
                         href={`/result/${filterAllVote?.[0].name}`}
                         className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                       >
                         result
                       </Link>
-
                       <div className="">
                         {/* You can open the modal using document.getElementById('ID').showModal() method */}
                         <button
@@ -419,14 +441,23 @@ const Page = () => {
                     (verify) => verify.isverify === "true"
                   )) ? (
                   <div className=" flex  gap-2 justify-center items-center pb-8">
-                    <Link
-                      href={`/participate/${filterAllVote?.[0].name}`}
-                      className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
-                    >
-                      Participate
-                    </Link>
+                    {filterElectionsByUserName?.[0]?.position != true ? (
+                      <button
+                        className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                        disabled
+                      >
+                        Participate
+                      </button>
+                    ) : (
+                      <Link
+                        href={`/participate/${filterAllVote?.[0].name}`}
+                        className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                      >
+                        Participate
+                      </Link>
+                    )}
                     {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-                     
+
                     <Link
                       href={`/result/${filterAllVote?.[0].name}`}
                       className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"

@@ -158,7 +158,10 @@ const ElectionDetails = () => {
     }).then((res) => {
       if (res?.isConfirmed) {
         axios
-          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemRunning)
+          .patch(
+            `https://evs-delta.vercel.app/create-vote/${id}`,
+            isSystemRunning
+          )
           .then((res) => {
             console.log(res?.data);
           })
@@ -183,7 +186,10 @@ const ElectionDetails = () => {
     }).then((res) => {
       if (res?.isConfirmed) {
         axios
-          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemRunning)
+          .patch(
+            `https://evs-delta.vercel.app/create-vote/${id}`,
+            isSystemRunning
+          )
           .then((res) => {
             console.log(res?.data);
           })
@@ -222,23 +228,29 @@ const ElectionDetails = () => {
 
         <div className="">
           {filterElection?.[0]?.position != true ? (
-            <button
-              onClick={() =>
-                handleElectionPositionTrue(filterElection?.[0]?._id)
-              }
-              className="btn btn-primary btn-sm"
-            >
-              Start
-            </button>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-green-500">Start This Elections</h2>
+              <button
+                onClick={() =>
+                  handleElectionPositionTrue(filterElection?.[0]?._id)
+                }
+                className="btn btn-primary btn-sm"
+              >
+                Start
+              </button>
+            </div>
           ) : (
-            <button
-              onClick={() =>
-                handleElectionPositionFalse(filterElection?.[0]?._id)
-              }
-              className="btn btn-primary btn-sm"
-            >
-              Stop
-            </button>
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold text-red-500">Stop this election</h2>
+              <button
+                onClick={() =>
+                  handleElectionPositionFalse(filterElection?.[0]?._id)
+                }
+                className="btn btn-primary btn-sm"
+              >
+                Stop
+              </button>
+            </div>
           )}
         </div>
       </div>
