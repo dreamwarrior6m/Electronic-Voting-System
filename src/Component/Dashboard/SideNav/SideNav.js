@@ -43,7 +43,6 @@ export const SideNav = ({ children }) => {
 
     fetchData();
   }, [user?.email]);
-  // console.log(users);
 
 
   return (

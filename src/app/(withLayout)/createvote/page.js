@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useAuthState } from "react-firebase-hooks/auth";
 import axios from "axios";
 import Protected from "@/Component/Protected/Protected";
+import { UploadImage } from "@/Component/shareComponent/utilites";
 const page = () => {
   const router = useRouter();
   const [loading, setloading] = useState(false);
@@ -45,11 +46,13 @@ const page = () => {
     const OrganizatonName = form.OrganizatonName.value;
     const Type = form.Type.value;
     const name = form.name.value;
-    const photo = form.photo.value;
+    const image = form.photo.files[0];
     const startDate = form.startDate.value;
     const startTime = form.startTime.value;
     const endDate = form.endDate.value;
     const endTime = form.endTime.value;
+    const imageData =await UploadImage(image);
+    const photo = imageData?.data?.display_url;
 
     const email = user?.email;
     const createVoteInfo = {
@@ -163,7 +166,7 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="my-10 text-white">
+      <div className="my-10 text-white pt-8">
         <div>
           <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
             <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
@@ -189,21 +192,16 @@ const page = () => {
                         name="OrganizatonName"
                       />
                     </div>
-                    <div className="form-control w-full ">
+                    <div className="form-control">
                       <label className="label">
-                        <span className="label-text dark:text-white">
-                          Select Organization Type
-                        </span>
+                        <span className=" text-white bg-blue-950">Upload Photo</span>
                       </label>
-                      <select
-                        className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
-                        name="Type"
-                        id=""
-                      >
-                        <option value="Administrative">Administrative</option>
-                        <option value="Education">Education</option>
-                        <option value="General">General</option>
-                      </select>
+                      <input
+                        required
+                        name="photo"
+                        type="file"
+                        className="file-input file-input-bordered w-full max-w-xs"
+                      />
                     </div>
                   </div>
 
@@ -222,19 +220,22 @@ const page = () => {
                         name="name"
                       />
                     </div>
-                    <div className="form-control">
+                    
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
-                          Organization Logo
+                          Select Organization Type
                         </span>
                       </label>
-                      <input
-                        type="text"
-                        placeholder="Photo Link"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
-                        required
-                        name="photo"
-                      />
+                      <select
+                        className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
+                        name="Type"
+                        id=""
+                      >
+                        <option value="Administrative">Administrative</option>
+                        <option value="Education">Education</option>
+                        <option value="General">General</option>
+                      </select>
                     </div>
                   </div>
 

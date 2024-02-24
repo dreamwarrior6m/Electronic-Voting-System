@@ -2,14 +2,14 @@ const Facilities = () => {
   return (
     <div className="bg-[#f1faee] dark:bg-gray-900 pt-16 pb-32">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-        <h2 className="text-base font-semibold tracking-wider text-indigo-600 dark:text-indigo-500 uppercase">
-          Polling made easy
+        <h2 className="text-base font-semibold tracking-wider text-indigo-500 dark:text-indigo-500 uppercase">
+          Election made easy
         </h2>
         <p className="mt-2 text-3xl font-extrabold text-gray-900 dark:text-gray-200 tracking-tight sm:text-4xl">
-          Simple polls with powerfull configuration
+          Simple Election with powerful configuration
         </p>
-        <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
-          While we make our polls as simple and beautiful as possible, we also
+        <p className="mt-5 max-w-2xl mx-auto text-xl text-gray-500">
+          While we make our election as simple and beautiful as possible, we also
           offer powerful customization options to enable on-demand adjustments
           for many different purposes.
         </p>
@@ -41,7 +41,7 @@ const Facilities = () => {
                   </h3>
                   <p className="mt-5 text-base text-gray-500">
                     By default, bots and VPN users are blocked from voting on
-                    straw polls.
+                    straw election.
                   </p>
                 </div>
               </div>
@@ -73,7 +73,7 @@ const Facilities = () => {
                     Deadlines
                   </h3>
                   <p className="mt-5 text-base text-gray-500">
-                    Our polls run indefinetly. You can change that by setting a
+                    Our election run indefinitely. You can change that by setting a
                     deadline.
                   </p>
                 </div>
@@ -102,10 +102,10 @@ const Facilities = () => {
                     </span>
                   </div>
                   <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
-                    Emoji Support
+                    Link Shear
                   </h3>
                   <p className="mt-5 text-base text-gray-500">
-                    We support all Emojis natively. Feel free to use as many as
+                    We support election and pull Link shear. Feel free to use as many as
                     you want!
                   </p>
                 </div>
@@ -137,7 +137,7 @@ const Facilities = () => {
                     Live Results
                   </h3>
                   <p className="mt-5 text-base text-gray-500">
-                    Evaluate your poll results in a pie chart or bar graph in
+                    Evaluate your poll or election results in a number in
                     real-time.
                   </p>
                 </div>
@@ -166,10 +166,10 @@ const Facilities = () => {
                     </span>
                   </div>
                   <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
-                    Poll API
+                    Poll and Election API
                   </h3>
                   <p className="mt-5 text-base text-gray-500">
-                    We provide an easy to use API for poll creation and result
+                    We provide an easy to use API for poll and election creation and result
                     analysis.
                   </p>
                 </div>

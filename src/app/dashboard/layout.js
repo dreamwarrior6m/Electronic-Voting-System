@@ -2,16 +2,6 @@
 import DashboardNavbar from "@/Component/Dashboard/DashboardNavbar/DashboardNavbar";
 import NavBarIcon from "@/Component/Dashboard/NavBarIcon/NavBarIcon";
 import { SideBarItem, SideNav } from "@/Component/Dashboard/SideNav/SideNav";
-import {
-  LifeBuoy,
-  Receipt,
-  Boxes,
-  Package,
-  UserCircle,
-  BarChart3,
-  LayoutDashboard,
-  Settings,
-} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GiVote } from "react-icons/gi";
@@ -102,36 +92,33 @@ const RootLayout = ({ children }) => {
                 </Link>
                 <Link
                   href="/dashboard/Candidate"
-                  className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
-                    location === "/dashboard/Candidate"
-                      ? "text-white bg-indigo-500 "
-                      : ""
-                  }`}
+                  
                 >
-                  <FaUsers className="text-2xl group-hover:text-white" />
-                  <h3 className="text-white font-semibold">All Candidate</h3>
+                  <SideBarItem
+                    icon={<GiVote size={25} />}
+                    text="My Poll"
+                    alert
+                  />
                 </Link>
                 <Link
                   href="/dashboard/allPoll"
-                  className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                    location === "/dashboard/allPoll"
-                      ? "text-white bg-indigo-500  border-gray-200/10 hover:border-gray-200"
-                      : ""
-                  }`}
+                
                 >
-                  <GiVote className="text-2xl " />
-                  <h3 className="font-semibold">All Poll</h3>
+                   <SideBarItem
+                    icon={<GiVote size={25} />}
+                    text="My Poll"
+                    alert
+                  />
                 </Link>
                 <Link
                   href="/dashboard/allVoter"
-                  className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                    location === "/dashboard/allVoter"
-                      ? "text-white bg-indigo-500 "
-                      : "text-gray-800"
-                  }`}
+                 
                 >
-                  <MdPeople className="text-2xl group-hover:text-white" />
-                  <h3 className=" text-white font-semibold">All Users</h3>
+                   <SideBarItem
+                    icon={<GiVote size={25} />}
+                    text="My Poll"
+                    alert
+                  />
                 </Link>
               </>
             )}
@@ -166,4 +153,3 @@ const RootLayout = ({ children }) => {
 
 export default RootLayout;
 
-// className="hidden lg:h-full lg:block p-6 w-1/2 lg:w-72 bg-blue-200/5"

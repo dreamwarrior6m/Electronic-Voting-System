@@ -7,6 +7,7 @@ import { useState } from "react";
 import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
 import Swal from "sweetalert2";
 import registrationImg from "../../../public/images/logo (2).png";
+import { UploadImage } from "@/Component/shareComponent/utilites";
 
 const Registration = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -21,14 +22,31 @@ const Registration = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photo = form.photo.value;
+    const confirmPassword = form.confirmPassword.value;
+    const image = form.photo.files[0];
     const date = form.date.value;
-    const idNumber = form.idNumber.value;
     const verify = false;
     const isRole = "user";
-    const user = { name, email, photo, date, idNumber, verify, isRole };
+    
+    const imageData =await UploadImage(image);
+    const photo = imageData?.data?.display_url;
+    const user = { name, email, confirmPassword, photo, date, verify, isRole };
 
+   
+    // console.log(user);
     // Password validation
+    if(password != confirmPassword){
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title:
+          "Password not same",
+        showConfirmButton: false,
+        timer: 3000,
+      });
+      return;
+    }
+    
     if (
       password.length < 6 ||
       !/[A-Z]/.test(password) ||
@@ -44,6 +62,8 @@ const Registration = () => {
       });
       return;
     }
+
+    
 
     setloading(true);
 
@@ -95,7 +115,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white">
+    <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white px-3">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-gray-700 dark:text-white  flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
@@ -110,28 +130,28 @@ const Registration = () => {
           </div>
         </div>
         <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
-          <form onSubmit={handleRegistration} className="w-full">
+          <form onSubmit={handleRegistration} className="w-full p-3">
             <div className="grid lg:grid-cols-12 gap-4">
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">Name</span>
+                  <span className=" text-gray-700 dark:text-white">Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="name"
                 />
               </div>
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">E-mail</span>
+                  <span className=" text-gray-700 dark:text-white">E-mail</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="email"
                 />
@@ -139,13 +159,15 @@ const Registration = () => {
               <div className="relative col-span-6">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text dark:text-white">Password</span>
+                    <span className="label-text text-gray-700 dark:text-white">
+                      Password
+                    </span>
                   </label>
                   <input
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-white"
+                    className="input input-bordered text-gray-700 dark:text-white"
                     required
                     defaultChecked
                   />
@@ -156,45 +178,71 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-white dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-gray-700 dark:text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-white dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-gray-700 dark:text-white" />
                     )}
                   </p>
                 </div>
               </div>
               <div className="form-control col-span-6">
-                <label className="label">
-                  <span className=" dark:text-white">ID Card Number</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Your ID Card Number"
-                  className="input input-bordered text-white"
-                  required
-                  name="idNumber"
-                />
+                
+              <div className="relative col-span-6">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text text-gray-700 dark:text-white">
+                      Confirm Password
+                    </span>
+                  </label>
+                  <input
+                    type={showPass ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Enter your password"
+                    className="input input-bordered text-gray-700 dark:text-white"
+                    required
+                    defaultChecked
+                  />
+                </div>
+                <div className="absolute -mt-[42px] right-0 flex items-center pr-3">
+                  <p
+                    onClick={() => setShowPass(!showPass)}
+                    className="p-2 focus:outline-none"
+                  >
+                    {showPass ? (
+                      <PiEyeLight className="h-5 w-5 text-gray-700 dark:text-white" />
+                    ) : (
+                      <PiEyeSlash className="h-5 w-5 text-gray-700 dark:text-white" />
+                    )}
+                  </p>
+                </div>
+              </div>
+              </div>
+
+              <div className="form-control col-span-6">
+                {/* file photo */}
+                <div className="form-control">
+                  <label className="label">
+                    <span className=" text-white">Upload Photo</span>
+                  </label>
+                  <input
+                    required
+                    name="photo"
+                    type="file"
+                    className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
+                  />
+                </div>
               </div>
 
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" dark:text-white">Upload Picture</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter Valid Photo URL"
-                  className="input input-bordered text-white"
-                  name="photo"
-                />
-              </div>
-              <div className="form-control col-span-6">
-                <label className="label">
-                  <span className=" dark:text-white">Birth of Date</span>
+                  <span className=" text-gray-700 dark:text-white">
+                    Birth of Date
+                  </span>
                 </label>
                 <input
                   type="date"
                   placeholder="Photo"
-                  className="input input-bordered text-white"
+                  className="input input-bordered text-gray-700 dark:text-white"
                   required
                   name="date"
                 />
@@ -205,17 +253,14 @@ const Registration = () => {
               <div className="form-control">
                 <label className="label cursor-pointer">
                   <input
+                  checked
                     type="checkbox"
-                    checked="checked"
                     className="checkbox checkbox-sm checkbox-primary"
                   />
                   <span className="label-text ml-3 text-base">
                     I agree to the
-                    <span className="text-[#3B82F6] cursor-pointer">
-                      privacy policy
-                    </span>
-                    and
-                    <span className="text-[#3B82F6] cursor-pointer">
+                     <span className="text-[#3B82F6] cursor-pointer"> privacy policy </span> 
+                     and <span className="text-[#3B82F6] cursor-pointer">
                       terms of service
                     </span>
                     .
@@ -234,19 +279,6 @@ const Registration = () => {
                   "Registration"
                 )}
               </button>
-            </div>
-            <div>
-              <div className="py-6 flex items-center text-xs  before:flex-[1_1_0%] before:border-t before:border-gray-200 before:mr-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ml-6 text-gray-700 dark:text-white dark:before:border-gray-600 dark:after:border-gray-600">
-                Or Continue with
-              </div>
-              <div className="w-full gap-8 flex justify-between">
-                <button className="btn flex-1  bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-                <button className="btn flex-1 bg-[#4B5563] text-white/90">
-                  Google
-                </button>
-              </div>
             </div>
           </form>
         </div>
