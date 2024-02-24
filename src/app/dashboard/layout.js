@@ -31,9 +31,9 @@ const RootLayout = ({ children }) => {
   console.log(users);
 
   return (
-    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900 min-h-screen">
+    <div className="px-4 py-2 lg:flex lg:px-0 lg:py-0 bg-gray-900">
       {/* SideNav  */}
-      <div className="">
+      <div className="min-h-screen">
         <div>
           <SideNav>
             <Link
@@ -59,7 +59,7 @@ const RootLayout = ({ children }) => {
               </>
             )}
 
-            {users?.isRole == "Moderator" && (
+            {users?.isRole == "Modarator" && (
               <>
                 <Link href="/dashboard/ownElections">
                   <SideBarItem
@@ -87,31 +87,22 @@ const RootLayout = ({ children }) => {
                     alert
                   />
                 </Link>
-                <Link
-                  href="/dashboard/Candidate"
-                  
-                >
+                <Link href="/dashboard/Candidate">
                   <SideBarItem
                     icon={<GiVote size={25} />}
                     text="My Poll"
                     alert
                   />
                 </Link>
-                <Link
-                  href="/dashboard/allPoll"
-                
-                >
-                   <SideBarItem
+                <Link href="/dashboard/allPoll">
+                  <SideBarItem
                     icon={<GiVote size={25} />}
                     text="My Poll"
                     alert
                   />
                 </Link>
-                <Link
-                  href="/dashboard/allVoter"
-                 
-                >
-                   <SideBarItem
+                <Link href="/dashboard/allVoter">
+                  <SideBarItem
                     icon={<GiVote size={25} />}
                     text="My Poll"
                     alert
@@ -122,7 +113,7 @@ const RootLayout = ({ children }) => {
             <Link href="/">
               <SideBarItem icon={<IoMdHome size={25} />} text="Home" alert />
             </Link>
-            <Link href="/" onClick={()=>logOut()}>
+            <Link href="/" onClick={() => logOut()}>
               <SideBarItem
                 icon={<MdOutlineLogin size={25} />}
                 text="Logout"
@@ -135,9 +126,9 @@ const RootLayout = ({ children }) => {
           <NavBarIcon />
         </div>
       </div>
-      <div className="flex-1 pt-1 pl-8">
+      <div className="flex-1 pr-8 pt-1 pl-8">
         <div className="">
-          <div className="p-3 rounded">
+          <div className="pt-5 rounded">
             <DashboardNavbar />
           </div>
         </div>
