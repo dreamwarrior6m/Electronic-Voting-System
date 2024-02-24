@@ -1,49 +1,68 @@
-"use client";
-import { MdDeleteForever } from "react-icons/md";
-import { ImCross } from "react-icons/im";
-import Swal from "sweetalert2";
-import axios from "axios";
-import { useEffect, useRef, useState } from "react";
-import { MdVerified } from "react-icons/md";
-import ReactPaginate from "react-paginate";
+"use client"
 
-import "./styles.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ImCross } from "react-icons/im";
+import { MdDeleteForever, MdVerified } from "react-icons/md";
+import ReactPaginate from "react-paginate";
+import "./styles.css"
 import { useQuery } from "@tanstack/react-query";
 import AdminProtected from "@/Component/Protected/AdminProtected";
+import Swal from "sweetalert2";
 
 const AllVoter = () => {
   const [voters, setVoters] = useState([]);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(10);
   const [pageCount, setPageCount] = useState(1);
-  const currentPage = useRef(1);
-
-  console.log(voters);
-  // useEffect(() => {
-  //   fetch("https://evs-delta.vercel.app/users")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // }, []);
+  const [currentPage, setCurrentPage] = useState(1);
   const { data, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/users");
+      const res = await axios.get("https://evs-delta.vercel.app/users", { params: { page: currentPage, limit } });
       setVoters(res.data);
+      setPageCount(res.data.pageCount);
       return res.data;
     },
   });
 
-  const handleVerify = async (id) => {
+  useEffect(() => {
+    getPaginatedUsers();
+  }, [currentPage]);
+
+  const handlePageClick = (e) => {
+    setCurrentPage(e.selected + 1);
+  };
+
+  const changeLimit = () => {
+    setCurrentPage(1);
+    getPaginatedUsers();
+  };
+
+  const getPaginatedUsers = async () => {
     try {
-      const res = await axios.patch(
-        `https://evs-delta.vercel.app/users/verify/${id}`
+      const response = await axios.get(
+        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage}&limit=${limit}`
       );
-      if (res.data.modifiedCount > 0) {
-        refetch();
-      }
+
+      setPageCount(response.data.pageCount);
+      setVoters(response.data.result);
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error fetching paginated users:", error);
     }
   };
+
+  // const handleVerify = async (id) => {
+  //   try {
+  //     const res = await axios.patch(
+  //       `https://evs-delta.vercel.app/users/verify/${id}`
+  //     );
+  //     if (res.data.modifiedCount > 0) {
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   const handleRole = async (id) => {
     try {
@@ -102,45 +121,17 @@ const AllVoter = () => {
       }
     });
   };
-  // pagination
 
-  useEffect(() => {
-    getPaginatedUsers();
-  }, []);
-
-  const handlePageClick = (e) => {
-    currentPage.current = e.selected + 1;
-    getPaginatedUsers();
-  };
-
-  const changeLimit = () => {
-    currentPage.current = 1;
-    getPaginatedUsers();
-  };
-
-  const getPaginatedUsers = async () => {
-    try {
-      const response = await axios.get(
-        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage.current}&limit=${limit}`
-      );
-
-      setPageCount(response.data.pageCount);
-      setVoters(response.data.result);
-    } catch (error) {
-      console.error("Error fetching paginated users:", error);
-    }
-  };
   return (
     <AdminProtected>
       <div>
-        <p className="font-bold text-center text-2xl text-black">
-          Total Users: {voters.length}
+        <p className="font-bold text-center text-2xl text-white">
+          Total Users: {data?.length}
         </p>
         <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
-
         <div className="overflow-x-auto">
-          <table className="table text-black">
-            <thead>
+          <table className="table text-gray-900 mt-4">
+            <thead className="text-white">
               <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
                 <th>
                   <label>
@@ -151,17 +142,17 @@ const AllVoter = () => {
                 <th>ID Card Number</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Verify</th>
+                {/* <th>Verify</th> */}
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {voters?.map((vote, index) => (
-                <tr
+                  <tr
                   key={vote._id}
                   className={`${
-                    index % 2 === 0 ? "bg-gray-100" : "bg-white"
-                  } text-center font-semibold border-b border-gray-600`}
+                    index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/80"
+                  } text-center font-semibold border-b border-gray-300`}
                 >
                   <th>
                     <label>
@@ -171,12 +162,12 @@ const AllVoter = () => {
                   <td>{vote.name}</td>
                   <td>{vote.idNumber}</td>
                   <td>{vote.email}</td>
-                  <td>
-                    <button onClick={() => handleRole(vote._id)}>
+                  <td className=" ">
+                    <button className=" bg-[#441760] px-2 py-1 mt-1 text-gray-300 rounded" onClick={() => handleRole(vote._id)}>
                       {vote.isRole}
                     </button>
                   </td>
-                  <td>
+                  {/* <td>
                     <button onClick={() => handleVerify(vote._id)}>
                       {vote?.verify == "true" ? (
                         <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
@@ -184,7 +175,7 @@ const AllVoter = () => {
                         <ImCross className="text-xl text-red-700 text-center ml-5 cursor-pointer" />
                       )}
                     </button>
-                  </td>
+                  </td> */}
                   <td className="text-3xl cursor-pointer">
                     <button onClick={() => handleDelete(vote._id)}>
                       <MdDeleteForever className=" text-red-700" />
@@ -196,7 +187,7 @@ const AllVoter = () => {
           </table>
         </div>
         {
-          <div className="flex items-center justify-between mt-4">
+          <div className="md:flex items-center justify-between mt-4">
             <ReactPaginate
               breakLabel={<span className="break-label">...</span>}
               nextLabel={<span className="pagination-icon">&rarr;</span>}
@@ -214,11 +205,11 @@ const AllVoter = () => {
               nextClassName="page-item"
               nextLinkClassName="page-link"
               activeClassName="active"
-              forcePage={currentPage.current - 1}
+              forcePage={currentPage - 1}
             />
             <div className="flex items-center">
               <span className="text-sm text-gray-600 mr-2">
-                Page {currentPage.current} of {pageCount}
+                Page {currentPage} of {pageCount}
               </span>
               <input
                 className="p-2 border border-gray-400 rounded-md"
@@ -226,7 +217,7 @@ const AllVoter = () => {
                 onChange={(e) => setLimit(e.target.value)}
               />
               <button
-                className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-md"
+                className="ml-2 bg-blue-500 text-white md:px-4 px-2 md:py-2 py-1 rounded-md"
                 onClick={changeLimit}
               >
                 Set Limit

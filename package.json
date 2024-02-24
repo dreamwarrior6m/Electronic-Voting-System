@@ -14,7 +14,8 @@
     "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "firebase": "^10.7.2",
-    "framer-motion": "^11.0.5",
+    "framer-motion": "^11.0.6",
+    "lucide-react": "^0.334.0",
     "mongodb": "^6.3.0",
     "next": "^14.0.4",
     "react": "^18.2.0",
@@ -26,7 +27,7 @@
     "react-share": "^5.1.0",
     "react-spinners": "^0.13.8",
     "react-spring": "^9.7.3",
-    "recharts": "^2.12.0",
+    "recharts": "^2.12.1",
     "sharp": "^0.33.2",
     "typewriter-effect": "^2.21.0"
   },

@@ -19,13 +19,13 @@ const Results = () => {
   console.log(candidates);
 
   const filterCandidates = candidates?.filter(
-    (candidate) => candidate?.voteName === id
+    (candidate) => (candidate?.voteName === id) && (candidate?.isverify == 'true')
   );
   console.log(filterCandidates);
 
   return (
     <Protected>
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 pt-36">
         <h1 className="text-center font-bold text-4xl pb-8">Results</h1>
         <div className="grid md:grid-cols-2 gap-5">
           {filterCandidates?.map((candidate, index) => (
