@@ -1,74 +1,30 @@
-"use client";
-import {
-  ComposedChart,
-  Line,
-  Area,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  Scatter,
-} from "recharts";
+import React from "react";
+import { ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 
-const data = [
-  {
-    name: "Page A",
-    uv: 590,
-    pv: 800,
-    amt: 1400,
-    cnt: 490,
-  },
-  {
-    name: "Page B",
-    uv: 868,
-    pv: 967,
-    amt: 1506,
-    cnt: 590,
-  },
-  {
-    name: "Page C",
-    uv: 1397,
-    pv: 1098,
-    amt: 989,
-    cnt: 350,
-  },
-  {
-    name: "Page D",
-    uv: 1480,
-    pv: 1200,
-    amt: 1228,
-    cnt: 480,
-  },
-];
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"]; // Add more colors if you have more than four categories
 
-export default function App() {
+const Rechart = ({data}) => {
+  const total = data.reduce((acc, item) => acc + item.value, 0);
+
   return (
-    <div className="mt-6 hidden lg:block">
-      <h2 className="font-bold">Voting Chart </h2>
-      <ComposedChart
-        className=""
-        width={800}
-        height={400}
-        data={data}
-        margin={{
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 20,
-        }}
-      >
-        <CartesianGrid stroke="#f5f5f5" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" />
-        <Bar dataKey="pv" barSize={20} fill="#413ea0" />
-        <Line type="monotone" dataKey="uv" stroke="#ff7300" />
-        <Scatter dataKey="cnt" fill="red" />
-      </ComposedChart>
+    <div style={{ width: "100%", height: 300 }}>
+      <ResponsiveContainer>
+        <PieChart>
+          <Pie
+            dataKey="value"
+            data={data}
+            labelLine={false}
+            label={({ name, value }) => `${name}: ${(value / total * 100).toFixed(2)}%`}
+          >
+            {
+              data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+            }
+          </Pie>
+          <Legend />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default Rechart;

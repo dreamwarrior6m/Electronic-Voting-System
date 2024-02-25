@@ -122,7 +122,7 @@ const Modal = ({ electionId, buttonName, type }) => {
             .getElementById(`my_modal_3_${electionId}_${type}`)
             .showModal()
         }
-        className="flex justify-center items-center text-lg border border-primary px-2 py-1 rounded-md hover:bg-primary/20 gap-1 w-full"
+        className="flex justify-center items-center text-lg border border-primary px-2 py-1 rounded-md hover:bg-primary/20 gap-1 "
       >
         <VscUnverified />{" "}
         <span className="text-[16px] py-[5px]">{buttonName}</span>

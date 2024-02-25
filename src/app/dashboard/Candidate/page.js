@@ -42,7 +42,7 @@ const Page = () => {
   };
 
   return (
-    <AdminProtected>
+      <AdminProtected>
       <div>
         <p className=" font-bold text-xl text-white  text-center mt-5 mb-1">
           Total Candidate : {candidates.length}
@@ -114,6 +114,7 @@ const Page = () => {
       </div>
       </div>
     </AdminProtected>
+    
   );
 };
 

@@ -24,12 +24,33 @@ const Participate = () => {
   const router = useRouter();
   console.log(id);
   const updateVoterEmail2 = user?.email;
-  console.log(user?.email)
+  console.log(user?.email);
   const updateVoterEmail = { updateVoterEmail2 };
   // console.log(updateVoterEmail);
 
   const updateParticipate = { email: user?.email, voteName: id };
   // console.log(updateParticipate);
+
+
+  //  all election filter
+  const [allElections, setAllElections] = useState();
+  useEffect(() => {
+    axios
+      .get("https://evs-delta.vercel.app/create-vote")
+      .then((res) => {
+        setAllElections(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },[]);
+  console.log(allElections);
+  const filterAllElections = allElections?.filter(
+    (election) => election?.name == id
+  );
+  console.log(filterAllElections?.[0]?.position);
+
+
 
   useEffect(() => {
     axios
@@ -44,7 +65,8 @@ const Participate = () => {
   console.log(candidateUnderUser);
 
   const filterUndreUser = candidateUnderUser?.filter(
-    (underUser) => underUser?.voteName == id && underUser?.candidateEmail == user?.email
+    (underUser) =>
+      underUser?.voteName == id && underUser?.candidateEmail == user?.email
   );
   // console.log(filterUndreUser);
 
@@ -56,7 +78,6 @@ const Participate = () => {
       });
   }, []);
 
-
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
@@ -67,9 +88,9 @@ const Participate = () => {
   });
 
   const filterCandidate = allCandidate?.filter(
-    (candidate) => candidate?.voteName == id
+    (candidate) => candidate?.voteName == id && candidate?.isverify == "true"
   );
-  // console.log(filterCandidate);
+  console.log(filterCandidate);
 
   const handalCountVote = (id) => {
     // console.log(id);
@@ -87,7 +108,7 @@ const Participate = () => {
 
     if (
       filterParticipet?.[0]?.email != user?.email &&
-      filterUndreUser?.[0]?.isverify == "true"
+      filterUndreUser?.[0]?.isverify == "true" && filterAllElections?.[0]?.position == true
     ) {
       fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
         .then((res) => res.json())
@@ -161,28 +182,35 @@ const Participate = () => {
     }
   };
 
+ 
+
   return (
     <Protected>
-      <div className="text-white p-5">
+      <div className="text-white p-5 min-h-screen">
         <div className="flex justify-center gap-32">
-          <h2 className="md:text-3xl text-2xl font-semibold py-6 pb-10">Choose your favorite person</h2>
+          {filterCandidate?.length != 0 && (
+            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+              Choose your favorite person
+            </h2>
+          )}
         </div>
         {filterCandidate?.map((candidat, ind) => (
           <>
-            <div key={candidat._id} className="form-control md:w-[50%] mx-auto">
+            <div
+              key={candidat._id}
+              className="form-control md:w-[50%] mx-auto py-2"
+            >
               <label className="label cursor-pointer">
                 <span className="label-text">
                   <Image
-                    className=" rounded-full"
+                    className=" w-24 h-24 rounded-full object-cover"
                     src={candidat?.candidatePhoto}
                     alt="alt"
                     width={100}
                     height={100}
                   />
                 </span>
-                <span className="label-text">
-                   {candidat?.candidateName}
-                </span>
+                <span className="label-text">{candidat?.candidateName}</span>
                 <input
                   onClick={() => handalCountVote(candidat?._id)}
                   type="radio"
@@ -202,14 +230,13 @@ const Participate = () => {
           )}
         </div>
         <div className="text-center pt-5">
-          {filterParticipet?.[0]?.email == user?.email ||
+          {filterParticipet?.[0]?.email == user?.email || filterAllElections?.[0]?.position == false ||
           filterCandidate?.length == 0 ? (
             <button
               disabled
-              onClick={() => handaleAddVote()}
               className="btn btn-primary"
             >
-              You already voted
+              submit
             </button>
           ) : (
             <button
