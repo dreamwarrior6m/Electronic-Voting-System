@@ -1,22 +1,22 @@
 const Facilities = () => {
   return (
-    <div className="bg-[#f1faee] dark:bg-gray-900 pt-16 pb-32">
+    <div className="bg-gray-900  pt-16 pb-32">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
-        <h2 className="text-base font-semibold tracking-wider text-indigo-500 dark:text-indigo-500 uppercase">
-          Election made easy
+        <h2 className="text-base font-semibold tracking-wider text-indigo-600 dark:text-indigo-500 uppercase">
+          Polling made easy
         </h2>
-        <p className="mt-2 text-3xl font-extrabold text-gray-900 dark:text-gray-200 tracking-tight sm:text-4xl">
-          Simple Election with powerful configuration
+        <p className="mt-2 text-3xl font-extrabold text-gray-100 dark:text-gray-200 tracking-tight sm:text-4xl">
+          Simple polls with powerfull configuration
         </p>
-        <p className="mt-5 max-w-2xl mx-auto text-xl text-gray-500">
-          While we make our election as simple and beautiful as possible, we also
+        <p className="mt-5 max-w-prose mx-auto text-xl text-gray-500">
+          While we make our polls as simple and beautiful as possible, we also
           offer powerful customization options to enable on-demand adjustments
           for many different purposes.
         </p>
         <div className="mt-12">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div className="pt-6">
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -36,12 +36,12 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
                     Fake Detection
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
+                  <p className="mt-5 text-base text-gray-100">
                     By default, bots and VPN users are blocked from voting on
-                    straw election.
+                    straw polls.
                   </p>
                 </div>
               </div>
@@ -49,7 +49,7 @@ const Facilities = () => {
 
             <div className="pt-6"
             >
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -69,11 +69,11 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
                     Deadlines
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
-                    Our election run indefinitely. You can change that by setting a
+                  <p className="mt-5 text-base text-gray-100">
+                    Our polls run indefinetly. You can change that by setting a
                     deadline.
                   </p>
                 </div>
@@ -81,7 +81,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -101,11 +101,11 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
-                    Link Shear
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
+                    Emoji Support
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
-                    We support election and pull Link shear. Feel free to use as many as
+                  <p className="mt-5 text-base text-gray-100">
+                    We support all Emojis natively. Feel free to use as many as
                     you want!
                   </p>
                 </div>
@@ -113,7 +113,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -133,11 +133,11 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
                     Live Results
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
-                    Evaluate your poll or election results in a number in
+                  <p className="mt-5 text-base text-gray-100">
+                    Evaluate your poll results in a pie chart or bar graph in
                     real-time.
                   </p>
                 </div>
@@ -145,7 +145,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -165,11 +165,11 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
-                    Poll and Election API
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
+                    Poll API
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
-                    We provide an easy to use API for poll and election creation and result
+                  <p className="mt-5 text-base text-gray-100">
+                    We provide an easy to use API for poll creation and result
                     analysis.
                   </p>
                 </div>
@@ -177,7 +177,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root bg-white dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -197,10 +197,10 @@ const Facilities = () => {
                       </svg>
                     </span>
                   </div>
-                  <h3 className="mt-8 text-lg font-medium text-gray-900 dark:text-gray-200 tracking-tight">
+                  <h3 className="mt-8 text-lg font-medium text-white dark:text-gray-200 tracking-tight">
                     Active Development
                   </h3>
-                  <p className="mt-5 text-base text-gray-500">
+                  <p className="mt-5 text-base text-gray-100">
                     We are continuously working on additional features and QoL
                     updates.
                   </p>

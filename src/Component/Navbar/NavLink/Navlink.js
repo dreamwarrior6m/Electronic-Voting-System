@@ -11,6 +11,7 @@ const NavLink = ({ href, icon, title }) => {
         <span className="mr-1">{icon}</span>
         {title}
         {pathName === href && (
+          
           <>
             <motion.div
               className="absolute bottom-0  left-0 w-full h-[3px] bg-gradient-to-r from-[#ffffff] via-[#cfcfcf] to-[#a3a2a2] -mb-1 rounded-full"
