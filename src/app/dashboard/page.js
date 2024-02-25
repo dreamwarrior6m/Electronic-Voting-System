@@ -63,7 +63,6 @@ const HomePage = () => {
                 <div className="stat-value text-indigo-200/50 lg:border-indigo-200/50 ">
                   {users.length}
                 </div>
-                
               </div>
               <div className="stat lg:border-b lg:border-r lg:border-indigo-200/40 lg:col-span-1 bg-blue-200/5">
                 <div className="stat-figure text-indigo-200/50 lg:border-indigo-200/50 ">
@@ -73,7 +72,6 @@ const HomePage = () => {
                 <div className="stat-value text-indigo-200/50 lg:border-indigo-200/50 ">
                   {allElections.length}
                 </div>
-                
               </div>
               <div className="stat lg:border-b lg:border-indigo-200/40 lg:col-span-1 bg-blue-200/5">
                 <div className="stat-figure text-indigo-200/50 lg:border-indigo-200/50 ">
@@ -83,7 +81,6 @@ const HomePage = () => {
                 <div className="stat-value text-indigo-200/50 lg:border-indigo-200/50 ">
                   {candidates.length}
                 </div>
-                
               </div>
               <div className="stat lg:border-b lg:border-r lg:border-indigo-200/40 lg:col-span-1 bg-blue-200/5">
                 <div className="stat-figure text-indigo-200/50 lg:border-indigo-200/50 ">
@@ -93,11 +90,10 @@ const HomePage = () => {
                 <div className="stat-value text-indigo-200/50 lg:border-indigo-200/50 ">
                   {candidates.length}
                 </div>
-                
               </div>
             </div>
             {/* chart  */}
-            <div className="my-8">
+            <div className="mt-6 mb-6">
               <Rechart data={data} />
             </div>
           </div>

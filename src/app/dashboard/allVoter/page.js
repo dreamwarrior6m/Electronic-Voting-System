@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ImCross } from "react-icons/im";
 import { MdDeleteForever, MdVerified } from "react-icons/md";
 import ReactPaginate from "react-paginate";
-import "./styles.css"
+import "./styles.css";
 import { useQuery } from "@tanstack/react-query";
 import AdminProtected from "@/Component/Protected/AdminProtected";
 import Swal from "sweetalert2";
@@ -18,7 +18,9 @@ const AllVoter = () => {
   const { data, refetch } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/users", { params: { page: currentPage, limit } });
+      const res = await axios.get("https://evs-delta.vercel.app/users", {
+        params: { page: currentPage, limit },
+      });
       setVoters(res.data);
       setPageCount(res.data.pageCount);
       return res.data;
@@ -125,14 +127,10 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
-        <p className="font-bold text-center text-2xl text-white">
-          Total Users: {data?.length}
-        </p>
-        <hr className="w-52 mx-auto h-2 mb-3 mt-1 bg-gradient-to-r from-blue-500 to-green-500"></hr>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-3">
           <table className="table text-gray-900 mt-4">
             <thead className="text-white">
-              <tr className="text-xl font-semibold text-center border-b-2 border-gray-500">
+              <tr className="text-md font-semibold text-center border-b-2 border-gray-500">
                 <th>
                   <label>
                     <p className="">Number</p>
@@ -148,7 +146,7 @@ const AllVoter = () => {
             </thead>
             <tbody>
               {voters?.map((vote, index) => (
-                  <tr
+                <tr
                   key={vote._id}
                   className={`${
                     index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/80"
@@ -163,7 +161,10 @@ const AllVoter = () => {
                   <td>{vote.idNumber}</td>
                   <td>{vote.email}</td>
                   <td className=" ">
-                    <button className=" bg-[#441760] px-2 py-1 mt-1 text-gray-300 rounded" onClick={() => handleRole(vote._id)}>
+                    <button
+                      className=" bg-[#441760] px-2 py-1 mt-1 text-gray-300 rounded"
+                      onClick={() => handleRole(vote._id)}
+                    >
                       {vote.isRole}
                     </button>
                   </td>

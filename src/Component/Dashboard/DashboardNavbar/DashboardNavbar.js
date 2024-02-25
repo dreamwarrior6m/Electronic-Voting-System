@@ -91,16 +91,16 @@ const DashboardNavbar = () => {
             onClick={() => {
               setOpenProfile(!openProfile);
             }}
-            className=" rounded-full object-cover"
+            className=" rounded-full h-[30px] w-[30px] object-cover"
             height={30}
             width={30}
             src={user?.photoURL}
             alt="Profile Photo"
           />
           <div
-            className={`dropdown-menus shadow-xl border border-gray-800 ${
+            className={`dropdown-menus shadow-xl z-20 border border-gray-800 ${
               openProfile ? "active" : "inactive"
-            } min-h-96`}
+            } h-auto`}
           >
             <ul>
               <div className="flex justify-end text-xl cursor-pointer">
@@ -111,10 +111,10 @@ const DashboardNavbar = () => {
                   }
                 />
               </div>
-              <div className="grid gap-4 items-center">
+              <div className="grid gap-4 items-center h-auto">
                 <h1 className=" font-bold text-lg mb-2">
                   Welcome Back !! <br />{" "}
-                  <span className="text-2xl">{users.isRole} Dashboard</span>
+                  <span className="text-2xl">{User.isRole} Dashboard</span>
                 </h1>
                 <div className="w-24 h-24">
                   <Image
@@ -148,10 +148,6 @@ const DashboardNavbar = () => {
                     <div>
                       <h2 className="font-bold">Date Of Birdth</h2>
                       <p className="">{User?.[0]?.date}</p>
-                    </div>
-                    <div>
-                      <h2 className="font-bold">ID Number</h2>
-                      <p>{User?.[0]?.idNumber}</p>
                     </div>
                   </div>
                 </div>
