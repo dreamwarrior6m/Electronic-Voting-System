@@ -339,7 +339,7 @@ const page = () => {
                     {loading ? (
                       <h1 className="loading loading-spinner loading-sm"></h1>
                     ) : (
-                      "Submit"
+                      "Create"
                     )}
                   </button>
                 </div>

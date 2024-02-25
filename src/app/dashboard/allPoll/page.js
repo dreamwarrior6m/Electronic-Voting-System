@@ -71,9 +71,9 @@ const allPoll = () => {
     <AdminProtected>
       <div className="text-white/85">
         <div className="overflow-x-auto">
-          <table className="table table-zebra">
+          <table className="table table-zebra text-md font-semibold">
             {/* head */}
-            <thead>
+            <thead className="">
               <tr>
                 <th></th>
                 <th>Title</th>
