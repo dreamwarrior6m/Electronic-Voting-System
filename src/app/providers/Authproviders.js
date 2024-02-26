@@ -71,7 +71,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         axios
-          .post("https://evs-delta.vercel.app/logout", loggedEmail, {
+          .post("http://localhost:5000/logout", loggedEmail, {
             withCredentials: true,
           })
           .then((res) => {

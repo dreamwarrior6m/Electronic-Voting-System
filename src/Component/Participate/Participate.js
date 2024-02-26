@@ -31,7 +31,6 @@ const Participate = () => {
   const updateParticipate = { email: user?.email, voteName: id };
   // console.log(updateParticipate);
 
-
   //  all election filter
   const [allElections, setAllElections] = useState();
   useEffect(() => {
@@ -43,18 +42,16 @@ const Participate = () => {
       .catch((err) => {
         console.error(err);
       });
-  },[]);
+  }, []);
   console.log(allElections);
   const filterAllElections = allElections?.filter(
     (election) => election?.name == id
   );
   console.log(filterAllElections?.[0]?.position);
 
-
-
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/CandiateUnderUser",{
+      .get("https://evs-delta.vercel.app/CandiateUnderUser", {
         withCredentials: true,
       })
       .then((res) => {
@@ -73,17 +70,20 @@ const Participate = () => {
   // console.log(filterUndreUser);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllCandidate(data);
+    axios
+      .get("https://evs-delta.vercel.app/candidate", { withCredentials: true })
+      .then((res) => {
+        setAllCandidate(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/participate",{
+      const res = await axios.get("https://evs-delta.vercel.app/participate", {
         withCredentials: true,
       });
       setParticipate(res?.data);
@@ -112,7 +112,8 @@ const Participate = () => {
 
     if (
       filterParticipet?.[0]?.email != user?.email &&
-      filterUndreUser?.[0]?.isverify == "true" && filterAllElections?.[0]?.position == true
+      filterUndreUser?.[0]?.isverify == "true" &&
+      filterAllElections?.[0]?.position == true
     ) {
       fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
         .then((res) => res.json())
@@ -186,8 +187,6 @@ const Participate = () => {
     }
   };
 
- 
-
   return (
     <Protected>
       <div className="text-white p-5 min-h-screen">
@@ -234,12 +233,10 @@ const Participate = () => {
           )}
         </div>
         <div className="text-center pt-5">
-          {filterParticipet?.[0]?.email == user?.email || filterAllElections?.[0]?.position == false ||
+          {filterParticipet?.[0]?.email == user?.email ||
+          filterAllElections?.[0]?.position == false ||
           filterCandidate?.length == 0 ? (
-            <button
-              disabled
-              className="btn btn-primary"
-            >
+            <button disabled className="btn btn-primary">
               submit
             </button>
           ) : (

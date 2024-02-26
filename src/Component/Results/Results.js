@@ -3,6 +3,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Protected from "../Protected/Protected";
+import axios from "axios";
 
 const Results = () => {
   const [candidates, setCandidates] = useState();
@@ -10,16 +11,21 @@ const Results = () => {
   console.log(id);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
-      .then((res) => res.json())
-      .then((data) => {
-        setCandidates(data);
+    axios
+      .get("https://evs-delta.vercel.app/candidate", {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setCandidates(res?.data);
+      })
+      .catch((err) => {
+        conlsol.log(err);
       });
   }, []);
   console.log(candidates);
 
   const filterCandidates = candidates?.filter(
-    (candidate) => (candidate?.voteName === id) && (candidate?.isverify == 'true')
+    (candidate) => candidate?.voteName === id && candidate?.isverify == "true"
   );
   console.log(filterCandidates);
 
