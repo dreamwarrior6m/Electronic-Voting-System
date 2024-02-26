@@ -27,7 +27,9 @@ const ElectionDetails = () => {
     queryKey: ["CandidateEmail"],
     queryFn: async () => {
       const res = await axios.get(
-        `https://evs-delta.vercel.app/candidate/under/users/${filterElection[0]?.name}`
+        `https://evs-delta.vercel.app/candidate/under/users/${filterElection[0]?.name}`,{
+          withCredentials: true,
+        }
       );
       return res.data;
     },
@@ -127,7 +129,9 @@ const ElectionDetails = () => {
   const { data: candidates = [] } = useQuery({
     queryKey: ["candidates1"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate");
+      const res = await axios.get("https://evs-delta.vercel.app/candidate",{
+        withCredentials: true,
+      });
       return res.data;
     },
     refetchInterval: 1000,

@@ -18,7 +18,9 @@ const Notification = ({ classes }) => {
   const { data: allNotifications = [], refetch } = useQuery({
     queryKey: ["notification1"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/notification");
+      const res = await axios.get("https://evs-delta.vercel.app/notification",{
+        withCredentials: true,
+      });
       return res.data;
     },
     refetchInterval: 1000,

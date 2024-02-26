@@ -54,7 +54,8 @@ const Page = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`
+            `https://evs-delta.vercel.app/users/${user?.email}`,
+            { withCredentials: true }
           );
           setusers(res.data);
         }

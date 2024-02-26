@@ -68,11 +68,12 @@ const AllElections = () => {
   const { data: showAllVote = [] } = useQuery({
     queryKey: ["showAllElectons"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote",);
       return res.data;
     },
-    refetchInterval: 1000,
+    // refetchInterval: 1000,
   });
+  console.log(showAllVote);
 
   // // console.log(showAllVote);
   // const filterModeratorElections = showAllVote?.filter(
@@ -150,15 +151,12 @@ const AllElections = () => {
                   />
                 </div>
                 <div className="flex justify-center items-center text-center mt-2">
-                      <Link
-                        href={`/details/${allVote?.name}`}
-                        className="w-full"
-                      >
-                        <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                          See Details
-                        </button>
-                      </Link>
-                    </div>
+                  <Link href={`/details/${allVote?.name}`} className="w-full">
+                    <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
+                      See Details
+                    </button>
+                  </Link>
+                </div>
                 {/* {userRoles?.isRole === "Admin" ? (
                   <div className="flex justify-center items-center text-center mt-2">
                     <Link href={`/details/${allVote?.name}`} className="w-full">

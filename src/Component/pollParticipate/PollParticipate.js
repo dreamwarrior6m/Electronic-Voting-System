@@ -64,7 +64,9 @@ const PollParticipate = () => {
     queryKey: ["participate"],
     queryFn: async () => {
       const res = await axios.get(
-        "https://evs-delta.vercel.app/poll-participate"
+        "https://evs-delta.vercel.app/poll-participate",{
+          withCredentials: true,
+        }
       );
       setPollParticipate(res?.data);
       return res?.data;

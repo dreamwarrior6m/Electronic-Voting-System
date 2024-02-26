@@ -6,6 +6,7 @@ import Notification from "@/Component/Notification/Notification";
 import { useEffect, useState } from "react";
 import "./DashboardNavbar.css";
 import { FaRegCopy } from "react-icons/fa";
+import axios from "axios";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
@@ -16,9 +17,14 @@ const DashboardNavbar = () => {
 
   const userData = `https://evs-delta.vercel.app/users`;
   useEffect(() => {
-    fetch(userData)
-      .then((res) => res.json())
-      .then((data) => setAlluser(data));
+    axios
+      .get(userData, { withCredentials: true })
+      .then((res) => {
+        setAlluser(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, [userData]);
   console.log(allUser);
 
@@ -31,7 +37,7 @@ const DashboardNavbar = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`
+            `https://evs-delta.vercel.app/users/${user?.email}`, {withCredentials: true}
           );
           setusers(res.data);
         }

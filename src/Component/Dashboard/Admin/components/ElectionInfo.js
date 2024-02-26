@@ -10,7 +10,9 @@ const ElectionInfo = ({ election, refetch }) => {
   const { user } = useAuth();
   useEffect(() => {
     axios
-      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`,{
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res.data);
         setUserRoles(res.data);

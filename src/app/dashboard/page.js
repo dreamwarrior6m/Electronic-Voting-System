@@ -13,7 +13,9 @@ const HomePage = () => {
   const { data: candidates = [], refetch } = useQuery({
     queryKey: ["candidates478"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate");
+      const res = await axios.get("https://evs-delta.vercel.app/candidate", {
+        withCredentials: true,
+      });
       return res.data;
     },
   });
@@ -21,7 +23,9 @@ const HomePage = () => {
   const { data: users = [] } = useQuery({
     queryKey: ["users8974"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/users");
+      const res = await axios.get("https://evs-delta.vercel.app/users", {
+        withCredentials: true,
+      });
       return res.data;
     },
   });
