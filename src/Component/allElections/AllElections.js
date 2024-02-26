@@ -56,7 +56,7 @@ const AllElections = () => {
     queryKey: ["showAllElectons"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/create-vote?search=${search}`
+        `https://evs-delta.vercel.app/create-vote?search=${search}`
       );
       return res.data;
     },
@@ -84,11 +84,11 @@ const AllElections = () => {
                 id="id"
                 name="search"
                 placeholder="Search by Org. Name"
-                className="w-[220px] border border-slate-200 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
+                className="w-[220px] border border-slate-400 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
               />
             </div>
             <div className="rounded-r-lg">
-              <input type="submit" value="Search" className="btn px-2" />
+              <input type="submit" value="Search" className="bg-slate-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-400" />
             </div>
           </div>
         </form>
