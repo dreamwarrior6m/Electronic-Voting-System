@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import Protected from "../Protected/Protected";
+import axios from "axios";
 
 const OpenCndidate = () => {
   const [openCandidate, setOpenCndidate] = useState();
@@ -10,16 +11,19 @@ const OpenCndidate = () => {
   console.log(id);
 
   useEffect(() => {
-    fetch("https://evs-delta.vercel.app/candidate")
-      .then((res) => res.json())
-      .then((data) => {
-        setOpenCndidate(data);
+    axios
+      .get("https://evs-delta.vercel.app/candidate", { withCredentials: true })
+      .then((res) => {
+        setOpenCndidate(res?.data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
   console.log(openCandidate);
 
   const filterCandidate = openCandidate?.filter(
-    (candidat) => candidat?.voteName === id && (candidat?.isverify == 'true')
+    (candidat) => candidat?.voteName === id && candidat?.isverify == "true"
   );
   console.log(filterCandidate);
 
@@ -44,14 +48,10 @@ const OpenCndidate = () => {
                 />
               </div>
               <div className="py-4 text-white">
-                <h2 className="">
-                  Name: {candidate?.candidateName}
-                </h2>
+                <h2 className="">Name: {candidate?.candidateName}</h2>
                 {/* <h2 className="">Email: {candidate?.candidateEmail}</h2> */}
                 <h2 className="">Id: {candidate?.candidateID}</h2>
-                <div className="">
-                  
-                </div>
+                <div className=""></div>
               </div>
             </div>
           ))}
