@@ -4,13 +4,16 @@
 import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import Protected from "@/Component/Protected/Protected";
+import Swal from "sweetalert2";
+import { UploadImage } from "@/Component/shareComponent/utilites";
 
 const page = () => {
   const [allPollAns, setAllPollAns] = useState();
+  const [allCreatePoll, setAllCreatePoll] = useState();
   const { user } = useAuth();
   const ownerEmail = user?.email;
   const { id } = useParams();
@@ -25,60 +28,88 @@ const page = () => {
       setAllPollAns(res?.data);
       return res?.data;
     },
+    // refetchInterval: 100,
   });
-  refetch();
 
-  const handleAddQuestion = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const question = form.question.value;
-    const questionPhoto = form.questionPhoto.value;
-    const addPollQuestion = {
-      question,
-      questionPhoto,
-      ownerEmail,
-      userName,
-      pollVoteCount,
-    };
-    console.log(addPollQuestion);
+  useEffect(() => {
     axios
-      .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
+      .get("https://evs-delta.vercel.app/create-poll")
       .then((res) => {
-        // console.log(res);
-        form.reset();
+        setAllCreatePoll(res?.data);
       })
       .catch((err) => {
         console.error(err);
       });
-  };
+  }, []);
+  // console.log(allCreatePoll);
 
-  // useState(() => {
-  //   axios
-  //     .get("https://evs-delta.vercel.app/poll-ans")
-  //     .then((res) => {
-  //       setAllPollAns(res?.data);
-  //       // console.log(res)
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }, []);
+  const filterCreatePoll = allCreatePoll?.filter(
+    (createPoll) => createPoll?.userName == id
+  );
+  console.log(filterCreatePoll?.[0]?.wonerEmail);
+  console.log(user?.email);
 
-  console.log(allPollAns);
+  // console.log(allPollAns);
   const filterAllPollAns = allPollAns?.filter(
     (pollAns) => pollAns?.userName == userName
   );
-  console.log(filterAllPollAns?.length);
+  console.log(filterAllPollAns);
+
+  const handleAddQuestion = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const question = form.question.value;
+    const image = form.questionPhoto.files[0];
+    const imageData = await UploadImage(image);
+    const questionPhoto = imageData?.data?.display_url ;
+
+    if(filterCreatePoll?.[0]?.wonerEmail == user?.email) {
+      const addPollQuestion = {
+        question,
+        questionPhoto,
+        ownerEmail,
+        userName,
+        pollVoteCount,
+      };
+      console.log(addPollQuestion);
+
+      axios
+        .post("https://evs-delta.vercel.app/poll-ans", addPollQuestion)
+        .then((res) => {
+          // console.log(res);
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${filterAllPollAns?.length + 1} Answer added`,
+            showConfirmButton: false,
+            timer: 1000,
+          });
+          form.reset();
+        })
+        .catch((err) => {
+          console.error("err", err);
+        });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "You are not legal user for this poll",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+  };
 
   return (
     <Protected>
-      <div className="my-10 text-white pt-10">
+      <div className="my-10 text-white pt-24 min-h-screen ">
         <div>
-          <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
-            <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+          <div className="w-full lg:max-w-[900px] mx-auto lg:p-6 px-2">
+            <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700 ">
               <h3 className="text-4xl font-bold text-center">Create Poll</h3>
               <h3 className="text-xl font-bold text-center">Answer Options</h3>
-              <h3 className="">
+              <h3 className="px-8">
                 You added: {filterAllPollAns?.length} question
               </h3>
               <form onSubmit={handleAddQuestion} className="card-body">
@@ -99,17 +130,18 @@ const page = () => {
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text dark:text-white">
-                        Add Photo(optional)
+                      <span className=" text-white bg-blue-950">
+                        Upload Photo (optional)
                       </span>
                     </label>
                     <input
-                      type="img"
-                      placeholder="Photo Link"
-                      className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                    required
                       name="questionPhoto"
+                      type="file"
+                      className="file-input file-input-bordered w-full max-w-xs"
                     />
                   </div>
+
                 </div>
 
                 <div className="form-control mt-6 w-full ">

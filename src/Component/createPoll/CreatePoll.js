@@ -5,19 +5,23 @@ import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Protected from "../Protected/Protected";
+import { UploadImage } from "../shareComponent/utilites";
 
 const createPoll = () => {
   const { user } = useAuth();
   const wonerEmail = user?.email;
   const router = useRouter();
   console.log(wonerEmail);
-  const handleCreatePoll = (e) => {
+  const handleCreatePoll = async (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
     const userName = form.userName.value;
     const description = form.description.value;
-    const photo = form.photo.value;
+    const image = form.photo.files[0];
+    const imageData = await UploadImage(image);
+    const photo = imageData?.data?.display_url;
+    // const photo = form.photo.value;
     const createPoll = { title, userName, description, photo, wonerEmail };
     console.log(createPoll);
 
@@ -93,15 +97,15 @@ const createPoll = () => {
                       <div className="cols-span-1">
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text dark:text-white">
-                              Add Image (optional)
+                            <span className=" text-white bg-blue-950">
+                              Upload Photo (optional)
                             </span>
                           </label>
                           <input
-                            type="img"
-                            placeholder="Photo Link"
-                            className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                            required
                             name="photo"
+                            type="file"
+                            className="file-input file-input-bordered w-full max-w-xs"
                           />
                         </div>
                       </div>
