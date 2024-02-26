@@ -9,6 +9,7 @@ import Image from "next/image";
 import useAuth from "@/app/hook/useAuth";
 import NavLink from "./NavLink/Navlink";
 import { BsCardText } from "react-icons/bs";
+import axios from "axios";
 
 
 const Nav = () => {

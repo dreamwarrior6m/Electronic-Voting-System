@@ -14,9 +14,11 @@ const ElectionDetails = () => {
   const { id } = useParams();
   const [userRoles, setUserRoles] = useState({});
   const { user } = useAuth();
+  
   useEffect(() => {
     axios
-      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`,{
+        withCredentials: true})
       .then((res) => {
         console.log(res.data);
         setUserRoles(res.data);
@@ -24,7 +26,10 @@ const ElectionDetails = () => {
       .catch((error) => {
         console.error("There was an error!", error);
       });
-  }, [user]);
+  }, [user?.email]);
+  
+  console.log('userRole: ',userRoles?.isRole)
+
   const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
@@ -47,7 +52,7 @@ const ElectionDetails = () => {
       );
       return res.data;
     },
-    refetchInterval: 1000,
+    refetchInterval: 100,
   });
   console.log("All Applied: ", Voter);
 
@@ -163,7 +168,7 @@ const ElectionDetails = () => {
   // console.log("VerifyCandidate:", verifyCandidate);
 
   // update election position by patch
-  console.log("Election: ", filterElection?.[0]?.position);
+  console.log("Election: ", filterElection[0]?.position);
   const handleElectionPositionTrue = (id) => {
     const position = true;
     const isSystemRunning = { position };
@@ -247,12 +252,12 @@ const ElectionDetails = () => {
         {/* start & stop elections */}
 
         <div className="">
-          {filterElection?.[0]?.position != true ? (
+          {filterElection[0]?.position != true ? (
             <div className="flex items-center gap-2">
               <h2 className="text-lg font-semibold text-green-500">Start This Elections</h2>
               <button
                 onClick={() =>
-                  handleElectionPositionTrue(filterElection?.[0]?._id)
+                  handleElectionPositionTrue(filterElection[0]?._id)
                 }
                 className="btn btn-primary btn-sm"
               >
@@ -264,7 +269,7 @@ const ElectionDetails = () => {
               <h2 className="text-lg font-semibold text-red-500">Stop this election</h2>
               <button
                 onClick={() =>
-                  handleElectionPositionFalse(filterElection?.[0]?._id)
+                  handleElectionPositionFalse(filterElection[0]?._id)
                 }
                 className="btn btn-primary btn-sm"
               >

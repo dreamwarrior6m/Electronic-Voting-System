@@ -59,7 +59,9 @@ const Page = () => {
   const { data: applyForCandidate = [] } = useQuery({
     queryKey: ["candidates479"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate", {withCredentials: true});
+      const res = await axios.get("https://evs-delta.vercel.app/candidate", {
+        withCredentials: true,
+      });
       return res.data;
     },
     refetchInterval: 1000,
@@ -75,7 +77,8 @@ const Page = () => {
     queryKey: ["Voter4829"],
     queryFn: async () => {
       const res = await axios.get(
-        "https://evs-delta.vercel.app/CandiateUnderUser", {withCredentials:true}
+        "https://evs-delta.vercel.app/CandiateUnderUser",
+        { withCredentials: true }
       );
       return res.data;
     },
@@ -237,15 +240,83 @@ const Page = () => {
               filterModeratorElections?.find(
                 (voteName) => voteName.name === filterAllVote[0]?.name
               ) ? (
-                <div className="flex justify-center items-center text-center mt-2">
-                  <Link
-                    href={`/details/${filterAllVote[0]?.name}`}
-                    className="w-full"
-                  >
-                    <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                      See Details
+                <div className="  flex  gap-2 justify-center items-center pb-8">
+                  {filterElectionsByUserName?.[0]?.position != true ? (
+                    <button
+                      className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                      disabled
+                    >
+                      Participate
                     </button>
+                  ) : (
+                    <Link
+                      href={`/participate/${filterAllVote?.[0].name}`}
+                      className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                    >
+                      Participate
+                    </Link>
+                  )}
+                  {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
+
+                  <Link
+                    href={`/result/${filterAllVote?.[0].name}`}
+                    className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                  >
+                    result
                   </Link>
+                  <div className="">
+                    {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                    <button
+                      className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
+                      onClick={() =>
+                        document.getElementById("my_modal_3").showModal()
+                      }
+                    >
+                      Share
+                    </button>
+                    <dialog id="my_modal_3" className="modal">
+                      <div className="modal-box">
+                        <form method="dialog">
+                          {/* if there is a button in form, it will close the modal */}
+                          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                            ✕
+                          </button>
+                        </form>
+                        <h3 className="font-bold text-center pb-2 text-lg">
+                          Share This Election
+                        </h3>
+
+                        <div className="text-center">
+                          <h2 className="pt-5">Derect Share</h2>
+                          <div className="flex gap-4 pt-3 justify-center">
+                            <FacebookShareButton url={shareUrl}>
+                              <FacebookIcon className="rounded-full size-8" />
+                            </FacebookShareButton>
+
+                            <WhatsappShareButton url={shareUrl}>
+                              <WhatsappIcon className="rounded-full size-8" />
+                            </WhatsappShareButton>
+                          </div>
+                          <div className="pt-10 pb-5">
+                            <h2 className="">Share Link</h2>
+                            <h2 className="bg-black p-1 px-3 rounded-md">
+                              {shareUrl}
+                              <CopyToClipboard text={shareUrl}>
+                                <span className="pl-1">
+                                  <button
+                                    onClick={handleCopy}
+                                    className="btn btn-sm"
+                                  >
+                                    copy
+                                  </button>
+                                </span>
+                              </CopyToClipboard>
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    </dialog>
+                  </div>
                 </div>
               ) : (
                 <div className="flex flex-col space-y-2 mt-2">
