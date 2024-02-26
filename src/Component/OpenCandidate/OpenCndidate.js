@@ -12,6 +12,7 @@ const OpenCndidate = () => {
 
   useEffect(() => {
     axios
+
       .get("https://evs-delta.vercel.app/candidate")
       .then((res) => {
         console.log("Data from fetch:", res.data);
@@ -19,6 +20,7 @@ const OpenCndidate = () => {
       })
       .catch((error) => {
         console.error("There was an error!", error);
+
       });
   }, []);
 
