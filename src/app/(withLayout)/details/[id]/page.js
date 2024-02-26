@@ -26,7 +26,8 @@ const Page = () => {
     queryKey: ["userRoles12"],
     queryFn: async () => {
       const res = await axios.get(
-        `https://evs-delta.vercel.app/users/${user?.email}`
+        `https://evs-delta.vercel.app/users/${user?.email}`,
+        { withCredentials: true }
       );
       return res.data;
     },
@@ -58,7 +59,7 @@ const Page = () => {
   const { data: applyForCandidate = [] } = useQuery({
     queryKey: ["candidates479"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate");
+      const res = await axios.get("https://evs-delta.vercel.app/candidate", {withCredentials: true});
       return res.data;
     },
     refetchInterval: 1000,
@@ -74,7 +75,7 @@ const Page = () => {
     queryKey: ["Voter4829"],
     queryFn: async () => {
       const res = await axios.get(
-        "https://evs-delta.vercel.app/CandiateUnderUser"
+        "https://evs-delta.vercel.app/CandiateUnderUser", {withCredentials:true}
       );
       return res.data;
     },

@@ -16,7 +16,9 @@ const AdminProtected = ({ children }) => {
     queryKey: ["poll-ans"],
     queryFn: async () => {
       const res = await axios.get(
-        `https://evs-delta.vercel.app/users/${user?.email}`
+        `https://evs-delta.vercel.app/users/${user?.email}`,{
+          withCredentials: true,
+        }
       );
       setAllUser(res?.data);
       return res?.data;

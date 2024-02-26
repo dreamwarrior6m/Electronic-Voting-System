@@ -19,6 +19,7 @@ const AllVoter = () => {
     queryKey: ["user"],
     queryFn: async () => {
       const res = await axios.get("https://evs-delta.vercel.app/users", {
+        withCredentials: true,
         params: { page: currentPage, limit },
       });
       setVoters(res.data);
@@ -43,7 +44,10 @@ const AllVoter = () => {
   const getPaginatedUsers = async () => {
     try {
       const response = await axios.get(
-        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage}&limit=${limit}`
+        `https://evs-delta.vercel.app/paginatedUsers?page=${currentPage}&limit=${limit}`,
+        {
+          withCredentials: true,
+        }
       );
 
       setPageCount(response.data.pageCount);

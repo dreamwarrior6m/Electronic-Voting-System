@@ -54,7 +54,9 @@ const Participate = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/CandiateUnderUser")
+      .get("https://evs-delta.vercel.app/CandiateUnderUser",{
+        withCredentials: true,
+      })
       .then((res) => {
         setCandidateUnderUser(res?.data);
       })
@@ -81,7 +83,9 @@ const Participate = () => {
   const { data, refetch } = useQuery({
     queryKey: ["participate"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/participate");
+      const res = await axios.get("https://evs-delta.vercel.app/participate",{
+        withCredentials: true,
+      });
       setParticipate(res?.data);
       return res?.data;
     },
