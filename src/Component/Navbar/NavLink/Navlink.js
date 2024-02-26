@@ -14,7 +14,7 @@ const NavLink = ({ href, icon, title }) => {
           
           <>
             <motion.div
-              className="absolute bottom-0  left-0 w-full h-[3px] bg-gradient-to-r from-[#ffffff] via-[#cfcfcf] to-[#a3a2a2] -mb-1 rounded-full"
+              className="absolute hidden lg:block bottom-0  left-0 w-full h-[3px] bg-gradient-to-r from-[#ffffff] via-[#cfcfcf] to-[#a3a2a2] -mb-1 rounded-full"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
               transition={{ duration: 0.9 }}

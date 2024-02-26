@@ -15,7 +15,7 @@ const layout = ({ children }) => {
           <NavBarIcon />
         </div>
       </div>
-      <div className="flex-1 pt-5 px-8 h-auto">
+      <div className="flex-1 pt-5 lg:px-8 h-auto">
         <div className="">
           <div className="p-3 rounded bg-blue-200/5">
             <DashboardNavbar />

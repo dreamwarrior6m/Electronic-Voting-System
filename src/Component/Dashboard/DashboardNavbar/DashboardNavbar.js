@@ -6,24 +6,13 @@ import Notification from "@/Component/Notification/Notification";
 import { useEffect, useState } from "react";
 import "./DashboardNavbar.css";
 import { FaRegCopy } from "react-icons/fa";
+import axios from "axios";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
   const [openProfile, setOpenProfile] = useState(false);
   const [users, setusers] = useState([]);
 
-  const [allUser, setAlluser] = useState([]);
-
-  const userData = `https://evs-delta.vercel.app/users`;
-  useEffect(() => {
-    fetch(userData)
-      .then((res) => res.json())
-      .then((data) => setAlluser(data));
-  }, [userData]);
-  console.log(allUser);
-
-  const User = allUser?.filter((users) => users?.email == user?.email);
-  console.log(User?.[0]?.idNumber);
 
   // user in the mongodb not firebase
   useEffect(() => {
@@ -114,7 +103,7 @@ const DashboardNavbar = () => {
               <div className="grid gap-4 items-center h-auto">
                 <h1 className=" font-bold text-lg mb-2">
                   Welcome Back !! <br />{" "}
-                  <span className="text-2xl">{User.isRole} Dashboard</span>
+                  <span className="text-2xl">{users.isRole} Dashboard</span>
                 </h1>
                 <div className="w-24 h-24">
                   <Image
@@ -126,7 +115,7 @@ const DashboardNavbar = () => {
                   />
                 </div>
                 <div className="flex gap-1 items-center">
-                  <p>{User?.[0]?.idNumber}</p> <FaRegCopy />
+                  <p>{users?.idNumber}</p> <FaRegCopy />
                 </div>
                 {user && (
                   <h1 className="text-2xl text-white font-semibold">
@@ -147,7 +136,7 @@ const DashboardNavbar = () => {
                     </div>
                     <div>
                       <h2 className="font-bold">Date Of Birdth</h2>
-                      <p className="">{User?.[0]?.date}</p>
+                      <p className="">{users?.date}</p>
                     </div>
                   </div>
                 </div>
