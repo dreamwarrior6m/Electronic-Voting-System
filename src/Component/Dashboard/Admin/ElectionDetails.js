@@ -3,14 +3,28 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { MdVerified } from "react-icons/md";
+import { MdDeleteForever, MdVerified } from "react-icons/md";
 import Swal from "sweetalert2";
 import ElectionInfo from "./components/ElectionInfo";
 import ElectionCandidate from "./components/ElectionCandidate";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useAuth from "@/app/hook/useAuth";
 
 const ElectionDetails = () => {
   const { id } = useParams();
+  const [userRoles, setUserRoles] = useState({});
+  const { user } = useAuth();
+  useEffect(() => {
+    axios
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .then((res) => {
+        console.log(res.data);
+        setUserRoles(res.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  }, [user]);
   const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
@@ -276,8 +290,7 @@ const ElectionDetails = () => {
         </div>
       </div>
 
-      {/* All Voter */}
-      <div className="grid grid-cols-2 gap-2 mt-10">
+      <div className="grid lg:grid-cols-2 gap-2 mt-10">
         <div className="">
           <div>
             <p className="font-bold text-center text-2xl  ">
@@ -304,7 +317,7 @@ const ElectionDetails = () => {
                     <tr
                       key={candidate._id}
                       className={`${
-                        index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                        index % 2 === 0 ? "bg-gray-100/80" : "bg-white/85"
                       } text-center font-semibold border-b border-gray-600`}
                     >
                       <th>
@@ -316,28 +329,37 @@ const ElectionDetails = () => {
                       <td>{candidate.candidateEmail}</td>
                       <td>
                         <div className="flex justify-center items-center">
-                          {candidate?.isverify == "true" ? (
-                            <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
-                          ) : (
-                            <div className="flex gap-2">
-                              <button
-                                className="bg-green-500 text-white px-2 py-1 rounded-sm"
-                                onClick={() =>
-                                  handleCandidateVerify(candidate._id)
-                                }
-                              >
-                                Accept
-                              </button>
-                              <button
-                                className="bg-red-500 text-white px-2 py-1 rounded-sm"
-                                onClick={() =>
-                                  handleCandidateDelete(candidate._id)
-                                }
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          )}
+                          {userRoles?.isRole === "Modarator" &&
+                            (candidate?.isverify === "true" ? (
+                              <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                            ) : (
+                              <div className="flex gap-2">
+                                <button
+                                  className="bg-green-500 text-white px-2 py-1 rounded-sm"
+                                  onClick={() =>
+                                    handleCandidateVerify(candidate._id)
+                                  }
+                                >
+                                  Accept
+                                </button>
+                                <button
+                                  className="bg-red-500 text-white px-2 py-1 rounded-sm"
+                                  onClick={() =>
+                                    handleCandidateDelete(candidate._id)
+                                  }
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            ))}
+                          {userRoles?.isRole === "Admin" &&
+                            (candidate?.isverify === "true" ? (
+                              <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                            ) : (
+                              <div className="flex gap-2">
+                                <MdDeleteForever className="text-3xl text-red-600 text-center ml-5 cursor-pointer" />
+                              </div>
+                            ))}
                         </div>
                       </td>
                     </tr>
@@ -385,24 +407,33 @@ const ElectionDetails = () => {
                       <td>{voter.candidateEmail}</td>
                       <td>
                         <div className="flex justify-center items-center">
-                          {voter?.isverify == "true" ? (
-                            <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
-                          ) : (
-                            <div className="flex gap-2">
-                              <button
-                                className="bg-green-500 text-white px-2 py-1 rounded-sm"
-                                onClick={() => handleVerify(voter._id)}
-                              >
-                                Accept
-                              </button>
-                              <button
-                                className="bg-red-500 text-white px-2 py-1 rounded-sm"
-                                onClick={() => handleDelete(voter._id)}
-                              >
-                                Delete
-                              </button>
-                            </div>
-                          )}
+                          {userRoles?.isRole === "Modarator" &&
+                            (voter?.isverify == "true" ? (
+                              <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                            ) : (
+                              <div className="flex gap-2">
+                                <button
+                                  className="bg-green-500 text-white px-2 py-1 rounded-sm"
+                                  onClick={() => handleVerify(voter._id)}
+                                >
+                                  Accept
+                                </button>
+                                <button
+                                  className="bg-red-500 text-white px-2 py-1 rounded-sm"
+                                  onClick={() => handleDelete(voter._id)}
+                                >
+                                  Delete
+                                </button>
+                              </div>
+                            ))}
+                          {userRoles?.isRole === "Admin" &&
+                            (voter?.isverify === "true" ? (
+                              <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                            ) : (
+                              <div className="flex gap-2">
+                                <MdDeleteForever className="text-3xl text-red-600 text-center ml-5 cursor-pointer" />
+                              </div>
+                            ))}
                         </div>
                       </td>
                     </tr>

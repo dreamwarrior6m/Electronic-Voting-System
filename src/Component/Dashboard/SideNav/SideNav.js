@@ -14,6 +14,7 @@ import {
   MdOutlineSettings,
   MdPeople,
 } from "react-icons/md";
+import { GoMultiSelect } from "react-icons/go";
 
 const SideNav = ({ children }) => {
   const location = usePathname();
@@ -42,7 +43,9 @@ const SideNav = ({ children }) => {
   return (
     <div className="">
       <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
-        <h1 className="font-bold text-3xl flex items-center font-[Poppins] text-white mb-1">DVS</h1>
+        <h1 className="font-bold text-3xl flex items-center font-[Poppins] text-white mb-1">
+          DVS
+        </h1>
         <h2 className="text-xl pb-5 text-center cursor-pointer font-medium text-white w-full">
           Digital Voting System
         </h2>
@@ -59,9 +62,9 @@ const SideNav = ({ children }) => {
             <MdDashboard className="text-2xl " />
             <h3 className="font-semibold">Dashboard</h3>
           </Link>
-          {users?.isRole == 'user' &&
-          <>
-          <Link
+          {users?.isRole == "user" && (
+            <>
+              <Link
                 href="/dashboard/myPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
                   location === "/dashboard/myPoll"
@@ -69,11 +72,11 @@ const SideNav = ({ children }) => {
                     : ""
                 }`}
               >
-                <GiVote className="text-2xl " />
+                <GoMultiSelect className="text-2xl " />
                 <h3 className="font-semibold">My Poll</h3>
               </Link>
             </>
-          }
+          )}
 
           {users?.isRole == "Modarator" && (
             <>
@@ -97,7 +100,7 @@ const SideNav = ({ children }) => {
                     : ""
                 }`}
               >
-                <GiVote className="text-2xl " />
+                <GoMultiSelect className="text-2xl " />
                 <h3 className="font-semibold">My Poll</h3>
               </Link>
             </>
@@ -114,7 +117,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <GiVote className="text-2xl group-hover:text-white" />
-                <h3 className=" text-white font-semibold">All Elections</h3>
+                <h3 className=" text-white font-semibold">Elections</h3>
               </Link>
               <Link
                 href="/dashboard/Candidate"
@@ -125,7 +128,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <FaUsers className="text-2xl group-hover:text-white" />
-                <h3 className="text-white font-semibold">All Candidate</h3>
+                <h3 className="text-white font-semibold">Candidates</h3>
               </Link>
               <Link
                 href="/dashboard/allPoll"
@@ -135,8 +138,8 @@ const SideNav = ({ children }) => {
                     : ""
                 }`}
               >
-                <GiVote className="text-2xl " />
-                <h3 className="font-semibold">All Poll</h3>
+                <GoMultiSelect className="text-2xl " />
+                <h3 className="font-semibold">Polls</h3>
               </Link>
               <Link
                 href="/dashboard/allVoter"
@@ -147,7 +150,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <MdPeople className="text-2xl group-hover:text-white" />
-                <h3 className=" text-white font-semibold">All Users</h3>
+                <h3 className=" text-white font-semibold">Users</h3>
               </Link>
             </>
           )}
