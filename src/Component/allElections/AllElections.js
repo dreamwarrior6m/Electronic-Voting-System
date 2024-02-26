@@ -67,67 +67,20 @@ const AllElections = () => {
   const { data: showAllVote = [] } = useQuery({
     queryKey: ["showAllElectons"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote",);
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
       return res.data;
     },
-    // refetchInterval: 1000,
+    refetchInterval: 1000,
   });
   console.log(showAllVote);
 
-  // // console.log(showAllVote);
-  // const filterModeratorElections = showAllVote?.filter(
-  //   (election) => election?.email == user?.email
-  // );
-  // console.log(filterModeratorElections);
-
-  // const { data: applyForCandidate = [] } = useQuery({
-  //   queryKey: ["candidates479"],
-  //   queryFn: async () => {
-  //     const res = await axios.get("https://evs-delta.vercel.app/candidate");
-  //     return res.data;
-  //   },
-  //   refetchInterval: 1000,
-  // });
-
-  // // FilterApplyCandidate
-  // const candidateApply = applyForCandidate?.filter(
-  //   (candidate) => candidate.candidateEmail === user?.email
-  // );
-  // console.log("get Candidate", candidateApply);
-
-  // const { data: applyForVoter = [] } = useQuery({
-  //   queryKey: ["Voter4829"],
-  //   queryFn: async () => {
-  //     const res = await axios.get(
-  //       "https://evs-delta.vercel.app/CandiateUnderUser"
-  //     );
-  //     return res.data;
-  //   },
-  //   refetchInterval: 1000,
-  // });
-
-  // const voterApply = applyForVoter?.filter(
-  //   (candidate) => candidate.candidateEmail === user?.email
-  // );
-  // console.log("get Voter", voterApply);
-
   return (
     <>
-      <div className="grid lg:grid-cols-3 gap-4 py-6 md:py-8 lg:py-12 ">
+      <div className="grid lg:grid-cols-3 gap-4 md:px-6 px-4 py-6 md:py-8 lg:py-12 ">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id} className="h-full">
-            <div className=" text-black rounded-xl shadow-xl hover:shadow-2xl bg-slate-300 p-5 flex justify-center items-center h-full">
-              <div className="">
-                <div className="flex gap-8 text-center justify-center">
-                  <h2 className="text-green-600 font-medium text-sm">
-                    Vote Casting Start <br /> {allVote?.startDate} (
-                    {allVote?.startTime})
-                  </h2>
-                  <h2 className="text-red-600 font-medium text-sm">
-                    Vote Casting End <br /> {allVote?.endDate} (
-                    {allVote?.endTime})
-                  </h2>
-                </div>
+            <div className=" text-white/80 rounded-md drop-shadow-xl hover:shadow-2xl bg-blue-200/5 border-2  border-gray-100/20 p-5 h-full">
+              <div className="flex justify-center items-center">
                 <div className="pb-1 text-center">
                   <h2 className="text-3xl font-bold text-center mb-2">
                     <span className="text-base font-normal">
@@ -149,189 +102,13 @@ const AllElections = () => {
                     endDate1={`${allVote?.endDate}T${allVote?.endTime}`}
                   />
                 </div>
-                <div className="flex justify-center items-center text-center mt-2">
-                  <Link href={`/details/${allVote?.name}`} className="w-full">
-                    <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                      See Details
-                    </button>
-                  </Link>
-                </div>
-                {/* {userRoles?.isRole === "Admin" ? (
-                  <div className="flex justify-center items-center text-center mt-2">
-                    <Link href={`/details/${allVote?.name}`} className="w-full">
-                      <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                        See Details
-                      </button>
-                    </Link>
-                  </div>
-                ) : userRoles?.isRole === "Modarator" ? (
-                  filterModeratorElections?.length > 0 &&
-                  filterModeratorElections?.find(
-                    (voteName) => voteName.name === allVote?.name
-                  ) ? (
-                    <div className="flex justify-center items-center text-center mt-2">
-                      <Link
-                        href={`/details/${allVote?.name}`}
-                        className="w-full"
-                      >
-                        <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                          See Details
-                        </button>
-                      </Link>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col space-y-2 mt-2">
-                      {candidateApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      candidateApply?.find(
-                        (verify) => verify.isverify === "true"
-                      ) ? (
-                        ""
-                      ) : candidateApply?.find(
-                          (voteName) => voteName.voteName === allVote?.name
-                        ) &&
-                        candidateApply?.find(
-                          (verify) => verify.isverify === "false"
-                        ) ? (
-                        <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                          Candidate In Process
-                        </button>
-                      ) : (
-                        <Modal
-                          electionId={allVote._id}
-                          buttonName={"Apply for a candidate"}
-                          type={2}
-                        />
-                      )}
-
-                      {voterApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      voterApply?.find(
-                        (verify) => verify.isverify === "true"
-                      ) ? (
-                        ""
-                      ) : voterApply?.find(
-                          (voteName) => voteName.voteName === allVote?.name
-                        ) &&
-                        voterApply?.find(
-                          (verify) => verify.isverify === "false"
-                        ) ? (
-                        <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                          Voter In Process
-                        </button>
-                      ) : (
-                        <Modal
-                          electionId={allVote._id}
-                          buttonName={"Apply for a voter"}
-                          type={1}
-                        />
-                      )}
-
-                      {(voterApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                        voterApply?.find(
-                          (verify) => verify.isverify === "true"
-                        )) ||
-                      (candidateApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                        candidateApply?.find(
-                          (verify) => verify.isverify === "true"
-                        )) ? (
-                        <div className="flex justify-center items-center text-center mt-2">
-                          <Link
-                            href={`/details/${allVote?.name}`}
-                            className="w-full"
-                          >
-                            <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                              See Details
-                            </button>
-                          </Link>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  )
-                ) : userRoles?.isRole === "user" ? (
-                  <div className="flex flex-col space-y-2 mt-2">
-                    {candidateApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                    candidateApply?.find(
-                      (verify) => verify.isverify === "true"
-                    ) ? (
-                      ""
-                    ) : candidateApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      candidateApply?.find(
-                        (verify) => verify.isverify === "false"
-                      ) ? (
-                      <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                        Candidate In Process
-                      </button>
-                    ) : (
-                      <Modal
-                        electionId={allVote._id}
-                        buttonName={"Apply for a candidate"}
-                        type={2}
-                      />
-                    )}
-
-                    {voterApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                    voterApply?.find((verify) => verify.isverify === "true") ? (
-                      ""
-                    ) : voterApply?.find(
-                        (voteName) => voteName.voteName === allVote?.name
-                      ) &&
-                      voterApply?.find(
-                        (verify) => verify.isverify === "false"
-                      ) ? (
-                      <button className="text-[16px] border py-3 border-red-500 rounded-md hover:bg-red-200 w-full">
-                        Voter In Process
-                      </button>
-                    ) : (
-                      <Modal
-                        electionId={allVote._id}
-                        buttonName={"Apply for a voter"}
-                        type={1}
-                      />
-                    )}
-                    {(voterApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                      voterApply?.find(
-                        (verify) => verify.isverify === "true"
-                      )) ||
-                    (candidateApply?.find(
-                      (voteName) => voteName.voteName === allVote?.name
-                    ) &&
-                      candidateApply?.find(
-                        (verify) => verify.isverify === "true"
-                      )) ? (
-                      <div className="flex justify-center items-center text-center mt-2">
-                        <Link
-                          href={`/details/${allVote?.name}`}
-                          className="w-full"
-                        >
-                          <button className="text-[16px] border py-3 border-green-500 rounded-md hover:bg-green-200 w-full">
-                            See Details
-                          </button>
-                        </Link>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                ) : (
-                  ""
-                )} */}
+              </div>
+              <div className="flex justify-center items-center text-center mt-2">
+                <Link href={`/details/${allVote?.name}`} className=" w-3/6">
+                  <button className="text-[16px] border  border-gray-100/20 py-[9px] rounded-md hover:bg-white/80 hover:text-gray-800 w-full">
+                    See Details
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

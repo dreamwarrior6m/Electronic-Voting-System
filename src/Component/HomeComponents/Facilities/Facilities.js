@@ -16,7 +16,7 @@ const Facilities = () => {
         <div className="mt-12">
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <div className="pt-6">
-              <div className="flow-root bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -49,7 +49,7 @@ const Facilities = () => {
 
             <div className="pt-6"
             >
-              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -81,7 +81,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -113,7 +113,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -145,7 +145,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
@@ -177,7 +177,7 @@ const Facilities = () => {
             </div>
 
             <div className="pt-6">
-              <div className="flow-root  bg-[#130f2a] border-2  border-[#6751b9] dark:bg-gray-800 rounded-lg px-6 pb-8">
+              <div className="flow-root  bg-blue-200/5 border-2  border-gray-100/20 dark:bg-gray-800 rounded-lg px-6 pb-8">
                 <div className="-mt-6">
                   <div>
                     <span className="inline-flex items-center justify-center p-3 bg-indigo-500 dark:bg-indigo-400 rounded-md shadow-lg">
