@@ -7,76 +7,93 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 // time start
-const Timer = ({ startDate1, endDate1 }) => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [isSystemRunning, setSystemRunning] = useState(false);
+// const Timer = ({ startDate1, endDate1 }) => {
+//   const [currentTime, setCurrentTime] = useState(new Date());
+//   const [isSystemRunning, setSystemRunning] = useState(false);
 
-  // Check if the system should start or stop
-  useEffect(() => {
-    const startDateTime = new Date(startDate1).getTime();
-    const endDateTime = new Date(endDate1).getTime();
+//   // Check if the system should start or stop
+//   useEffect(() => {
+//     const startDateTime = new Date(startDate1).getTime();
+//     const endDateTime = new Date(endDate1).getTime();
 
-    if (
-      currentTime.getTime() >= startDateTime &&
-      currentTime.getTime() <= endDateTime
-    ) {
-      // Start the system
-      setSystemRunning(true);
-    } else {
-      // Stop the system
-      setSystemRunning(false);
-    }
-  }, [currentTime, startDate1, endDate1]);
+//     if (
+//       currentTime.getTime() >= startDateTime &&
+//       currentTime.getTime() <= endDateTime
+//     ) {
+//       // Start the system
+//       setSystemRunning(true);
+//     } else {
+//       // Stop the system
+//       setSystemRunning(false);
+//     }
+//   }, [currentTime, startDate1, endDate1]);
 
-  // Update the current time every second
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
+//   // Update the current time every second
+//   useEffect(() => {
+//     const timer = setInterval(() => {
+//       setCurrentTime(new Date());
+//     }, 1000);
 
-    // Cleanup function to clear the interval when the component is unmounted
-    return () => clearInterval(timer);
-  }, []);
+//     // Cleanup function to clear the interval when the component is unmounted
+//     return () => clearInterval(timer);
+//   }, []);
 
-  return (
-    <div>
-      <h2 className="font-bold text-sm mt-2">
-        {isSystemRunning ? "Running.." : "Start Soon.."}
-      </h2>
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h2 className="font-bold text-sm mt-2">
+//         {isSystemRunning ? "Running.." : "Start Soon.."}
+//       </h2>
+//     </div>
+//   );
+// };
 
 //time end
 
 const AllElections = () => {
-  // const { user } = useAuth();
-  // const { data: userRoles = [], refetch } = useQuery({
-  //   queryKey: ["userRoles12"],
-  //   queryFn: async () => {
-  //     const res = await axios.get(
-  //       `https://evs-delta.vercel.app/users/${user?.email}`
-  //     );
-  //     return res.data;
-  //   },
-  //   refetchInterval: 1000,
-  // });
+  const [search, setSearch] = useState("");
 
-  // console.log(userRoles?.isRole);
-
-  const { data: showAllVote = [] } = useQuery({
+  const { data: showAllVote = [], refetch } = useQuery({
     queryKey: ["showAllElectons"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
+      const res = await axios.get(
+        `http://localhost:5000/create-vote?search=${search}`
+      );
       return res.data;
     },
-    refetchInterval: 1000,
+    refetchInterval: 50,
   });
   console.log(showAllVote);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    console.log(searchText);
+    refetch();
+    setSearch(searchText);
+  };
+
   return (
     <>
-      <div className="grid lg:grid-cols-3 gap-4 md:px-6 px-4 py-6 md:py-8 lg:py-12 ">
+    <div className="">
+    <div className="text-center pt-4 pr-6 pb-6">
+        <form onSubmit={handleSearch}>
+          <div className="flex items-center justify-end">
+            <div>
+              <input
+                type="text"
+                id="id"
+                name="search"
+                placeholder="Search by Org. Name"
+                className="w-[220px] border border-slate-200 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
+              />
+            </div>
+            <div className="rounded-r-lg">
+              <input type="submit" value="Search" className="btn px-2" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="grid lg:grid-cols-3 gap-4 md:px-6 px-4 ">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id} className="h-full">
             <div className=" text-white/80 rounded-md drop-shadow-xl hover:shadow-2xl bg-blue-200/5 border-2  border-gray-100/20 p-5 h-full">
@@ -97,10 +114,18 @@ const AllElections = () => {
                       <br /> {allVote?.name}
                     </p>
                   </div>
-                  <Timer
+                  {/* <Timer
                     startDate1={`${allVote?.startDate}T${allVote?.startTime}`}
                     endDate1={`${allVote?.endDate}T${allVote?.endTime}`}
-                  />
+                  /> */}
+                  <div className="">
+                    <h2 className="text-green-500 font-semibold">
+                      {allVote?.position == true && "Running"}
+                    </h2>
+                    <h2 className="text-red-500 font-semibold">
+                      {allVote?.position != true && "Stop"}
+                    </h2>
+                  </div>
                 </div>
               </div>
               <div className="flex justify-center items-center text-center mt-2">
@@ -114,6 +139,7 @@ const AllElections = () => {
           </div>
         ))}
       </div>
+    </div>
     </>
   );
 };

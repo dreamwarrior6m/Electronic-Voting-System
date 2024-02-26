@@ -56,7 +56,7 @@ const HomePage = () => {
   return (
     <Protected>
       <div className="text-white">
-        <div className="w-full justify-items-center">
+        <div className="w-full justify-items-center"> 
           <div className=" w-full">
             <div className="grid lg:grid-cols-3 w-full rounded-none mt-6">
               <div className="stat lg:border-b lg:border-r lg:border-indigo-200/40 lg:col-span-1 bg-blue-200/5">
