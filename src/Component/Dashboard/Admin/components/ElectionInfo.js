@@ -149,7 +149,7 @@ const ElectionInfo = ({ election, refetch }) => {
           <span className="font-bold">Email: </span> {election?.email}
         </p>
         <div>
-          {userRoles?.isRole !== "Admin" && (
+          {userRoles?.isRole === "Modarator" && (
             <div className="">
               <p className="mt-3 text-2xl font-bold mb-1">Create Candidate</p>
               <button

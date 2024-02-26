@@ -101,7 +101,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <GoMultiSelect className="text-2xl " />
-                <h3 className="font-semibold">My Poll</h3>
+                <h3 className="font-semibold">My Polls</h3>
               </Link>
             </>
           )}

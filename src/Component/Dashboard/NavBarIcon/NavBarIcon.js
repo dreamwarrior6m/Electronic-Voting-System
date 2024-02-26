@@ -11,7 +11,8 @@ const NavBarIcon = () => {
   const { user } = useAuth();
   useEffect(() => {
     axios
-      .get(`https://evs-delta.vercel.app/users/${user?.email}`)
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`, {
+        withCredentials: true})
       .then((res) => {
         console.log(res.data);
         setUserRoles(res.data);
@@ -53,12 +54,12 @@ const NavBarIcon = () => {
       },
       {
         id: 7,
-        path: "/dashboard/candidate",
+        path: "/dashboard/Candidate",
         title: "All Candidates",
       },
       {
         id: 5,
-        path: "/dashboard/allpoll",
+        path: "/dashboard/allPoll",
         title: "All Polls",
       },
       {

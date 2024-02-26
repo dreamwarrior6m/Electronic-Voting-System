@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Protected from "../Protected/Protected";
 import Modal from "../Modal/Modal";
 import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
@@ -113,7 +112,7 @@ const AllElections = () => {
   // console.log("get Voter", voterApply);
 
   return (
-    <Protected>
+    <>
       <div className="grid lg:grid-cols-3 gap-4 py-6 md:py-8 lg:py-12 ">
         {showAllVote?.map((allVote, ind) => (
           <div key={allVote._id} className="h-full">
@@ -338,7 +337,7 @@ const AllElections = () => {
           </div>
         ))}
       </div>
-    </Protected>
+    </>
   );
 };
 

@@ -6,20 +6,24 @@ import Protected from "../Protected/Protected";
 import axios from "axios";
 
 const OpenCndidate = () => {
-  const [openCandidate, setOpenCndidate] = useState();
+  const [openCandidate, setOpenCandidate] = useState([]);
   const { id } = useParams();
   console.log(id);
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/candidate", { withCredentials: true })
+
+      .get("https://evs-delta.vercel.app/candidate")
       .then((res) => {
-        setOpenCndidate(res?.data);
+        console.log("Data from fetch:", res.data);
+        setOpenCandidate(res.data);
       })
-      .catch((err) => {
-        console.error(err);
+      .catch((error) => {
+        console.error("There was an error!", error);
+
       });
   }, []);
+
   console.log(openCandidate);
 
   const filterCandidate = openCandidate?.filter(
