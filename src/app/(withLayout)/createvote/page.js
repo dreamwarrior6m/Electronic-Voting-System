@@ -28,7 +28,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/users")
+      .get("https://evs-delta.vercel.app/users", { withCredentials: true })
       .then((res) => {
         setAllUsers(res?.data);
       })
@@ -51,7 +51,7 @@ const page = () => {
     const startTime = form.startTime.value;
     const endDate = form.endDate.value;
     const endTime = form.endTime.value;
-    const imageData =await UploadImage(image);
+    const imageData = await UploadImage(image);
     const photo = imageData?.data?.display_url;
 
     const email = user?.email;
@@ -194,7 +194,9 @@ const page = () => {
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className=" text-white bg-blue-950">Upload Photo</span>
+                        <span className=" text-white bg-blue-950">
+                          Upload Photo
+                        </span>
                       </label>
                       <input
                         required
@@ -220,7 +222,7 @@ const page = () => {
                         name="name"
                       />
                     </div>
-                    
+
                     <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
