@@ -122,7 +122,7 @@ const Participate = () => {
           const updateVot = data?.voteCount;
           const updateVoteCount2 = updateVot + 1;
           const updateVoteCount = { updateVoteCount2 };
-          // console.log(updateVoteCount);
+          console.log(updateVoteCount);
 
           // add vote number
           axios

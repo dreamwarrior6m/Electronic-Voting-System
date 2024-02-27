@@ -17,7 +17,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("https://evs-delta.vercel.app/create-vote?search")
       .then((res) => {
         setAllCreateVote(res?.data);
       })

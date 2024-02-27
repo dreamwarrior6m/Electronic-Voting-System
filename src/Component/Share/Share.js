@@ -21,7 +21,7 @@ const Share = () => {
   console.log(id);
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("https://evs-delta.vercel.app/create-vote?search")
       .then((res) => {
         setAllVote(res?.data);
       })
