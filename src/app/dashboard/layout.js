@@ -11,7 +11,7 @@ const layout = ({ children }) => {
         <div className="hidden lg:block p-6 w-1/2 lg:w-72 bg-blue-200/5 lg:h-full">
           <SideNav />
         </div>
-        <div className="lg:hidden text-white">
+        <div className="lg:hidden text-white flex justify-center items-center mt-2">
           <NavBarIcon />
         </div>
       </div>

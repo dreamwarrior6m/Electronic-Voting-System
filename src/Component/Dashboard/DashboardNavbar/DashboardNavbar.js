@@ -79,7 +79,7 @@ const DashboardNavbar = () => {
             onClick={() => {
               setOpenProfile(!openProfile);
             }}
-            className=" rounded-full h-[30px] w-[30px] object-cover"
+            className=" rounded-full h-[30px] w-[30px] object-cover cursor-pointer"
             height={30}
             width={30}
             src={user?.photoURL}
