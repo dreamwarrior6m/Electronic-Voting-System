@@ -35,7 +35,7 @@ const Participate = () => {
   const [allElections, setAllElections] = useState();
   useEffect(() => {
     axios
-      .get("https://evs-delta.vercel.app/create-vote")
+      .get("https://evs-delta.vercel.app/create-vote?search")
       .then((res) => {
         setAllElections(res?.data);
       })

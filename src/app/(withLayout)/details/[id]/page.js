@@ -39,7 +39,7 @@ const Page = () => {
   const { data: showAllVote = [] } = useQuery({
     queryKey: ["showAllElectons"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote");
+      const res = await axios.get("https://evs-delta.vercel.app/create-vote?search");
       return res.data;
     },
     refetchInterval: 1000,

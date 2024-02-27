@@ -23,46 +23,46 @@ const ElectionInfo = ({ election, refetch }) => {
   }, [user]);
   // console.log("User: ", userRoles);
 
-  const Timer = ({ startDate1, endDate1 }) => {
-    const [currentTime, setCurrentTime] = useState(new Date());
-    const [isSystemRunning, setSystemRunning] = useState(false);
+  // const Timer = ({ startDate1, endDate1 }) => {
+  //   const [currentTime, setCurrentTime] = useState(new Date());
+  //   const [isSystemRunning, setSystemRunning] = useState(false);
 
-    // Check if the system should start or stop
-    useEffect(() => {
-      const startDateTime = new Date(startDate1).getTime();
-      const endDateTime = new Date(endDate1).getTime();
+  //   // Check if the system should start or stop
+  //   useEffect(() => {
+  //     const startDateTime = new Date(startDate1).getTime();
+  //     const endDateTime = new Date(endDate1).getTime();
 
-      if (
-        currentTime.getTime() >= startDateTime &&
-        currentTime.getTime() <= endDateTime
-      ) {
-        // Start the system
-        setSystemRunning(true);
-      } else {
-        // Stop the system
-        setSystemRunning(false);
-      }
-    }, [currentTime, startDate1, endDate1]);
+  //     if (
+  //       currentTime.getTime() >= startDateTime &&
+  //       currentTime.getTime() <= endDateTime
+  //     ) {
+  //       // Start the system
+  //       setSystemRunning(true);
+  //     } else {
+  //       // Stop the system
+  //       setSystemRunning(false);
+  //     }
+  //   }, [currentTime, startDate1, endDate1]);
 
-    // Update the current time every second
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setCurrentTime(new Date());
-      }, 1000);
+  //   // Update the current time every second
+  //   useEffect(() => {
+  //     const timer = setInterval(() => {
+  //       setCurrentTime(new Date());
+  //     }, 1000);
 
-      // Cleanup function to clear the interval when the component is unmounted
-      return () => clearInterval(timer);
-    }, []);
+  //     // Cleanup function to clear the interval when the component is unmounted
+  //     return () => clearInterval(timer);
+  //   }, []);
 
-    return (
-      <div>
-        <h2>
-          <span className="font-bold">Current Status: </span>
-          {isSystemRunning ? "Running" : "Stopped"}
-        </h2>
-      </div>
-    );
-  };
+  //   return (
+  //     <div>
+  //       <h2>
+  //         <span className="font-bold">Current Status: </span>
+  //         {isSystemRunning ? "Running" : "Stopped"}
+  //       </h2>
+  //     </div>
+  //   );
+  // };
 
   const handleCreateCandidate = async (event) => {
     event.preventDefault();
@@ -141,13 +141,25 @@ const ElectionInfo = ({ election, refetch }) => {
           <span className="font-bold">Election Name: </span>
           {election?.name}
         </p>
-        <Timer
+        {/* <Timer
           startDate1={`${election?.startDate}T${election?.startTime}`}
           endDate1={`${election?.endDate}T${election?.endTime}`}
-        />
-        <p>
+        /> */}
+         <p>
           <span className="font-bold">Email: </span> {election?.email}
         </p>
+        <div className="flex items-center gap-1">
+          <h2 className="font-bold">
+            Position: 
+          </h2>
+          <h2 className="text-green-500">
+            {election?.position==true && "Running"}
+          </h2>
+          <h2 className="text-red-500">
+            {election?.position !=true && "Stop"}
+          </h2>
+        </div>
+       
         <div>
           {userRoles?.isRole === "Modarator" && (
             <div className="">
