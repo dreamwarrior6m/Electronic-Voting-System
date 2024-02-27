@@ -58,8 +58,8 @@ const DashboardNavbar = () => {
 
   return (
     <>
-      <div className="text-white lg:flex lg:justify-between lg:items-center relative">
-        <div className="hidden lg:block p-2 bg-blue-200/15  rounded-md">
+      <div className="text-white flex justify-center lg:justify-end items-center relative">
+        {/* <div className="hidden lg:block p-2 bg-blue-200/15  rounded-md">
           <div className="flex items-center justify-around">
             <input
               type="text"
@@ -71,6 +71,9 @@ const DashboardNavbar = () => {
               <MdSearch className="text-lg text-white/65" />
             </button>
           </div>
+        </div> */}
+        <div>
+
         </div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
           <MdOutlineChat size={24} />

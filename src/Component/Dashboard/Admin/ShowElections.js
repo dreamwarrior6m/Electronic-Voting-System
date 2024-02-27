@@ -56,6 +56,7 @@ const ShowElections = () => {
     return (
       <div>
         <h2 className=" font-normal">
+          <span className="text-xs lg:hidden">Status: </span>
           {isSystemRunning ? "Running" : "Stopped"}
         </h2>
       </div>
@@ -137,40 +138,59 @@ const ShowElections = () => {
   return (
     <AdminProtected>
       <div className="mt-5">
-        <div className="text-center pt-4 pr-6 pb-6 text-white">
+        <div className="text-center pt-5 pb-6 text-white flex justify-center items-center">
           <form onSubmit={handleSearch}>
-            <div className="flex items-center justify-end">
+            <div className="flex items-center justify-end ">
               <div>
                 <input
                   type="text"
                   id="id"
                   name="search"
                   placeholder="Search by Org. Name"
-                  className="w-[220px] border border-slate-400 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
+                  className="w-[220px] border border-slate-400 bg-blue-200/15 rounded-l-md py-2 px-5 outline-none	"
                 />
               </div>
-              <div className="rounded-r-lg">
+              <div className="rounded-r-md">
                 <input
                   type="submit"
                   value="Search"
-                  className="bg-zinc-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-500"
+                  className="px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-md py-2 outline-none	bg-blue-200/15 hover:bg-slate-500"
                 />
               </div>
             </div>
           </form>
         </div>
-        <div className="grid">
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-12 text-indigo-200/100 font-semibold text-center mb-3">
+            <p className="col-span-1">Number</p>
+            <p className="col-span-4">Organization Name</p>
+            <p className="col-span-3">Election Name</p>
+            <p className="col-span-1">Status</p>
+            <p className="col-span-2">Details</p>
+            <p className="col-span-1">Action</p>
+          </div>
+        </div>
+        <div className="grid mb-3">
           {elections?.map((election, index) => (
             <div
               key={election._id}
               className={`${
-                index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/80"
-              } text-center font-semibold border-b border-gray-300`}
+                index % 2 === 0
+                  ? "bg-blue-200/5 text-indigo-200/70"
+                  : "bg-blue-200/5 text-indigo-200/70"
+              } text-center font-semibold border-b border-indigo-200/50`}
             >
-              <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
+              <div className=" space-y-1 lg:grid lg:grid-cols-12 py-3 lg:items-center lg:justify-center font-medium">
                 <p className="col-span-1">{index + 1}</p>
-                <p className="col-span-4">{election?.OrganizatonName}</p>
-                <p className="col-span-3">{election?.name}</p>
+                <p className="col-span-4">
+                  <span className="text-xs lg:hidden">Organization Name: </span>
+                  {election?.OrganizatonName}
+                </p>
+                <p className="col-span-3">
+                  <span className="text-xs lg:hidden">Election Name: </span>
+
+                  {election?.name}
+                </p>
                 <div className="col-span-1">
                   <Timer
                     startDate1={`${election?.startDate}T${election?.startTime}`}
@@ -179,7 +199,7 @@ const ShowElections = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-gray-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
+                    <button className="border border-indigo-200/50 px-[10px] py-[6px] rounded-md hover:bg-white/80 hover:text-gray-800 ">
                       See Details
                     </button>
                   </Link>
@@ -190,7 +210,7 @@ const ShowElections = () => {
                       handleNotification(1, election?.name, election?.email);
                       handleDelete(election._id, election?.name);
                     }}
-                    className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2"
+                    className="bg-red-500 text-white px-4 py-[10px] rounded-md mr-2 "
                   >
                     <MdDelete />
                   </button>
