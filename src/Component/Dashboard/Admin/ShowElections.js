@@ -9,13 +9,17 @@ import useAuth from "@/app/hook/useAuth";
 import AdminProtected from "@/Component/Protected/AdminProtected";
 
 const ShowElections = () => {
+  const [search, setSearch] = useState("");
   const { user } = useAuth();
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections1"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote?search");
+      const res = await axios.get(
+        `https://evs-delta.vercel.app/create-vote?search=${search}`
+      );
       return res.data;
     },
+    refetchInterval: 50,
   });
 
   const Timer = ({ startDate1, endDate1 }) => {
@@ -122,9 +126,39 @@ const ShowElections = () => {
       });
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    console.log(searchText);
+    // refetch();
+    setSearch(searchText);
+  };
+
   return (
     <AdminProtected>
       <div className="mt-5">
+        <div className="text-center pt-4 pr-6 pb-6 text-white">
+          <form onSubmit={handleSearch}>
+            <div className="flex items-center justify-end">
+              <div>
+                <input
+                  type="text"
+                  id="id"
+                  name="search"
+                  placeholder="Search by Org. Name"
+                  className="w-[220px] border border-slate-400 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
+                />
+              </div>
+              <div className="rounded-r-lg">
+                <input
+                  type="submit"
+                  value="Search"
+                  className="bg-zinc-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-500"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
         <div className="grid">
           {elections?.map((election, index) => (
             <div

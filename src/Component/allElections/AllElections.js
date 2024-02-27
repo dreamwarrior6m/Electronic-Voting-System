@@ -60,7 +60,7 @@ const AllElections = () => {
       );
       return res.data;
     },
-    // refetchInterval: 50,
+    refetchInterval: 50,
   });
   console.log(showAllVote);
 
@@ -68,7 +68,7 @@ const AllElections = () => {
     e.preventDefault();
     const searchText = e.target.search.value;
     console.log(searchText);
-    refetch();
+    // refetch();
     setSearch(searchText);
   };
 
@@ -88,7 +88,7 @@ const AllElections = () => {
               />
             </div>
             <div className="rounded-r-lg">
-              <input type="submit" value="Search" className="bg-slate-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-400" />
+              <input type="submit" value="Search" className="bg-zinc-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-500" />
             </div>
           </div>
         </form>
