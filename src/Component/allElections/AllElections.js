@@ -60,7 +60,7 @@ const AllElections = () => {
       );
       return res.data;
     },
-    refetchInterval: 50,
+    // refetchInterval: 50,
   });
   console.log(showAllVote);
 
