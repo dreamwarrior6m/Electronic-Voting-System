@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 import { GiVote } from "react-icons/gi";
 import { IoMdHome } from "react-icons/io";
+import { TfiAnnouncement } from "react-icons/tfi";
 import {
   MdDashboard,
   MdOutlineLogout,
@@ -103,6 +104,19 @@ const SideNav = ({ children }) => {
                 <GoMultiSelect className="text-2xl " />
                 <h3 className="font-semibold">My Polls</h3>
               </Link>
+
+              <Link
+                href="/dashboard/counselling"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-indigo-200/100  p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/"
+                    ? "text-indigo-200/100  bg-indigo-500  border-gray-200/10 hover:border-gray-200"
+                    : ""
+                }`}
+              >
+                <TfiAnnouncement className="text-2xl " />
+                <h3 className="font-semibold">Create Counselling</h3>
+              </Link>
+
             </>
           )}
 

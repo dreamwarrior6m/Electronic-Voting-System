@@ -49,6 +49,11 @@ const NavBarIcon = () => {
             path: "/dashboard/myPoll",
             title: "My Polls",
           },
+          {
+            
+            path: "/dashboard/counselling",
+            title: "Create Counselling",
+          },
         ]
       : []),
     ...(userRoles?.isRole === "Admin"
