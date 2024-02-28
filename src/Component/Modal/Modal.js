@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 const Modal = ({ electionId, buttonName, type }) => {
   const { user } = useAuth();
   const [data, setData] = useState([]);
-
+  
   useEffect(() => {
     axios
       .get(`https://evs-delta.vercel.app/create-vote/${electionId}`)
