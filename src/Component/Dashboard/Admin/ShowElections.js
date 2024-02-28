@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdSearch } from "react-icons/md";
 import Swal from "sweetalert2";
 import useAuth from "@/app/hook/useAuth";
 import AdminProtected from "@/Component/Protected/AdminProtected";
@@ -150,12 +150,14 @@ const ShowElections = () => {
                   className="w-[220px] border border-slate-400 bg-blue-200/15 rounded-l-md py-2 px-5 outline-none	"
                 />
               </div>
-              <div className="rounded-r-md">
-                <input
+              <div className="rounded-r-md ">
+                <button
                   type="submit"
                   value="Search"
-                  className="px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-md py-2 outline-none	bg-blue-200/15 hover:bg-slate-500"
-                />
+                  className="px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-md py-2 outline-none	bg-blue-200/15 hover:bg-slate-500 flex justify-center items-center"
+                >
+                  <MdSearch className="text-2xl text-indigo-200/100" />
+                </button>
               </div>
             </div>
           </form>
