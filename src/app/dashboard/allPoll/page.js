@@ -69,7 +69,7 @@ const allPoll = () => {
 
   return (
     <AdminProtected>
-      <div className="mt-5 text-center">
+      <div className="mt-5 text-center mb-4">
         {/* head */}
         <div className="hidden lg:block">
           <div className="grid grid-cols-12 text-center text-indigo-200/100 font-semibold text-base  border-b-2 border-indigo-200/50 py-3">

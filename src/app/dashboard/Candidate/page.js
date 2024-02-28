@@ -46,7 +46,7 @@ const Page = () => {
   return (
     <AdminProtected>
       <div>
-        <div className="mt-5">
+        <div className="mt-5 mb-4">
           {/* head */}
 
           <div className="hidden lg:block">
@@ -59,7 +59,7 @@ const Page = () => {
             </dev>
           </div>
 
-          <dev>
+          <dev className="">
             {/* map candidates to rows */}
             {candidates.map((candidate, index) => (
               <div
