@@ -56,22 +56,22 @@ const NavBarIcon = () => {
           {
             id: 3,
             path: "/dashboard/allElections",
-            title: "All Elections",
+            title: "All Election",
           },
           {
             id: 7,
             path: "/dashboard/Candidate",
-            title: "All Candidates",
+            title: "All Candidate",
           },
           {
             id: 5,
             path: "/dashboard/allPoll",
-            title: "All Polls",
+            title: "All Poll",
           },
           {
             id: 4,
             path: "/dashboard/allVoter",
-            title: "Users",
+            title: "All User",
           },
         ]
       : []),
@@ -93,7 +93,7 @@ const NavBarIcon = () => {
         {open ? <RxCross2 /> : <HiMenu />}
       </button>
       {open && (
-        <div className={styles.mobileDevice}>
+        <div className={`styles.mobileDevice my-2 `}>
           {Links.map((link) => (
             <NavLink key={link.id} href={link.path} title={link.title} />
           ))}
