@@ -5,7 +5,6 @@
     position: absolute;
     z-index: 2;
     top: 37.5px;
-    right: -67px;
     width: 260px;
     max-height: 450px;
     color: black;
@@ -16,7 +15,12 @@
     border-radius: 12px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
-  
+
+  @media only screen and (min-width: 768px) {
+    .notifications {
+      right: -67px; /* Adjust as necessary */
+    }
+  }
   /* Custom CSS for scrollbar */
 .notifications::-webkit-scrollbar {
   width: 6px; /* Width of the scrollbar */

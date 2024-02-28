@@ -137,7 +137,7 @@ const Notification = ({ classes }) => {
         }`}
       >
         <div
-          className="notifications overflow-y-auto z-10 bg-gray-700/95 scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+          className="-ml-[115px] lg:-ml-[0px] notifications overflow-y-auto z-10 bg-gray-700/95 scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
           ref={notificationRef}
         >
           {filterNotifications.length > 0 ? (
