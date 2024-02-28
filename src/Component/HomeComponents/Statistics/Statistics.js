@@ -3,7 +3,7 @@ import React from "react";
 const Statistics = () => {
   return (
     <div className="max-w-7xl mx-auto pt-12 pb-16 px-4 sm:px-6 lg:px-8">
-      <p className="text-center text-sm font-semibold uppercase text-gray-500 tracking-wide">
+      <p className="text-center text-sm font-semibold uppercase text-indigo-200/70 tracking-wide">
         Trusted by over 1,500,000 users worldwide
       </p>
       <div className="mt-6">
@@ -16,7 +16,7 @@ const Statistics = () => {
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                     Users
                   </dt>
-                  <dd className="order-1 text-4xl font-extrabold text-indigo-500 dark:text-indigo-400">
+                  <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
                     1.5M+
                   </dd>
                 </div>
@@ -24,7 +24,7 @@ const Statistics = () => {
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                     Polls
                   </dt>
-                  <dd className="order-1 text-4xl font-extrabold text-indigo-500 dark:text-indigo-400">
+                  <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
                     11M+
                   </dd>
                 </div>
@@ -32,7 +32,7 @@ const Statistics = () => {
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
                     Votes
                   </dt>
-                  <dd className="order-1 text-4xl font-extrabold text-indigo-500 dark:text-indigo-400">
+                  <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
                     260M+
                   </dd>
                 </div>

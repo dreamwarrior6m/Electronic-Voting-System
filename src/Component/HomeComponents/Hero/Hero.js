@@ -32,9 +32,9 @@ const Hero = () => {
             }}
             className="text-center sm:text-left text-5xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl sm:ml-12"
           >
-            <span className="block text-[#f1faee]">
+            <span className="block text-white/90">
               Democracy is a design
-              <span className="block text-indigo-300">
+              <span className="block text-indigo-200/70">
                 <TypewriterComponent
                   options={{
                     strings: ["Problem.", "Create Poll."],
@@ -45,7 +45,7 @@ const Hero = () => {
               </span>
             </span>
           </motion.h1>
-          <p className="mt-6 max-w-sm mx-auto sm:ml-12 text-center sm:text-left text-lg sm:text-xl text-indigo-200 sm:max-w-2xl">
+          <p className="mt-6 max-w-sm mx-auto sm:ml-12 text-center sm:text-left text-lg sm:text-xl text-indigo-200/70 sm:max-w-2xl">
             Elections should work for everyone. We are here to make that happen.
             Create a poll - and get answers in no time.
           </p>
@@ -53,13 +53,13 @@ const Hero = () => {
             <div className="sm:ml-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
               <Link
                 href="/createpoll"
-                className="flex items-center justify-center rounded-md border border-transparent bg-[#f1faee] px-4 py-3 text-base font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent bg-white/90 px-4 py-3 text-base font-medium text-indigo-500 shadow-sm hover:bg-indigo-50 sm:px-8"
               >
                 Create a poll
               </Link>
               <Link
                 href="/poll-participate/favoritelanguage"
-                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-base font-medium text-[#f1faee] shadow-sm hover:bg-opacity-70 sm:px-8"
+                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-400 bg-opacity-60 px-4 py-3 text-base font-medium text-white/90 shadow-sm hover:bg-opacity-70 sm:px-8"
               >
                 View examples
               </Link>
