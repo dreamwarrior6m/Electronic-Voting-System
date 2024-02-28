@@ -14,7 +14,7 @@ const Question2 = (props) => { // add props here
     <button onClick={handleClick}  style={{
         width: "100%",
         borderColor: "#4F46E5",
-        backgroundColor: "#4F46E5", // Add background color
+        backgroundColor: "#5C6BC0", // Add background color
         color: "white", // Text color
         borderRadius: "5px", // Border radius
         cursor: "pointer", // Cursor on hover

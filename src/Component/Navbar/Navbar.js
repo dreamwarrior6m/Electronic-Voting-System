@@ -33,12 +33,12 @@ const Nav = () => {
       title: "About",
       icon: <IoMdInformationCircle />,
     },
-    {
-      id: 4,
-      path: "/service",
-      title: "Services",
-      icon: <IoIosConstruct />,
-    },
+    // {
+    //   id: 4,
+    //   path: "/service",
+    //   title: "Services",
+    //   icon: <IoIosConstruct />,
+    // },
     {
       id: 5,
       path: "/createvote",
@@ -128,9 +128,9 @@ const Nav = () => {
         >
           <Link
             href="/"
-            className="font-bold  text-3xl flex items-center font-[Poppins] text-white"
+            className="font-bold  text-3xl flex items-center font-[Poppins] text-white/90"
           >
-            <span className="text-3xl text-indigo-600 mr-2">
+            <span className="text-3xl text-white/90 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
             DVS
@@ -156,7 +156,7 @@ const Nav = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+                className="menu dropdown-content z-[100] p-4 shadow bg-gray-700/95 text-white/90 rounded-box w-48 mt-4"
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
@@ -183,7 +183,7 @@ const Nav = () => {
               {open ? (
                 <FiX onClick={closeMenu} className="text-2xl text-white" />
               ) : (
-                <FiMenu className="text-2xl text-white" />
+                <FiMenu className="text-2xl text-white/90" />
               )}
             </motion.div>
           </div>
@@ -232,7 +232,7 @@ const Nav = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+                className="menu dropdown-content z-[100] p-4 shadow bg-gray-700/95 text-white/90 rounded-box w-48 mt-4"
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}

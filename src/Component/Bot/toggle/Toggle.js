@@ -28,13 +28,13 @@ const Toggle = () => {
         {show ? (
           <IoClose
             onClick={handleHide}
-            className="text-5xl text-white bg-gradient-to-r from-purple-500 to-indigo-500 p-2 rounded-full drop-shadow-2xl mt-3 animate-spin transform hover:scale-125"
+            className="text-5xl text-white/95  bg-gradient-to-r from-indigo-400 to-indigo-500 p-2 rounded-full drop-shadow-2xl mt-3 animate-spin transform hover:scale-125"
             style={{ animation: "infinite" }}
           />
         ) : (
           <FaRobot
             onClick={handleShow}
-            className="text-5xl text-white bg-gradient-to-r from-purple-500 to-indigo-500 p-2 rounded-full drop-shadow-2xl mt-3 animate-spin transition transform hover:scale-125"
+            className="text-5xl text-white/95 bg-gradient-to-r from-indigo-400 to-indigo-500 p-2 rounded-full drop-shadow-2xl mt-3 animate-spin transition transform hover:scale-125"
             style={{ animation: "scaleAnimation 1.5s infinite" }}
           />
         )}
