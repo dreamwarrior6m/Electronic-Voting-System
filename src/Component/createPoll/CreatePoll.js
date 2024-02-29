@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Protected from "../Protected/Protected";
 import { UploadImage } from "../shareComponent/utilites";
+import Swal from "sweetalert2";
 
 const createPoll = () => {
   const { user } = useAuth();
@@ -26,13 +27,20 @@ const createPoll = () => {
     console.log(createPoll);
 
     axios
-      .post("https://evs-delta.vercel.app/create-poll", createPoll)
+      .post("http://localhost:5000/create-poll", createPoll)
       .then((res) => {
         console.log(res);
         router.push(`/createpoll/${userName}`);
       })
       .catch((err) => {
-        console.error(err);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title:
+            "Username must be unique.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
 
     const type = 5;
