@@ -81,6 +81,10 @@ const Nav = () => {
 
     fetchData();
   }, [user?.email]);
+  
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 }); // Start animation after mounting
+  }, [controls]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,7 +121,7 @@ const Nav = () => {
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 border-b-2 border-gray-100/10  bg-gray-900 shadow-lg`}
       animate={controls}
-      initial={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: -50 }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-center">
         <motion.div
