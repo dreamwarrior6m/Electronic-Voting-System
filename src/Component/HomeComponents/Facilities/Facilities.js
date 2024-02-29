@@ -1,6 +1,6 @@
 const Facilities = () => {
   return (
-    <div className="bg-gray-900  pt-16 pb-32">
+    <div className="bg-gray-900  pt-16 pb-10">
       <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
         <h2 className="text-base font-semibold tracking-wider text-indigo-600 dark:text-indigo-400 uppercase">
           Polling made easy

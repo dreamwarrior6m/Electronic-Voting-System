@@ -3,6 +3,7 @@ import Facilities from "@/Component/HomeComponents/Facilities/Facilities";
 import Features from "@/Component/HomeComponents/Features/Features";
 import Hero from "@/Component/HomeComponents/Hero/Hero";
 import Statistics from "@/Component/HomeComponents/Statistics/Statistics";
+import Feedback from "@/Component/feebbacks/feedback/Feedback";
 
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
         <Statistics />
         <Features />
         <Facilities />
+        <Feedback></Feedback>
       </div>
     </div>
   );

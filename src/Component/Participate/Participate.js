@@ -39,7 +39,7 @@ const Participate = () => {
     e.preventDefault();
     const from = e.target;
     const candiatename = from.name.value;
-    const message = from.name.value;
+    const message = from.message.value;
     const name = user.displayName;
     const email = user.email;
     const img = user.photoURL;
@@ -47,10 +47,13 @@ const Participate = () => {
     const res = await axios.post('http://localhost:5000/feedback',{feedback})
     if(res.data.acknowledged){
       setIsModalOpen(false)
-      router.push(`/result/${RouteId}`);
+      router.push(`/result/${id}`);
     }
   };
-  const toggleModal = () => setIsModalOpen(!isModalOpen);
+  const toggleModal = () =>{
+    setIsModalOpen(!isModalOpen);
+    router.push(`/result/${id}`);
+  } 
   
 
   // console.log(updateParticipate);
@@ -140,11 +143,14 @@ const Participate = () => {
       filterUndreUser?.[0]?.isverify == "true" &&
       filterAllElections?.[0]?.position == true
     ) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`, {
+        credentials: 'include',
+      })
         .then((res) => res.json())
-        .then((data) => {
+        .then(async(data) => {
           // console.log(data);
-          const updateVot = data?.voteCount;
+          const updateVot =await data?.voteCount;
+          console.log(updateVot)
           const updateVoteCount2 = updateVot + 1;
           const updateVoteCount = { updateVoteCount2 };
           console.log(updateVoteCount);
