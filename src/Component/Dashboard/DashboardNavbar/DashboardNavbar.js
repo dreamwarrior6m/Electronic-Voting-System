@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import "./DashboardNavbar.css";
 import { FaRegCopy } from "react-icons/fa";
 import axios from "axios";
+import { Link } from "lucide-react";
+import AdminFeedback from "./AdminFeedback/AdminFeedback";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
@@ -19,7 +21,8 @@ const DashboardNavbar = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`, {withCredentials: true}
+            `https://evs-delta.vercel.app/users/${user?.email}`,
+            { withCredentials: true }
           );
           setusers(res.data);
         }
@@ -73,7 +76,7 @@ const DashboardNavbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
-          <MdOutlineChat size={24} />
+          {users?.isRole == "Admin" && <AdminFeedback />}
           <Notification />
           <Image
             onClick={() => {

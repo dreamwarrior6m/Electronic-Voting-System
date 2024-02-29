@@ -20,6 +20,7 @@ const SideNav = ({ children }) => {
   const location = usePathname();
   const { user, logOut } = useAuth();
   const [users, setusers] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
