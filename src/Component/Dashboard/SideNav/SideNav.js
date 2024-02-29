@@ -153,6 +153,17 @@ const SideNav = ({ children }) => {
                 <MdPeople className="text-2xl group-hover:text-white" />
                 <h3 className=" text-white font-semibold">Users</h3>
               </Link>
+              <Link
+                href="/dashboard/showMessage"
+                className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
+                  location === "/dashboard/allVoter"
+                    ? "text-white bg-indigo-500 "
+                    : "text-gray-800"
+                }`}
+              >
+                <MdPeople className="text-2xl group-hover:text-white" />
+                <h3 className=" text-white font-semibold">Show Feedback</h3>
+              </Link>
             </>
           )}
           <Link

@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import "./DashboardNavbar.css";
 import { FaRegCopy } from "react-icons/fa";
 import axios from "axios";
-import { Link } from "lucide-react";
-import AdminFeedback from "./AdminFeedback/AdminFeedback";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
@@ -76,7 +74,7 @@ const DashboardNavbar = () => {
           </div>
         </div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
-          {users?.isRole == "Admin" && <AdminFeedback />}
+          <MdOutlineChat size={25} className="text-white"/>
           <Notification />
           <Image
             onClick={() => {

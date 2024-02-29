@@ -1,37 +1,118 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 import axios from "axios";
-import useAuth from "@/app/hook/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import AdminProtected from "@/Component/Protected/AdminProtected";
 
-const YourPage = () => {
-  const { user, logOut } = useAuth();
-  const [users, setUsers] = useState([]);
+const ShowFeedback = () => {
+  const { data: candidates = [], refetch } = useQuery({
+    queryKey: ["candidates45"],
+    queryFn: async () => {
+      const res = await axios.get("http://localhost:5000/admin-feedback",{
+        withCredentials: true,
+      });
+      return res.data;
+    },
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (user?.email) {
-          const res = await axios.get(
-            `https://evs-delta.vercel.app/users/admin-feedback`,
-            {
-              withCredentials: true,
-            }
-          );
-          setUsers(res.data);
+  const handledeleted = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to fire this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Deleted it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axios.delete(
+          `https://evs-delta.vercel.app/candidate/${id}`
+        );
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            title: "fire!",
+            text: `this Candidate has been deleted.`,
+            icon: "success",
+          });
+          refetch();
         }
-      } catch (error) {
-        console.error(error);
       }
-    };
-    fetchData();
-  }, [user?.email]);
+    });
+  };
 
   return (
-    <>
-      <h1>fjdfkdasf</h1>
-    </>
+    <AdminProtected>
+      <div>
+        <div className="mt-5">
+          <div className="overflow-x-auto">
+            <table className="table text-black font-semibold">
+              {/* head */}
+              <thead>
+                <tr className="text-center text-md text-white font-semibold  border-b-2 border-gray-600">
+                  <th>
+                    <label>
+                      <p className="">Number</p>
+                    </label>
+                  </th>
+                  <th className=" ">Candidate</th>
+                  <th className="">ID Card Number</th>
+                  <th className="">Brand</th>
+                  <th className="">Profile</th>
+                  <th className="">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* map candidates to rows */}
+                {candidates.map((candidate, index) => (
+                  <tr
+                    key={candidate.id}
+                    className={`${
+                      index % 2 === 1 ? "bg-gray-100/90" : "bg-gray-100/80"
+                    } text-center font-semibold border-b border-gray-300`}
+                  >
+                    <th>
+                      <label>
+                        <p className="text-black font-semibold text-center">
+                          {index + 1}
+                        </p>
+                      </label>
+                    </th>
+                    <td className="">
+                      <div className="flex items-center justify-center gap-3">
+                        <div className="avatar"></div>
+                        <div>
+                          <div className="font-bold">
+                            {candidate.candidateName}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{candidate.candidateID}</td>
+                    <td>{candidate.brand}</td>
+
+                    <td>
+                      <button className="btn btn-ghost btn-xs text-black font-semibold">
+                        Information
+                      </button>
+                    </td>
+                    <td className="text-3xl cursor-pointer">
+                      <button onClick={() => handledeleted(candidate._id)}>
+                        <MdDeleteForever className=" text-red-700" />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </AdminProtected>
   );
 };
 
-export default YourPage;
+export default ShowFeedback;
+
 
