@@ -192,9 +192,9 @@ const page = () => {
                         name="OrganizatonName"
                       />
                     </div>
-                    <div className="form-control">
+                    <div className="form-control w-full">
                       <label className="label">
-                        <span className=" text-white bg-blue-950">
+                        <span className=" text-white ">
                           Upload Photo
                         </span>
                       </label>
@@ -242,7 +242,7 @@ const page = () => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
                           Start Date
@@ -256,7 +256,7 @@ const page = () => {
                         name="startDate"
                       />
                     </div>
-                    <div className="form-control">
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
                           Start Time
@@ -273,7 +273,7 @@ const page = () => {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-3">
-                    <div className="form-control">
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
                           End Date
@@ -287,7 +287,7 @@ const page = () => {
                         name="endDate"
                       />
                     </div>
-                    <div className="form-control">
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className="label-text dark:text-white">
                           End Time
@@ -337,7 +337,7 @@ const page = () => {
                 </div>
 
                 <div className="form-control mt-6 w-full ">
-                  <button className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
+                  <button type="submit" className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
                     {loading ? (
                       <h1 className="loading loading-spinner loading-sm"></h1>
                     ) : (

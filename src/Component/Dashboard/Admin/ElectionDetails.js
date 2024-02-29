@@ -33,7 +33,9 @@ const ElectionDetails = () => {
   const { data: elections = [] } = useQuery({
     queryKey: ["electionsDetails"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote?search");
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/create-vote?search"
+      );
       return res.data;
     },
     refetchInterval: 100,
@@ -231,8 +233,8 @@ const ElectionDetails = () => {
 
   return (
     <div className="">
-      {(ElectionInfoProtract || (userRoles?.isRole === "Admin")) && (
-        <div className="text-white">
+      {(ElectionInfoProtract || userRoles?.isRole === "Admin") && (
+        <div className="text-white/90">
           {/* ELection Name */}
 
           <div className="">
@@ -296,7 +298,7 @@ const ElectionDetails = () => {
           {/* Election Candidates */}
           <div className="mt-6">
             <h4 className="text-2xl font-bold mb-5">All Candidate:</h4>
-            <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-1 justify-center items-center">
+            <div className="grid md:grid-cols-2  gap-2 justify-center items-center">
               {verifyCandidate?.map((candidate, index) => (
                 <ElectionCandidate
                   key={candidate?._id}
@@ -319,7 +321,7 @@ const ElectionDetails = () => {
                 <div className="overflow-x-auto py-2 pb-12">
                   <table className="table text-black">
                     <thead>
-                      <tr className="text-md text-white font-semibold text-center border-b-2 bg-gray-400">
+                      <tr className="text-md text-white/90 font-semibold text-center border-b-2 bg-gray-400">
                         <th>
                           <label>
                             <p className="">Number</p>
@@ -353,7 +355,7 @@ const ElectionDetails = () => {
                                 ) : (
                                   <div className="flex gap-2">
                                     <button
-                                      className="bg-green-500 text-white px-2 py-1 rounded-sm"
+                                      className="bg-green-500 text-white/90 px-2 py-1 rounded-sm"
                                       onClick={() =>
                                         handleCandidateVerify(candidate._id)
                                       }
@@ -361,7 +363,7 @@ const ElectionDetails = () => {
                                       Accept
                                     </button>
                                     <button
-                                      className="bg-red-500 text-white px-2 py-1 rounded-sm"
+                                      className="bg-red-500 text-white/90 px-2 py-1 rounded-sm"
                                       onClick={() =>
                                         handleCandidateDelete(candidate._id)
                                       }
@@ -400,12 +402,12 @@ const ElectionDetails = () => {
                       <tr className="text-md font-semibold text-center border-b-2 bg-gray-400">
                         <th>
                           <label>
-                            <p className="text-white">Number</p>
+                            <p className="text-white/90">Number</p>
                           </label>
                         </th>
                         {/* <th>Name</th> */}
-                        <th className="text-white">Email</th>
-                        <th className="text-white">Actions</th>
+                        <th className="text-white/90">Email</th>
+                        <th className="text-white/90">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -431,13 +433,13 @@ const ElectionDetails = () => {
                                 ) : (
                                   <div className="flex gap-2">
                                     <button
-                                      className="bg-green-500 text-white px-2 py-1 rounded-sm"
+                                      className="bg-green-500 text-white/90 px-2 py-1 rounded-sm"
                                       onClick={() => handleVerify(voter._id)}
                                     >
                                       Accept
                                     </button>
                                     <button
-                                      className="bg-red-500 text-white px-2 py-1 rounded-sm"
+                                      className="bg-red-500 text-white/90 px-2 py-1 rounded-sm"
                                       onClick={() => handleDelete(voter._id)}
                                     >
                                       Delete

@@ -1,6 +1,6 @@
 import NavLink from "@/Component/Navbar/NavLink/Navlink";
 import { useEffect, useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { HiMenu } from "react-icons/hi";
 import { RxCross2 } from "react-icons/rx";
 import styles from "../../Navbar/NavLink/Navlink.module.css";
 import useAuth from "@/app/hook/useAuth";
@@ -12,7 +12,8 @@ const NavBarIcon = () => {
   useEffect(() => {
     axios
       .get(`https://evs-delta.vercel.app/users/${user?.email}`, {
-        withCredentials: true})
+        withCredentials: true,
+      })
       .then((res) => {
         console.log(res.data);
         setUserRoles(res.data);
@@ -27,63 +28,72 @@ const NavBarIcon = () => {
       path: "/dashboard/home",
       title: "Dashboard",
     },
-    ...(userRoles?.isRole === "user" ? [
-      {
-        id: 7,
-        path: "/dashboard/myPoll",
-        title: "My Polls",
-      },
-    ] : []),
-    ...(userRoles?.isRole === "Modarator" ? [
-      {
-        id: 2,
-        path: "/dashboard/ownElections",
-        title: "My Elections",
-      },
-      {
-        id: 7,
-        path: "/dashboard/myPoll",
-        title: "My Polls",
-      },
-    ] : []),
-    ...(userRoles?.isRole === "Admin" ? [
-      {
-        id: 3,
-        path: "/dashboard/allElections",
-        title: "All Elections",
-      },
-      {
-        id: 7,
-        path: "/dashboard/Candidate",
-        title: "All Candidates",
-      },
-      {
-        id: 5,
-        path: "/dashboard/allPoll",
-        title: "All Polls",
-      },
-      {
-        id: 4,
-        path: "/dashboard/allVoter",
-        title: "Users",
-      },
-    ] : []),
+    ...(userRoles?.isRole === "user"
+      ? [
+          {
+            id: 7,
+            path: "/dashboard/myPoll",
+            title: "My Polls",
+          },
+        ]
+      : []),
+    ...(userRoles?.isRole === "Modarator"
+      ? [
+          {
+            id: 2,
+            path: "/dashboard/ownElections",
+            title: "My Elections",
+          },
+          {
+            id: 7,
+            path: "/dashboard/myPoll",
+            title: "My Polls",
+          },
+        ]
+      : []),
+    ...(userRoles?.isRole === "Admin"
+      ? [
+          {
+            id: 3,
+            path: "/dashboard/allElections",
+            title: "All Election",
+          },
+          {
+            id: 7,
+            path: "/dashboard/Candidate",
+            title: "All Candidate",
+          },
+          {
+            id: 5,
+            path: "/dashboard/allPoll",
+            title: "All Poll",
+          },
+          {
+            id: 4,
+            path: "/dashboard/allVoter",
+            title: "All User",
+          },
+        ]
+      : []),
     {
       id: 6,
       path: "/",
       title: "Home",
     },
-];
+  ];
 
   const [open, setopen] = useState(false);
 
   return (
-    <div>
-      <button className={styles.menu} onClick={() => setopen((prev) => !prev)}>
-        {open ? <RxCross2 /> : <FaBars />}
+    <div className="text-center">
+      <button
+        className={`styles.menu text-2xl text-gray-600 p-1 bg-white/90 rounded-full`}
+        onClick={() => setopen((prev) => !prev)}
+      >
+        {open ? <RxCross2 /> : <HiMenu />}
       </button>
       {open && (
-        <div className={styles.mobileDevice}>
+        <div className={`styles.mobileDevice my-2 `}>
           {Links.map((link) => (
             <NavLink key={link.id} href={link.path} title={link.title} />
           ))}

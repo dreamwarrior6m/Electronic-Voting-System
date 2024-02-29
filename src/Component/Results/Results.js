@@ -31,15 +31,15 @@ const Results = () => {
 
   return (
     <Protected>
-      <div className="max-w-7xl mx-auto px-4 pt-36">
+      <div className="max-w-7xl mx-auto px-4 pt-36 pb-16">
         <h1 className="text-center font-bold text-4xl pb-8">Results</h1>
         <div className="grid md:grid-cols-2 gap-5">
           {filterCandidates?.map((candidate, index) => (
             <div
               key={candidate?._id}
               className={`${
-                index % 2 === 0 ? "bg-gray-100 rounded-xl" : "bg-white"
-              } text-center font-semibold rounded-xl`}
+                index % 2 === 0 ? "bg-gray-100 rounded-md" : "bg-white"
+              } text-center font-semibold rounded-md`}
             >
               <div>
                 <Image
@@ -47,7 +47,7 @@ const Results = () => {
                   width={150}
                   height={150}
                   alt="Image"
-                  className="rounded-xl w-full h-auto md:h-[280px]"
+                  className="rounded-t-md w-full h-auto md:h-[280px]"
                 />
               </div>
               <div className="py-4 text-gray-600 font-bold text-lg">

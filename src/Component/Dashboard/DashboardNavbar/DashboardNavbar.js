@@ -58,8 +58,8 @@ const DashboardNavbar = () => {
 
   return (
     <>
-      <div className="text-white lg:flex lg:justify-between lg:items-center relative">
-        <div className="hidden lg:block p-2 bg-blue-200/15  rounded-md">
+      <div className="text-white/90 flex justify-center lg:justify-end items-center relative">
+        {/* <div className="hidden lg:block p-2 bg-blue-200/15  rounded-md">
           <div className="flex items-center justify-around">
             <input
               type="text"
@@ -68,18 +68,21 @@ const DashboardNavbar = () => {
             />
             <button className="hover:bg-blue-200/30">
               {" "}
-              <MdSearch className="text-lg text-white/65" />
+              <MdSearch className="text-lg text-white/90/65" />
             </button>
           </div>
+        </div> */}
+        <div>
+
         </div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
-          <MdOutlineChat size={24} />
+          <MdOutlineChat className="text-indigo-200/70" size={24} />
           <Notification />
           <Image
             onClick={() => {
               setOpenProfile(!openProfile);
             }}
-            className=" rounded-full h-[30px] w-[30px] object-cover"
+            className=" rounded-full h-[30px] w-[30px] object-cover cursor-pointer"
             height={30}
             width={30}
             src={user?.photoURL}
@@ -117,7 +120,7 @@ const DashboardNavbar = () => {
                   <p>{users?.idNumber}</p> <FaRegCopy />
                 </div>
                 {user && (
-                  <h1 className="text-2xl text-white font-semibold">
+                  <h1 className="text-2xl text-white/90 font-semibold">
                     {user?.displayName}
                   </h1>
                 )}
@@ -154,12 +157,12 @@ const DashboardNavbar = () => {
                   <form onSubmit={handleUpdate} action="">
                     <div className="form-control">
                       <label className="label">
-                        <span className=" dark:text-white">Change Name</span>
+                        <span className=" dark:text-white/90">Change Name</span>
                       </label>
                       <input
                         type="text"
                         placeholder="Change Name"
-                        className="input input-bordered text-white"
+                        className="input input-bordered text-white/90"
                         required
                         name="name"
                       />
@@ -167,14 +170,14 @@ const DashboardNavbar = () => {
 
                     <div className="form-control">
                       <label className="label">
-                        <span className=" dark:text-white">
+                        <span className=" dark:text-white/90">
                           Change Date of birth
                         </span>
                       </label>
                       <input
                         type="date"
                         placeholder="Photo"
-                        className="input input-bordered text-white"
+                        className="input input-bordered text-white/90"
                         required
                         name="date"
                       />

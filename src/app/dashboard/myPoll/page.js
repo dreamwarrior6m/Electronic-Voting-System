@@ -75,44 +75,45 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="text-white/85">
-        <div className="overflow-x-auto">
-          <table className="table table-zebra">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th>Title</th>
-                <th>Owner</th>
-                <th>View</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filterMyPoll?.map((poll, ind) => (
-                <tr key={poll?._id}>
-                  <th>{ind + 1}</th>
-                  <td>{poll?.title}</td>
-                  <td>{poll?.wonerEmail}</td>
-                  <td>
-                    <Link href={`/poll-participate/${poll?.userName}`}>
-                      Show
-                    </Link>
-                  </td>
-                  <th>
-                    <button
-                      onClick={() =>
-                        handleDelete(poll?._id, poll?.wonerEmail, poll?.title)
-                      }
-                      className=" text-red-500 text-2xl"
-                    >
-                      <MdDeleteForever />
-                    </button>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="mt-5">
+        {/* head */}
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-12 text-center text-indigo-200/100 font-semibold text-base  border-b-2 border-indigo-200/50 py-3">
+            <p className="col-span-1">Number</p>
+            <p className="col-span-5">Title</p>
+            <p className="col-span-4">Owner</p>
+            <p className="col-span-1">View</p>
+            <p className="col-span-1">Delete</p>
+          </div>
+        </div>
+        <div>
+          {filterMyPoll?.map((poll, ind) => (
+            <div
+              key={poll?._id}
+              className={`${
+                ind % 2 === 0
+                  ? "bg-blue-200/5 text-indigo-200/70"
+                  : "bg-blue-200/5 text-indigo-200/70"
+              } text-center font-semibold border-b border-indigo-200/50 space-y-1 lg:grid grid-cols-12 py-3 justify-center items-center`}
+            >
+              <p className="col-span-1">{ind + 1}</p>
+              <p className="col-span-5">{poll?.title}</p>
+              <p className="col-span-4">{poll?.wonerEmail}</p>
+              <div className="col-span-1">
+                <Link href={`/poll-participate/${poll?.userName}`}>Show</Link>
+              </div>
+              <div className="col-span-1">
+                <button
+                  onClick={() =>
+                    handleDelete(poll?._id, poll?.wonerEmail, poll?.title)
+                  }
+                  className=" text-red-500 text-2xl"
+                >
+                  <MdDeleteForever />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </Protected>
