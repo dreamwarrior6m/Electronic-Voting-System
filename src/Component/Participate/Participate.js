@@ -96,11 +96,12 @@ const Participate = () => {
   );
   console.log(filterCandidate);
 
+  console.log(selectCandidateId)
   const handalCountVote = (id) => {
     // console.log(id);
     setSelectCandidateId(id);
   };
-
+  console.log(selectCandidateId)
   const filterParticipet = participate?.filter(
     (participat) =>
       participat?.email === user?.email && participat?.voteName === id
@@ -122,6 +123,7 @@ const Participate = () => {
           const updateVot = data?.voteCount;
           const updateVoteCount2 = updateVot + 1;
           const updateVoteCount = { updateVoteCount2 };
+          console.log(updateVot)
           console.log(updateVoteCount);
 
           // add vote number
