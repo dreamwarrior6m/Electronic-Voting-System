@@ -19,7 +19,8 @@ const DashboardNavbar = () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`, {withCredentials: true}
+            `https://evs-delta.vercel.app/users/${user?.email}`,
+            { withCredentials: true }
           );
           setusers(res.data);
         }
@@ -76,7 +77,9 @@ const DashboardNavbar = () => {
 
         </div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
-          <MdOutlineChat className="text-indigo-200/70" size={24} />
+
+          <MdOutlineChat size={25} className="text-white"/>
+
           <Notification />
           <Image
             onClick={() => {
