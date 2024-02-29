@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Protected from "../Protected/Protected";
 import { UploadImage } from "../shareComponent/utilites";
+import Swal from "sweetalert2";
 
 const createPoll = () => {
   const { user } = useAuth();
@@ -34,7 +35,14 @@ const createPoll = () => {
         router.push(`/createpoll/${userName}`);
       })
       .catch((err) => {
-        console.error(err);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title:
+            "Username must be unique.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       });
 
     const type = 5;
@@ -105,7 +113,7 @@ const createPoll = () => {
                             </span>
                           </label>
                           <input
-                            required
+                      
                             name="photo"
                             type="file"
                             className="file-input file-input-bordered w-full max-w-xs"

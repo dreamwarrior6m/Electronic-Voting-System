@@ -131,48 +131,43 @@ const AllVoter = () => {
   return (
     <AdminProtected>
       <div>
-        <div className="overflow-x-auto mt-3">
-          <table className="table text-gray-900 mt-4">
-            <thead className="text-white">
-              <tr className="text-md font-semibold text-center border-b-2 border-gray-500">
-                <th>
-                  <label>
-                    <p className="">Number</p>
-                  </label>
-                </th>
-                <th>Name</th>
-                <th>ID Card Number</th>
-                <th>Email</th>
-                <th>Role</th>
-                {/* <th>Verify</th> */}
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {voters?.map((vote, index) => (
-                <tr
-                  key={vote._id}
-                  className={`${
-                    index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/80"
-                  } text-center font-semibold border-b border-gray-300`}
-                >
-                  <th>
-                    <label>
-                      <p className="text-black">{index + 1}</p>
-                    </label>
-                  </th>
-                  <td>{vote.name}</td>
-                  <td>{vote.idNumber}</td>
-                  <td>{vote.email}</td>
-                  <td className=" ">
-                    <button
-                      className=" bg-[#441760] px-2 py-1 mt-1 text-gray-300 rounded"
-                      onClick={() => handleRole(vote._id)}
-                    >
-                      {vote.isRole}
-                    </button>
-                  </td>
-                  {/* <td>
+        <div className="mt-5">
+          <div className="hidden lg:block">
+            <div className="grid grid-cols-12 text-center text-indigo-200/100 font-semibold text-base  border-b-2 border-indigo-200/50 py-3">
+              <p className="col-span-1">Number</p>
+
+              <p className="col-span-2">Name</p>
+              <p className="col-span-3">ID Card Number</p>
+              <p className="col-span-3">Email</p>
+              <p className="col-span-2">Role</p>
+              {/* <th>Verify</th> */}
+              <p className="col-span-1">Action</p>
+            </div>
+          </div>
+          <div>
+            {voters?.map((vote, index) => (
+              <div
+                key={vote._id}
+                className={`${
+                  index % 2 === 0
+                    ? "bg-blue-200/5 text-indigo-200/70"
+                    : "bg-blue-200/5 text-indigo-200/70"
+                } text-center font-semibold border-b border-indigo-200/50 space-y-1 lg:grid grid-cols-12 py-3 justify-center items-center`}
+              >
+                <p className="col-span-1">{index + 1}</p>
+
+                <p className="col-span-2">{vote.name}</p>
+                <p className="col-span-3">{vote.idNumber}</p>
+                <p className="col-span-3">{vote.email}</p>
+                <div className="col-span-2">
+                  <button
+                    className=" bg-blue-200/15 text-indigo-200/60 px-2 py-1 mt-1 rounded"
+                    onClick={() => handleRole(vote._id)}
+                  >
+                    {vote.isRole}
+                  </button>
+                </div>
+                {/* <td>
                     <button onClick={() => handleVerify(vote._id)}>
                       {vote?.verify == "true" ? (
                         <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
@@ -181,15 +176,14 @@ const AllVoter = () => {
                       )}
                     </button>
                   </td> */}
-                  <td className="text-3xl cursor-pointer">
-                    <button onClick={() => handleDelete(vote._id)}>
-                      <MdDeleteForever className=" text-red-700" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                <div className="text-3xl cursor-pointer col-span-1">
+                  <button onClick={() => handleDelete(vote._id)}>
+                    <MdDeleteForever className=" text-red-500" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
         {
           <div className="md:flex items-center justify-between mt-4">

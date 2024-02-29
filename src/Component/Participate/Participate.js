@@ -11,6 +11,8 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Protected from "../Protected/Protected";
+import Rating from "react-rating";
+import './participate.css'
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
@@ -29,6 +31,31 @@ const Participate = () => {
   // console.log(updateVoterEmail);
 
   const updateParticipate = { email: user?.email, voteName: id };
+
+  // Modal for feedback
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [RouteId, setRouteID] = useState('')
+  const handleSubmitFeedback = async(e) => {
+    e.preventDefault();
+    const from = e.target;
+    const candiatename = from.name.value;
+    const message = from.message.value;
+    const name = user.displayName;
+    const email = user.email;
+    const img = user.photoURL;
+    const feedback = {candiatename,message,name,email,img}
+    const res = await axios.post('https://evs-delta.vercel.app/feedback',{feedback})
+    if(res.data.acknowledged){
+      setIsModalOpen(false)
+      router.push(`/result/${id}`);
+    }
+  };
+  const toggleModal = () =>{
+    setIsModalOpen(!isModalOpen);
+    router.push(`/result/${id}`);
+  } 
+  
+
   // console.log(updateParticipate);
 
   //  all election filter
@@ -96,11 +123,13 @@ const Participate = () => {
   );
   console.log(filterCandidate);
 
+  console.log(selectCandidateId)
   const handalCountVote = (id) => {
+    setRouteID(id)
     // console.log(id);
     setSelectCandidateId(id);
   };
-
+  console.log(selectCandidateId)
   const filterParticipet = participate?.filter(
     (participat) =>
       participat?.email === user?.email && participat?.voteName === id
@@ -115,13 +144,17 @@ const Participate = () => {
       filterUndreUser?.[0]?.isverify == "true" &&
       filterAllElections?.[0]?.position == true
     ) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`)
+      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`, {
+        credentials: 'include',
+      })
         .then((res) => res.json())
-        .then((data) => {
+        .then(async(data) => {
           // console.log(data);
-          const updateVot = data?.voteCount;
+          const updateVot =await data?.voteCount;
+          console.log(updateVot)
           const updateVoteCount2 = updateVot + 1;
           const updateVoteCount = { updateVoteCount2 };
+          console.log(updateVot)
           console.log(updateVoteCount);
 
           // add vote number
@@ -131,8 +164,6 @@ const Participate = () => {
               updateVoteCount
             )
             .then((res) => {
-              refetch();
-              router.push(`/result/${id}`);
               Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -141,6 +172,7 @@ const Participate = () => {
                 timer: 1500,
               });
 
+              setIsModalOpen(true)
               // console.log(res);
               // participate api update
               axios
@@ -187,68 +219,94 @@ const Participate = () => {
     }
   };
 
+
+
+
   return (
     <Protected>
       <div className="text-white p-5 min-h-screen">
-        <div className="flex justify-center gap-32">
-          {filterCandidate?.length != 0 && (
-            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
-              Choose your favorite person
-            </h2>
-          )}
+      {
+        isModalOpen && <div className='w-96 mt-14 mx-auto relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 py-5 rounded'>
+        <div  onClick={toggleModal} className=" absolute top-0 right-0 bg-[#130f2a] px-2 py-1">
+        <span className=" cursor-pointer" >X</span>
+
         </div>
-        {filterCandidate?.map((candidat, ind) => (
-          <>
-            <div
-              key={candidat._id}
-              className="form-control md:w-[50%] mx-auto py-2"
-            >
-              <label className="label cursor-pointer">
-                <span className="label-text">
-                  <Image
-                    className=" w-24 h-24 rounded-full object-cover"
-                    src={candidat?.candidatePhoto}
-                    alt="alt"
-                    width={100}
-                    height={100}
-                  />
-                </span>
-                <span className="label-text">{candidat?.candidateName}</span>
-                <input
-                  onClick={() => handalCountVote(candidat?._id)}
-                  type="radio"
-                  name="radio-10"
-                  className="radio checked:bg-blue-500"
-                />
-              </label>
-              <hr></hr>
+          <h2 className="mb-4 text-center text-2xl font-semibold text-gray-200">Feedback</h2>
+          <form onSubmit={handleSubmitFeedback}>
+            <div className="">
+            <input className="bg-[#130f2a] mb-2 border border-[#6751b9] py-2 px-1 w-full rounded-xl" name="name" required type="text" placeholder='Enter your Candidate Name' />
             </div>
-          </>
-        ))}
-        <div className="">
-          {filterCandidate?.length == 0 && (
-            <h2 className="text-center text-xl md:text-3xl font-bold p-5">
-              No candidate partcipate
-            </h2>
-          )}
+            <textarea className="bg-[#130f2a] border border-[#6751b9] py-2 px-1 w-full rounded-xl" required name="message" placeholder='Enter your Feedback'></textarea>
+            <button type="submit">submit</button>
+          </form>
         </div>
-        <div className="text-center pt-5">
-          {filterParticipet?.[0]?.email == user?.email ||
-          filterAllElections?.[0]?.position == false ||
-          filterCandidate?.length == 0 ? (
-            <button disabled className="btn btn-primary">
-              submit
-            </button>
-          ) : (
-            <button
-              onClick={() => handaleAddVote()}
-              className="btn btn-primary"
-            >
-              submit
-            </button>
-          )}
+      }
+       {
+        !isModalOpen && <div>
+        <div className="flex justify-center gap-32">
+           {filterCandidate?.length != 0 && (
+             <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+               Choose your favorite person
+             </h2>
+           )}
+         </div>
+         {filterCandidate?.map((candidat, ind) => (
+           <>
+             <div
+               key={candidat._id}
+               className="form-control md:w-[50%] mx-auto py-2"
+             >
+               <label className="label cursor-pointer">
+                 <span className="label-text">
+                   <Image
+                     className=" w-24 h-24 rounded-full object-cover"
+                     src={candidat?.candidatePhoto}
+                     alt="alt"
+                     width={100}
+                     height={100}
+                   />
+                 </span>
+                 <span className="label-text text-white">{candidat?.candidateName}</span>
+                 <input
+                   onClick={() => handalCountVote(candidat?._id)}
+                   type="radio"
+                   name="radio-10"
+                   className="radio checked:bg-blue-500 bg-white"
+                 />
+               </label>
+               <hr></hr>
+             </div>
+           </>
+         ))}
+         <div className="">
+           {filterCandidate?.length == 0 && (
+             <h2 className="text-center text-xl md:text-3xl font-bold p-5">
+               No candidate partcipate
+             </h2>
+           )}
+         </div>
+         <div className="text-center pt-5">
+           {filterParticipet?.[0]?.email == user?.email ||
+           filterAllElections?.[0]?.position == false ||
+           filterCandidate?.length == 0 ? (
+             <button disabled className="btn btn-primary">
+               submit
+             </button>
+           ) : (
+             <button
+               onClick={() => handaleAddVote()}
+               className="btn btn-primary"
+             >
+               submit
+             </button>
+           )}
+         </div>
         </div>
+       }
+        <div>
       </div>
+     
+        </div>
     </Protected>
   );
 };

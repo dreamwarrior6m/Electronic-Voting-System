@@ -20,6 +20,7 @@ import NavLink from "./NavLink/Navlink";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
+ 
   const [open, setOpen] = useState(false);
   const controls = useAnimation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -46,6 +47,10 @@ const Nav = () => {
 
     fetchData();
   }, [user?.email]);
+  
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 }); // Start animation after mounting
+  }, [controls]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -179,7 +184,7 @@ const Nav = () => {
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 border-b-2 border-gray-100/10  bg-gray-900 shadow-lg`}
       animate={controls}
-      initial={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: -50 }}
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex flex-col md:flex-row justify-between items-center">
         <motion.div
@@ -190,9 +195,9 @@ const Nav = () => {
         >
           <Link
             href="/"
-            className="font-bold  text-3xl flex items-center font-[Poppins] text-white"
+            className="font-bold  text-3xl flex items-center font-[Poppins] text-white/90"
           >
-            <span className="text-3xl text-indigo-600 mr-2">
+            <span className="text-3xl text-white/90 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
             DVS
@@ -201,6 +206,7 @@ const Nav = () => {
             {user && <Notification />}
           </div>
           <div className=" md:hidden">
+ 
             {user && (
               <div className="dropdown dropdown-end md:ml-2 ml-5">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -221,6 +227,7 @@ const Nav = () => {
                 >
                   <div className="">
                     {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
+ 
 
                     <li>
                       <Link href="/dashboard/home">dashboard</Link>
@@ -244,7 +251,7 @@ const Nav = () => {
               {open ? (
                 <FiX onClick={closeMenu} className="text-2xl text-white" />
               ) : (
-                <FiMenu className="text-2xl text-white" />
+                <FiMenu className="text-2xl text-white/90" />
               )}
             </motion.div>
           </div>
@@ -299,7 +306,7 @@ const Nav = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+                className="menu dropdown-content z-[100] p-4 shadow bg-gray-700/95 text-white/90 rounded-box w-48 mt-4"
               >
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { MdDeleteForever } from "react-icons/md";
+import { MdDelete, MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ const Page = () => {
   const { data: candidates = [], refetch } = useQuery({
     queryKey: ["candidates45"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/candidate",{
+      const res = await axios.get("https://evs-delta.vercel.app/candidate", {
         withCredentials: true,
       });
       return res.data;
@@ -46,68 +46,47 @@ const Page = () => {
   return (
     <AdminProtected>
       <div>
-        <div className="mt-5">
-          <div className="overflow-x-auto">
-            <table className="table text-black font-semibold">
-              {/* head */}
-              <thead>
-                <tr className="text-center text-md text-white font-semibold  border-b-2 border-gray-600">
-                  <th>
-                    <label>
-                      <p className="">Number</p>
-                    </label>
-                  </th>
-                  <th className=" ">Candidate</th>
-                  <th className="">ID Card Number</th>
-                  <th className="">Brand</th>
-                  <th className="">Profile</th>
-                  <th className="">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* map candidates to rows */}
-                {candidates.map((candidate, index) => (
-                  <tr
-                    key={candidate.id}
-                    className={`${
-                      index % 2 === 1 ? "bg-gray-100/90" : "bg-gray-100/80"
-                    } text-center font-semibold border-b border-gray-300`}
-                  >
-                    <th>
-                      <label>
-                        <p className="text-black font-semibold text-center">
-                          {index + 1}
-                        </p>
-                      </label>
-                    </th>
-                    <td className="">
-                      <div className="flex items-center justify-center gap-3">
-                        <div className="avatar"></div>
-                        <div>
-                          <div className="font-bold">
-                            {candidate.candidateName}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>{candidate.candidateID}</td>
-                    <td>{candidate.brand}</td>
+        <div className="mt-5 mb-4">
+          {/* head */}
 
-                    <td>
-                      <button className="btn btn-ghost btn-xs text-black font-semibold">
-                        Information
-                      </button>
-                    </td>
-                    <td className="text-3xl cursor-pointer">
-                      <button onClick={() => handledeleted(candidate._id)}>
-                        <MdDeleteForever className=" text-red-700" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="hidden lg:block">
+            <dev className=" grid grid-cols-12 text-center text-indigo-200/100 font-semibold text-base  border-b-2 border-indigo-200/50 py-3">
+              <p className="col-span-1">Number</p>
+              <p className="col-span-3">Candidate</p>
+              <p className="col-span-4">ID Card Number</p>
+              <p className="col-span-3">Brand</p>
+              <p className="col-span-1">Action</p>
+            </dev>
           </div>
+
+          <dev className="">
+            {/* map candidates to rows */}
+            {candidates.map((candidate, index) => (
+              <div
+                key={candidate.id}
+                className={`${
+                  index % 2 === 0
+                    ? "bg-blue-200/5 text-indigo-200/70"
+                    : "bg-blue-200/5 text-indigo-200/70"
+                } text-center font-semibold border-b border-indigo-200/50 space-y-1 lg:grid grid-cols-12 py-3 justify-center items-center`}
+              >
+                <p className="col-span-1 font-semibold text-center">
+                  {index + 1}
+                </p>
+
+                <div className="col-span-3">
+                  <p className="font-bold"><span className="text-xs lg:hidden">Candidate Name: </span>{candidate.candidateName}</p>
+                </div>
+                <p className="col-span-4"><span className="text-xs lg:hidden">Candidate Id: </span>{candidate.candidateID}</p>
+                <p className="col-span-3"><span className="text-xs lg:hidden">Brand Name: </span>{candidate.brand}</p>
+                <div className="col-span-1 text-3xl cursor-pointer">
+                  <button onClick={() => handledeleted(candidate._id)}>
+                    <MdDelete className=" text-red-500" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </dev>
         </div>
       </div>
     </AdminProtected>

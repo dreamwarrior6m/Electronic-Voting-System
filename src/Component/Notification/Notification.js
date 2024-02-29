@@ -122,11 +122,11 @@ const Notification = ({ classes }) => {
         className="flex justify-center items-center"
         onClick={handleToggleOpen}
       >
-        <MdNotifications size={26} />
+        <MdNotifications className="text-indigo-200/70" size={26} />
         <div
           className={`absolute -mt-[22px] ml-5 ${newStatus ? "" : "hidden"}`}
         >
-          <h1 className=" bg-red-600 rounded-full text-[9px] px-1 drop-shadow-md">
+          <h1 className=" bg-red-500 rounded-full text-[9px] px-1 drop-shadow-md">
             new
           </h1>
         </div>
@@ -137,7 +137,7 @@ const Notification = ({ classes }) => {
         }`}
       >
         <div
-          className="notifications overflow-y-auto z-10 bg-gray-700/95 scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+          className="-ml-[115px] lg:-ml-[0px] notifications overflow-y-auto z-10 bg-gray-700/95 scrollbar-width-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
           ref={notificationRef}
         >
           {filterNotifications.length > 0 ? (
@@ -145,16 +145,16 @@ const Notification = ({ classes }) => {
               .slice()
               .reverse()
               .map((message, index) => (
-                <span className="text-white p-1 rounded-md" key={index + 1}>
+                <span className="text-white/90 p-1 rounded-md" key={index + 1}>
                   {displayNotification(message)}
                 </span>
               ))
           ) : (
-            <span className="text-white">No notifications found.</span>
+            <span className="text-indigo-200/70">No notifications found.</span>
           )}
           {filterNotifications.length > 0 && (
             <button
-              className="bg-gray-400 text-white mt-2 py-2 rounded-md"
+              className="bg-gray-400 text-white/90 mt-2 py-2 rounded-md"
               onClick={() => notificationDelete()}
             >
               Delete All

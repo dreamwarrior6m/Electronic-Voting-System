@@ -15,7 +15,9 @@ const OwnElection = () => {
   const { data: elections = [], refetch } = useQuery({
     queryKey: ["elections2"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote?search");
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/create-vote?search"
+      );
       return res.data;
     },
   });
@@ -169,18 +171,30 @@ const OwnElection = () => {
   return (
     <ModaProtected>
       <div className="mt-5">
-        <div className="grid gap-1">
+        <div className="hidden lg:block">
+          <div className="grid grid-cols-12 text-indigo-200/100 font-semibold text-center mb-3">
+            <p className="col-span-1">Number</p>
+            <p className="col-span-3">Organization Name</p>
+            <p className="col-span-3">Election Name</p>
+            <p className="col-span-1">Status</p>
+            <p className="col-span-2">Details</p>
+            <p className="col-span-2">Actions</p>
+          </div>
+        </div>
+        <div className="">
           {elections2?.map((election, index) => (
             <div
               key={election._id}
               className={`${
-                index % 2 === 0 ? "bg-gray-100/90" : "bg-gray-100/70"
-              } text-center font-semibold border-b border-gray-400`}
+                index % 2 === 0
+                  ? "bg-blue-200/5 text-indigo-200/70"
+                  : "bg-blue-200/5 text-indigo-200/70"
+              } text-center font-semibold border-b border-indigo-200/50`}
             >
-              <div className="grid grid-cols-12 py-3 items-center justify-center font-medium">
+              <div className="space-y-1 lg:grid lg:grid-cols-12 py-3 lg:items-center lg:justify-center font-medium mb-4">
                 <p className="col-span-1">{index + 1}</p>
-                <p className="col-span-3">{election?.OrganizatonName}</p>
-                <p className="col-span-3">{election?.name}</p>
+                <p className="col-span-3"><span className="text-xs lg:hidden">Organization Name: </span>{election?.OrganizatonName}</p>
+                <p className="col-span-3"><span className="text-xs lg:hidden">Election Name: </span>{election?.name}</p>
                 <div className="col-span-1">
                   <Timer
                     startDate1={`${election?.startDate}T${election?.startTime}`}
@@ -189,7 +203,7 @@ const OwnElection = () => {
                 </div>
                 <div className="col-span-2">
                   <Link href={`/dashboard/allElections/${election._id}`}>
-                    <button className="border border-gray-500 px-[10px] py-[6px] rounded-md hover:bg-green-200">
+                    <button className="border border-indigo-200/50 px-[10px] py-[6px] rounded-md hover:bg-white/80 hover:text-gray-800 ">
                       See Details
                     </button>
                   </Link>

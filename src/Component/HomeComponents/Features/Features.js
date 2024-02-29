@@ -20,7 +20,7 @@ const Features = () => {
       <div className="flex items-center gap-8"></div>
       <div className="grid lg:grid-cols-3 gap-8">
         <div
-          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-500 dark:text-indigo-400 py-12 lg:rounded-md"
+          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-200/70 dark:text-indigo-200/70 py-12 lg:rounded-md"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -29,7 +29,7 @@ const Features = () => {
         </div>
 
         <div
-          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-500 dark:text-indigo-400 py-12 lg:rounded-md"
+          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-200/70 dark:text-indigo-200/70 py-12 lg:rounded-md"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
@@ -38,7 +38,7 @@ const Features = () => {
         </div>
 
         <div
-          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-500 dark:text-indigo-400 py-12 lg:rounded-md"
+          className="flex flex-col justify-center items-center bg-blue-200/5 border-2 border-gray-400/20 text-indigo-200/70 dark:text-indigo-200/70 py-12 lg:rounded-md"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
