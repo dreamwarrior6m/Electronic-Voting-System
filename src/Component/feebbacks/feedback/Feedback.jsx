@@ -10,7 +10,7 @@ const Feedback = () => {
     const [feedbackdata, setFeedbackData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/feedback')
+        axios.get('https://evs-delta.vercel.app/feedback')
             .then(res => {
                 setFeedbackData(res.data);
             })

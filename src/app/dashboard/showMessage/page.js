@@ -9,12 +9,13 @@ const ShowFeedback = () => {
   const { data: candidates = [], refetch } = useQuery({
     queryKey: ["candidates45"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/admin-feedback",{
+      const res = await axios.get("https://evs-delta.vercel.app/admin-feedback",{
         withCredentials: true,
       });
       return res.data;
     },
   });
+  console.log(candidates);
 
   const handledeleted = (id) => {
     Swal.fire({
@@ -45,21 +46,20 @@ const ShowFeedback = () => {
   return (
     <AdminProtected>
       <div>
-        <div className="mt-5">
+        <div className="mt-5 text-indigo-200/100">
           <div className="overflow-x-auto">
-            <table className="table text-black font-semibold">
+            <table className="table font-semibold">
               {/* head */}
               <thead>
-                <tr className="text-center text-md text-white font-semibold  border-b-2 border-gray-600">
+                <tr className="text-center text-md font-semibold  border-b-2 border-gray-600">
                   <th>
                     <label>
-                      <p className="">Number</p>
+                      <p className="">No</p>
                     </label>
                   </th>
-                  <th className=" ">Candidate</th>
-                  <th className="">ID Card Number</th>
-                  <th className="">Brand</th>
-                  <th className="">Profile</th>
+                  <th className=" ">Name</th>
+                  <th className="">Email</th>
+                  <th className="">Massage</th>
                   <th className="">Action</th>
                 </tr>
               </thead>
@@ -69,12 +69,12 @@ const ShowFeedback = () => {
                   <tr
                     key={candidate.id}
                     className={`${
-                      index % 2 === 1 ? "bg-gray-100/90" : "bg-gray-100/80"
-                    } text-center font-semibold border-b border-gray-300`}
+                      index % 2 === 1 ? "bg-blue-200/5 text-indigo-200/70" : "bg-blue-200/5 text-indigo-200/70"
+                    } text-center font-semibold border-b border-indigo-200/50`}
                   >
                     <th>
                       <label>
-                        <p className="text-black font-semibold text-center">
+                        <p className=" font-semibold text-center">
                           {index + 1}
                         </p>
                       </label>
@@ -84,19 +84,13 @@ const ShowFeedback = () => {
                         <div className="avatar"></div>
                         <div>
                           <div className="font-bold">
-                            {candidate.candidateName}
+                            {candidate.userName}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td>{candidate.candidateID}</td>
-                    <td>{candidate.brand}</td>
-
-                    <td>
-                      <button className="btn btn-ghost btn-xs text-black font-semibold">
-                        Information
-                      </button>
-                    </td>
+                    <td>{candidate.email}</td>
+                    <td>{candidate.feedback}</td>
                     <td className="text-3xl cursor-pointer">
                       <button onClick={() => handledeleted(candidate._id)}>
                         <MdDeleteForever className=" text-red-700" />

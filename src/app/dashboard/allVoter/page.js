@@ -30,6 +30,7 @@ const AllVoter = () => {
 
   useEffect(() => {
     getPaginatedUsers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const handlePageClick = (e) => {

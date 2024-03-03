@@ -151,7 +151,7 @@ const Nav = () => {
     console.log(adminFeedback);
 
     axios
-      .post("http://localhost:5000/admin-feedback", adminFeedback)
+      .post("https://evs-delta.vercel.app/admin-feedback", adminFeedback)
       .then((res) => {
         console.log(res);
         withCredentials: true, router.push(`/admin-feedback/${userName}`);
@@ -171,7 +171,7 @@ const Nav = () => {
   //   console.log(adminFeedback);
 
   //   try {
-  //     const res = axios.post("http://localhost:5000/admin-feedback", adminFeedback, {
+  //     const res = axios.post("https://evs-delta.vercel.app/admin-feedback", adminFeedback, {
   //       withCredentials: true
   //     });
   //     console.log(res.data);

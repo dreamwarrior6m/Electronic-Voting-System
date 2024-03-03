@@ -156,8 +156,8 @@ const SideNav = ({ children }) => {
               <Link
                 href="/dashboard/showMessage"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
-                  location === "/dashboard/allVoter"
-                    ? "text-white bg-indigo-500 "
+                  location === "/dashboard/showMessage"
+                    ? "text-white bg-indigo-400 "
                     : "text-gray-800"
                 }`}
               >
