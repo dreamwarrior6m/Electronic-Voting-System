@@ -37,7 +37,7 @@ const Hero = () => {
               <span className="block text-indigo-200/70">
                 <TypewriterComponent
                   options={{
-                    strings: ["Problem.", "Create Poll."],
+                    strings: ["Create Election.", "Create Poll."],
                     autoStart: true,
                     loop: true,
                   }}
