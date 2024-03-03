@@ -87,7 +87,11 @@ const AllVoter = () => {
             `https://evs-delta.vercel.app/users/isRole/${id}`
           );
           if (res.data.modifiedCount > 0) {
-            refetch();
+            setVoters((prevVoters) =>
+              prevVoters.map((voter) =>
+                voter._id === id ? { ...voter, isRole: "admin" } : voter
+              )
+            );
             Swal.fire({
               title: "Admin",
               text: "This voter has been Admin.",
@@ -155,7 +159,9 @@ const AllVoter = () => {
                     : "bg-blue-200/5 text-indigo-200/70"
                 } text-center font-semibold border-b border-indigo-200/50 space-y-1 lg:grid grid-cols-12 py-3 justify-center items-center`}
               >
-                <p className="col-span-1">{index + 1}</p>
+                <p className="col-span-1">
+                  {(currentPage - 1) * limit + index + 1}
+                </p>
 
                 <p className="col-span-2">{vote.name}</p>
                 <p className="col-span-3">{vote.idNumber}</p>

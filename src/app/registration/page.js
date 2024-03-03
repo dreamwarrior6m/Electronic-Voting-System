@@ -115,12 +115,12 @@ const Registration = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white px-3">
+    <div className="bg-slate-900 flex items-center justify-center min-h-screen text-white px-3">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
-        <div className="flex text-gray-700 dark:text-white  flex-col justify-center items-center">
+        <div className="flex text-white  flex-col justify-center items-center">
           <Image width={50} height={50} alt="login Img" src={registrationImg} />
           <div className="mt-2 mb-7 text-center">
-            <h1 className="mb-2 text-3xl font-bold text-gray-700 dark:text-white ">
+            <h1 className="mb-2 text-3xl font-bold text-white ">
               Create a free account
             </h1>
             <h4 className="text-base">
@@ -129,29 +129,29 @@ const Registration = () => {
             </h4>
           </div>
         </div>
-        <div className="lg:px-8 lg:pt-4 lg:pb-6 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
+        <div className="lg:px-8 lg:pt-4 lg:pb-6 ] border- border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
           <form onSubmit={handleRegistration} className="w-full p-3">
             <div className="grid lg:grid-cols-12 gap-4">
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" text-gray-700 dark:text-white">Name</span>
+                  <span className=" text-white">Name</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your Name"
-                  className="input input-bordered text-gray-700 dark:text-white"
+                  className="input input-bordered bg-[#1D232A] text-white"
                   required
                   name="name"
                 />
               </div>
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" text-gray-700 dark:text-white">E-mail</span>
+                  <span className=" text-white">E-mail</span>
                 </label>
                 <input
                   type="text"
                   placeholder="Enter Your E-mail"
-                  className="input input-bordered text-gray-700 dark:text-white"
+                  className="input input-bordered bg-[#1D232A] text-white"
                   required
                   name="email"
                 />
@@ -159,7 +159,7 @@ const Registration = () => {
               <div className="relative col-span-6">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-gray-700 dark:text-white">
+                    <span className="label-text text-white">
                       Password
                     </span>
                   </label>
@@ -167,7 +167,7 @@ const Registration = () => {
                     type={showPass ? "text" : "password"}
                     name="password"
                     placeholder="Enter your password"
-                    className="input input-bordered text-gray-700 dark:text-white"
+                    className="input input-bordered bg-[#1D232A] text-white"
                     required
                     defaultChecked
                   />
@@ -178,9 +178,9 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-gray-700 dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-gray-700 dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-white" />
                     )}
                   </p>
                 </div>
@@ -190,7 +190,7 @@ const Registration = () => {
               <div className="relative col-span-6">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text text-gray-700 dark:text-white">
+                    <span className="label-text text-white">
                       Confirm Password
                     </span>
                   </label>
@@ -198,7 +198,7 @@ const Registration = () => {
                     type={showPass ? "text" : "password"}
                     name="confirmPassword"
                     placeholder="Enter your password"
-                    className="input input-bordered text-gray-700 dark:text-white"
+                    className="input input-bordered bg-[#1D232A] text-white"
                     required
                     defaultChecked
                   />
@@ -209,16 +209,16 @@ const Registration = () => {
                     className="p-2 focus:outline-none"
                   >
                     {showPass ? (
-                      <PiEyeLight className="h-5 w-5 text-gray-700 dark:text-white" />
+                      <PiEyeLight className="h-5 w-5 text-white" />
                     ) : (
-                      <PiEyeSlash className="h-5 w-5 text-gray-700 dark:text-white" />
+                      <PiEyeSlash className="h-5 w-5 text-white" />
                     )}
                   </p>
                 </div>
               </div>
               </div>
 
-              <div className="form-control col-span-6">
+              <div className="form-control col-span-6 text-white">
                 {/* file photo */}
                 <div className="form-control">
                   <label className="label">
@@ -228,21 +228,21 @@ const Registration = () => {
                     required
                     name="photo"
                     type="file"
-                    className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
+                    className="file-input file-input-bordered w-full max-w-xs bg-[#1D232A] text-white"
                   />
                 </div>
               </div>
 
               <div className="form-control col-span-6">
                 <label className="label">
-                  <span className=" text-gray-700 dark:text-white">
+                  <span className=" text-white">
                     Birth of Date
                   </span>
                 </label>
                 <input
                   type="date"
                   placeholder="Photo"
-                  className="input input-bordered text-gray-700 dark:text-white"
+                  className="input input-bordered bg-[#1D232A] text-white"
                   required
                   name="date"
                 />
@@ -282,7 +282,7 @@ const Registration = () => {
             </div>
           </form>
         </div>
-        <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">
+        <div className="flex text-white flex-col justify-center items-center">
           <div className="mt-7 mb-4 text-center">
             <h4 className="text-base">
               <span className="opacity-90">Don't have an account yet?</span>{" "}
@@ -292,7 +292,7 @@ const Registration = () => {
             </h4>
           </div>
           <div className="opacity-70">
-            <ul className="flex gap-6 items-center justify-center text-gray-700 dark:text-white ">
+            <ul className="flex gap-6 items-center justify-center text-white ">
               <Link href="/">
                 <li>Home</li>
               </Link>

@@ -8,7 +8,7 @@ const NavLink = ({ href, icon, title }) => {
   return (
     <Link href={href}>
       <div
-        className={`flex items-center justify-center text-indigo-200/90 hover:text-gray-300 transition duration-300 relative relative-group`}
+        className={`flex items-center justify-center text-white/90 hover:text-gray-300 transition duration-300 relative relative-group`}
       >
         <span className="mr-1">{icon}</span>
         {title}

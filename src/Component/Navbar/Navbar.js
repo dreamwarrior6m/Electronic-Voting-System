@@ -196,32 +196,33 @@ const Nav = () => {
             </span>
             DVS
           </Link>
-          <div className=" md:hidden text-white ">
-            {user && <Notification />}
+
+          <div className=" md:hidden text-white/90">
+          {user &&  <Notification /> 
+          }
           </div>
           <div className=" md:hidden">
- 
-            {user && (
-              <div className="dropdown dropdown-end md:ml-2 ml-5">
-                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                  <div className=" rounded-full border-[2px] border-gray-300">
-                    {user && (
-                      <Image
-                        width={20}
-                        height={20}
-                        alt="User Profile"
-                        src={user?.photoURL ? user?.photoURL : userProfile}
-                      />
-                    )}
-                  </div>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
-                >
-                  <div className="">
-                    {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
- 
+          {user && (
+            <div className="dropdown dropdown-end md:ml-2 ml-5">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className=" rounded-full border-[2px] border-white/90">
+                  {user && (
+                    <Image
+                      width={20}
+                      height={20}
+                      alt="User Profile"
+                      src={user?.photoURL ? user?.photoURL : userProfile}
+                    />
+                  )}
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[100] p-4 shadow bg-gray-700/95 text-white/90 rounded-box w-48 mt-4"
+              >
+                <div className="">
+                  {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
+
 
                     <li>
                       <Link href="/dashboard/home">dashboard</Link>
@@ -243,7 +244,7 @@ const Nav = () => {
               whileTap={{ scale: 0.9 }}
             >
               {open ? (
-                <FiX onClick={closeMenu} className="text-2xl text-white" />
+                <FiX onClick={closeMenu} className="text-2xl text-white/90" />
               ) : (
                 <FiMenu className="text-2xl text-white/90" />
               )}
@@ -276,7 +277,7 @@ const Nav = () => {
           )} */}
           {user && (
             <motion.li
-              className="mt-2 text-white md:mt-0 md:ml-4 ml-8 hidden md:block"
+              className="mt-2 text-white/90 md:mt-0 md:ml-4 ml-8 hidden md:block"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -287,7 +288,7 @@ const Nav = () => {
           {user && (
             <div className="dropdown dropdown-end md:ml-2 ml-5  hidden md:block">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full border-[2px] border-gray-300">
+                <div className="w-10 rounded-full border-[2px] border-white/90">
                   {user && (
                     <Image
                       width={40}

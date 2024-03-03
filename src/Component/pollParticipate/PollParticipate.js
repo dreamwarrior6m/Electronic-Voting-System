@@ -149,7 +149,7 @@ const PollParticipate = () => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "You already voted",
+        title: "Unsuccessful",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -168,7 +168,7 @@ const PollParticipate = () => {
   };
 
   return (
-    <Protected>
+
       <div className="text-white min-h-screen pt-12">
         <div className="text-white p-5  pt-12">
           <div className="bg-gray-800 md:w-3/4 mx-auto rounded-md">
@@ -275,7 +275,7 @@ const PollParticipate = () => {
           </div>
         </div>
       </div>
-    </Protected>
+    
   );
 };
 

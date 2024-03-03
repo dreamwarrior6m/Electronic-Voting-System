@@ -2,7 +2,7 @@ import React from "react";
 
 const Statistics = () => {
   return (
-    <div className="max-w-7xl mx-auto pt-12 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto pt-12 pb-12 px-4 sm:px-6 lg:px-8">
       <p className="text-center text-sm font-semibold uppercase text-indigo-200/70 tracking-wide">
         Trusted by over 1,500,000 users worldwide
       </p>
