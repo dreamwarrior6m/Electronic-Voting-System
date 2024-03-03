@@ -81,9 +81,9 @@ const Nav = () => {
       .catch((error) => console.error(error));
   };
 
-  const handleSupportClick = () => {
-    setShowModal(true);
-  };
+  // const handleSupportClick = () => {
+  //   setShowModal(true);
+  // };
 
   const Links = [
     {
@@ -267,13 +267,13 @@ const Nav = () => {
               <NavLink href={link.path} icon={link.icon} title={link.title} />
             </motion.li>
           ))}
-          {users?.isRole == "user" || users?.isRole == "Modarator" ? (
+          {/* {users?.isRole == "user" || users?.isRole == "Modarator" ? (
             <button onClick={() => handleSupportClick()} className="text-white">
               Support
             </button>
           ) : (
             []
-          )}
+          )} */}
           {user && (
             <motion.li
               className="mt-2 text-white md:mt-0 md:ml-4 ml-8 hidden md:block"
@@ -318,7 +318,7 @@ const Nav = () => {
           )}
         </ul>
       </div>
-      {showModal && (
+      {/* {showModal && (
         <div className="fixed inset-0 z-50 flex items-center text-white justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
           <div className="relative w-auto max-w-3xl mx-auto">
             <button
@@ -344,7 +344,7 @@ const Nav = () => {
             </form>
           </div>
         </div>
-      )}
+      )} */}
     </motion.nav>
   );
 };

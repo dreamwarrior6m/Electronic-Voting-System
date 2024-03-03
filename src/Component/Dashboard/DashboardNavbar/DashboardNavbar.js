@@ -7,11 +7,13 @@ import { useEffect, useState } from "react";
 import "./DashboardNavbar.css";
 import { FaRegCopy } from "react-icons/fa";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const DashboardNavbar = () => {
   const { user } = useAuth();
   const [openProfile, setOpenProfile] = useState(false);
   const [users, setusers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   // user in the mongodb not firebase
   useEffect(() => {
@@ -57,6 +59,50 @@ const DashboardNavbar = () => {
       });
   };
 
+  const handleSupportClick = () => {
+    setShowModal(true);
+  };
+
+  const handleAdminFeedback = async (e) => {
+    console.log(e.target);
+    e.preventDefault();
+    const form = e.target;
+    const feedback = form?.feedback.value;
+    const userName = user?.displayName;
+    const email = user?.email;
+    const adminFeedback = { feedback, userName, email };
+    console.log(adminFeedback);
+
+    axios
+      .post("https://evs-delta.vercel.app/admin-feedback", adminFeedback)
+      .then((res) => {
+        // console.log(res);
+        // router.push(`/admin-feedback/${userName}`);
+        console.log('data-',res?.data?.acknowledged)
+        if (res?.data?.acknowledged == true) {
+          setShowModal(false);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: 'Your message sent',
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }else{
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: 'There is a Problem',
+            showConfirmButton: false,
+            timer: 1000,
+          });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <>
       <div className="text-white/90 flex justify-center lg:justify-end items-center relative">
@@ -73,12 +119,17 @@ const DashboardNavbar = () => {
             </button>
           </div>
         </div> */}
-        <div>
-
-        </div>
+        <div></div>
         <div className="flex items-center gap-4 bg-blue-200/15 p-1.5 px-6 rounded-md">
-
-          <MdOutlineChat size={25} className="text-white"/>
+          {/* <MdOutlineChat size={25} className="text-white"/>
+           */}
+          {users?.isRole == "user" || users?.isRole == "Modarator" ? (
+            <button onClick={() => handleSupportClick()} className="text-white">
+              Support
+            </button>
+          ) : (
+            []
+          )}
 
           <Notification />
           <Image
@@ -195,6 +246,34 @@ const DashboardNavbar = () => {
             </ul>
           </div>
         </div>
+        {showModal && (
+          <div className="fixed inset-0 z-50 flex items-center text-white justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+            <div className="relative w-auto max-w-3xl mx-auto">
+              <button
+                className="absolute -right-3 -top-5 text-white"
+                onClick={() => setShowModal(false)}
+              >
+                X
+              </button>
+              <form
+                onSubmit={handleAdminFeedback}
+                className="w-96 bg-gray-700 p-4 rounded-md"
+              >
+                <h3 className="font-bold text-lg mb-4">Send your message on admin!</h3>
+                <textarea
+                  placeholder="Your Text"
+                  type="text"
+                  required
+                  name="feedback"
+                  className="textarea textarea-bordered textarea-md w-full max-w-lg"
+                ></textarea>
+                <div className="card-actions justify-center mt-4">
+                  <button className="btn btn-sm btn-primary">Send</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
