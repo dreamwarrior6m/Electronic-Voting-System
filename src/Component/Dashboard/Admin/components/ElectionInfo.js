@@ -185,8 +185,8 @@ const ElectionInfo = ({ election, refetch }) => {
       </div>
       <Image
         className="rounded-full w-[110px] h-[110px] object-cover"
-        width={110}
-        height={110}
+        width={300}
+        height={300}
         alt="logo"
         src={election?.photo}
       />
