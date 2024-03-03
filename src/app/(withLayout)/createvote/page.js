@@ -166,33 +166,33 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="my-10 text-white pt-8">
+      <div className="my-10 text-white pt-[80px]">
         <div>
           <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
-            <div className="py-6 lg:p-7 bg-[#f1faee] border-gray-200 lg:rounded-xl shadow-2xl dark:bg-gray-800 dark:border-gray-700">
+            <div className="py-6 lg:p-7 lg:border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
               <h3 className="text-4xl font-bold text-center">DVS</h3>
               <h3 className="text-xl font-bold text-center">
                 Digital Voting System
               </h3>
 
-              <form onSubmit={handleCreate} className="card-body">
+              <form onSubmit={handleCreate} className=" ">
                 <div className="">
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Organization
                         </span>
                       </label>
                       <input
                         type="text"
                         placeholder="Organization Name"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="OrganizatonName"
                       />
                     </div>
-                    <div className="form-control w-full">
+                    <div className="form-control w-full ">
                       <label className="label">
                         <span className=" text-white ">
                           Upload Photo
@@ -202,7 +202,7 @@ const page = () => {
                         required
                         name="photo"
                         type="file"
-                        className="file-input file-input-bordered w-full max-w-xs"
+                        className="file-input file-input-bordered w-full bg-[#1D232A] text-white"
                       />
                     </div>
                   </div>
@@ -210,14 +210,14 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           User Name
                         </span>
                       </label>
                       <input
                         type="text"
                         placeholder="User Name must unique"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="name"
                       />
@@ -225,12 +225,12 @@ const page = () => {
 
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Select Organization Type
                         </span>
                       </label>
                       <select
-                        className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2"
+                        className="input input-bordered py-2 rounded-sm border-blue-500 border-l-8 mb-2 bg-[#1D232A] text-white"
                         name="Type"
                         id=""
                       >
@@ -244,28 +244,28 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Start Date
                         </span>
                       </label>
                       <input
                         type="date"
                         placeholder="Start Date"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="startDate"
                       />
                     </div>
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Start Time
                         </span>
                       </label>
                       <input
                         type="time"
                         placeholder="Start Time"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="startTime"
                       />
@@ -275,28 +275,28 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           End Date
                         </span>
                       </label>
                       <input
                         type="date"
                         placeholder="End Date"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="endDate"
                       />
                     </div>
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           End Time
                         </span>
                       </label>
                       <input
                         type="time"
                         placeholder="End Time"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         required
                         name="endTime"
                       />
@@ -306,7 +306,7 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Your E-mail
                         </span>
                       </label>
@@ -315,13 +315,13 @@ const page = () => {
                         disabled
                         type="email"
                         placeholder="Enter Your Email"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                         name="email"
                       />
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text dark:text-white">
+                        <span className="label-text text-white">
                           Your Name
                         </span>
                       </label>
@@ -330,7 +330,7 @@ const page = () => {
                         disabled
                         defaultValue={user?.displayName}
                         placeholder="Your name"
-                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 "
+                        className="input input-bordered p-2 rounded-sm border-l-8 border-blue-500 bg-[#1D232A] text-white"
                       />
                     </div>
                   </div>

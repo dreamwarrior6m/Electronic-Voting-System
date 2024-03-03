@@ -122,7 +122,7 @@ const Notification = ({ classes }) => {
         className="flex justify-center items-center"
         onClick={handleToggleOpen}
       >
-        <MdNotifications className="text-indigo-200/70" size={26} />
+        <MdNotifications className="text-white/90" size={26} />
         <div
           className={`absolute -mt-[22px] ml-5 ${newStatus ? "" : "hidden"}`}
         >
