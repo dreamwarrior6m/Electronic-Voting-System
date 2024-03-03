@@ -144,70 +144,72 @@ const Participate = () => {
       filterUndreUser?.[0]?.isverify == "true" &&
       filterAllElections?.[0]?.position == true
     ) {
-      fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`, {
-        credentials: 'include',
-      })
-        .then((res) => res.json())
-        .then(async(data) => {
-          // console.log(data);
-          const updateVot =await data?.voteCount;
-          console.log(updateVot)
-          const updateVoteCount2 = updateVot + 1;
-          const updateVoteCount = { updateVoteCount2 };
-          console.log(updateVot)
-          console.log(updateVoteCount);
+      axios.get(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`,{withCredentials: true})
+      .then(async(data) => {
+        console.log(data?.data);
+        const updateVot =await data?.data?.voteCount;
+        console.log(updateVot)
+        const updateVoteCount2 = updateVot + 1;
+        const updateVoteCount = { updateVoteCount2 };
+        console.log(updateVot)
+        console.log(updateVoteCount);
 
-          // add vote number
-          axios
-            .patch(
-              `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
-              updateVoteCount
-            )
-            .then((res) => {
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Voted successfully",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-
-              setIsModalOpen(true)
-              // console.log(res);
-              // participate api update
-              axios
-                .post(
-                  "https://evs-delta.vercel.app/participate",
-                  updateParticipate
-                )
-                .then((res) => {
-                  console.log("partcipate", res);
-                })
-                .catch((err) => {
-                  console.error("participate", err);
-                });
-            })
-            .catch((err) => {
-              // console.error(err);
-              Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: "You are not verified user",
-                showConfirmButton: false,
-                timer: 1500,
-              });
-            })
-            .catch((err) => {
-              // console.error(err);
-              Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: "You are not verified user",
-                showConfirmButton: false,
-                timer: 1500,
-              });
+        // add vote number
+        axios
+          .patch(
+            `https://evs-delta.vercel.app/candidate/${selectCandidateId}`,
+            updateVoteCount
+          )
+          .then((res) => {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Voted successfully",
+              showConfirmButton: false,
+              timer: 1500,
             });
-        });
+
+            setIsModalOpen(true)
+            // console.log(res);
+            // participate api update
+            axios
+              .post(
+                "https://evs-delta.vercel.app/participate",
+                updateParticipate
+              )
+              .then((res) => {
+                console.log("partcipate", res);
+              })
+              .catch((err) => {
+                console.error("participate", err);
+              });
+          })
+          .catch((err) => {
+            // console.error(err);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "You are not verified user",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          })
+          .catch((err) => {
+            // console.error(err);
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: "You are not verified user",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          });
+      });
+      // fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`, {
+      //   credentials: 'include',
+      // })
+      //   .then((res) => res.json())
+       
     } else {
       Swal.fire({
         position: "top-end",

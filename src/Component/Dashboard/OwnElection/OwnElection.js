@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/firebase/config";
 import Swal from "sweetalert2";
 import ModaProtected from "@/Component/Protected/ModaProtected";
+import { UploadImage } from "@/Component/shareComponent/utilites";
 
 const OwnElection = () => {
   const [user] = useAuthState(auth);
@@ -110,18 +111,21 @@ const OwnElection = () => {
     });
   };
 
-  const handleUpdate = (event) => {
+  const handleUpdate =async (event) => {
     event.preventDefault();
     const form = event.target;
     const OrganizatonName = form.OrganizatonName.value;
     const Type = form.Type.value;
     const name = form.voteName.value;
-    const photo = form.photo.value;
+    // const photo = form.photo.value;
     const startDate = form.startDate.value;
     const startTime = form.startTime.value;
     const endDate = form.endDate.value;
     const endTime = form.endTime.value;
     const electionId = form.electionId.value;
+    const image = form.photo.files[0];
+    const imageData =await UploadImage(image);
+    const photo = imageData?.data?.display_url;
 
     const obj = {
       OrganizatonName,
@@ -133,7 +137,7 @@ const OwnElection = () => {
       startDate,
       startTime,
     };
-    console.log(electionId);
+    console.log(obj);
     axios
       .put(`https://evs-delta.vercel.app/create-vote/update/${electionId}`, obj)
       .then((res) => {
@@ -193,8 +197,14 @@ const OwnElection = () => {
             >
               <div className="space-y-1 lg:grid lg:grid-cols-12 py-3 lg:items-center lg:justify-center font-medium mb-4">
                 <p className="col-span-1">{index + 1}</p>
-                <p className="col-span-3"><span className="text-xs lg:hidden">Organization Name: </span>{election?.OrganizatonName}</p>
-                <p className="col-span-3"><span className="text-xs lg:hidden">Election Name: </span>{election?.name}</p>
+                <p className="col-span-3">
+                  <span className="text-xs lg:hidden">Organization Name: </span>
+                  {election?.OrganizatonName}
+                </p>
+                <p className="col-span-3">
+                  <span className="text-xs lg:hidden">Election Name: </span>
+                  {election?.name}
+                </p>
                 <div className="col-span-1">
                   <Timer
                     startDate1={`${election?.startDate}T${election?.startTime}`}
@@ -291,9 +301,9 @@ const OwnElection = () => {
                           readOnly
                         />
                       </div>
-                      <div className="form-control">
+                      {/* <div className="form-control">
                         <label className="label">
-                          <span className=" text-white">Organization Logo</span>
+                          <span className=" text-white">Organization Logo </span>
                         </label>
                         <input
                           type="text"
@@ -302,6 +312,17 @@ const OwnElection = () => {
                           required
                           defaultValue={election.photo}
                           name="photo"
+                        />
+                      </div> */}
+                      <div className="form-control">
+                        <label className="label">
+                          <span className=" text-white">Upload Photo</span>
+                        </label>
+                        <input
+                          required
+                          name="photo"
+                          type="file"
+                          className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
                         />
                       </div>
                       <div className="form-control">

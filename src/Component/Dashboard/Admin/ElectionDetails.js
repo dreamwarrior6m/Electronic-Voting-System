@@ -231,6 +231,33 @@ const ElectionDetails = () => {
     });
   };
 
+  const handleFinishedElection = (id) => {
+    console.log(id);
+    const position = filterElection[0]?.position;
+    const isFinished = true;
+    const isSystemFinished = {position, isFinished };
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to stop this Elections",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Stope it!",
+    }).then((res) => {
+      if (res?.isConfirmed) {
+        axios
+          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemFinished)
+          .then((res) => {
+            console.log(res?.data);
+          })
+          .catch((err) => console.error(err));
+        console.log("ok", id);
+        refetch();
+      }
+    });
+  };
+
   return (
     <div className="">
       {(ElectionInfoProtract || userRoles?.isRole === "Admin") && (
@@ -291,6 +318,19 @@ const ElectionDetails = () => {
                     </button>
                   </div>
                 )}
+              </div>
+
+              {/* Finished Elections */}
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-semibold text-green-500">
+                  Finished This Elections
+                </h2>
+                <button
+                  onClick={() => handleFinishedElection(filterElection[0]?._id)}
+                  className="btn btn-primary btn-sm"
+                >
+                  Finished
+                </button>
               </div>
             </div>
           </div>

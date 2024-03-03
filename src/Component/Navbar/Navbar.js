@@ -1,74 +1,40 @@
-"use client"
-import { useState, useEffect } from "react";
-import { IoIosCube, IoIosLogIn, IoMdInformationCircle, IoIosConstruct, IoMdHome } from "react-icons/io";
-import { FiMenu, FiX } from "react-icons/fi";
-import { motion, useAnimation } from "framer-motion";
-import Link from "next/link";
-import Notification from "../Notification/Notification";
-import Image from "next/image";
+"use client";
 import useAuth from "@/app/hook/useAuth";
-import NavLink from "./NavLink/Navlink";
-import { BsCardText } from "react-icons/bs";
 import axios from "axios";
-
+import { motion, useAnimation } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BiSupport } from "react-icons/bi";
+import { BsCardText } from "react-icons/bs";
+import { FiMenu, FiX } from "react-icons/fi";
+import {
+  IoIosConstruct,
+  IoIosCube,
+  IoIosLogIn,
+  IoMdHome,
+  IoMdInformationCircle,
+} from "react-icons/io";
+import Notification from "../Notification/Notification";
+import NavLink from "./NavLink/Navlink";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
-  const Links = [
-    {
-      id: 1,
-      path: "/",
-      title: "Home",
-      icon: <IoMdHome />,
-    },
-    {
-      id: 2,
-      path: "/show-all-vote",
-      title: "Elections",
-      icon: <BsCardText />,
-    },
-    {
-      id: 3,
-      path: "/about",
-      title: "About",
-      icon: <IoMdInformationCircle />,
-    },
-    // {
-    //   id: 4,
-    //   path: "/service",
-    //   title: "Services",
-    //   icon: <IoIosConstruct />,
-    // },
-    {
-      id: 5,
-      path: "/createvote",
-      title: "Create Election",
-      icon: <IoIosCube />,
-    },
-    ...(user
-      ? []
-      : [
-          {
-            id: 6,
-            path: "/login",
-            title: "Log In",
-            icon: <IoIosLogIn />,
-          },
-        ]),
-  ];
-
+ 
   const [open, setOpen] = useState(false);
   const controls = useAnimation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
   const [users, setusers] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (user?.email) {
           const res = await axios.get(
-            `https://evs-delta.vercel.app/users/${user?.email}`,{
+            `https://evs-delta.vercel.app/users/${user?.email}`,
+            {
               withCredentials: true,
             }
           );
@@ -109,13 +75,104 @@ const Nav = () => {
     };
   }, [prevScrollPos, controls]);
 
-  const closeMenu = () => setOpen(false);
-
   const handleLogOut = () => {
     logOut()
       .then((res) => console.log(res))
       .catch((error) => console.error(error));
   };
+
+  // const handleSupportClick = () => {
+  //   setShowModal(true);
+  // };
+
+  const Links = [
+    {
+      id: 1,
+      path: "/",
+      title: "Home",
+      icon: <IoMdHome />,
+    },
+    {
+      id: 2,
+      path: "/show-all-vote",
+      title: "Elections",
+      icon: <BsCardText />,
+    },
+    {
+      id: 3,
+      path: "/about",
+      title: "About",
+      icon: <IoMdInformationCircle />,
+    },
+    {
+      id: 5,
+      path: "/createvote",
+      title: "Create Election",
+      icon: <IoIosCube />,
+    },
+    // ...(user && users?.isRole == "user" || user && users?.isRole == "Modarator"
+    //   ? [
+    //       {
+    //         id: 6,
+    //         path: "/adminHelp",
+    //         title: "Support",
+    //         icon: <BiSupport />,
+    //         onClick: ()=>handleSupportClick(),
+    //       },
+    //     ]
+    //   : []),
+
+    ...(user
+      ? []
+      : [
+          {
+            id: 7,
+            path: "/login",
+            title: "Log In",
+            icon: <IoIosLogIn />,
+          },
+        ]),
+  ];
+
+  const handleAdminFeedback = async (e) => {
+    console.log(e.target);
+    e.preventDefault();
+    const form = e.target;
+    const feedback = form?.feedback.value;
+    const userName = user?.displayName;
+    const email = user?.email;
+    const adminFeedback = { feedback, userName, email };
+    console.log(adminFeedback);
+
+    axios
+      .post("https://evs-delta.vercel.app/admin-feedback", adminFeedback)
+      .then((res) => {
+        console.log(res);
+        withCredentials: true, router.push(`/admin-feedback/${userName}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  // const handleAdminFeedback = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const feedback = form?.feedback.value;
+  //   const userName = user?.displayName;
+  //   const email = user?.email;
+  //   const adminFeedback = { feedback, userName, email };
+  //   console.log(adminFeedback);
+
+  //   try {
+  //     const res = axios.post("https://evs-delta.vercel.app/admin-feedback", adminFeedback, {
+  //       withCredentials: true
+  //     });
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <motion.nav
@@ -139,6 +196,7 @@ const Nav = () => {
             </span>
             DVS
           </Link>
+
           <div className=" md:hidden text-white/90">
           {user &&  <Notification /> 
           }
@@ -165,17 +223,18 @@ const Nav = () => {
                 <div className="">
                   {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
 
-                  <li>
-                    <Link href="/dashboard/home">dashboard</Link>
-                  </li>
 
-                  <li>
-                    <button onClick={handleLogOut}>Log Out</button>
-                  </li>
-                </div>
-              </ul>
-            </div>
-          )}
+                    <li>
+                      <Link href="/dashboard/home">dashboard</Link>
+                    </li>
+
+                    <li>
+                      <button onClick={handleLogOut}>Log Out</button>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            )}
           </div>
           <div className="md:hidden ml-2">
             <motion.div
@@ -191,7 +250,6 @@ const Nav = () => {
               )}
             </motion.div>
           </div>
-
         </motion.div>
 
         <ul
@@ -210,6 +268,13 @@ const Nav = () => {
               <NavLink href={link.path} icon={link.icon} title={link.title} />
             </motion.li>
           ))}
+          {/* {users?.isRole == "user" || users?.isRole == "Modarator" ? (
+            <button onClick={() => handleSupportClick()} className="text-white">
+              Support
+            </button>
+          ) : (
+            []
+          )} */}
           {user && (
             <motion.li
               className="mt-2 text-white/90 md:mt-0 md:ml-4 ml-8 hidden md:block"
@@ -254,6 +319,33 @@ const Nav = () => {
           )}
         </ul>
       </div>
+      {/* {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center text-white justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
+          <div className="relative w-auto max-w-3xl mx-auto">
+            <button
+              className="absolute -right-3 -top-5 text-white"
+              onClick={() => setShowModal(false)}
+            >
+              X
+            </button>
+            <form
+              onSubmit={handleAdminFeedback}
+              className="w-96 bg-gray-700 p-4 rounded-md"
+            >
+              <h3 className="font-bold text-lg mb-4">Hello!</h3>
+              <textarea
+                placeholder="Your Text"
+                type="text"
+                name="feedback"
+                className="textarea textarea-bordered textarea-md w-full max-w-lg"
+              ></textarea>
+              <div className="card-actions justify-center mt-4">
+                <button className="btn btn-sm btn-primary">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )} */}
     </motion.nav>
   );
 };

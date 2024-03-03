@@ -12,8 +12,10 @@ const createPoll = () => {
   const { user } = useAuth();
   const wonerEmail = user?.email;
   const router = useRouter();
+
   console.log(wonerEmail);
   const handleCreatePoll = async (e) => {
+    console.log(e.target);
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
@@ -61,6 +63,7 @@ const createPoll = () => {
         console.error("There was an error!", error);
       });
   };
+
   return (
     <Protected>
       <div className="dark:text-white">

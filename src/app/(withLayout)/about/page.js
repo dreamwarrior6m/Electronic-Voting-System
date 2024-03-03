@@ -46,9 +46,9 @@ const About = () => {
             </span>
           </p>
         </div>
-        <div className="my-8">
+        <div className="my-20">
           <h1 className="text-2xl font-semibold">Our Team</h1>
-          <div className="avatar my-8">
+          {/* <div className="avatar my-8">
             <div className="w-48 rounded-full">
               <Image
                 width={100}
@@ -59,7 +59,131 @@ const About = () => {
             </div>
           </div>
           <h1 className="text-xl font-semibold opacity-85">Dream Warrior</h1>
-          <h1 className="text-base opacity-50 py-0.5">Founder & CEO</h1>
+          <h1 className="text-base opacity-50 py-0.5">Founder & CEO</h1> */}
+
+          <div className="text-white">
+            <div className=" my-4 flex justify-center items-center">
+              <div className="flex flex-col gap-2 justify-center items-center">
+                <a
+                  className="flex flex-col justify-center items-center hover:text-blue-500"
+                  target="_blank"
+                  href="https://anamul-portfolio.surge.sh/"
+                >
+                  <div className="w-32 rounded-full">
+                    <Image
+                      width={300}
+                      height={300}
+                      alt="Tea"
+                      className="rounded-full"
+                      src="https://i.ibb.co/161dhbQ/Anamul.jpg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h2 className="font-semibold">
+                      Anamul Haque{" "}
+                      <span className="text-gray-400">[Leader]</span>
+                    </h2>
+                    <h2 className="text-sm text-gray-400">
+                      MERN stack engineer
+                    </h2>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div className=" my-4 flex justify-around items-center">
+            
+              <div className="flex flex-col gap-2 justify-center items-center">
+              <a
+                  className="flex flex-col justify-center items-center hover:text-blue-500"
+                  target="_blank"
+                  href="https://my-portfolio-site-1.web.app/"
+                >
+                <div className="w-32 rounded-full">
+                  <Image
+                    width={300}
+                    height={300}
+                    alt=""
+                    className="rounded-full"
+                    src="https://i.ibb.co/N6CNRNL/md-mahsin-mia2-1.jpg"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="font-semibold">Md Mahsin Mia</h2>
+                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
+                </div>
+                  </a>
+              </div>
+
+              <div className="flex flex-col gap-2 justify-center items-center">
+              <a
+                  className="flex flex-col justify-center items-center hover:text-blue-500"
+                  target="_blank"
+                  href="https://junayet73.netlify.app/"
+                >
+                <div className="w-32 rounded-full">
+                  <Image
+                    width={300}
+                    height={300}
+                    alt="Team CEO"
+                    className="rounded-full"
+                    src="https://i.ibb.co/pRzNz09/1708497619001.jpg"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="font-semibold">Junayet Shiblu</h2>
+                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
+                </div>
+                  </a>
+              </div>
+            </div>
+
+            <div className=" my-4 flex justify-between items-center px-5">
+              <div className="flex flex-col gap-2 justify-center items-center">
+              <a
+                  className="flex flex-col justify-center items-center hover:text-blue-500"
+                  target="_blank"
+                  href="https://chandon.netlify.app/"
+                >
+                <div className="w-32 rounded-full">
+                  <Image
+                    width={300}
+                    height={300}
+                    alt="Team CEO"
+                    className="rounded-full"
+                    src="https://i.postimg.cc/2y7gZRp9/chandon-kumar.png"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="font-semibold">Chandon Kumar</h2>
+                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
+                </div>
+                  </a>
+              </div>
+
+              <div className="flex flex-col gap-2 justify-center items-center">
+              <a
+                  className="flex flex-col justify-center items-center hover:text-blue-500"
+                  target="_blank"
+                  href="https://personal-portfolio-49577.web.app/"
+                >
+                <div className="w-32 rounded-full">
+                  <Image
+                    width={300}
+                    height={300}
+                    alt="Team CEO"
+                    className="rounded-full"
+                    src="https://i.ibb.co/Zg03hVq/1704042718127.jpg"
+                  />
+                </div>
+                <div className="text-center">
+                  <h2 className="font-semibold">MD. Jahangir Alam</h2>
+                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
+                </div>
+                  </a>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="my-8">
           <h1 className="text-2xl font-semibold">General Information</h1>
