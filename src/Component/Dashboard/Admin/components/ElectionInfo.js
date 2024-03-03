@@ -1,3 +1,4 @@
+import { UploadImage } from "@/Component/shareComponent/utilites";
 import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import Image from "next/image";
@@ -69,12 +70,16 @@ const ElectionInfo = ({ election, refetch }) => {
     const form = event.target;
     const candidateName = form.candidateName.value;
     const candidateID = form.candidateID.value;
-    const candidatePhoto = form.candidatePhoto.value;
+    // const candidatePhoto = form.candidatePhoto.value;
+    const image = form.photo.files[0];
     const candidateEmail = form.candidateEmail.value;
     const brand = form.brand.value;
     const moderatorEmail = form.moderatorEmail.value;
     const voteName = form.electionName.value;
     const voteCount = 0;
+
+    const imageData =await UploadImage(image);
+    const candidatePhoto = imageData?.data?.display_url;
 
     const candidate = {
       candidateName,
@@ -87,7 +92,7 @@ const ElectionInfo = ({ election, refetch }) => {
       voteCount,
     };
 
-    // console.log(candidate);
+    console.log(candidate);
 
     axios
       .post(`https://evs-delta.vercel.app/candidate`, candidate)
@@ -229,7 +234,7 @@ const ElectionInfo = ({ election, refetch }) => {
                   </div>
                 </div>
                 <div>
-                  <div className="form-control">
+                  {/* <div className="form-control">
                     <label className="label">
                       <span className=" text-white text-base">
                         Upload Candidate Photo
@@ -237,12 +242,24 @@ const ElectionInfo = ({ election, refetch }) => {
                     </label>
                     <input
                       required
-                      name="candidatePhoto"
+                      // name="candidatePhoto"
+                      name="photo"
                       type="text"
                       className=" input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
                       placeholder="Enter photo link"
                     />
-                  </div>
+                  </div> */}
+                  <div className="form-control">
+                  <label className="label">
+                    <span className=" text-white text-base">Upload Candidate Photo</span>
+                  </label>
+                  <input
+                    required
+                    name="photo"
+                    type="file"
+                    className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
+                  />
+                </div>
                 </div>
                 <div>
                   <div className="form-control">

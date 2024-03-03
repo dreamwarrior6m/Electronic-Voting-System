@@ -25,17 +25,10 @@ const Links = () => {
       title: "About",
     },
     {
-      id: 4,
-      path: "/service",
-      title: "Service",
-    },
-
-    {
       id: 5,
       path: "/createvote",
       title: "Create a Election",
     },
-
     ...(user
       ? []
       : [

@@ -137,7 +137,7 @@ const page = () => {
         Swal.fire({
           position: "top-end",
           icon: "error",
-          title: "There is a problem",
+          title: "User-name must be unique",
           showConfirmButton: false,
           timer: 2000,
         });

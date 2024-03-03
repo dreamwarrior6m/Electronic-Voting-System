@@ -105,12 +105,6 @@ const Nav = () => {
       icon: <IoMdInformationCircle />,
     },
     {
-      id: 4,
-      path: "/service",
-      title: "Services",
-      icon: <IoIosConstruct />,
-    },
-    {
       id: 5,
       path: "/createvote",
       title: "Create Election",
