@@ -15,6 +15,7 @@ import {
   MdPeople,
 } from "react-icons/md";
 import { GoMultiSelect } from "react-icons/go";
+import { VscFeedback } from "react-icons/vsc";
 
 const SideNav = ({ children }) => {
   const location = usePathname();
@@ -118,9 +119,9 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <GiVote className="text-2xl group-hover:text-white/90 " />
-                <h3 className=" text-white/90  font-semibold">All Election</h3>
+                <h3 className=" text-white/90  font-semibold">Elections</h3>
               </Link>
-              <Link
+              {/* <Link
                 href="/dashboard/Candidate"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white/90  p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200 ${
                   location === "/dashboard/Candidate"
@@ -130,7 +131,7 @@ const SideNav = ({ children }) => {
               >
                 <FaUsers className="text-2xl group-hover:text-white/90 " />
                 <h3 className="text-white/90  font-semibold">All Candidate</h3>
-              </Link>
+              </Link> */}
               <Link
                 href="/dashboard/allPoll"
                 className={`flex mb-2 justify-start items-center gap-4 px-5 text-white/90  p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200  ${
@@ -140,7 +141,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <GoMultiSelect className="text-2xl " />
-                <h3 className="font-semibold">All Poll</h3>
+                <h3 className="font-semibold">Polls</h3>
               </Link>
               <Link
                 href="/dashboard/allVoter"
@@ -151,7 +152,7 @@ const SideNav = ({ children }) => {
                 }`}
               >
                 <MdPeople className="text-2xl group-hover:text-white/90 " />
-                <h3 className=" text-white/90  font-semibold">All User</h3>
+                <h3 className=" text-white/90  font-semibold">Users</h3>
               </Link>
               <Link
                 href="/dashboard/showMessage"
@@ -161,8 +162,8 @@ const SideNav = ({ children }) => {
                     : "text-gray-800"
                 }`}
               >
-                <MdPeople className="text-2xl group-hover:text-white" />
-                <h3 className=" text-white font-semibold">Show Feedback</h3>
+                <VscFeedback className="text-2xl group-hover:text-white" />
+                <h3 className=" text-white font-semibold">Feedbacks</h3>
               </Link>
             </>
           )}
@@ -191,7 +192,7 @@ const SideNav = ({ children }) => {
         <Link href="/" className=" w-full" onClick={() => signOut(auth)}>
           <div className="flex mb-2 justify-start items-center gap-4 px-5 text-white/90  p-2 rounded-md group cursor-pointer shadow-lg m-auto border-2 border-gray-200/10 hover:border-gray-200">
             <MdOutlineLogout className="text-2xl text-white/90  " />
-            <h3 className=" font-semibold">Logout</h3>
+            <h3 className=" font-semibold">Log Out</h3>
           </div>
         </Link>
       </div>
