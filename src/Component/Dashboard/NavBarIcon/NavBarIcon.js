@@ -56,22 +56,27 @@ const NavBarIcon = () => {
           {
             id: 3,
             path: "/dashboard/allElections",
-            title: "All Election",
+            title: "Elections",
           },
-          {
-            id: 7,
-            path: "/dashboard/Candidate",
-            title: "All Candidate",
-          },
+          // {
+          //   id: 7,
+          //   path: "/dashboard/Candidate",
+          //   title: "All Candidate",
+          // },
           {
             id: 5,
             path: "/dashboard/allPoll",
-            title: "All Poll",
+            title: "Polls",
+          },
+          {
+            id: 8,
+            path: "/dashboard/showMessage",
+            title: "Feedbacks",
           },
           {
             id: 4,
             path: "/dashboard/allVoter",
-            title: "All User",
+            title: "Users",
           },
         ]
       : []),
