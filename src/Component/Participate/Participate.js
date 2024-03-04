@@ -11,8 +11,10 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import Protected from "../Protected/Protected";
-import Rating from "react-rating";
+import { Rating } from '@smastrom/react-rating'
+import '@smastrom/react-rating/style.css'
 import './participate.css'
+import { Ratio } from "lucide-react";
 
 const Participate = () => {
   const [allCandidate, setAllCandidate] = useState();
@@ -34,6 +36,8 @@ const Participate = () => {
 
   // Modal for feedback
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rating, setRating] = useState(0)
+  console.log(rating)
   const [RouteId, setRouteID] = useState('')
   const handleSubmitFeedback = async(e) => {
     e.preventDefault();
@@ -43,7 +47,8 @@ const Participate = () => {
     const name = user.displayName;
     const email = user.email;
     const img = user.photoURL;
-    const feedback = {candiatename,message,name,email,img}
+    const ratings = rating;
+    const feedback = {candiatename,message,name,email,img,ratings}
     const res = await axios.post('http://localhost:5000/feedback',{feedback})
     if(res.data.acknowledged){
       setIsModalOpen(false)
@@ -224,17 +229,23 @@ const Participate = () => {
     <Protected>
       <div className="text-white p-5 min-h-screen">
       {
-        isModalOpen && <div className='w-96 mt-14 mx-auto relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 py-5 rounded'>
+        isModalOpen && <div className='w-96 mt-14 mx-auto relative bg-gray-700 px-8 py-5 rounded'>
         <div  onClick={toggleModal} className=" absolute top-0 right-0 bg-[#130f2a] px-2 py-1">
         <span className=" cursor-pointer" >X</span>
 
         </div>
-          <h2 className="mb-4 text-center text-2xl font-semibold text-gray-200">Feedback</h2>
+        <div className=" text-center">
+        <h2 className=" text-2xl font-semibold text-gray-200">Feedback</h2>
+        <div style={{ display: 'inline-block' }}>
+          <Rating style={{ maxWidth: 200 }} value={rating} onChange={setRating} />
+        </div>
+        </div>
+          
           <form onSubmit={handleSubmitFeedback}>
             <div className="">
-            <input className="bg-[#130f2a] mb-2 border border-[#6751b9] py-2 px-1 w-full rounded-xl" name="name" required type="text" placeholder='Enter your Candidate Name' />
+            <input className="bg-[#130f2a] px-2 mb-2 border border-[#6751b9] py-2  w-full rounded-xl" name="name" required type="text" placeholder='Enter your Candidate Name' />
             </div>
-            <textarea className="bg-[#130f2a] border border-[#6751b9] py-2 px-1 w-full rounded-xl" required name="message" placeholder='Enter your Feedback'></textarea>
+            <textarea className="bg-[#130f2a] border border-[#6751b9] py-2 px-2 w-full rounded-xl" required name="message" placeholder='Enter your Feedback'></textarea>
             <button type="submit">submit</button>
           </form>
         </div>
