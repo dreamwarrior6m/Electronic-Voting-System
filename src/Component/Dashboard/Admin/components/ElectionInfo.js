@@ -5,13 +5,17 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { IoPersonAdd } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 
 const ElectionInfo = ({ election, refetch }) => {
   const [userRoles, setUserRoles] = useState({});
   const { user } = useAuth();
+  const { id } = useParams();
+  console.log(id);
   useEffect(() => {
     axios
-      .get(`https://evs-delta.vercel.app/users/${user?.email}`,{
+      .get(`https://evs-delta.vercel.app/users/${user?.email}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -22,48 +26,6 @@ const ElectionInfo = ({ election, refetch }) => {
         console.error("There was an error!", error);
       });
   }, [user]);
-  // console.log("User: ", userRoles);
-
-  // const Timer = ({ startDate1, endDate1 }) => {
-  //   const [currentTime, setCurrentTime] = useState(new Date());
-  //   const [isSystemRunning, setSystemRunning] = useState(false);
-
-  //   // Check if the system should start or stop
-  //   useEffect(() => {
-  //     const startDateTime = new Date(startDate1).getTime();
-  //     const endDateTime = new Date(endDate1).getTime();
-
-  //     if (
-  //       currentTime.getTime() >= startDateTime &&
-  //       currentTime.getTime() <= endDateTime
-  //     ) {
-  //       // Start the system
-  //       setSystemRunning(true);
-  //     } else {
-  //       // Stop the system
-  //       setSystemRunning(false);
-  //     }
-  //   }, [currentTime, startDate1, endDate1]);
-
-  //   // Update the current time every second
-  //   useEffect(() => {
-  //     const timer = setInterval(() => {
-  //       setCurrentTime(new Date());
-  //     }, 1000);
-
-  //     // Cleanup function to clear the interval when the component is unmounted
-  //     return () => clearInterval(timer);
-  //   }, []);
-
-  //   return (
-  //     <div>
-  //       <h2>
-  //         <span className="font-bold">Current Status: </span>
-  //         {isSystemRunning ? "Running" : "Stopped"}
-  //       </h2>
-  //     </div>
-  //   );
-  // };
 
   const handleCreateCandidate = async (event) => {
     event.preventDefault();
@@ -78,7 +40,7 @@ const ElectionInfo = ({ election, refetch }) => {
     const voteName = form.electionName.value;
     const voteCount = 0;
 
-    const imageData =await UploadImage(image);
+    const imageData = await UploadImage(image);
     const candidatePhoto = imageData?.data?.display_url;
 
     const candidate = {
@@ -135,6 +97,21 @@ const ElectionInfo = ({ election, refetch }) => {
     refetch();
   };
 
+  const { data: elections = [] } = useQuery({
+    queryKey: ["electionsDetails"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://evs-delta.vercel.app/create-vote?search`
+      );
+      return res.data;
+    },
+    refetchInterval: 100,
+  });
+  console.log(elections);
+
+  const findElections = elections?.find((election) => election?._id == id);
+  console.log(findElections?.isFinished);
+
   return (
     <div className="grid grid-cols-2 text-[18px]">
       <div className="">
@@ -150,38 +127,48 @@ const ElectionInfo = ({ election, refetch }) => {
           startDate1={`${election?.startDate}T${election?.startTime}`}
           endDate1={`${election?.endDate}T${election?.endTime}`}
         /> */}
-         <p>
+        <p>
           <span className="font-bold">Email: </span> {election?.email}
         </p>
         <div className="flex items-center gap-1">
-          <h2 className="font-bold">
-            Position: 
-          </h2>
-          <h2 className="text-green-500">
-            {election?.position==true && "Running"}
-          </h2>
-          <h2 className="text-red-500">
-            {election?.position !=true && "Stop"}
-          </h2>
-        </div>
-       
-        <div>
-          {userRoles?.isRole === "Modarator" && (
+          <h2 className="font-bold">Position:</h2>
+          {findElections?.isFinished != true ? (
             <div className="">
-              <p className="mt-3 text-2xl font-bold mb-1">Create Candidate</p>
-              <button
-                onClick={() =>
-                  document
-                    .getElementById(`my_modal_3_${election._id}`)
-                    .showModal()
-                }
-                className="bg-green-500 text-white px-4 py-[10px] rounded-md"
-              >
-                <IoPersonAdd />
-              </button>
+              <h2 className="text-green-500">
+                {election?.position == true && "Running"}
+              </h2>
+              <h2 className="text-red-500">
+                {election?.position != true && "Stop"}
+              </h2>
+            </div>
+          ) : (
+            <div className="">
+              <h2 className="text-red-500">
+                 Stop
+              </h2>
             </div>
           )}
         </div>
+
+        {findElections?.isFinished != true && (
+          <div>
+            {userRoles?.isRole === "Modarator" && (
+              <div className="">
+                <p className="mt-3 text-2xl font-bold mb-1">Create Candidate</p>
+                <button
+                  onClick={() =>
+                    document
+                      .getElementById(`my_modal_3_${election._id}`)
+                      .showModal()
+                  }
+                  className="bg-green-500 text-white px-4 py-[10px] rounded-md"
+                >
+                  <IoPersonAdd />
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <Image
         className="rounded-full w-[110px] h-[110px] object-cover"
@@ -250,16 +237,18 @@ const ElectionInfo = ({ election, refetch }) => {
                     />
                   </div> */}
                   <div className="form-control">
-                  <label className="label">
-                    <span className=" text-white text-base">Upload Candidate Photo</span>
-                  </label>
-                  <input
-                    required
-                    name="photo"
-                    type="file"
-                    className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
-                  />
-                </div>
+                    <label className="label">
+                      <span className=" text-white text-base">
+                        Upload Candidate Photo
+                      </span>
+                    </label>
+                    <input
+                      required
+                      name="photo"
+                      type="file"
+                      className="file-input file-input-bordered w-full max-w-xs bg-gray-700"
+                    />
+                  </div>
                 </div>
                 <div>
                   <div className="form-control">
