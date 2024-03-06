@@ -40,10 +40,10 @@ const ElectionDetails = () => {
     },
     refetchInterval: 100,
   });
-  console.log(elections);
+  // console.log(elections);
   const filterElection = elections?.filter((election) => election?._id === id);
-  console.log(filterElection?.[0]?.email);
-  console.log(user?.email);
+  // console.log(filterElection?.[0]?.email);
+  // console.log(user?.email);
   const ElectionInfoProtract = filterElection?.[0]?.email == user?.email;
 
   // console.log(CandidateEmail);
@@ -235,10 +235,10 @@ const ElectionDetails = () => {
     console.log(id);
     const position = filterElection[0]?.position;
     const isFinished = true;
-    const isSystemFinished = {position, isFinished };
+    const isSystemFinished = { position, isFinished };
     Swal.fire({
       title: "Are you sure?",
-      text: "You want to stop this Elections",
+      text: "You want to finished this Elections",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -247,7 +247,10 @@ const ElectionDetails = () => {
     }).then((res) => {
       if (res?.isConfirmed) {
         axios
-          .patch(`https://evs-delta.vercel.app/create-vote/${id}`, isSystemFinished)
+          .patch(
+            `https://evs-delta.vercel.app/create-vote/${id}`,
+            isSystemFinished
+          )
           .then((res) => {
             console.log(res?.data);
           })
@@ -257,6 +260,8 @@ const ElectionDetails = () => {
       }
     });
   };
+
+  console.log(filterElection?.[0]?.isFinished);
 
   return (
     <div className="">
@@ -287,51 +292,58 @@ const ElectionDetails = () => {
               </div>
 
               {/* start & stop elections */}
+              {filterElection?.[0]?.isFinished != true ? (
+                <div className="">
+                  <div className="">
+                    {filterElection[0]?.position != true ? (
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-semibold text-green-500">
+                          Start This Elections
+                        </h2>
+                        <button
+                          onClick={() =>
+                            handleElectionPositionTrue(filterElection[0]?._id)
+                          }
+                          className="btn btn-primary btn-sm"
+                        >
+                          Start
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <h2 className="text-lg font-semibold text-red-500">
+                          Stop this election
+                        </h2>
+                        <button
+                          onClick={() =>
+                            handleElectionPositionFalse(filterElection[0]?._id)
+                          }
+                          className="btn btn-primary btn-sm"
+                        >
+                          Stop
+                        </button>
+                      </div>
+                    )}
+                  </div>
 
-              <div className="">
-                {filterElection[0]?.position != true ? (
-                  <div className="flex items-center gap-2">
+                  {/* Finished Elections */}
+                  <div className="flex items-center gap-2 pt-2">
                     <h2 className="text-lg font-semibold text-green-500">
-                      Start This Elections
+                      Finished This Elections
                     </h2>
                     <button
                       onClick={() =>
-                        handleElectionPositionTrue(filterElection[0]?._id)
+                        handleFinishedElection(filterElection[0]?._id)
                       }
                       className="btn btn-primary btn-sm"
                     >
-                      Start
+                      Finished
                     </button>
                   </div>
-                ) : (
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-lg font-semibold text-red-500">
-                      Stop this election
-                    </h2>
-                    <button
-                      onClick={() =>
-                        handleElectionPositionFalse(filterElection[0]?._id)
-                      }
-                      className="btn btn-primary btn-sm"
-                    >
-                      Stop
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Finished Elections */}
-              <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold text-green-500">
-                  Finished This Elections
-                </h2>
-                <button
-                  onClick={() => handleFinishedElection(filterElection[0]?._id)}
-                  className="btn btn-primary btn-sm"
-                >
-                  Finished
-                </button>
-              </div>
+                </div>
+              ) : (
+                <div className="text-red-500 text-xl font-semibold">This Elections is Finished</div>
+              )}
             </div>
           </div>
 
