@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 import { GiVote } from "react-icons/gi";
 import { IoMdHome } from "react-icons/io";
+import dvsLogo from "../../../../public/images/DVS_logo.png";
+import Image from "next/image";
 import {
   MdDashboard,
   MdOutlineLogout,
@@ -46,7 +48,7 @@ const SideNav = ({ children }) => {
     <div className="">
       <div className="flex flex-col justify-start items-center md:fixed overflow-x-hidden">
         <h1 className="font-bold text-3xl flex items-center font-[Poppins] text-white/90  mb-1">
-          DVS
+          <Image className="w-20" src={dvsLogo} alt="alt" width={200} height={200} />
         </h1>
         <h2 className="text-xl pb-5 text-center cursor-pointer font-medium text-white/90  w-full">
           Digital Voting System

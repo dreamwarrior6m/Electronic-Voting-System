@@ -17,10 +17,11 @@ import {
 } from "react-icons/io";
 import Notification from "../Notification/Notification";
 import NavLink from "./NavLink/Navlink";
+import dvsLogo from "../../../public/images/DVS_logo.png";
 
 const Nav = () => {
   const { user, logOut } = useAuth();
- 
+
   const [open, setOpen] = useState(false);
   const controls = useAnimation();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -47,7 +48,7 @@ const Nav = () => {
 
     fetchData();
   }, [user?.email]);
-  
+
   useEffect(() => {
     controls.start({ opacity: 1, y: 0 }); // Start animation after mounting
   }, [controls]);
@@ -194,7 +195,7 @@ const Nav = () => {
             <span className="text-3xl text-white/90 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
-            DVS
+            <Image className="w-16" src={dvsLogo} alt="alt" width={200} height={200} />
           </Link>
 
           <div className=" md:hidden text-white/90">
@@ -202,26 +203,27 @@ const Nav = () => {
           }
           </div>
           <div className=" md:hidden">
-          {user && (
-            <div className="dropdown dropdown-end md:ml-2 ml-5">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className=" rounded-full border-[2px] border-white/90">
-                  {user && (
-                    <Image
-                      width={20}
-                      height={20}
-                      alt="User Profile"
-                      src={user?.photoURL ? user?.photoURL : userProfile}
-                    />
-                  )}
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu dropdown-content z-[100] p-4 shadow bg-gray-700/95 text-white/90 rounded-box w-48 mt-4"
-              >
-                <div className="">
-                  {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
+
+            {user && (
+              <div className="dropdown dropdown-end md:ml-2 ml-5">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className=" rounded-full border-[2px] border-gray-300">
+                    {user && (
+                      <Image
+                        width={20}
+                        height={20}
+                        alt="User Profile"
+                        src={user?.photoURL ? user?.photoURL : userProfile}
+                      />
+                    )}
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content z-[100] p-4 shadow bg-white text-black rounded-box w-48 mt-4"
+                >
+                  <div className="">
+                    {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
 
 
                     <li>
