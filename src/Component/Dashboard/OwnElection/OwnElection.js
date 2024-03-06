@@ -185,7 +185,7 @@ const OwnElection = () => {
             <p className="col-span-2">Actions</p>
           </div>
         </div>
-        <div className="">
+        <div className="mb-4">
           {elections2?.map((election, index) => (
             <div
               key={election._id}
@@ -195,7 +195,7 @@ const OwnElection = () => {
                   : "bg-blue-200/5 text-indigo-200/70"
               } text-center font-semibold border-b border-indigo-200/50`}
             >
-              <div className="space-y-1 lg:grid lg:grid-cols-12 py-3 lg:items-center lg:justify-center font-medium mb-4">
+              <div className="space-y-1 lg:grid lg:grid-cols-12 py-3 lg:items-center lg:justify-center font-medium">
                 <p className="col-span-1">{index + 1}</p>
                 <p className="col-span-3">
                   <span className="text-xs lg:hidden">Organization Name: </span>

@@ -74,8 +74,8 @@ const AllElections = () => {
 
   return (
     <>
-    <div className="">
-    <div className="text-center pt-4 pr-6 pb-6">
+    <div className="pt-8 pb-14">
+    <div className="text-center pt-4  pb-8 flex justify-center items-center">
         <form onSubmit={handleSearch}>
           <div className="flex items-center justify-end">
             <div>
@@ -84,11 +84,11 @@ const AllElections = () => {
                 id="id"
                 name="search"
                 placeholder="Search by Org. Name"
-                className="w-[220px] border border-slate-400 rounded-l-lg py-2 px-5 outline-none	bg-transparent"
+                className="w-[220px] border border-slate-400 rounded-l-lg py-3 px-5 outline-none	bg-transparent"
               />
             </div>
             <div className="rounded-r-lg">
-              <input type="submit" value="Search" className="bg-zinc-600 px-2 w-[70px] border border-l-0 border-slate-400 rounded-r-lg py-2 outline-none	bg-transparent hover:bg-slate-500" />
+              <input type="submit" value="Search" className="bg-zinc-600 px-2 w-[85px] border border-l-0 border-slate-400 rounded-r-lg py-3 outline-none	bg-transparent hover:bg-slate-500" />
             </div>
           </div>
         </form>

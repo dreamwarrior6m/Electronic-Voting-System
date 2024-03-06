@@ -403,7 +403,17 @@ const ElectionDetails = () => {
                             <div className="flex justify-center items-center">
                               {userRoles?.isRole === "Modarator" &&
                                 (candidate?.isverify === "true" ? (
-                                  <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                                  <div className="flex gap-2">
+                                    <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                                    <button
+                                      className="bg-red-500 text-white/90 px-2 py-1 rounded-sm"
+                                      onClick={() =>
+                                        handleCandidateDelete(candidate._id)
+                                      }
+                                    >
+                                      Delete
+                                    </button>
+                                  </div>
                                 ) : (
                                   <div className="flex gap-2">
                                     <button
@@ -481,7 +491,15 @@ const ElectionDetails = () => {
                             <div className="flex justify-center items-center">
                               {userRoles?.isRole === "Modarator" &&
                                 (voter?.isverify == "true" ? (
-                                  <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                                  <div className="flex gap-2">
+                                    <MdVerified className="text-3xl text-green-600 text-center ml-5 cursor-pointer" />
+                                    <button
+                                      className="bg-red-500 text-white/90 px-2 py-1 rounded-sm"
+                                      onClick={() => handleDelete(voter._id)}
+                                    >
+                                      Delete
+                                    </button>
+                                  </div>
                                 ) : (
                                   <div className="flex gap-2">
                                     <button

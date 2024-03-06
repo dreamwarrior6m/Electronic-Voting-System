@@ -59,12 +59,14 @@ const page = () => {
   };
 
   return (
-    <div className="dark:bg-slate-900 flex items-center px-3 justify-center min-h-screen text-gray-700 dark:text-white">
+    <div className="bg-slate-900 flex items-center px-3 justify-center min-h-screen text-white">
       <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
+
         <div className="flex dark:text-white flex-col justify-center items-center">
           <Image className="w-20" width={200} height={200} alt="login Img" src={loginImg} />
+
           <div className=" mt-2 mb-7 text-center">
-            <h1 className="mb-2 dark:text-white text-3xl font-bold">
+            <h1 className="mb-2 text-white text-3xl font-bold">
               Log in to your account
             </h1>
             <h4 className="text-base">
@@ -73,30 +75,30 @@ const page = () => {
             </h4>
           </div>
         </div>
-        <div className="lg:p-8 lg:pb-10 bg-[#f1faee] border- border-t-4 rounded-xl shadow-md dark:bg-gray-800 dark:border-blue-700">
+        <div className="lg:p-8 lg:pb-10 border- border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
           <form onSubmit={handleLogin} className=" w-full px-3">
             <div className="form-control">
               <label className="label">
-                <span className="label-text dark:text-white">Email</span>
+                <span className="label-text text-white">Email</span>
               </label>
               <input
                 type="email"
                 name="email"
                 placeholder="Enter Your E-Mail"
-                className="input input-bordered"
+                className="input input-bordered bg-[#1D232A] text-white"
                 required
               />
             </div>
             <div className="relative">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text dark:text-white">Password</span>
+                  <span className="label-text text-white">Password</span>
                 </label>
                 <input
                   type={showPass ? "text" : "password"}
                   name="password"
                   placeholder="Enter Your Password"
-                  className="input input-bordered"
+                  className="input input-bordered bg-[#1D232A] text-white"
                   required
                 />
               </div>
@@ -106,9 +108,9 @@ const page = () => {
                   className="p-2 focus:outline-none"
                 >
                   {showPass ? (
-                    <PiEyeLight className="h-5 w-5 text-black dark:text-white" />
+                    <PiEyeLight className="h-5 w-5 text-white" />
                   ) : (
-                    <PiEyeSlash className="h-5 w-5 text-black dark:text-white" />
+                    <PiEyeSlash className="h-5 w-5 text-white" />
                   )}
                 </p>
               </div>
@@ -148,7 +150,7 @@ const page = () => {
             </div>
           </form>
         </div>
-        <div className="flex text-gray-700 dark:text-white flex-col justify-center items-center">
+        <div className="flex text-white flex-col justify-center items-center">
           <div className="mt-7 mb-4 text-center">
             <h4 className="text-base">
               <span className="opacity-90">Don't have an account yet?</span>
@@ -160,7 +162,7 @@ const page = () => {
             </h4>
           </div>
           <div className="opacity-70">
-            <ul className="flex gap-6 items-center justify-center text-gray-700 dark:text-white ">
+            <ul className="flex gap-6 items-center justify-center text-white ">
               <Link href="/">
                 <li>Home</li>
               </Link>
