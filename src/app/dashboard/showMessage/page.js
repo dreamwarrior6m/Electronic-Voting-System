@@ -26,15 +26,15 @@ const ShowFeedback = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, Deleted it!",
-    }).then(async (result) => {
+    }).then( async(result) => {
       if (result.isConfirmed) {
         const res = await axios.delete(
-          `https://evs-delta.vercel.app/candidate/${id}`
+          `https://evs-delta.vercel.app/admin-feedback/${id}`
         );
-        if (res.data.deletedCount > 0) {
+        if (res?.data?.deletedCount > 0) {
           Swal.fire({
             title: "fire!",
-            text: `this Candidate has been deleted.`,
+            text: `this message has been deleted.`,
             icon: "success",
           });
           refetch();
