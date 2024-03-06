@@ -11,7 +11,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
 import Swal from "sweetalert2";
-import loginImg from "../../../public/images/logo (2).png";
+import loginImg from "../../../public/images/DVS_logo.png"
 
 const page = () => {
   //firebase
@@ -62,7 +62,7 @@ const page = () => {
     <div className="dark:bg-slate-900 flex items-center px-3 justify-center min-h-screen text-gray-700 dark:text-white">
       <div className="w-full lg:max-w-[520px] mx-auto lg:p-6">
         <div className="flex dark:text-white flex-col justify-center items-center">
-          <Image width={50} height={50} alt="login Img" src={loginImg} />
+          <Image className="w-20" width={200} height={200} alt="login Img" src={loginImg} />
           <div className=" mt-2 mb-7 text-center">
             <h1 className="mb-2 dark:text-white text-3xl font-bold">
               Log in to your account

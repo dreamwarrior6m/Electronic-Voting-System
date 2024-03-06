@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { PiEyeLight, PiEyeSlash } from "react-icons/pi";
 import Swal from "sweetalert2";
-import registrationImg from "../../../public/images/logo (2).png";
+import registrationImg from "../../../public/images/DVS_logo.png";
 import { UploadImage } from "@/Component/shareComponent/utilites";
 
 const Registration = () => {
@@ -118,7 +118,7 @@ const Registration = () => {
     <div className="dark:bg-slate-900 flex items-center justify-center min-h-screen text-gray-700 dark:text-white px-3">
       <div className="w-full lg:max-w-[600px] mx-auto lg:p-6">
         <div className="flex text-gray-700 dark:text-white  flex-col justify-center items-center">
-          <Image width={50} height={50} alt="login Img" src={registrationImg} />
+          <Image className="w-20 pt-4" width={200} height={200} alt="login Img" src={registrationImg} />
           <div className="mt-2 mb-7 text-center">
             <h1 className="mb-2 text-3xl font-bold text-gray-700 dark:text-white ">
               Create a free account
