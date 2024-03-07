@@ -126,7 +126,7 @@ const Participate = () => {
 
   console.log(selectCandidateId)
   const handalCountVote = (id) => {
-    setRouteID(id)
+    // setRouteID(id)
     // console.log(id);
     setSelectCandidateId(id);
   };

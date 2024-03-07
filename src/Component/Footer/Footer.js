@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Footer.module.css";
 import { BsInstagram, BsTwitter, BsYoutube } from "react-icons/bs";
 import { FaFacebookF, FaLinkedin } from "react-icons/fa";
+import Image from "next/image";
+import dvsLogo from "../../../public/images/DVS_logo.png";
 
 const Footer = () => {
   return (
@@ -9,11 +11,15 @@ const Footer = () => {
       <footer className="pt-10 pb-6 bg-gray-900 border-t-2 border-gray-100/10 text-indigo-200/70">
         <div className="max-w-2xl mx-auto text-center opacity-95 px-3">
           <div className=" mx-auto mb-3">
-            <section className="flex flex-col text-center">
-              <h1 className="text-white/90 font-bold text-4xl font-[Poppins] mb-1">
-                DVS
-              </h1>
-              <p className="text-2xl font-medium text-white/70">
+            <section className="flex flex-col justify-center items-center text-center">
+              <Image
+                className="w-20"
+                src={dvsLogo}
+                alt="alt"
+                width={200}
+                height={200}
+              />
+              <p className="text-2xl font-medium text-white/70 mt-[2px]">
                 Digital Voting System
               </p>
             </section>
