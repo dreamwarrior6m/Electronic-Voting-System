@@ -120,8 +120,8 @@ const Page = () => {
           <h2 className="text-center text-green-500 font-bold text-2xl">
             {filterAllVote[0]?.position == true && "Running"}
           </h2>
-          <h2 className="text-center text-red-500 font-bold text-2xl">
-            {filterAllVote[0]?.position != true && "Stop"}
+          <h2 className="text-center text-yellow-400 font-bold text-2xl">
+            {filterAllVote[0]?.position != true && "Running soon"}
           </h2>
         </div>
 

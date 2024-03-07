@@ -137,8 +137,8 @@ const ElectionInfo = ({ election, refetch }) => {
               <h2 className="text-green-500">
                 {election?.position == true && "Running"}
               </h2>
-              <h2 className="text-red-500">
-                {election?.position != true && "Stop"}
+              <h2 className="text-yellow-400">
+                {election?.position != true && "Running Soon"}
               </h2>
             </div>
           ) : (
