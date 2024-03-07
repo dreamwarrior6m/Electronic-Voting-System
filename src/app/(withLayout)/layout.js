@@ -4,8 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export const metadata = {
-  title: "DVS",
-  description: "Digital Voting System",
+  title: "Digital Voting System",
+  description: "An online voting system is a software platform that allows groups to securely conduct votes and elections.The system should verify the identity and eligibility of the voters and candidate, and prevent unauthorized or duplicate voting.",
 };
 
 const Layout = ({ children }) => {
