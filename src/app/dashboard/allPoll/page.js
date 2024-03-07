@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -9,18 +9,21 @@ import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
 import AdminProtected from "@/Component/Protected/AdminProtected";
 import useAuth from "@/app/hook/useAuth";
+import ReactPaginate from "react-paginate";
+import './styles.css'
 
 const allPoll = () => {
   const [allPoll, setAllPoll] = useState();
   const { id } = useParams();
   const {user} = useAuth();
-
   const { data, refetch } = useQuery({
-    queryKey: ["create-poll"],
+    queryKey: ["user"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-poll");
-      setAllPoll(res?.data);
-      return res?.data;
+      const res = await axios.get("https://evs-delta.vercel.app/create-poll", {
+        withCredentials: true,
+      });
+      setAllPoll(res.data);
+      return res.data;
     },
   });
 

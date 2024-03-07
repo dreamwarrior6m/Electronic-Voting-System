@@ -15,18 +15,17 @@ const AllVoter = () => {
   const [limit, setLimit] = useState(10);
   const [pageCount, setPageCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const { data, refetch } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/users", {
-        withCredentials: true,
-        params: { page: currentPage, limit },
-      });
-      setVoters(res.data);
-      setPageCount(res.data.pageCount);
-      return res.data;
-    },
-  });
+  // const { data, refetch } = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: async () => {
+  //     const res = await axios.get("https://evs-delta.vercel.app/users", {
+  //       withCredentials: true,
+  //     });
+  //     setVoters(res.data);
+  //     setPageCount(res.data.pageCount);
+  //     return res.data;
+  //   },
+  // });
 
   useEffect(() => {
     getPaginatedUsers();

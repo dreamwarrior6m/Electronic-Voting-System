@@ -49,7 +49,7 @@ const Participate = () => {
     const img = user.photoURL;
     const ratings = rating;
     const feedback = {candiatename,message,name,email,img,ratings}
-    const res = await axios.post('http://localhost:5000/feedback',{feedback})
+    const res = await axios.post('https://evs-delta.vercel.app/feedback',{feedback})
     if(res.data.acknowledged){
       setIsModalOpen(false)
       router.push(`/result/${id}`);
