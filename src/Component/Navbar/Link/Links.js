@@ -1,13 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavLink from "../NavLink/Navlink";
 import styles from "./Link.module.css";
 import { FaBars } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 import useAuth from "@/app/hook/useAuth";
+import { IoIosCube } from "react-icons/io";
+import axios from "axios";
 
 const Links = () => {
+  const [users, setusers] = useState();
   const { user } = useAuth();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (user?.email) {
+          const res = await axios.get(
+            `https://evs-delta.vercel.app/users/${user?.email}`,
+            {
+              withCredentials: true,
+            }
+          );
+          setusers(res.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, [user?.email]);
+
   const Links = [
     {
       id: 1,
@@ -24,11 +46,17 @@ const Links = () => {
       path: "/about",
       title: "About",
     },
-    {
-      id: 5,
-      path: "/createvote",
-      title: "Create a Election",
-    },
+    ...((user && users?.isRole == "user") ||
+    (user && users?.isRole == "Modarator")
+      ? [
+          {
+            id: 5,
+            path: "/createvote",
+            title: "Create Election",
+            icon: <IoIosCube />,
+          },
+        ]
+      : []),
     ...(user
       ? []
       : [

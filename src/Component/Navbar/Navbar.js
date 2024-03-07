@@ -105,12 +105,18 @@ const Nav = () => {
       title: "About",
       icon: <IoMdInformationCircle />,
     },
-    {
-      id: 5,
-      path: "/createvote",
-      title: "Create Election",
-      icon: <IoIosCube />,
-    },
+    ...((user && users?.isRole == "user") ||
+    (user && users?.isRole == "Modarator")
+      ? [
+          {
+            id: 5,
+            path: "/createvote",
+            title: "Create Election",
+            icon: <IoIosCube />,
+          },
+        ]
+      : []),
+
     // ...(user && users?.isRole == "user" || user && users?.isRole == "Modarator"
     //   ? [
     //       {
@@ -195,15 +201,19 @@ const Nav = () => {
             <span className="text-3xl text-white/90 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
-            <Image className="w-16" src={dvsLogo} alt="alt" width={200} height={200} />
+            <Image
+              className="w-16"
+              src={dvsLogo}
+              alt="alt"
+              width={200}
+              height={200}
+            />
           </Link>
 
           <div className=" md:hidden text-white/90">
-          {user &&  <Notification /> 
-          }
+            {user && <Notification />}
           </div>
           <div className=" md:hidden">
-
             {user && (
               <div className="dropdown dropdown-end md:ml-2 ml-5">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -224,7 +234,6 @@ const Nav = () => {
                 >
                   <div className="">
                     {user && <p className="mb-3 ml-4">{user?.displayName}</p>}
-
 
                     <li>
                       <Link href="/dashboard/home">dashboard</Link>
