@@ -61,9 +61,9 @@ const Nav = () => {
       const threshold = 78;
 
       if (isScrollingDown && currentScrollPos > threshold) {
-        controls.start({ opacity: 0, y: -50 });
+        controls?.start({ opacity: 0, y: -50 });
       } else {
-        controls.start({ opacity: 1, y: 0 });
+        controls?.start({ opacity: 1, y: 0 });
       }
 
       setPrevScrollPos(currentScrollPos);
