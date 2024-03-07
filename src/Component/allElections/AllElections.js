@@ -76,14 +76,21 @@ const AllElections = () => {
                     startDate1={`${allVote?.startDate}T${allVote?.startTime}`}
                     endDate1={`${allVote?.endDate}T${allVote?.endTime}`}
                   /> */}
+                  {(allVote?.isFinished != true) ?
                   <div className="">
-                    <h2 className="text-green-500 font-semibold">
-                      {allVote?.position == true && "Running"}
-                    </h2>
-                    <h2 className="text-red-500 font-semibold">
-                      {allVote?.position != true && "Stop"}
-                    </h2>
-                  </div>
+                  <h2 className="text-green-500 font-semibold">
+                    {allVote?.position == true && "Running"}
+                  </h2>
+                  <h2 className="text-red-500 font-semibold">
+                    {allVote?.position != true && "Stop"}
+                  </h2>
+                </div>
+                :
+                <div className="text-red-500 font-semibold">
+                  Finished
+                </div>
+                  }
+                  
                 </div>
               </div>
               <div className="flex justify-center items-center text-center mt-2">
