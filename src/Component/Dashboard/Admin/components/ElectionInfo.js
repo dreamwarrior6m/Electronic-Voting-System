@@ -144,7 +144,7 @@ const ElectionInfo = ({ election, refetch }) => {
           ) : (
             <div className="">
               <h2 className="text-red-500">
-                 Stop
+                 Finished
               </h2>
             </div>
           )}
@@ -221,21 +221,6 @@ const ElectionInfo = ({ election, refetch }) => {
                   </div>
                 </div>
                 <div>
-                  {/* <div className="form-control">
-                    <label className="label">
-                      <span className=" text-white text-base">
-                        Upload Candidate Photo
-                      </span>
-                    </label>
-                    <input
-                      required
-                      // name="candidatePhoto"
-                      name="photo"
-                      type="text"
-                      className=" input input-bordered py-2 rounded-lg border-blue-500 border-l-8 mb-2 bg-slate-400 text-white"
-                      placeholder="Enter photo link"
-                    />
-                  </div> */}
                   <div className="form-control">
                     <label className="label">
                       <span className=" text-white text-base">

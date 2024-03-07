@@ -39,7 +39,9 @@ const Page = () => {
   const { data: showAllVote = [] } = useQuery({
     queryKey: ["showAllElectons"],
     queryFn: async () => {
-      const res = await axios.get("https://evs-delta.vercel.app/create-vote?search");
+      const res = await axios.get(
+        "https://evs-delta.vercel.app/create-vote?search"
+      );
       return res.data;
     },
     refetchInterval: 1000,
@@ -107,11 +109,22 @@ const Page = () => {
   return (
     <div className="min-h-screen max-w-7xl mx-auto pt-20">
       <div className="text-white pt-10 md:px-8 px-3">
-         <div className="flex justify-center items-center gap-1 pb-4">
-         <h2 className="text-center font-bold text-2xl">Position: </h2>
-          <h2 className="text-center text-green-500 font-bold text-2xl">{filterAllVote[0]?.position == true && 'Running'}</h2>
-          <h2 className="text-center text-red-500 font-bold text-2xl">{filterAllVote[0]?.position != true && 'Stop'}</h2>
-         </div>
+        <div className="flex justify-center items-center gap-1 pb-4">
+          <h2 className="text-center font-bold text-2xl">Position: </h2>
+          {(filterAllVote[0]?.isFinished != true) ?
+          <div className="">
+          <h2 className="text-center text-green-500 font-bold text-2xl">
+            {filterAllVote[0]?.position == true && "Running"}
+          </h2>
+          <h2 className="text-center text-red-500 font-bold text-2xl">
+            {filterAllVote[0]?.position != true && "Stop"}
+          </h2>
+        </div>
+        :
+        <div className="text-center text-red-500 font-bold text-2xl">Finished</div>}
+
+          
+        </div>
         <div className=" bg-gray-800 rounded-md pt-8 flex flex-col-reverse md:flex-col">
           <div className="md:flex justify-between">
             <div className=" card flex-1">
