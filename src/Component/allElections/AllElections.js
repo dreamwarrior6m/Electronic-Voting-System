@@ -6,48 +6,6 @@ import useAuth from "@/app/hook/useAuth";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
-// time start
-// const Timer = ({ startDate1, endDate1 }) => {
-//   const [currentTime, setCurrentTime] = useState(new Date());
-//   const [isSystemRunning, setSystemRunning] = useState(false);
-
-//   // Check if the system should start or stop
-//   useEffect(() => {
-//     const startDateTime = new Date(startDate1).getTime();
-//     const endDateTime = new Date(endDate1).getTime();
-
-//     if (
-//       currentTime.getTime() >= startDateTime &&
-//       currentTime.getTime() <= endDateTime
-//     ) {
-//       // Start the system
-//       setSystemRunning(true);
-//     } else {
-//       // Stop the system
-//       setSystemRunning(false);
-//     }
-//   }, [currentTime, startDate1, endDate1]);
-
-//   // Update the current time every second
-//   useEffect(() => {
-//     const timer = setInterval(() => {
-//       setCurrentTime(new Date());
-//     }, 1000);
-
-//     // Cleanup function to clear the interval when the component is unmounted
-//     return () => clearInterval(timer);
-//   }, []);
-
-//   return (
-//     <div>
-//       <h2 className="font-bold text-sm mt-2">
-//         {isSystemRunning ? "Running.." : "Start Soon.."}
-//       </h2>
-//     </div>
-//   );
-// };
-
-//time end
 
 const AllElections = () => {
   const [search, setSearch] = useState("");

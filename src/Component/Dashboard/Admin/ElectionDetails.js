@@ -233,7 +233,7 @@ const ElectionDetails = () => {
 
   const handleFinishedElection = (id) => {
     console.log(id);
-    const position = filterElection[0]?.position;
+    const position = false;
     const isFinished = true;
     const isSystemFinished = { position, isFinished };
     Swal.fire({
