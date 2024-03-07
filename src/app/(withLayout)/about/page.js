@@ -23,28 +23,9 @@ const About = () => {
         <h1 className="text-2xl font-semibold">About Us</h1>
         <div className="my-8">
           <p className="opacity-75">
-            StrawPoll is a platform where anyone can create their own poll for
-            free. We help our users to find out the majority opinion of a group
-            as easily and reliably as possible, no matter how large the number
-            of participants is.
+            An online voting system is a software platform that allows groups to securely conduct votes and elections.The system should verify the identity and eligibility of the voters and candidate, and prevent unauthorized or duplicate voting.
           </p>
           <br />
-          <br />
-          <p className="">
-            <span className="opacity-75">StrawPoll is operated by</span>
-            <strong className="underline px-1">
-              Gregor Krambs Internet GmbH & Co. KG.
-            </strong>
-            <span className="opacity-75">
-              We are currently a small team in Hamburg, Germany but reach the
-              whole world with our software products. Our mission is to make
-              interaction in larger groups as easy as possible. To achieve this,
-              we build free voting tools that everyone can easily participate
-              in. We value reliability, precision and fast work and dont need
-              complicated structures in the company. This allows us to work in a
-              very agile way and implement new ideas quickly and easily.
-            </span>
-          </p>
         </div>
         <div className="my-20">
           <h1 className="text-2xl font-semibold">Our Team</h1>
@@ -92,95 +73,102 @@ const About = () => {
             </div>
 
             <div className=" my-4 flex justify-around items-center">
-            
               <div className="flex flex-col gap-2 justify-center items-center">
-              <a
+                <a
                   className="flex flex-col justify-center items-center hover:text-blue-500"
                   target="_blank"
                   href="https://my-portfolio-site-1.web.app/"
                 >
-                <div className="w-32 rounded-full">
-                  <Image
-                    width={300}
-                    height={300}
-                    alt=""
-                    className="rounded-full"
-                    src="https://i.ibb.co/N6CNRNL/md-mahsin-mia2-1.jpg"
-                  />
-                </div>
-                <div className="text-center">
-                  <h2 className="font-semibold">Md Mahsin Mia</h2>
-                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
-                </div>
-                  </a>
+                  <div className="w-32 rounded-full">
+                    <Image
+                      width={300}
+                      height={300}
+                      alt=""
+                      className="rounded-full"
+                      src="https://i.ibb.co/N6CNRNL/md-mahsin-mia2-1.jpg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h2 className="font-semibold">Md Mahsin Mia</h2>
+                    <h2 className="text-sm text-gray-400">
+                      MERN stack engineer
+                    </h2>
+                  </div>
+                </a>
               </div>
 
               <div className="flex flex-col gap-2 justify-center items-center">
-              <a
+                <a
                   className="flex flex-col justify-center items-center hover:text-blue-500"
                   target="_blank"
                   href="https://junayet73.netlify.app/"
                 >
-                <div className="w-32 rounded-full">
-                  <Image
-                    width={300}
-                    height={300}
-                    alt="Team CEO"
-                    className="rounded-full"
-                    src="https://i.ibb.co/pRzNz09/1708497619001.jpg"
-                  />
-                </div>
-                <div className="text-center">
-                  <h2 className="font-semibold">Junayet Shiblu</h2>
-                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
-                </div>
-                  </a>
+                  <div className="w-32 rounded-full">
+                    <Image
+                      width={300}
+                      height={300}
+                      alt="Team CEO"
+                      className="rounded-full"
+                      src="https://i.ibb.co/pRzNz09/1708497619001.jpg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h2 className="font-semibold">Junayet Shiblu</h2>
+                    <h2 className="text-sm text-gray-400">
+                      MERN stack engineer
+                    </h2>
+                  </div>
+                </a>
               </div>
             </div>
 
             <div className=" my-4 flex justify-between items-center px-5">
               <div className="flex flex-col gap-2 justify-center items-center">
-              <a
+                <a
                   className="flex flex-col justify-center items-center hover:text-blue-500"
                   target="_blank"
                   href="https://chandon.netlify.app/"
                 >
-                <div className="w-32 rounded-full">
-                  <Image
-                    width={300}
-                    height={300}
-                    alt="Team CEO"
-                    className="rounded-full"
-                    src="https://i.postimg.cc/2y7gZRp9/chandon-kumar.png"
-                  />
-                </div>
-                <div className="text-center">
-                  <h2 className="font-semibold">Chandon Kumar</h2>
-                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
-                </div>
-                  </a>
+                  <div className="w-32 rounded-full">
+                    <Image
+                      width={300}
+                      height={300}
+                      alt="Team CEO"
+                      className="rounded-full"
+                      src="https://i.postimg.cc/2y7gZRp9/chandon-kumar.png"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h2 className="font-semibold">Chandon Kumar</h2>
+                    <h2 className="text-sm text-gray-400">
+                      MERN stack engineer
+                    </h2>
+                  </div>
+                </a>
               </div>
 
               <div className="flex flex-col gap-2 justify-center items-center">
-              <a
+                <a
                   className="flex flex-col justify-center items-center hover:text-blue-500"
                   target="_blank"
                   href="https://personal-portfolio-49577.web.app/"
                 >
-                <div className="w-32 rounded-full">
-                  <Image
-                    width={300}
-                    height={300}
-                    alt="Team CEO"
-                    className="rounded-full"
-                    src="https://i.ibb.co/Zg03hVq/1704042718127.jpg"
-                  />
-                </div>
-                <div className="text-center">
-                  <h2 className="font-semibold">MD. Jahangir Alam</h2>
-                  <h2 className="text-sm text-gray-400">MERN stack engineer</h2>
-                </div>
-                  </a>
+                  <div className="w-32 rounded-full">
+                    <Image
+                      width={300}
+                      height={300}
+                      alt="Team CEO"
+                      className="rounded-full"
+                      src="https://i.ibb.co/Zg03hVq/1704042718127.jpg"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h2 className="font-semibold">MD. Jahangir Alam</h2>
+                    <h2 className="text-sm text-gray-400">
+                      MERN stack engineer
+                    </h2>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
@@ -190,12 +178,11 @@ const About = () => {
           <div className="my-6">
             <p className="">
               <span className="opacity-75">
-                StrawPoll offers its users a free platform where they can create
-                different types of polls. The most popular type is Straw Poll,
-                which can be used to easily find the majority in a group with
+                DVS offers its users a free platform where they can create
+                different types of polls. which can be used to easily find the majority in a group with
                 different opinions. A simple question with a selection of
                 predefined answer options can be shared with the group in no
-                time. Already in the days of Usenet (since 1979) the name Straw
+                time. Already in the days of Usenet (since 1979) the name
                 Poll was coined as a synonym for this kind of voting. We do our
                 best to live up to this and at the same time fight any kind of
                 manipulation in voting with different methods
@@ -208,83 +195,32 @@ const About = () => {
             </p>
           </div>
         </div>
+       
         <div className="my-8">
-          <h1 className="text-2xl font-semibold">
-            Online Polls for More Than Ten Years
-          </h1>
+          <h1 className="text-2xl font-semibold">Technologies we use</h1>
           <div className="my-6">
             <p className="opacity-75">
-              It all began with "strawpollnow.com", a website that started a
-              Twitter poll-app in 2007. Ahead of its time, it was still not a
-              major breakthrough in online polls. In 2014, we launched
-              "strawpoll.de" with a fresh redesign in our home country, Germany.
-              It quickly conquered the world with aeasy-to-use and ad-free,
-              multi-langual site. Many people even outside of Germany used the
-              German-language website, so we thought about strengthening our
-              international presence. It took some time to negotiate, but
-              finally in early 2017, we acquired "strawpoll.com" to give our
-              international, years-old business the web address it deserves.
-            </p>
-          </div>
-        </div>
-        <div className="my-8">
-          <h1 className="text-2xl font-semibold">User Experience Matters</h1>
-          <div className="my-6">
-            <p className="opacity-75">
-              There is no need to hide the fact that there are already many
-              other poll-apps available. In order to be better than the others,
-              we at StrawPoll try to provide the best user experience, easy
-              navigation and fast sharing possibilities. Just to make sure that
-              you and your participants enjoy using our service again and again.
-              At every step of the way, from creating and sharing to evaluating
-              your poll, we optimize the process from the ground up. If you
-              think something could be done even better, we are always open to
-              hearing from you!
-            </p>
-          </div>
-        </div>
-        <div className="my-8">
-          <h1 className="text-2xl font-semibold">
-            Reliable Results Are Even More Important
-          </h1>
-          <div className="my-6">
-            <p className="opacity-75">
-              The most important part of a successful poll-app is the
-              reliability of the results. After we already had bots and scripts
-              under control, the next big task was to prevent manipulation by
-              multiple votes using changing IP addresses via VPN or proxies. We
-              are happy to announce that we implemented a VPN detection system
-              in our backend to block (almost) all unauthorized votes. However,
-              it is important to make sure that the correct duplication check
-              setting is selected when creating a poll.
-            </p>
-          </div>
-        </div>
-        <div className="my-8">
-          <h1 className="text-2xl font-semibold">Interested in Tech?</h1>
-          <div className="my-6">
-            <p className="opacity-75">
-              Our tech stack is quite simple. We are Perl fans and always
+              Our tech stack is quite simple. We are JavaScript fans and always
               interested in the latest web standards and technologies.
             </p>
+
             <ul className="my-6">
-              <li>Languages: Perl, JavaScrip</li>
-              <li>Web Framework: Mojolicious</li>
-              <li>Frontend: Alpine.js, Tailwind CSS</li>
-              <li>Database: PostgreSQLp</li>
-              <li>Charts: Chart.js</li>
-              <li>Date Formatting: Day.js</li>
+              <li>Expertise: HTML, CSS</li>
+              <li>
+                Comfortable: React.js, Next.js, TailwindCSS, Material UI, Daisy
+                UI
+              </li>
+              <li>Familiar: JavaScript, Express.js, MongoDB, Redux Toolkit</li>
+              <li>Tools: VS-Code, Git, GitHub, Firebase, Vercel </li>
             </ul>
           </div>
         </div>
         <div className="mt-8">
           <h1 className="text-2xl font-semibold">Interested in Tech?</h1>
-          <ul className="my-6">
-            <li>The icons we're currently using are coming from heroicons.</li>
-            <li>
-              The stock photos on various landing pages are licenced via Adobe
-              Stock.
-            </li>
+          <ul className="my-2">
+            <li>Veu.js</li>
+            <li>UI/UX Design</li>
+            <li>Responsive Design</li>
           </ul>
         </div>
       </div>
