@@ -81,8 +81,8 @@ const AllElections = () => {
                   <h2 className="text-green-500 font-semibold">
                     {allVote?.position == true && "Running"}
                   </h2>
-                  <h2 className="text-red-500 font-semibold">
-                    {allVote?.position != true && "Stop"}
+                  <h2 className="text-yellow-400 font-semibold">
+                    {allVote?.position != true && "Running soon"}
                   </h2>
                 </div>
                 :
