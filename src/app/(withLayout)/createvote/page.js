@@ -166,7 +166,7 @@ const page = () => {
 
   return (
     <Protected>
-      <div className="my-10 text-white pt-[80px]">
+      <div className="pb-10 text-white pt-28">
         <div>
           <div className="w-full lg:max-w-[900px] mx-auto lg:p-6">
             <div className="py-6 lg:p-7 lg:border-t-4 rounded-xl shadow-md bg-gray-800 border-blue-700">
@@ -194,9 +194,7 @@ const page = () => {
                     </div>
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className=" text-white ">
-                          Upload Photo
-                        </span>
+                        <span className=" text-white ">Upload Photo</span>
                       </label>
                       <input
                         required
@@ -210,9 +208,7 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text text-white">
-                          User Name
-                        </span>
+                        <span className="label-text text-white">User Name</span>
                       </label>
                       <input
                         type="text"
@@ -275,9 +271,7 @@ const page = () => {
                   <div className="grid md:grid-cols-2 gap-3">
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text text-white">
-                          End Date
-                        </span>
+                        <span className="label-text text-white">End Date</span>
                       </label>
                       <input
                         type="date"
@@ -289,9 +283,7 @@ const page = () => {
                     </div>
                     <div className="form-control w-full ">
                       <label className="label">
-                        <span className="label-text text-white">
-                          End Time
-                        </span>
+                        <span className="label-text text-white">End Time</span>
                       </label>
                       <input
                         type="time"
@@ -321,9 +313,7 @@ const page = () => {
                     </div>
                     <div className="form-control">
                       <label className="label">
-                        <span className="label-text text-white">
-                          Your Name
-                        </span>
+                        <span className="label-text text-white">Your Name</span>
                       </label>
                       <input
                         type="text"
@@ -337,7 +327,10 @@ const page = () => {
                 </div>
 
                 <div className="form-control mt-6 w-full ">
-                  <button type="submit" className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white">
+                  <button
+                    type="submit"
+                    className="py-3 px-4 rounded-md border border-transparent font-semibold bg-blue-500 text-white"
+                  >
                     {loading ? (
                       <h1 className="loading loading-spinner loading-sm"></h1>
                     ) : (

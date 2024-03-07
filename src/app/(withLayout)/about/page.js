@@ -6,7 +6,7 @@ import dreamWarrior from "../../../../public/images/EVS.jpg";
 
 const About = () => {
   return (
-    <div className="my-10 max-w-7xl mx-auto md:pt-20 mt-14">
+    <div className="py-12 max-w-7xl mx-auto md:pt-28 ">
       <div className="text-white">
         <div href="/" className="flex">
           <Link href="/" className="hover:opacity-80">
