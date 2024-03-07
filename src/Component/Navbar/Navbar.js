@@ -105,12 +105,18 @@ const Nav = () => {
       title: "About",
       icon: <IoMdInformationCircle />,
     },
-    {
-      id: 5,
-      path: "/createvote",
-      title: "Create Election",
-      icon: <IoIosCube />,
-    },
+    ...((user && users?.isRole == "user") ||
+    (user && users?.isRole == "Modarator")
+      ? [
+          {
+            id: 5,
+            path: "/createvote",
+            title: "Create Election",
+            icon: <IoIosCube />,
+          },
+        ]
+      : []),
+
     // ...(user && users?.isRole == "user" || user && users?.isRole == "Modarator"
     //   ? [
     //       {
@@ -195,9 +201,16 @@ const Nav = () => {
             <span className="text-3xl text-white/90 mr-2">
               <ion-icon name="logo-ionic"></ion-icon>
             </span>
-            <Image className="w-16" src={dvsLogo} alt="alt" width={200} height={200} />
+            <Image
+              className="w-16"
+              src={dvsLogo}
+              alt="alt"
+              width={200}
+              height={200}
+            />
           </Link>
-          <div className=" md:hidden text-white ">
+
+          <div className=" md:hidden text-white/90">
             {user && <Notification />}
           </div>
           <div className=" md:hidden">
@@ -242,7 +255,7 @@ const Nav = () => {
               whileTap={{ scale: 0.9 }}
             >
               {open ? (
-                <FiX onClick={closeMenu} className="text-2xl text-white" />
+                <FiX onClick={closeMenu} className="text-2xl text-white/90" />
               ) : (
                 <FiMenu className="text-2xl text-white/90" />
               )}
@@ -275,7 +288,7 @@ const Nav = () => {
           )} */}
           {user && (
             <motion.li
-              className="mt-2 text-white md:mt-0 md:ml-4 ml-8 hidden md:block"
+              className="mt-2 text-white/90 md:mt-0 md:ml-4 ml-8 hidden md:block"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -286,7 +299,7 @@ const Nav = () => {
           {user && (
             <div className="dropdown dropdown-end md:ml-2 ml-5  hidden md:block">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full border-[2px] border-gray-300">
+                <div className="w-10 rounded-full border-[2px] border-white/90">
                   {user && (
                     <Image
                       width={40}

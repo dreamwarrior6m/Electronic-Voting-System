@@ -34,7 +34,7 @@ const Participate = () => {
 
   // Modal for feedback
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [RouteId, setRouteID] = useState('')
+  const [rating, setRating] = useState(0)
   const handleSubmitFeedback = async(e) => {
     e.preventDefault();
     const from = e.target;
@@ -42,8 +42,9 @@ const Participate = () => {
     const message = from.message.value;
     const name = user.displayName;
     const email = user.email;
+    const ratings = rating;
     const img = user.photoURL;
-    const feedback = {candiatename,message,name,email,img}
+    const feedback = {candiatename,message,name,email,img,ratings}
     const res = await axios.post('https://evs-delta.vercel.app/feedback',{feedback})
     if(res.data.acknowledged){
       setIsModalOpen(false)
@@ -125,7 +126,7 @@ const Participate = () => {
 
   console.log(selectCandidateId)
   const handalCountVote = (id) => {
-    setRouteID(id)
+    // setRouteID(id)
     // console.log(id);
     setSelectCandidateId(id);
   };
@@ -195,7 +196,7 @@ const Participate = () => {
             });
           })
           .catch((err) => {
-            // console.error(err);
+         
             Swal.fire({
               position: "top-end",
               icon: "error",
@@ -205,10 +206,6 @@ const Participate = () => {
             });
           });
       });
-      // fetch(`https://evs-delta.vercel.app/candidate/${selectCandidateId}`, {
-      //   credentials: 'include',
-      // })
-      //   .then((res) => res.json())
        
     } else {
       Swal.fire({
@@ -228,12 +225,17 @@ const Participate = () => {
     <Protected>
       <div className="text-white p-5 min-h-screen">
       {
-        isModalOpen && <div className='w-96 mt-14 mx-auto relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 px-8 py-5 rounded'>
+        isModalOpen && <div className='w-96 mt-14 mx-auto relative bg-gray-700 px-8 py-5 rounded'>
         <div  onClick={toggleModal} className=" absolute top-0 right-0 bg-[#130f2a] px-2 py-1">
         <span className=" cursor-pointer" >X</span>
 
         </div>
-          <h2 className="mb-4 text-center text-2xl font-semibold text-gray-200">Feedback</h2>
+        <div className=" text-center">
+        <h2 className=" text-2xl font-semibold text-gray-200">Feedback</h2>
+        <div style={{ display: 'inline-block' }}>
+          <Rating style={{ maxWidth: 200 }} value={rating} onChange={setRating} />
+        </div>
+        </div>
           <form onSubmit={handleSubmitFeedback}>
             <div className="">
             <input className="bg-[#130f2a] mb-2 border border-[#6751b9] py-2 px-1 w-full rounded-xl" name="name" required type="text" placeholder='Enter your Candidate Name' />

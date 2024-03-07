@@ -1,10 +1,51 @@
-import React from "react";
+"use client"
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Statistics = () => {
+  const [users, setUsers] = useState([]);
+  const [allElections, setAllElections] = useState([]);
+  const [polls, setPolls] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const res = await axios.get("https://evs-delta.vercel.app/users", {
+          withCredentials: true,
+        });
+        setUsers(res.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    const fetchAllElections = async () => {
+      try {
+        const res = await axios.get('https://evs-delta.vercel.app/create-vote?search');
+        setAllElections(res.data);
+      } catch (error) {
+        console.error("Error fetching all elections:", error);
+      }
+    };
+
+    const fetchPolls = async () => {
+      try {
+        const res = await axios.get("https://evs-delta.vercel.app/create-poll");
+        setPolls(res.data);
+      } catch (error) {
+        console.error("Error fetching polls:", error);
+      }
+    };
+
+    fetchUsers();
+    fetchAllElections();
+    fetchPolls();
+  }, []); // Empty dependency array to run effect only once
+
   return (
-    <div className="max-w-7xl mx-auto pt-12 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto pt-12 pb-12 px-4 sm:px-6 lg:px-8">
       <p className="text-center text-sm font-semibold uppercase text-indigo-200/70 tracking-wide">
-        Trusted by over 1,500,000 users worldwide
+        Trusted by over {users?.length}+ users worldwide
       </p>
       <div className="mt-6">
         <div className="relative">
@@ -17,7 +58,7 @@ const Statistics = () => {
                     Users
                   </dt>
                   <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
-                    1.5M+
+                  {users?.length}+
                   </dd>
                 </div>
                 <div className="flex flex-col p-5 text-center">
@@ -25,15 +66,15 @@ const Statistics = () => {
                     Polls
                   </dt>
                   <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
-                    11M+
+                  {polls?.length}+
                   </dd>
                 </div>
                 <div className="flex flex-col p-5 text-center">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">
-                    Votes
+                    Elections
                   </dt>
                   <dd className="order-1 text-4xl font-extrabold text-indigo-200/70 dark:text-indigo-200/70">
-                    260M+
+                  {allElections?.length}+
                   </dd>
                 </div>
               </dl>

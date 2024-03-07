@@ -6,7 +6,7 @@ import TypewriterComponent from "typewriter-effect";
 
 const Hero = () => {
   return (
-    <div className="px-4 md:mt-18 mt-14">
+    <div className="px-4 md:pt-18 pt-14">
       <div className="relative max-w-7xl mx-auto rounded-b-md shadow-xl overflow-hidden bg-indigo-50 dark:bg-gray-900">
         <div className="dark:hidden dark:sm:block absolute inset-0">
           <Image
@@ -16,7 +16,7 @@ const Hero = () => {
             width={500}
             height={500}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-700 dark:from-gray-400 dark:to-gray-400 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-400 mix-blend-multiply"></div>
         </div>
         <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:pt-28  lg:px-8 lg:pb-28">
           <motion.h1
@@ -37,7 +37,7 @@ const Hero = () => {
               <span className="block text-indigo-200/70">
                 <TypewriterComponent
                   options={{
-                    strings: ["Problem.", "Create Poll."],
+                    strings: ["Create Election.", "Create Poll."],
                     autoStart: true,
                     loop: true,
                   }}

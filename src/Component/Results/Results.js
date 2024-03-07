@@ -20,7 +20,7 @@ const Results = () => {
         setCandidates(res?.data);
       })
       .catch((err) => {
-        conlsol.log(err);
+        console.log(err);
       });
   }, []);
   console.log(candidates);

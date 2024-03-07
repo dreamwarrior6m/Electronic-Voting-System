@@ -58,6 +58,9 @@ const Page = () => {
   console.log(filterElectionsByUserName?.[0]?.position);
   console.log(filterElectionsByUserName);
 
+  const filterAllVote = showAllVote.filter((allVot) => allVot?.name == id);
+  console.log("Election Name:",filterAllVote);
+
   const { data: applyForCandidate = [] } = useQuery({
     queryKey: ["candidates479"],
     queryFn: async () => {
@@ -71,7 +74,7 @@ const Page = () => {
 
   // FilterApplyCandidate
   const candidateApply = applyForCandidate?.filter(
-    (candidate) => candidate.candidateEmail === user?.email
+    (candidate) => candidate.candidateEmail === user?.email && candidate.voteName === filterAllVote[0]?.name
   );
   console.log("get Candidate", candidateApply);
 
@@ -88,12 +91,11 @@ const Page = () => {
   });
 
   const voterApply = applyForVoter?.filter(
-    (candidate) => candidate.candidateEmail === user?.email
+    (candidate) => candidate.candidateEmail === user?.email && candidate.voteName === filterAllVote[0]?.name
   );
   console.log("get Voter", voterApply);
 
-  const filterAllVote = showAllVote.filter((allVot) => allVot?.name == id);
-  console.log(filterAllVote);
+  
 
   const shareUrl = `electronic-voting-system-beta.vercel.app/details/${id}`;
   const handleCopy = () => {
@@ -111,8 +113,10 @@ const Page = () => {
       <div className="text-white pt-10 md:px-8 px-3">
         <div className="flex justify-center items-center gap-1 pb-4">
           <h2 className="text-center font-bold text-2xl">Position: </h2>
+
           {(filterAllVote[0]?.isFinished != true) ?
           <div className="">
+
           <h2 className="text-center text-green-500 font-bold text-2xl">
             {filterAllVote[0]?.position == true && "Running"}
           </h2>
@@ -120,11 +124,13 @@ const Page = () => {
             {filterAllVote[0]?.position != true && "Stop"}
           </h2>
         </div>
+
         :
         <div className="text-center text-red-500 font-bold text-2xl">Finished</div>}
 
           
         </div>
+
         <div className=" bg-gray-800 rounded-md pt-8 flex flex-col-reverse md:flex-col">
           <div className="md:flex justify-between">
             <div className=" card flex-1">
@@ -394,10 +400,10 @@ const Page = () => {
                     candidateApply?.find(
                       (verify) => verify.isverify === "true"
                     )) ? (
-                    <div className=" flex  gap-2 justify-center items-center pb-8">
-                      {filterElectionsByUserName?.[0]?.position != true ? (
+                    <div className="flex gap-2 justify-center items-center pb-8">
+                      {filterElectionsByUserName?.[0]?.position !== true ? (
                         <button
-                          className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                          className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                           disabled
                         >
                           Participate
@@ -410,16 +416,13 @@ const Page = () => {
                           Participate
                         </Link>
                       )}
-
-                      {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
                       <Link
                         href={`/result/${filterAllVote?.[0].name}`}
                         className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                       >
-                        result
+                        Result
                       </Link>
-                      <div className="">
-                        {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                      <div>
                         <button
                           className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                           onClick={() =>
@@ -431,7 +434,6 @@ const Page = () => {
                         <dialog id="my_modal_3" className="modal">
                           <div className="modal-box">
                             <form method="dialog">
-                              {/* if there is a button in form, it will close the modal */}
                               <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                                 ✕
                               </button>
@@ -439,14 +441,12 @@ const Page = () => {
                             <h3 className="font-bold text-center pb-2 text-lg">
                               Share This Election
                             </h3>
-
                             <div className="text-center">
-                              <h2 className="pt-5">Derect Share</h2>
+                              <h2 className="pt-5">Direct Share</h2>
                               <div className="flex gap-4 pt-3 justify-center">
                                 <FacebookShareButton url={shareUrl}>
                                   <FacebookIcon className="rounded-full size-8" />
                                 </FacebookShareButton>
-
                                 <WhatsappShareButton url={shareUrl}>
                                   <WhatsappIcon className="rounded-full size-8" />
                                 </WhatsappShareButton>
@@ -472,9 +472,7 @@ const Page = () => {
                         </dialog>
                       </div>
                     </div>
-                  ) : (
-                    ""
-                  )}
+                  ) : null}
                 </div>
               )
             ) : userRoles?.isRole === "user" ? (
@@ -530,10 +528,10 @@ const Page = () => {
                   candidateApply?.find(
                     (verify) => verify.isverify === "true"
                   )) ? (
-                  <div className=" flex  gap-2 justify-center items-center pb-8">
-                    {filterElectionsByUserName?.[0]?.position != true ? (
+                  <div className="flex gap-2 justify-center items-center pb-8">
+                    {filterElectionsByUserName?.[0]?.position !== true ? (
                       <button
-                        className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500 "
+                        className="text-[16px] btn border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                         disabled
                       >
                         Participate
@@ -546,17 +544,13 @@ const Page = () => {
                         Participate
                       </Link>
                     )}
-                    {/* <Link href={`/show-all-vote/candidate`}  className="btn btn-sm"> Candidates</Link> */}
-
                     <Link
                       href={`/result/${filterAllVote?.[0].name}`}
                       className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                     >
-                      result
+                      Result
                     </Link>
-
-                    <div className="">
-                      {/* You can open the modal using document.getElementById('ID').showModal() method */}
+                    <div>
                       <button
                         className="text-[16px] border py-1 px-2 border-blue-600 rounded-md hover:bg-blue-300 font-semibold bg-blue-500"
                         onClick={() =>
@@ -568,7 +562,6 @@ const Page = () => {
                       <dialog id="my_modal_3" className="modal">
                         <div className="modal-box">
                           <form method="dialog">
-                            {/* if there is a button in form, it will close the modal */}
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                               ✕
                             </button>
@@ -576,14 +569,12 @@ const Page = () => {
                           <h3 className="font-bold text-center pb-2 text-lg">
                             Share This Election
                           </h3>
-
                           <div className="text-center">
-                            <h2 className="pt-5">Derect Share</h2>
+                            <h2 className="pt-5">Direct Share</h2>
                             <div className="flex gap-4 pt-3 justify-center">
                               <FacebookShareButton url={shareUrl}>
                                 <FacebookIcon className="rounded-full size-8" />
                               </FacebookShareButton>
-
                               <WhatsappShareButton url={shareUrl}>
                                 <WhatsappIcon className="rounded-full size-8" />
                               </WhatsappShareButton>
@@ -609,9 +600,7 @@ const Page = () => {
                       </dialog>
                     </div>
                   </div>
-                ) : (
-                  ""
-                )}
+                ) : null}
               </div>
             ) : (
               ""
